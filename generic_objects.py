@@ -1,12 +1,12 @@
 import random
+import numpy as np
 
 class Generic_object:
     def __init__(self, info):
         self.id = info['object_id']
-        self.scope_x = info['scope_x']
-        self.scope_y = info['scope_y']
-        self.scope_z = info['scope_z']
+        self.set_scope(info)
         self.connect_id = info['connect_id']
+        self.rules = info['connect_rule']
 
     def get_next(self):
         if self.connect_id == []:
@@ -15,3 +15,13 @@ class Generic_object:
         
         choice = random.choice(self.connect_id)
         return choice
+    
+    def set_scope(self, info):
+        scope_x = info['scope_x']
+        scope_y = info['scope_y']
+        scope_z = info['scope_z']
+        self.scope = np.array([scope_x,scope_y,scope_z])
+    
+    def execute_rule(self, next_id):
+        rule = self.rules[str(next_id)]
+        print("self.rule", rule)
