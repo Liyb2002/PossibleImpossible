@@ -24,4 +24,5 @@ class Generic_object:
     
     def execute_rule(self, next_id):
         rule = self.rules[str(next_id)]
-        print("self.rule", rule)
+        choice = random.choice(rule)
+        return choice

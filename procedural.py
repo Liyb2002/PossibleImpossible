@@ -16,30 +16,27 @@ if __name__ == "__main__":
             object_list.append(new_object)
 
 cur_id = 1
-cur_pos = np.array([0,0,0])
-cur_scope = object_list[cur_id].scope
-cur_obj = procedural_objects.Procedural_object(cur_id)
-cur_obj.set_position(cur_pos)
-cur_obj.set_scope(cur_scope)
-cur_generic_obj = object_list[cur_id]
-next_id = cur_generic_obj.get_next()
-cur_generic_obj.execute_rule(next_id)
+start_pos = np.array([0,0,0])
+start_scope = object_list[cur_id].scope
+cur_obj = procedural_objects.Procedural_object(cur_id, start_pos, start_scope)
+production_list.append(cur_obj)
 
 #processing
 # count = 0
-# while(True):
-#     cur_obj = procedural_objects.Procedural_object(cur_id)
-#     cur_obj.set_position(cur_pos)
-#     cur_obj.set_scope(cur_scope)
-#     production_list.append(cur_obj)
+while(True):
+    cur_generic_obj = object_list[cur_id]
+    next_id = cur_generic_obj.get_next()
+    if next_id == None:
+        break
+    next_obj = procedural_objects.Procedural_object(next_id, start_pos, start_scope)
+    choice = cur_generic_obj.execute_rule(next_id)
+    next_obj.set_position(cur_obj, choice)
 
-#     cur_generic_obj = object_list[cur_id]
-#     next_id = cur_generic_obj.get_next()
-#     if next_id == None:
-#         break
+    cur_id = next_id
+    cur_obj = next_obj
+    production_list.append(cur_obj)
 
-    
 
 #show the objects we have
-# for obj in production_list:
-#     print("object type",obj.type, "position", obj.position, "scope", obj.scope)
+for obj in production_list:
+    print("object type",obj.type, "position", obj.position, "scope", obj.scope)
