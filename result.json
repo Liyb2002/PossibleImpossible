@@ -20,5 +20,60 @@
       "scope_y": 0.2,
       "scope_z": 0.5
     }
+  },
+  {
+    "obj": {
+      "type": 1,
+      "position_x": 3.2679491924311215,
+      "position_y": 3.2679491924311215,
+      "position_z": 3.2679491924311215,
+      "scope_x": 0.5,
+      "scope_y": 0.2,
+      "scope_z": 0.5
+    }
+  },
+  {
+    "obj": {
+      "type": 1,
+      "position_x": 2.2679491924311215,
+      "position_y": 3.2679491924311215,
+      "position_z": 3.2679491924311215,
+      "scope_x": 0.5,
+      "scope_y": 0.2,
+      "scope_z": 0.5
+    }
+  },
+  {
+    "obj": {
+      "type": 1,
+      "position_x": 1.2679491924311215,
+      "position_y": 3.2679491924311215,
+      "position_z": 3.2679491924311215,
+      "scope_x": 0.5,
+      "scope_y": 0.2,
+      "scope_z": 0.5
+    }
+  },
+  {
+    "obj": {
+      "type": 1,
+      "position_x": 2.2679491924311215,
+      "position_y": 3.2679491924311215,
+      "position_z": 3.2679491924311215,
+      "scope_x": 0.5,
+      "scope_y": 0.2,
+      "scope_z": 0.5
+    }
+  },
+  {
+    "obj": {
+      "type": 2,
+      "position_x": 2.2679491924311215,
+      "position_y": 3.2679491924311215,
+      "position_z": 2.2679491924311215,
+      "scope_x": 0.5,
+      "scope_y": 0.2,
+      "scope_z": 0.5
+    }
   }
 ]
