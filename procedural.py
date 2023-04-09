@@ -2,8 +2,19 @@ import json
 import generic_objects
 import procedural_objects
 import write2JSON
+import intersection
 
 import numpy as np
+
+startPos = np.array([400,400])
+basic_scene = intersection.Scene(startPos)
+foreground_index = 8
+background_index = 12
+
+foreground_intersection = basic_scene.get_possible_intersects(foreground_index)
+background_intersection = basic_scene.get_possible_intersects(background_index)
+print("foreground_intersection", foreground_intersection)
+print("background_intersection", background_intersection)
 
 object_list = []
 production_list = []
@@ -39,7 +50,3 @@ while(True):
 
 
 write2JSON.write(production_list)
-
-#show the objects we have
-# for obj in production_list:
-#     print("object type",obj.type, "position", obj.position, "scope", obj.scope)
