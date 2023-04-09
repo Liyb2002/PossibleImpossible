@@ -1,6 +1,7 @@
 import json
 import generic_objects
 import procedural_objects
+import write2JSON
 
 import numpy as np
 
@@ -37,6 +38,8 @@ while(True):
     production_list.append(cur_obj)
 
 
+write2JSON.write(production_list)
+
 #show the objects we have
-for obj in production_list:
-    print("object type",obj.type, "position", obj.position, "scope", obj.scope)
+# for obj in production_list:
+#     print("object type",obj.type, "position", obj.position, "scope", obj.scope)

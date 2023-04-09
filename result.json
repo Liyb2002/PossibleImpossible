@@ -1,0 +1,24 @@
+[
+  {
+    "obj": {
+      "type": 1,
+      "position_x": 0.0,
+      "position_y": 0.0,
+      "position_z": 0.0,
+      "scope_x": 0.5,
+      "scope_y": 0.2,
+      "scope_z": 0.5
+    }
+  },
+  {
+    "obj": {
+      "type": 2,
+      "position_x": 0.0,
+      "position_y": 0.0,
+      "position_z": -1.0,
+      "scope_x": 0.5,
+      "scope_y": 0.2,
+      "scope_z": 0.5
+    }
+  }
+]
