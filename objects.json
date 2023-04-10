@@ -2,28 +2,28 @@
     {
       "object_id": 1,
       "scope_x": 0.2,
-      "scope_y": 0.05,
+      "scope_y": 0.03,
       "scope_z": 0.2,
       "connect_id": [2,3,4],
       "connect_rule":{
-        "2" : [ "-z"],
+        "2" : [ "-y"],
         "3" : ["-x", "+x"],
         "4" : ["-z", "+z"]
       }
     },
     {
         "object_id": 2,
-        "scope_x": 0.05,
+        "scope_x": 0.03,
         "scope_y": 0.4,
-        "scope_z": 0.05,
+        "scope_z": 0.03,
         "connect_id": [],
         "connect_rule":{}
       },
       {
         "object_id": 3,
         "scope_x": 0.2,
-        "scope_y": 0.05,
-        "scope_z": 0.05,
+        "scope_y": 0.03,
+        "scope_z": 0.03,
         "connect_id": [1],
         "connect_rule":{
           "1" : [ "-x", "+x"]
@@ -31,13 +31,24 @@
       },
       {
         "object_id": 4,
-        "scope_x": 0.05,
-        "scope_y": 0.05,
+        "scope_x": 0.03,
+        "scope_y": 0.03,
         "scope_z": 0.2,
         "connect_id": [1],
         "connect_rule":{
           "1" : [ "-z", "+z"]
         }
+      },
+      {
+        "object_id": 5,
+        "scope_x": 0.03,
+        "scope_y": 0.3,
+        "scope_z": 0.03,
+        "connect_id": [1],
+        "connect_rule":{
+          "1" : [ "-x", "+x"]
+        }
       }
+
     
   ]

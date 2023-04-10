@@ -1,10 +1,10 @@
 import generic_objects
 import procedural_objects
 
-def execute_model(start_pos, object_list):
+def execute_model(start_pos, object_list, start_id):
     production_list = []
+    cur_id = start_id
 
-    cur_id = 1
     start_scope = object_list[cur_id].scope
     cur_obj = procedural_objects.Procedural_object(cur_id, start_pos, start_scope)
     production_list.append(cur_obj)
