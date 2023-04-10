@@ -19,16 +19,16 @@ class Procedural_object:
             self.position = prev_pos + np.array([prev_scope[0], 0, 0]) + np.array([self.scope[0],0,0])
         
         if(rule == '-y'):
-            self.position = prev_pos - np.array([0, prev_scope[1], 0]) - np.array([0,prev_scope[1],0])
+            self.position = prev_pos - np.array([0, prev_scope[1], 0]) - np.array([0,self.scope[1],0])
         
         if(rule == '+y'):
-            self.position = prev_pos + np.array([0, prev_scope[1], 0]) + np.array([0,prev_scope[1],0])
+            self.position = prev_pos + np.array([0, prev_scope[1], 0]) + np.array([0,self.scope[1],0])
        
         if(rule == '-z'):
-            self.position = prev_pos - np.array([0, 0, prev_scope[2]]) - np.array([0,0,prev_scope[2]])
+            self.position = prev_pos - np.array([0, 0, prev_scope[2]]) - np.array([0,0,self.scope[2]])
 
         if(rule == '+z'):
-            self.position = prev_pos + np.array([0, 0, prev_scope[2]]) + np.array([0,0,prev_scope[2]])
+            self.position = prev_pos + np.array([0, 0, prev_scope[2]]) + np.array([0,0,self.scope[2]])
 
     def set_scope(self, scope):
         self.scope = scope
