@@ -2,8 +2,7 @@ import numpy as np
 import random
 
 class Procedural_object:
-    def __init__(self, type, position, scope, cur_id):
-        self.id = cur_id
+    def __init__(self, type, position, scope):
         self.type = type
         self.position = position
         self.scope = scope
