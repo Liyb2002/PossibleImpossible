@@ -21,6 +21,9 @@ class Procedural_object:
         self.len_y = round(random.uniform(scope_y[0], scope_y[1]),2)
         self.len_z = round(random.uniform(scope_z[0], scope_z[1]),2)
 
+    def arbitrary_set(self, position):
+        self.position = position
+        
     def set_position(self, prev_obj, rule):
         prev_pos = prev_obj.position
         prev_x = prev_obj.len_x

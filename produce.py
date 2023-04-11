@@ -1,12 +1,11 @@
 import generic_objects
 import procedural_objects
+import numpy as np
 
 def execute_model(start_pos, object_list, start_type, steps):
     production_list = []
-    cur_type = start_type
-
-    start_scope = object_list[cur_type].scope
-    cur_obj = procedural_objects.Procedural_object(cur_type, start_pos, start_scope)
+    
+    cur_obj = start_obj(start_pos, object_list, start_type)
     production_list.append(cur_obj)
 
     #processing
@@ -27,7 +26,6 @@ def execute_model(start_pos, object_list, start_type, steps):
         next_obj = procedural_objects.Procedural_object(next_type, start_pos, next_scope)
         next_choice = cur_generic_obj.execute_rule(next_type)
         cur_obj = production_list[tempt_count+1]
-        print("prev type", cur_obj.type, "next type", next_type)
         next_obj.set_position(cur_obj, next_choice)
 
         cur_obj = next_obj
@@ -36,3 +34,16 @@ def execute_model(start_pos, object_list, start_type, steps):
         count += 1
 
     return production_list
+
+def start_obj(start_pos, object_list, start_type):
+
+    cur_type = start_type
+    start_scope = object_list[cur_type].scope
+    cur_obj = procedural_objects.Procedural_object(cur_type, start_pos, start_scope)
+    cur_obj_x = cur_obj.len_x
+    cur_obj_y = cur_obj.len_y
+    cur_obj_z = cur_obj.len_z
+    update_pos = np.array([cur_obj_x, cur_obj_y, cur_obj_z])
+    cur_obj.arbitrary_set(start_pos - update_pos)
+
+    return cur_obj
