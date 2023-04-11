@@ -28,7 +28,7 @@ with open('objects.json', 'r') as object_file:
 #start produce
 foreground_type = 5
 background_type = 3
-steps = 0
+steps = 5
 
 production_list = produce.execute_model(foreground_intersection, object_list, foreground_type, steps)
 production_list += produce.execute_model(background_intersection, object_list, background_type, steps)

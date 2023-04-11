@@ -45,7 +45,8 @@ loader.load(
 	// onLoad callback
 	function ( data ) {
 		const scene = new THREE.Scene();
-			const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+			const left = -3.2, right = 3.2, top2 = 2.4, bottom = -2.4, near = 0.01, far = 100;
+			const camera = new THREE.OrthographicCamera(left, right, top2, bottom, near, far);
 
 			const renderer = new THREE.WebGLRenderer({ antialias: true });
 			renderer.setSize( window.innerWidth, window.innerHeight );
