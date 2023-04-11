@@ -27,7 +27,7 @@ with open('objects.json', 'r') as object_file:
 
 #start produce
 production_list = produce.execute_model(foreground_intersection, object_list, 1)
-production_list += produce.execute_model(background_intersection, object_list, 5)
+# production_list += produce.execute_model(background_intersection, object_list, 5)
 
 
 write2JSON.write(production_list)
