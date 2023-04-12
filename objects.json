@@ -4,11 +4,13 @@
       "scope_x": [0.2,0.2],
       "scope_y": [0.02,0.02],
       "scope_z": [0.2,0.2],
-      "connect_id": [2,3,4],
+      "connect_id": [2,4,5,6,7],
       "connect_rule":{
         "2" : [ "-y"],
-        "3" : ["-x", "+x"],
-        "4" : ["-z", "+z"]
+        "4" : ["-x"],
+        "5" : ["+x"],
+        "6" : ["-z"],
+        "7" : ["+z"]
       }
     },
     {
@@ -21,34 +23,56 @@
       },
       {
         "object_id": 3,
-        "scope_x": [0.15,0.3],
-        "scope_y": [0.02,0.02],
-        "scope_z": [0.02,0.02],
-        "connect_id": [1],
-        "connect_rule":{
-          "1" : [ "-x", "+x"]
-        }
-      },
-      {
-        "object_id": 4,
-        "scope_x": [0.02,0.02],
-        "scope_y": [0.02,0.02],
-        "scope_z": [0.15,0.3],
-        "connect_id": [1],
-        "connect_rule":{
-          "1" : [ "-z", "+z"]
-        }
-      },
-      {
-        "object_id": 5,
         "scope_x": [0.02,0.02],
         "scope_y": [0.2,0.2],
         "scope_z": [0.02,0.02],
         "connect_id": [1],
         "connect_rule":{
-          "1" : [ "+y"]
+          "1" : [ "-y"]
+        }
+      },
+      {
+        "object_id": 4,
+        "scope_x": [0.15,0.3],
+        "scope_y": [0.02,0.02],
+        "scope_z": [0.02,0.02],
+        "connect_id": [1],
+        "connect_rule":{
+          "1" : [ "-x"]
+        }
+      },
+      {
+        "object_id": 5,
+        "scope_x": [0.15,0.3],
+        "scope_y": [0.02,0.02],
+        "scope_z": [0.02,0.02],
+        "connect_id": [1],
+        "connect_rule":{
+          "1" : [ "+x"]
+        }
+      },
+      {
+        "object_id": 6,
+        "scope_x": [0.02,0.02],
+        "scope_y": [0.02,0.02],
+        "scope_z": [0.15,0.3],
+        "connect_id": [1],
+        "connect_rule":{
+          "1" : [ "-z"]
+        }
+      },
+      {
+        "object_id": 7,
+        "scope_x": [0.02,0.02],
+        "scope_y": [0.02,0.02],
+        "scope_z": [0.15,0.3],
+        "connect_id": [1],
+        "connect_rule":{
+          "1" : [ "+z"]
         }
       }
+
+
 
     
   ]
