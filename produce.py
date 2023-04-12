@@ -10,7 +10,8 @@ def execute_model(start_pos, object_list, start_type, steps):
 
     #processing
     count = 0
-    while(count < steps):
+    not_end = True
+    while(count < steps or not_end):
 
         tempt_count = count
         next_type = None
@@ -21,6 +22,7 @@ def execute_model(start_pos, object_list, start_type, steps):
             next_type = cur_generic_obj.get_next()
             tempt_count -=1
 
+        print("next_type", next_type)
         next_generic_obj = object_list[next_type]
         next_scope = next_generic_obj.scope
         next_obj = procedural_objects.Procedural_object(next_type, start_pos, next_scope)
@@ -30,6 +32,11 @@ def execute_model(start_pos, object_list, start_type, steps):
 
         cur_obj = next_obj
         production_list.append(cur_obj)
+
+        if next_generic_obj.canTerminate == "False":
+            not_end = True
+        else:
+            not_end = False
     
         count += 1
 

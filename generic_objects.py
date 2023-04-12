@@ -6,6 +6,7 @@ class Generic_object:
         self.id = info['object_id']
         self.set_scope(info)
         self.connect_id = info['connect_id']
+        self.canTerminate = info['canTerminate']
         self.rules = info['connect_rule']
 
     def get_next(self):
