@@ -17,9 +17,9 @@ class Procedural_object:
         scope_y = self.scope[1]
         scope_z = self.scope[2]
 
-        self.len_x = round(random.uniform(scope_x[0], scope_x[1]),2)
-        self.len_y = round(random.uniform(scope_y[0], scope_y[1]),2)
-        self.len_z = round(random.uniform(scope_z[0], scope_z[1]),2)
+        self.len_x = round(random.uniform(scope_x[0], scope_x[1]),3)
+        self.len_y = round(random.uniform(scope_y[0], scope_y[1]),3)
+        self.len_z = round(random.uniform(scope_z[0], scope_z[1]),3)
 
     def arbitrary_set(self, position):
         self.position = position

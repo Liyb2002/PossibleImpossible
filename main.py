@@ -3,6 +3,7 @@ import write2JSON
 import intersection
 import produce
 import generic_objects
+import cycle_connect
 
 import numpy as np
 
@@ -16,22 +17,24 @@ foreground_intersection = basic_scene.get_possible_intersects(foreground_index)
 background_intersection = basic_scene.get_possible_intersects(background_index)
 
 #read the inputs
-object_list = []
+generic_object_list = []
 with open('objects.json', 'r') as object_file:
     objects_data = json.load(object_file)
 
-    object_list.append(objects_data[0])
+    generic_object_list.append(objects_data[0])
     for object_data in objects_data:
         new_object = generic_objects.Generic_object(object_data)
-        object_list.append(new_object)
+        generic_object_list.append(new_object)
 
 #start produce
 foreground_type = 1
 background_type = 3
 steps = 4
 
-production_list = produce.execute_model(foreground_intersection, object_list, foreground_type, steps)
-production_list += produce.execute_model(background_intersection, object_list, background_type, steps)
+front_list = produce.execute_model(foreground_intersection, generic_object_list, foreground_type, steps)
+back_list = produce.execute_model(background_intersection, generic_object_list, background_type, steps)
+production_list = front_list + back_list
 
+cycle_connect.solve_3D(generic_object_list, front_list[-1], back_list[-1])
 
 write2JSON.write(production_list)
