@@ -45,6 +45,7 @@ def execute_model(start_pos, generic_object_list, start_type, steps):
 def execute_model_withDirection(objStart, generic_object_list, delta, direction):
     dummy_pos = np.array([0,0,0])
     production_list = []
+    rules_list = []
 
     lower_bound = 0
     current_bound = 0
@@ -57,10 +58,12 @@ def execute_model_withDirection(objStart, generic_object_list, delta, direction)
         current_generic_obj = generic_object_list[current_type]
 
         next_type = current_generic_obj.get_nextType_with_direction(direction)
+        rule_chosen = current_generic_obj.execute_rule(next_type)
         next_generic_obj = generic_object_list[next_type]
         next_scope = next_generic_obj.scope
         next_obj = procedural_objects.Procedural_object(next_type, dummy_pos, next_scope)
         production_list.append(next_obj)
+        rules_list.append(rule_chosen)
         
         lower_bound += next_scope[0][0]
         current_bound += next_obj.len_x
@@ -84,11 +87,16 @@ def execute_model_withDirection(objStart, generic_object_list, delta, direction)
     if current_bound > delta[0]:
         production_list = minus_scope(current_bound, delta, production_list)
 
-    real_bound = 0
-    for obj in production_list:
-        real_bound += obj.len_x
-    print("real_bound", real_bound)
+    #set object positions
+    first_obj = production_list[0]
+    first_obj.set_position(objStart, rules_list[0])
+    for i in range(1, len(production_list)):
+        prev_obj = production_list[i-1]
+        cur_obj = production_list[i]
+        cur_obj.set_position(prev_obj, rules_list[i])
 
+    return production_list
+    
 def add_scope(current_bound, delta, production_list):
     print("do add scope")
     for obj in production_list:
