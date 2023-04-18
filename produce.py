@@ -50,11 +50,14 @@ def execute_model_withDirection(objStart, generic_object_list, delta, direction)
     lower_bound = 0
     current_bound = 0
     upper_bound = 0
+    direction_idx = direction_to_index(direction)
+    print("direction_idx", direction_idx)
+    print("delta[direction_idx]", delta[direction_idx])
 
     current_type = objStart.type
 
     #execute rule to get the objects
-    while upper_bound< abs(delta[0]):
+    while upper_bound< delta[direction_idx]:
         current_generic_obj = generic_object_list[current_type]
 
         next_type = current_generic_obj.get_nextType_with_direction(direction)
@@ -65,26 +68,26 @@ def execute_model_withDirection(objStart, generic_object_list, delta, direction)
         production_list.append(next_obj)
         rules_list.append(rule_chosen)
         
-        lower_bound += next_scope[0][0]
+        lower_bound += next_scope[direction_idx][0]
         current_bound += next_obj.len_x
-        upper_bound += next_scope[0][1]
+        upper_bound += next_scope[direction_idx][1]
         current_type = next_type
     
 
     print("final lower_bound", lower_bound)
     print("final current_bound", current_bound)
     print("final upper_bound", upper_bound)
-    print("delta[0]", delta[0])
+    print("delta[direction_idx]", delta[direction_idx])
     
-    if lower_bound > delta[0]:
+    if lower_bound > delta[direction_idx]:
         print("failed")
         return
 
     #find exact scope of the objects
-    if current_bound < delta[0]:
+    if current_bound < delta[direction_idx]:
         production_list = add_scope(current_bound, delta, production_list)
 
-    if current_bound > delta[0]:
+    if current_bound > delta[direction_idx]:
         production_list = minus_scope(current_bound, delta, production_list)
 
     #set object positions
@@ -136,3 +139,11 @@ def start_obj(start_pos, generic_object_list, start_type):
 
     return cur_obj
 
+def direction_to_index(direction):
+    if direction == '+x' or direction == '-x':
+        return 0
+    
+    if direction == '+y' or direction == '-y':
+        return 1
+    
+    return 2
