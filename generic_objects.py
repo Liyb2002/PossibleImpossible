@@ -35,7 +35,7 @@ class Generic_object:
                 possible_rule.append(next_id)
         
         if possible_rule[0] != None:
-            choice = random.choice(possible_rule)
+            choice = int(random.choice(possible_rule))
         else:
             choice = self.get_nextType()
         

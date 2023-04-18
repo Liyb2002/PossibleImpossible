@@ -17,12 +17,9 @@ class Procedural_object:
         scope_y = self.scope[1]
         scope_z = self.scope[2]
 
-        self.len_x = round(random.uniform(scope_x[0], scope_x[1]),3)
-        self.len_y = round(random.uniform(scope_y[0], scope_y[1]),3)
-        self.len_z = round(random.uniform(scope_z[0], scope_z[1]),3)
-
-    def arbitrary_set(self, position):
-        self.position = position
+        self.len_x = round(random.uniform(scope_x[0], scope_x[1]),4)
+        self.len_y = round(random.uniform(scope_y[0], scope_y[1]),4)
+        self.len_z = round(random.uniform(scope_z[0], scope_z[1]),4)
         
     def set_position(self, prev_obj, rule):
         prev_pos = prev_obj.position
@@ -47,3 +44,11 @@ class Procedural_object:
 
         if(rule == '+z'):
             self.position = prev_pos + np.array([0, 0, prev_z]) + np.array([0,0,self.len_z])
+
+    def arbitrary_set_position(self, position):
+        self.position = position
+
+    def arbitrary_set_scope(self, len_x, len_y, len_z):
+        self.len_x = len_x
+        self.len_y = len_y       
+        self.len_z = len_z

@@ -42,12 +42,47 @@ def execute_model(start_pos, generic_object_list, start_type, steps):
     return production_list
 
 
-def execute_model_withDirection(objStart, generic_object_list, delta_1d, direction):
+def execute_model_withDirection(objStart, generic_object_list, delta, direction):
+    dummy_pos = np.array([0,0,0])
     production_list = []
 
-    start_type = objStart.type
-    generic_objStart = generic_object_list[start_type]
-    next_type = generic_objStart.get_nextType_with_direction(direction)
+    lower_bound = 0
+    current_bound = 0
+    upper_bound = 0
+
+    current_type = objStart.type
+
+    #execute rule to get the objects
+    while upper_bound< abs(delta[0]):
+        current_generic_obj = generic_object_list[current_type]
+
+        next_type = current_generic_obj.get_nextType_with_direction(direction)
+        next_generic_obj = generic_object_list[next_type]
+        next_scope = next_generic_obj.scope
+        next_obj = procedural_objects.Procedural_object(next_type, dummy_pos, next_scope)
+        production_list.append(next_obj)
+        
+        lower_bound += next_scope[0][0]
+        current_bound += next_obj.len_x
+        upper_bound += next_scope[0][1]
+        current_type = next_type
+    
+
+    print("final lower_bound", lower_bound)
+    print("final current_bound", current_bound)
+    print("final upper_bound", upper_bound)
+    print("delta[0]", delta[0])
+    
+    if(lower_bound > delta[0]):
+        print("failed")
+        return
+
+    #find exact scope of the objects
+
+
+def add_scope(current_bound, delta, production_list):
+    for obj in production_list:
+        available_add = obj.scope[0][1] - obj.len_x
 
 def start_obj(start_pos, generic_object_list, start_type):
 
@@ -58,7 +93,7 @@ def start_obj(start_pos, generic_object_list, start_type):
     cur_obj_y = cur_obj.len_y
     cur_obj_z = cur_obj.len_z
     update_pos = np.array([cur_obj_x, cur_obj_y, cur_obj_z])
-    cur_obj.arbitrary_set(start_pos - update_pos)
+    cur_obj.arbitrary_set_position(start_pos - update_pos)
 
     return cur_obj
 
