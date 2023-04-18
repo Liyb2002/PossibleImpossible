@@ -9,7 +9,7 @@ class Generic_object:
         self.canTerminate = info['canTerminate']
         self.rules = info['connect_rule']
 
-    def get_next(self):
+    def get_nextType(self):
         if self.connect_id == []:
             print("terminate")
             return
@@ -26,4 +26,17 @@ class Generic_object:
     def execute_rule(self, next_id):
         rule = self.rules[str(next_id)]
         choice = random.choice(rule)
+        return choice
+
+    def get_nextType_with_direction(self, direction):
+        possible_rule = []
+        for next_id in self.rules:
+            if direction == self.rules[next_id][0]:
+                possible_rule.append(next_id)
+        
+        if possible_rule[0] != None:
+            choice = random.choice(possible_rule)
+        else:
+            choice = self.get_nextType()
+        
         return choice

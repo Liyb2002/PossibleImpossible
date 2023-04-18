@@ -10,4 +10,4 @@ def solve_3D(generic_object_list, objStart, objEnd):
     solve_1D(generic_object_list, delta, objStart)
 
 def solve_1D(generic_object_list, delta, objStart):
-    produce.execute_model_withDirection(objStart, generic_object_list,delta,"x")
+    produce.execute_model_withDirection(objStart, generic_object_list,delta,"+x")

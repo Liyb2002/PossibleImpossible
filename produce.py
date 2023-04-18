@@ -19,7 +19,7 @@ def execute_model(start_pos, generic_object_list, start_type, steps):
         while(tempt_count >= 0 and next_type == None):
             cur_type = production_list[tempt_count].type
             cur_generic_obj = generic_object_list[cur_type]
-            next_type = cur_generic_obj.get_next()
+            next_type = cur_generic_obj.get_nextType()
             tempt_count -=1
 
         next_generic_obj = generic_object_list[next_type]
@@ -47,6 +47,7 @@ def execute_model_withDirection(objStart, generic_object_list, delta_1d, directi
 
     start_type = objStart.type
     generic_objStart = generic_object_list[start_type]
+    next_type = generic_objStart.get_nextType_with_direction(direction)
 
 def start_obj(start_pos, generic_object_list, start_type):
 
