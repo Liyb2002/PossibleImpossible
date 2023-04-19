@@ -22,17 +22,15 @@ def solve_1D(generic_object_list, delta, objStart, objEnd):
     abs_delta -= objStart.length
     abs_delta -= objEnd.length
 
-    print("abs_delta", abs_delta)
-
     if delta[1] > 0:
         production_list = produce.execute_model_withDirection(objStart, generic_object_list,abs_delta,"+y")
     elif delta[1] < 0:
         production_list = produce.execute_model_withDirection(objStart, generic_object_list,abs_delta,"-y")
 
-    # if delta[0] > 0:
-    #     production_list = produce.execute_model_withDirection(objStart, generic_object_list,abs_delta,"+x")
-    # elif delta[0] < 0:
-    #     production_list = produce.execute_model_withDirection(objStart, generic_object_list,abs_delta,"-x")
+    if delta[0] > 0 and len(production_list) > 0:
+        production_list += produce.execute_model_withDirection(production_list[-1], generic_object_list,abs_delta,"+x")
+    elif delta[0] < 0 and len(production_list) > 0:
+        production_list += produce.execute_model_withDirection(production_list[-1], generic_object_list,abs_delta,"-x")
     
     # if delta[2] > 0:
     #     production_list = produce.execute_model_withDirection(objStart, generic_object_list,abs_delta,"+z")
@@ -40,7 +38,7 @@ def solve_1D(generic_object_list, delta, objStart, objEnd):
     #     production_list = produce.execute_model_withDirection(objStart, generic_object_list,abs_delta,"-z")
 
     for obj in production_list:
-        print("new obj")
+        print("-------------new obj-------------")
         print(obj.position)
         print(obj.length)
 

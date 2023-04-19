@@ -33,8 +33,12 @@ steps = 4
 
 front_list = produce.execute_model(foreground_intersection, generic_object_list, foreground_type, steps)
 back_list = produce.execute_model(background_intersection, generic_object_list, background_type, steps)
-production_list = front_list + back_list
 
-production_list += cycle_connect.solve_3D(generic_object_list, front_list[-1], back_list[-1])
+connect_list = cycle_connect.solve_3D(generic_object_list, front_list[-1], back_list[-1])
 
-write2JSON.write(production_list)
+
+output_writer = write2JSON.output()
+output_writer.prepare_write(front_list)
+output_writer.prepare_write(back_list)
+output_writer.prepare_write(connect_list)
+output_writer.write()

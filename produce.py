@@ -51,9 +51,6 @@ def execute_model_withDirection(objStart, generic_object_list, delta, direction)
     current_bound = 0
     upper_bound = 0
     direction_idx = direction_to_index(direction)
-    print("direction", direction)
-    print("direction_idx", direction_idx)
-    print("delta[direction_idx]", delta[direction_idx])
 
     current_type = objStart.type
 
@@ -76,7 +73,8 @@ def execute_model_withDirection(objStart, generic_object_list, delta, direction)
         upper_bound += next_scope[direction_idx][1]*2
         current_type = next_type
     
-
+    print("delta", delta)
+    print("number of objects", len(production_list))
     print("final lower_bound", lower_bound)
     print("final current_bound", current_bound)
     print("final upper_bound", upper_bound)
