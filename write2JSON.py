@@ -11,9 +11,9 @@ def write(production_list):
                 'start_x': float(obj.position[0]),
                 'start_y': float(obj.position[1]),
                 'start_z': float(obj.position[2]),
-                'scale_x': float(obj.len_x),
-                'scale_y': float(obj.len_y),
-                'scale_z': float(obj.len_z)}
+                'scale_x': float(obj.length[0]),
+                'scale_y': float(obj.length[1]),
+                'scale_z': float(obj.length[2])}
                 }
             result.append(data)
 

@@ -69,7 +69,7 @@ def execute_model_withDirection(objStart, generic_object_list, delta, direction)
         rules_list.append(rule_chosen)
         
         lower_bound += next_scope[direction_idx][0]
-        current_bound += next_obj.len_x
+        current_bound += next_obj.length[direction_idx]
         upper_bound += next_scope[direction_idx][1]
         current_type = next_type
     
@@ -81,14 +81,14 @@ def execute_model_withDirection(objStart, generic_object_list, delta, direction)
     
     if lower_bound > delta[direction_idx]:
         print("failed")
-        return
+        return []
 
     #find exact scope of the objects
     if current_bound < delta[direction_idx]:
-        production_list = add_scope(current_bound, delta, production_list)
+        production_list = add_scope(current_bound, delta, production_list, direction_idx)
 
     if current_bound > delta[direction_idx]:
-        production_list = minus_scope(current_bound, delta, production_list)
+        production_list = minus_scope(current_bound, delta, production_list, direction_idx)
 
     #set object positions
     first_obj = production_list[0]
@@ -100,29 +100,29 @@ def execute_model_withDirection(objStart, generic_object_list, delta, direction)
 
     return production_list
     
-def add_scope(current_bound, delta, production_list):
+def add_scope(current_bound, delta, production_list, direction_idx):
     print("do add scope")
     for obj in production_list:
-        target_add = delta[0] - current_bound
-        available_add = obj.scope[0][1] - obj.len_x
+        target_add = delta[direction_idx] - current_bound
+        available_add = obj.scope[direction_idx][1] - obj.length[direction_idx]
         if target_add > available_add:
-            obj.len_x = obj.scope[0][1]
+            obj.length[direction_idx] = obj.scope[direction_idx][1]
             current_bound += available_add
         else:
-            obj.len_x += target_add
+            obj.length[direction_idx] += target_add
             break
     return production_list
 
-def minus_scope(current_bound, delta, production_list):
+def minus_scope(current_bound, delta, production_list, direction_idx):
     print("do minus scope")
     for obj in production_list:
-        target_minus = current_bound - delta[0]
-        available_minus = obj.len_x - obj.scope[0][0]
+        target_minus = current_bound - delta[direction_idx]
+        available_minus = obj.length[direction_idx] - obj.scope[direction_idx][0]
         if target_minus > available_minus:
-            obj.len_x = obj.scope[0][0]
+            obj.length[direction_idx] = obj.scope[direction_idx][0]
             current_bound -= available_minus
         else:
-            obj.len_x -= target_minus
+            obj.length[direction_idx] -= target_minus
             break
     return production_list
 
@@ -131,9 +131,9 @@ def start_obj(start_pos, generic_object_list, start_type):
     cur_type = start_type
     start_scope = generic_object_list[cur_type].scope
     cur_obj = procedural_objects.Procedural_object(cur_type, start_pos, start_scope)
-    cur_obj_x = cur_obj.len_x
-    cur_obj_y = cur_obj.len_y
-    cur_obj_z = cur_obj.len_z
+    cur_obj_x = cur_obj.length[0]
+    cur_obj_y = cur_obj.length[1]
+    cur_obj_z = cur_obj.length[2]
     update_pos = np.array([cur_obj_x, cur_obj_y, cur_obj_z])
     cur_obj.arbitrary_set_position(start_pos - update_pos)
 

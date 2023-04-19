@@ -17,38 +17,35 @@ class Procedural_object:
         scope_y = self.scope[1]
         scope_z = self.scope[2]
 
-        self.len_x = round(random.uniform(scope_x[0], scope_x[1]),4)
-        self.len_y = round(random.uniform(scope_y[0], scope_y[1]),4)
-        self.len_z = round(random.uniform(scope_z[0], scope_z[1]),4)
-        
+        len_x = round(random.uniform(scope_x[0], scope_x[1]),4)
+        len_y = round(random.uniform(scope_y[0], scope_y[1]),4)
+        len_z = round(random.uniform(scope_z[0], scope_z[1]),4)
+        self.length = np.array([len_x, len_y, len_z])
+
     def set_position(self, prev_obj, rule):
         prev_pos = prev_obj.position
-        prev_x = prev_obj.len_x
-        prev_y = prev_obj.len_y
-        prev_z = prev_obj.len_z
+        prev_x = prev_obj.length[0]
+        prev_y = prev_obj.length[1]
+        prev_z = prev_obj.length[2]
 
         if(rule == '-x'):
-            self.position = prev_pos - np.array([prev_x, 0, 0]) - np.array([self.len_x,0,0])
+            self.position = prev_pos - np.array([prev_x, 0, 0]) - np.array([self.length[0],0,0])
 
         if(rule == '+x'):
-            self.position = prev_pos + np.array([prev_x, 0, 0]) + np.array([self.len_x,0,0])
+            self.position = prev_pos + np.array([prev_x, 0, 0]) + np.array([self.length[0],0,0])
         
         if(rule == '-y'):
-            self.position = prev_pos - np.array([0, prev_y, 0]) - np.array([0,self.len_y,0])
+            self.position = prev_pos - np.array([0, prev_y, 0]) - np.array([0,self.length[1],0])
         
         if(rule == '+y'):
-            self.position = prev_pos + np.array([0, prev_y, 0]) + np.array([0,self.len_y,0])
+            self.position = prev_pos + np.array([0, prev_y, 0]) + np.array([0,self.length[1],0])
        
         if(rule == '-z'):
-            self.position = prev_pos - np.array([0, 0, prev_z]) - np.array([0,0,self.len_z])
+            self.position = prev_pos - np.array([0, 0, prev_z]) - np.array([0,0,self.length[2]])
 
         if(rule == '+z'):
-            self.position = prev_pos + np.array([0, 0, prev_z]) + np.array([0,0,self.len_z])
+            self.position = prev_pos + np.array([0, 0, prev_z]) + np.array([0,0,self.length[2]])
 
     def arbitrary_set_position(self, position):
         self.position = position
 
-    def arbitrary_set_scope(self, len_x, len_y, len_z):
-        self.len_x = len_x
-        self.len_y = len_y       
-        self.len_z = len_z

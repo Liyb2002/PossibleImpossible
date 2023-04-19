@@ -6,7 +6,6 @@ def solve_3D(generic_object_list, objStart, objEnd):
     endPos = objEnd.position
 
     delta = endPos - startPos
-    print("delta", delta)
 
     production_list = solve_1D(generic_object_list, delta, objStart)
     return production_list
@@ -19,5 +18,10 @@ def solve_1D(generic_object_list, delta, objStart):
         production_list = produce.execute_model_withDirection(objStart, generic_object_list,abs_delta,"+x")
     elif delta[0] < 0:
         production_list = produce.execute_model_withDirection(objStart, generic_object_list,abs_delta,"-x")
+    
+    if delta[2] > 0:
+        production_list = produce.execute_model_withDirection(objStart, generic_object_list,abs_delta,"+z")
+    elif delta[2] < 0:
+        production_list = produce.execute_model_withDirection(objStart, generic_object_list,abs_delta,"-z")
 
     return production_list
