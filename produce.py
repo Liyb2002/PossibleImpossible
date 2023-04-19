@@ -73,12 +73,12 @@ def execute_model_withDirection(objStart, generic_object_list, delta, direction)
         upper_bound += next_scope[direction_idx][1]*2
         current_type = next_type
     
-    print("delta", delta)
-    print("number of objects", len(production_list))
-    print("final lower_bound", lower_bound)
-    print("final current_bound", current_bound)
-    print("final upper_bound", upper_bound)
-    print("delta[direction_idx]", delta[direction_idx])
+    # print("delta", delta)
+    # print("number of objects", len(production_list))
+    # print("final lower_bound", lower_bound)
+    # print("final current_bound", current_bound)
+    # print("final upper_bound", upper_bound)
+    # print("delta[direction_idx]", delta[direction_idx])
     
     if lower_bound > delta[direction_idx]:
         print("failed")

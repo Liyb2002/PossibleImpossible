@@ -38,7 +38,7 @@ connect_list = cycle_connect.solve_3D(generic_object_list, front_list[-1], back_
 
 
 output_writer = write2JSON.output()
-output_writer.prepare_write(front_list)
-output_writer.prepare_write(back_list)
+output_writer.prepare_write_debug(front_list)
+output_writer.prepare_write_debug(back_list)
 output_writer.prepare_write(connect_list)
 output_writer.write()

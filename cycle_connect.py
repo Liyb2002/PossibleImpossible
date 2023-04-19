@@ -19,8 +19,10 @@ def solve_3D(generic_object_list, objStart, objEnd):
 def solve_1D(generic_object_list, delta, objStart, objEnd):
 
     abs_delta = np.array([abs(delta[0]), abs(delta[1]), abs(delta[2])])
-    abs_delta -= objStart.length
-    abs_delta -= objEnd.length
+    abs_delta -= np.array([0,objStart.length[1],0])
+    abs_delta -= np.array([0,objEnd.length[1],0])
+
+    print("abs_delta", abs_delta)
 
     if delta[1] > 0:
         production_list = produce.execute_model_withDirection(objStart, generic_object_list,abs_delta,"+y")
@@ -32,10 +34,10 @@ def solve_1D(generic_object_list, delta, objStart, objEnd):
     elif delta[0] < 0 and len(production_list) > 0:
         production_list += produce.execute_model_withDirection(production_list[-1], generic_object_list,abs_delta,"-x")
     
-    # if delta[2] > 0:
-    #     production_list = produce.execute_model_withDirection(objStart, generic_object_list,abs_delta,"+z")
-    # elif delta[2] < 0:
-    #     production_list = produce.execute_model_withDirection(objStart, generic_object_list,abs_delta,"-z")
+    if delta[2] > 0 and len(production_list) > 0:
+        production_list += produce.execute_model_withDirection(production_list[-1], generic_object_list,abs_delta,"+z")
+    elif delta[2] < 0 and len(production_list) > 0:
+        production_list += produce.execute_model_withDirection(production_list[-1], generic_object_list,abs_delta,"-z")
 
     for obj in production_list:
         print("-------------new obj-------------")

@@ -130,11 +130,11 @@ loader.load(
 			var center_y = start_y ;
 			var center_z = start_z;
 			
-			var debug_mode = jsonData[i]["obj"]["debug"];
+			var debug_mode = jsonData[i]["obj"]["mode"];
 			// console.log("jsonData[i]", jsonData[i]["obj"]);
 
 			var cube = new THREE.Mesh( geometry, material );
-			if(debug_mode == "true"){
+			if(debug_mode == "0"){
 				console.log("debug", debug_mode);
 				cube = new THREE.Mesh( geometry2, material2 );
 			}
