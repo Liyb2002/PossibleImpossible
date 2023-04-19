@@ -51,6 +51,7 @@ def execute_model_withDirection(objStart, generic_object_list, delta, direction)
     current_bound = 0
     upper_bound = 0
     direction_idx = direction_to_index(direction)
+    print("direction", direction)
     print("direction_idx", direction_idx)
     print("delta[direction_idx]", delta[direction_idx])
 
@@ -60,17 +61,19 @@ def execute_model_withDirection(objStart, generic_object_list, delta, direction)
     while upper_bound< delta[direction_idx]:
         current_generic_obj = generic_object_list[current_type]
 
-        next_type = current_generic_obj.get_nextType_with_direction(direction)
-        rule_chosen = current_generic_obj.execute_rule(next_type)
+        next_type, rule_chosen = current_generic_obj.get_nextType_with_direction(direction)
+        next_type = int(next_type)
+
         next_generic_obj = generic_object_list[next_type]
         next_scope = next_generic_obj.scope
         next_obj = procedural_objects.Procedural_object(next_type, dummy_pos, next_scope)
         production_list.append(next_obj)
         rules_list.append(rule_chosen)
         
-        lower_bound += next_scope[direction_idx][0]
-        current_bound += next_obj.length[direction_idx]
-        upper_bound += next_scope[direction_idx][1]
+        # print("upper_bound plus", next_scope[direction_idx][1])
+        lower_bound += next_scope[direction_idx][0]*2
+        current_bound += next_obj.length[direction_idx]*2
+        upper_bound += next_scope[direction_idx][1]*2
         current_type = next_type
     
 
@@ -101,28 +104,28 @@ def execute_model_withDirection(objStart, generic_object_list, delta, direction)
     return production_list
     
 def add_scope(current_bound, delta, production_list, direction_idx):
-    print("do add scope")
+    # print("do add scope")
     for obj in production_list:
         target_add = delta[direction_idx] - current_bound
-        available_add = obj.scope[direction_idx][1] - obj.length[direction_idx]
+        available_add = (obj.scope[direction_idx][1] - obj.length[direction_idx]) * 2
         if target_add > available_add:
             obj.length[direction_idx] = obj.scope[direction_idx][1]
             current_bound += available_add
         else:
-            obj.length[direction_idx] += target_add
+            obj.length[direction_idx] += target_add * 0.5
             break
     return production_list
 
 def minus_scope(current_bound, delta, production_list, direction_idx):
-    print("do minus scope")
+    # print("do minus scope")
     for obj in production_list:
         target_minus = current_bound - delta[direction_idx]
-        available_minus = obj.length[direction_idx] - obj.scope[direction_idx][0]
+        available_minus = (obj.length[direction_idx] - obj.scope[direction_idx][0]) * 2
         if target_minus > available_minus:
             obj.length[direction_idx] = obj.scope[direction_idx][0]
             current_bound -= available_minus
         else:
-            obj.length[direction_idx] -= target_minus
+            obj.length[direction_idx] -= target_minus * 0.5
             break
     return production_list
 

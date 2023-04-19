@@ -29,14 +29,16 @@ class Generic_object:
         return choice
 
     def get_nextType_with_direction(self, direction):
-        possible_rule = []
+        possible_next = []
         for next_id in self.rules:
             if direction == self.rules[next_id][0]:
-                possible_rule.append(next_id)
+                possible_next.append(next_id)
         
-        if possible_rule[0] != None:
-            choice = int(random.choice(possible_rule))
+        if len(possible_next) != 0:
+            choice = possible_next[0]
+            rule = direction
         else:
             choice = self.get_nextType()
+            rule = self.execute_rule(choice)
         
-        return choice
+        return (choice, rule)
