@@ -4,6 +4,7 @@ import intersection
 import produce
 import generic_objects
 import cycle_connect
+import particle
 
 import numpy as np
 
@@ -31,14 +32,14 @@ foreground_type = 1
 background_type = 3
 steps = 4
 
-front_list = produce.execute_model(foreground_intersection, generic_object_list, foreground_type, steps)
-back_list = produce.execute_model(background_intersection, generic_object_list, background_type, steps)
-
-connect_list = cycle_connect.solve_3D(generic_object_list, front_list[-1], back_list[-1])
+cur_particle = particle.Particle(generic_object_list)
+cur_particle.run_particle(foreground_intersection, foreground_type, steps, True)
+cur_particle.run_particle(background_intersection, background_type, steps, False)
+cur_particle.run_connect()
 
 
 output_writer = write2JSON.output()
-output_writer.prepare_write_debug(front_list)
-output_writer.prepare_write_debug(back_list)
-output_writer.prepare_write(connect_list)
+output_writer.prepare_write_debug(cur_particle.front_list)
+output_writer.prepare_write_debug(cur_particle.back_list)
+output_writer.prepare_write(cur_particle.connect_list)
 output_writer.write()
