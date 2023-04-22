@@ -55,7 +55,8 @@ class Procedural_object:
             B_x = [objB.position[i] - objB.length[i], objB.position[i] + objB.length[i]]
             overlap_x = getOverlap(A_x, B_x)
             if overlap_x> 0.05:
-                return False
+                return True
+        return False
 
 
 def getOverlap(a, b):

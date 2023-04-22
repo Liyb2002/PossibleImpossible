@@ -34,7 +34,7 @@ class output:
                 'scale_x': float(obj.length[0]),
                 'scale_y': float(obj.length[1]),
                 'scale_z': float(obj.length[2]),
-                'mode': '0'}
+                'mode': '1'}
                     }
             else:
                 data = {'obj':
