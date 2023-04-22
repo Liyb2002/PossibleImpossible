@@ -32,14 +32,13 @@ foreground_type = 1
 background_type = 3
 steps = 4
 
-
 success = False
 while(success != True):
     cur_particle = particle.Particle(generic_object_list)
     cur_particle.run_particle(foreground_intersection, foreground_type, steps, True)
     cur_particle.run_particle(background_intersection, background_type, steps, False)
     cur_particle.run_connect()
-    cur_particle.overlapping_check()
+    # cur_particle.overlapping_check()
     success = cur_particle.success
 
 

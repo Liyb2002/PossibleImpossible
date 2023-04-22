@@ -6,6 +6,7 @@ class Particle:
         self.generic_object_list = generic_object_list
         self.success = True
 
+
     def run_particle(self,intersection, start_type, steps, isFront):
         if isFront:
             self.front_list = produce.execute_model(intersection, self.generic_object_list, start_type, steps)

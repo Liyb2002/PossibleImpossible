@@ -23,6 +23,7 @@ def solve_1D(generic_object_list, delta, objStart, objEnd):
     abs_delta -= np.array([0,objEnd.length[1],0])
 
     print("abs_delta", abs_delta)
+    Available_Ending_With_Object(generic_object_list, objEnd)
 
     if delta[1] > 0:
         work_1, production_list_1 = produce.execute_model_withDirection(objStart, generic_object_list,abs_delta,"+y")
@@ -51,7 +52,17 @@ def solve_1D(generic_object_list, delta, objStart, objEnd):
     production_list = production_list_1 + production_list_2 + production_list_3
     for obj in production_list:
         print("-------------new obj-------------")
+        print("type", obj.type)
         print(obj.position)
         print(obj.length)
 
     return production_list
+
+def Available_Ending_With_Object(generic_object_list, target_obj):
+    possible_endings = []
+    for i in range(1, len(generic_object_list)):
+        for connect_id in generic_object_list[int(i)].connect_id:
+            if connect_id == target_obj.type:
+                possible_endings.append(i)
+    
+    return possible_endings

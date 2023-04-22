@@ -55,7 +55,7 @@ def execute_model_withDirection(objStart, generic_object_list, delta, direction)
     current_type = objStart.type
 
     #execute rule to get the objects
-    while upper_bound< delta[direction_idx]:
+    while True:
         current_generic_obj = generic_object_list[current_type]
 
         next_type, rule_chosen = current_generic_obj.get_nextType_with_direction(direction)
@@ -72,6 +72,14 @@ def execute_model_withDirection(objStart, generic_object_list, delta, direction)
         current_bound += next_obj.length[direction_idx]*2
         upper_bound += next_scope[direction_idx][1]*2
         current_type = next_type
+
+        if upper_bound>delta[direction_idx] and lower_bound<delta[direction_idx]:
+            break
+        
+        if lower_bound > delta[direction_idx]:
+            print("failed")
+            return (False, [])
+
     
     # print("delta", delta)
     # print("number of objects", len(production_list))
@@ -79,10 +87,6 @@ def execute_model_withDirection(objStart, generic_object_list, delta, direction)
     # print("final current_bound", current_bound)
     # print("final upper_bound", upper_bound)
     # print("delta[direction_idx]", delta[direction_idx])
-    
-    if lower_bound > delta[direction_idx]:
-        print("failed")
-        return (False, [])
 
     #find exact scope of the objects
     if current_bound < delta[direction_idx]:

@@ -31,14 +31,23 @@ class Generic_object:
     def get_nextType_with_direction(self, direction):
         possible_next = []
         for next_id in self.rules:
-            if direction == self.rules[next_id][0]:
-                possible_next.append(next_id)
+            for i in range(len(self.rules[next_id])):
+                if direction == self.rules[next_id][i]:
+                    possible_next.append(next_id)
         
         if len(possible_next) != 0:
             choice = possible_next[0]
             rule = direction
         else:
+            print("wtf")
             choice = self.get_nextType()
             rule = self.execute_rule(choice)
         
         return (choice, rule)
+    
+    def get_possible_connect(self):
+        for connect_id in self.connect_id:
+            print("connect_id", connect_id)
+    
+    def test(self):
+        print("hello")
