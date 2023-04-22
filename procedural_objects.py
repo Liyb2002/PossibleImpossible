@@ -49,3 +49,14 @@ class Procedural_object:
     def arbitrary_set_position(self, position):
         self.position = position
 
+    def collision_check(self, objB):
+        for i in range(3):
+            A_x = [self.position[i] - self.length[i], self.position[i] + self.length[i]]
+            B_x = [objB.position[i] - objB.length[i], objB.position[i] + objB.length[i]]
+            overlap_x = getOverlap(A_x, B_x)
+            if overlap_x> 0.05:
+                return False
+
+
+def getOverlap(a, b):
+    return max(0, min(a[1], b[1]) - max(a[0], b[0]))

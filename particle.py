@@ -17,3 +17,11 @@ class Particle:
         if len(self.connect_list) == 0:
             print("failed particle")
             self.success = False
+    
+    def overlapping_check(self):
+        for obj_A in self.connect_list:
+            for obj_B in self.front_list:
+                overlapping = obj_A.collision_check(obj_B)
+                if overlapping:
+                    self.success = False
+  
