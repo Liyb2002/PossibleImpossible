@@ -82,7 +82,7 @@ def execute_model_withDirection(objStart, generic_object_list, delta, direction)
     
     if lower_bound > delta[direction_idx]:
         print("failed")
-        return []
+        return (False, [])
 
     #find exact scope of the objects
     if current_bound < delta[direction_idx]:
@@ -99,7 +99,7 @@ def execute_model_withDirection(objStart, generic_object_list, delta, direction)
         cur_obj = production_list[i]
         cur_obj.set_position(prev_obj, rules_list[i])
 
-    return production_list
+    return (True, production_list)
     
 def add_scope(current_bound, delta, production_list, direction_idx):
     # print("do add scope")

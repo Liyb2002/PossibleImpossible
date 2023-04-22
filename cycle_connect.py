@@ -25,20 +25,30 @@ def solve_1D(generic_object_list, delta, objStart, objEnd):
     print("abs_delta", abs_delta)
 
     if delta[1] > 0:
-        production_list = produce.execute_model_withDirection(objStart, generic_object_list,abs_delta,"+y")
+        work_1, production_list_1 = produce.execute_model_withDirection(objStart, generic_object_list,abs_delta,"+y")
     elif delta[1] < 0:
-        production_list = produce.execute_model_withDirection(objStart, generic_object_list,abs_delta,"-y")
+        work_1, production_list_1 = produce.execute_model_withDirection(objStart, generic_object_list,abs_delta,"-y")
 
-    if delta[0] > 0 and len(production_list) > 0:
-        production_list += produce.execute_model_withDirection(production_list[-1], generic_object_list,abs_delta,"+x")
-    elif delta[0] < 0 and len(production_list) > 0:
-        production_list += produce.execute_model_withDirection(production_list[-1], generic_object_list,abs_delta,"-x")
+    if work_1 != True:
+        return []
+
+    if delta[0] > 0:
+        work_2, production_list_2 = produce.execute_model_withDirection(production_list_1[-1], generic_object_list,abs_delta,"+x")
+    elif delta[0] < 0:
+        work_2, production_list_2 = produce.execute_model_withDirection(production_list_1[-1], generic_object_list,abs_delta,"-x")
     
-    if delta[2] > 0 and len(production_list) > 0:
-        production_list += produce.execute_model_withDirection(production_list[-1], generic_object_list,abs_delta,"+z")
-    elif delta[2] < 0 and len(production_list) > 0:
-        production_list += produce.execute_model_withDirection(production_list[-1], generic_object_list,abs_delta,"-z")
+    if work_2 != True:
+        return []
 
+    if delta[2] > 0:
+        work_3, production_list_3 = produce.execute_model_withDirection(production_list_2[-1], generic_object_list,abs_delta,"+z")
+    elif delta[2] < 0:
+        work_3, production_list_3 = produce.execute_model_withDirection(production_list_2[-1], generic_object_list,abs_delta,"-z")
+
+    if work_3 != True:
+        return []
+
+    production_list = production_list_1 + production_list_2 + production_list_3
     for obj in production_list:
         print("-------------new obj-------------")
         print(obj.position)
