@@ -5,11 +5,11 @@ def solve_3D(generic_object_list, objStart, objEnd):
     startPos = objStart.position
     endPos = objEnd.position
 
-    print("startPos", startPos)
-    print("startlength", objStart.length)
+    # print("startPos", startPos)
+    # print("startlength", objStart.length)
 
-    print("endPos", endPos)
-    print("endlength", objEnd.length)
+    # print("endPos", endPos)
+    # print("endlength", objEnd.length)
 
     delta = endPos - startPos
 
@@ -40,11 +40,11 @@ def solve_1D(generic_object_list, delta, objStart, objEnd):
         return []
 
     production_list = production_list_1 + production_list_2 + production_list_3
-    for obj in production_list:
-        print("-------------new obj-------------")
-        print("type", obj.type)
-        print(obj.position)
-        print(obj.length)
+    # for obj in production_list:
+    #     print("-------------new obj-------------")
+    #     print("type", obj.type)
+    #     print(obj.position)
+    #     print(obj.length)
 
     return production_list
 
@@ -63,7 +63,6 @@ def Available_Ending_With_Direction(generic_object_list, direction):
         if generic_object_list[i].able_next_direction(direction):
             possible_endings.append(i)
     
-    print("possible_endings", possible_endings)
     return possible_endings
 
 def get_dirs(delta):

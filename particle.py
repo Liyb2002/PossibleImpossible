@@ -25,4 +25,10 @@ class Particle:
                 overlapping = obj_A.collision_check(obj_B)
                 if overlapping:
                     self.success = False
+            
+            for obj_B in self.back_list:
+                overlapping = obj_A.collision_check(obj_B)
+                if overlapping:
+                    self.success = False
+
   

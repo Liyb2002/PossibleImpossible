@@ -46,17 +46,28 @@ class Procedural_object:
             self.position = prev_pos + np.array([0, 0, prev_z]) + np.array([0,0,self.length[2]])
 
         self.arriving_rule = rule
-        
+
     def arbitrary_set_position(self, position):
         self.position = position
 
     def collision_check(self, objB):
-        for i in range(3):
-            A_x = [self.position[i] - self.length[i], self.position[i] + self.length[i]]
-            B_x = [objB.position[i] - objB.length[i], objB.position[i] + objB.length[i]]
-            overlap_x = getOverlap(A_x, B_x)
-            if overlap_x> 0.05:
-                return True
+        A_x = [self.position[0] - self.length[0], self.position[0] + self.length[0]]
+        B_x = [objB.position[0] - objB.length[0], objB.position[0] + objB.length[0]]
+        overlap_x = getOverlap(A_x, B_x)
+
+        A_y = [self.position[1] - self.length[1], self.position[1] + self.length[1]]
+        B_y = [objB.position[1] - objB.length[1], objB.position[1] + objB.length[1]]
+        overlap_y = getOverlap(A_y, B_y)
+
+        A_z = [self.position[2] - self.length[2], self.position[2] + self.length[2]]
+        B_z = [objB.position[2] - objB.length[2], objB.position[2] + objB.length[2]]
+        overlap_z = getOverlap(A_z, B_z)
+
+        if overlap_x>0.0 and overlap_y>0.0 and overlap_z>0.0:
+            # print("cur obj", self.position, self.length)
+            # print("objB", objB.position, objB.length)
+            return True
+
         return False
 
 
