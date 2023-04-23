@@ -42,7 +42,7 @@ def execute_model(start_pos, generic_object_list, start_type, steps):
     return production_list
 
 
-def execute_model_withDirection(objStart, generic_object_list, delta, direction, available_endings):
+def execute_model_withDirection(objStart, generic_object_list, delta, direction, available_endings, objEnd):
     dummy_pos = np.array([0,0,0])
     production_list = []
     rules_list = []
@@ -76,6 +76,13 @@ def execute_model_withDirection(objStart, generic_object_list, delta, direction,
         rules_list.append(rule_chosen)
         
         if direction_idx != 2:
+            lower_bound += next_scope[direction_idx][0] + prev_lower_bound
+            current_bound += next_obj.length[direction_idx] + prev_current_bound
+            upper_bound += next_scope[direction_idx][1] + prev_upper_bound
+            prev_lower_bound = next_scope[direction_idx][0]
+            prev_current_bound = next_obj.length[direction_idx]
+            prev_upper_bound = next_scope[direction_idx][1]
+        elif objEnd.type == 3 or objEnd.type == 8:
             lower_bound += next_scope[direction_idx][0] + prev_lower_bound
             current_bound += next_obj.length[direction_idx] + prev_current_bound
             upper_bound += next_scope[direction_idx][1] + prev_upper_bound

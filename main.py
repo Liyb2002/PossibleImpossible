@@ -11,8 +11,8 @@ import numpy as np
 #find impossible intersection positions
 startPos = np.array([400,400])
 basic_scene = intersection.Scene(startPos)
-foreground_index = 8
-background_index = 12
+foreground_index = 6
+background_index = 16
 
 foreground_intersection = basic_scene.get_possible_intersects(foreground_index)
 background_intersection = basic_scene.get_possible_intersects(background_index)

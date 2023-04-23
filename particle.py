@@ -14,6 +14,7 @@ class Particle:
             self.back_list = produce.execute_model(intersection, self.generic_object_list, start_type, steps)
         
     def run_connect(self):
+        # ending = self.find_connect_ending()
         self.connect_list = cycle_connect.solve_3D(self.generic_object_list, self.front_list[-1], self.back_list[-1])
         if len(self.connect_list) == 0:
             print("failed particle")
@@ -31,4 +32,8 @@ class Particle:
                 if overlapping:
                     self.success = False
 
-  
+    def find_connect_ending(self):
+        for obj in self.back_list:
+            if obj.type == 1:
+                print("obj.type", obj.type)
+                return obj

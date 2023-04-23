@@ -25,26 +25,34 @@ def solve_1D(generic_object_list, delta, objStart, objEnd):
     directions = update_order(objStart, directions)
 
     available_endings = Available_Ending_With_Direction(generic_object_list, directions[0])
-    work_1, production_list_1 = produce.execute_model_withDirection(objStart, generic_object_list,abs_delta,directions[0],available_endings)
+    work_1, production_list_1 = produce.execute_model_withDirection(objStart, generic_object_list,abs_delta,directions[0],available_endings, objEnd)
     if work_1 != True:
         return []
 
     available_endings = Available_Ending_With_Direction(generic_object_list, directions[1])
-    work_2, production_list_2 = produce.execute_model_withDirection(production_list_1[-1], generic_object_list,abs_delta,directions[1],available_endings)
+    work_2, production_list_2 = produce.execute_model_withDirection(production_list_1[-1], generic_object_list,abs_delta,directions[1],available_endings, objEnd)
     if work_2 != True:
         return []
 
     available_endings = Available_Ending_With_Object(generic_object_list, objEnd)
-    work_3, production_list_3 = produce.execute_model_withDirection(production_list_2[-1], generic_object_list,abs_delta,directions[2],available_endings)
+    work_3, production_list_3 = produce.execute_model_withDirection(production_list_2[-1], generic_object_list,abs_delta,directions[2],available_endings, objEnd)
     if work_3 != True:
         return []
 
     production_list = production_list_1 + production_list_2 + production_list_3
-    # for obj in production_list:
-    #     print("-------------new obj-------------")
-    #     print("type", obj.type)
-    #     print(obj.position)
-    #     print(obj.length)
+    print("startPos", objStart.position)
+    print("startType", objStart.type)
+    print("startlength", objStart.length)
+
+    print("endPos", objEnd.position)
+    print("endType", objEnd.type)
+    print("endlength", objEnd.length)
+
+    for obj in production_list:
+        print("-------------new obj-------------")
+        print("type", obj.type)
+        print(obj.position)
+        print(obj.length)
 
     return production_list
 
