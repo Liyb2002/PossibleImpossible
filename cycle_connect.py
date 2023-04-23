@@ -19,6 +19,8 @@ def solve_3D(generic_object_list, objStart, objEnd):
 def solve_1D(generic_object_list, delta, objStart, objEnd):
 
     abs_delta = np.array([abs(delta[0]), abs(delta[1]), abs(delta[2])])
+    abs_delta -= np.array([0, 0, objEnd.length[2]])
+
     directions = get_dirs(delta)
 
     available_endings = Available_Ending_With_Direction(generic_object_list, directions[0])

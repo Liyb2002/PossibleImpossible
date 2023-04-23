@@ -75,12 +75,18 @@ def execute_model_withDirection(objStart, generic_object_list, delta, direction,
         production_list.append(next_obj)
         rules_list.append(rule_chosen)
         
-        lower_bound += next_scope[direction_idx][0] + prev_lower_bound
-        current_bound += next_obj.length[direction_idx] + prev_current_bound
-        upper_bound += next_scope[direction_idx][1] + prev_upper_bound
-        prev_lower_bound = next_scope[direction_idx][0]
-        prev_current_bound = next_obj.length[direction_idx]
-        prev_upper_bound = next_scope[direction_idx][1]
+        if direction_idx != 2:
+            lower_bound += next_scope[direction_idx][0] + prev_lower_bound
+            current_bound += next_obj.length[direction_idx] + prev_current_bound
+            upper_bound += next_scope[direction_idx][1] + prev_upper_bound
+            prev_lower_bound = next_scope[direction_idx][0]
+            prev_current_bound = next_obj.length[direction_idx]
+            prev_upper_bound = next_scope[direction_idx][1]
+        else:
+            lower_bound += next_scope[direction_idx][0] *2
+            current_bound += next_obj.length[direction_idx] *2
+            upper_bound += next_scope[direction_idx][1] *2
+
         current_type = next_type
 
         if upper_bound>delta[direction_idx] and lower_bound<delta[direction_idx] and valid_ending(available_endings, current_type):
