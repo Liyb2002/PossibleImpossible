@@ -22,8 +22,7 @@ def solve_1D(generic_object_list, delta, objStart, objEnd):
     abs_delta -= np.array([0,objStart.length[1],0])
     abs_delta -= np.array([0,objEnd.length[1],0])
 
-    print("abs_delta", abs_delta)
-    Available_Ending_With_Object(generic_object_list, objEnd)
+    Available_Ending_With_Direction(generic_object_list, "+x")
 
     if delta[1] > 0:
         work_1, production_list_1 = produce.execute_model_withDirection(objStart, generic_object_list,abs_delta,"+y")
@@ -65,4 +64,13 @@ def Available_Ending_With_Object(generic_object_list, target_obj):
             if connect_id == target_obj.type:
                 possible_endings.append(i)
     
+    return possible_endings
+
+def Available_Ending_With_Direction(generic_object_list, direction):
+    possible_endings = []
+    for i in range(1, len(generic_object_list)):
+        if generic_object_list[i].able_next_direction(direction):
+            possible_endings.append(i)
+    
+    print("possible_endings", possible_endings)
     return possible_endings

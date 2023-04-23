@@ -39,15 +39,18 @@ class Generic_object:
             choice = possible_next[0]
             rule = direction
         else:
-            print("wtf")
             choice = self.get_nextType()
             rule = self.execute_rule(choice)
         
         return (choice, rule)
-    
-    def get_possible_connect(self):
-        for connect_id in self.connect_id:
-            print("connect_id", connect_id)
-    
+        
+    def able_next_direction(self, direction):
+        for next_id in self.rules:
+            for i in range(len(self.rules[next_id])):
+                if direction == self.rules[next_id][i]:
+                    return True
+
+        return False    
+
     def test(self):
         print("hello")
