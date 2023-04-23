@@ -80,20 +80,15 @@ def execute_model_withDirection(objStart, generic_object_list, delta, direction,
             print("failed")
             return (False, [])
 
-    
-    # print("delta", delta)
-    # print("number of objects", len(production_list))
-    # print("final lower_bound", lower_bound)
-    # print("final current_bound", current_bound)
-    # print("final upper_bound", upper_bound)
-    # print("delta[direction_idx]", delta[direction_idx])
-
     #find exact scope of the objects
     if current_bound < delta[direction_idx]:
         production_list = add_scope(current_bound, delta, production_list, direction_idx)
 
     if current_bound > delta[direction_idx]:
         production_list = minus_scope(current_bound, delta, production_list, direction_idx)
+
+    if direction_idx == 0:
+        production_list = adjust_scope(production_list)
 
     #set object positions
     first_obj = production_list[0]
@@ -130,6 +125,19 @@ def minus_scope(current_bound, delta, production_list, direction_idx):
             obj.length[direction_idx] -= target_minus * 0.5
             break
     return production_list
+
+def adjust_scope(production_list):
+    target_adjust = production_list[-1].length[0]
+    for obj in production_list:
+        available_adjust =  (obj.length[0] - obj.scope[0][0]) * 2
+        if target_adjust > available_adjust:
+            obj.length[0] = obj.scope[0][0]
+            target_adjust -= available_adjust
+        else: 
+            obj.length[0] -= target_adjust * 0.5
+            break
+    return production_list
+       
 
 def start_obj(start_pos, generic_object_list, start_type):
 

@@ -34,6 +34,7 @@ def solve_1D(generic_object_list, delta, objStart, objEnd):
         return []
 
     available_endings = Available_Ending_With_Object(generic_object_list, objEnd)
+    print("available_endings", available_endings)
     work_3, production_list_3 = produce.execute_model_withDirection(production_list_2[-1], generic_object_list,abs_delta,directions[2],available_endings)
     if work_3 != True:
         return []
