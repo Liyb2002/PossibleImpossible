@@ -42,7 +42,7 @@ def execute_model(start_pos, generic_object_list, start_type, steps):
     return production_list
 
 
-def execute_model_withDirection(objStart, generic_object_list, delta, direction):
+def execute_model_withDirection(objStart, generic_object_list, delta, direction, available_endings):
     dummy_pos = np.array([0,0,0])
     production_list = []
     rules_list = []
@@ -73,7 +73,7 @@ def execute_model_withDirection(objStart, generic_object_list, delta, direction)
         upper_bound += next_scope[direction_idx][1]*2
         current_type = next_type
 
-        if upper_bound>delta[direction_idx] and lower_bound<delta[direction_idx]:
+        if upper_bound>delta[direction_idx] and lower_bound<delta[direction_idx] and valid_ending(available_endings, current_type):
             break
         
         if lower_bound > delta[direction_idx]:
@@ -152,3 +152,10 @@ def direction_to_index(direction):
         return 1
     
     return 2
+
+def valid_ending(available_endings, cur_type):
+    for ending in available_endings:
+        if ending == cur_type:
+            return True
+    
+    return False

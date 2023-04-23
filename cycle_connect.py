@@ -21,21 +21,20 @@ def solve_1D(generic_object_list, delta, objStart, objEnd):
     abs_delta = np.array([abs(delta[0]), abs(delta[1]), abs(delta[2])])
     abs_delta -= np.array([objStart.length[0] + objEnd.length[0],0,0])
 
-    Available_Ending_With_Direction(generic_object_list, "+x")
     directions = get_dirs(delta)
 
-    work_1, production_list_1 = produce.execute_model_withDirection(objStart, generic_object_list,abs_delta,directions[0])
-
+    available_endings = Available_Ending_With_Direction(generic_object_list, directions[0])
+    work_1, production_list_1 = produce.execute_model_withDirection(objStart, generic_object_list,abs_delta,directions[0],available_endings)
     if work_1 != True:
         return []
 
-    work_2, production_list_2 = produce.execute_model_withDirection(production_list_1[-1], generic_object_list,abs_delta,directions[1])
-    
+    available_endings = Available_Ending_With_Direction(generic_object_list, directions[1])
+    work_2, production_list_2 = produce.execute_model_withDirection(production_list_1[-1], generic_object_list,abs_delta,directions[1],available_endings)
     if work_2 != True:
         return []
 
-    work_3, production_list_3 = produce.execute_model_withDirection(production_list_2[-1], generic_object_list,abs_delta,directions[2])
-
+    available_endings = Available_Ending_With_Object(generic_object_list, objEnd)
+    work_3, production_list_3 = produce.execute_model_withDirection(production_list_2[-1], generic_object_list,abs_delta,directions[2],available_endings)
     if work_3 != True:
         return []
 
