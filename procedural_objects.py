@@ -6,7 +6,6 @@ class Procedural_object:
         self.type = type
         self.position = position
         self.scope = scope
-
         self.set_scope()
     
     def set_type(self, type):
@@ -46,6 +45,8 @@ class Procedural_object:
         if(rule == '+z'):
             self.position = prev_pos + np.array([0, 0, prev_z]) + np.array([0,0,self.length[2]])
 
+        self.arriving_rule = rule
+        
     def arbitrary_set_position(self, position):
         self.position = position
 

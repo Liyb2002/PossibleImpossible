@@ -22,6 +22,7 @@ def solve_1D(generic_object_list, delta, objStart, objEnd):
     abs_delta -= np.array([0, 0, objEnd.length[2]])
 
     directions = get_dirs(delta)
+    directions = update_order(objStart, directions)
 
     available_endings = Available_Ending_With_Direction(generic_object_list, directions[0])
     work_1, production_list_1 = produce.execute_model_withDirection(objStart, generic_object_list,abs_delta,directions[0],available_endings)
@@ -79,5 +80,13 @@ def get_dirs(delta):
         directions.append("+z")
     if delta[2] < 0:
         directions.append("-z")
+    
+    return directions
+
+def update_order(objStart, directions):
+    if objStart.arriving_rule == "+x" or objStart.arriving_rule == "-x":
+        tempt_dir = directions[0]
+        directions[0] = directions[1]
+        directions[1] = tempt_dir
     
     return directions
