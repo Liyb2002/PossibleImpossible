@@ -19,31 +19,22 @@ def solve_3D(generic_object_list, objStart, objEnd):
 def solve_1D(generic_object_list, delta, objStart, objEnd):
 
     abs_delta = np.array([abs(delta[0]), abs(delta[1]), abs(delta[2])])
-    abs_delta -= np.array([0,objStart.length[1],0])
-    abs_delta -= np.array([0,objEnd.length[1],0])
+    abs_delta -= np.array([objStart.length[0] + objEnd.length[0],0,0])
 
     Available_Ending_With_Direction(generic_object_list, "+x")
+    directions = get_dirs(delta)
 
-    if delta[1] > 0:
-        work_1, production_list_1 = produce.execute_model_withDirection(objStart, generic_object_list,abs_delta,"+y")
-    elif delta[1] < 0:
-        work_1, production_list_1 = produce.execute_model_withDirection(objStart, generic_object_list,abs_delta,"-y")
+    work_1, production_list_1 = produce.execute_model_withDirection(objStart, generic_object_list,abs_delta,directions[0])
 
     if work_1 != True:
         return []
 
-    if delta[0] > 0:
-        work_2, production_list_2 = produce.execute_model_withDirection(production_list_1[-1], generic_object_list,abs_delta,"+x")
-    elif delta[0] < 0:
-        work_2, production_list_2 = produce.execute_model_withDirection(production_list_1[-1], generic_object_list,abs_delta,"-x")
+    work_2, production_list_2 = produce.execute_model_withDirection(production_list_1[-1], generic_object_list,abs_delta,directions[1])
     
     if work_2 != True:
         return []
 
-    if delta[2] > 0:
-        work_3, production_list_3 = produce.execute_model_withDirection(production_list_2[-1], generic_object_list,abs_delta,"+z")
-    elif delta[2] < 0:
-        work_3, production_list_3 = produce.execute_model_withDirection(production_list_2[-1], generic_object_list,abs_delta,"-z")
+    work_3, production_list_3 = produce.execute_model_withDirection(production_list_2[-1], generic_object_list,abs_delta,directions[2])
 
     if work_3 != True:
         return []
@@ -74,3 +65,20 @@ def Available_Ending_With_Direction(generic_object_list, direction):
     
     print("possible_endings", possible_endings)
     return possible_endings
+
+def get_dirs(delta):
+    directions = []
+    if delta[0] > 0:
+        directions.append("+x")
+    if delta[0] < 0:
+        directions.append("-x")
+    if delta[1] > 0:
+        directions.append("+y")
+    if delta[1] < 0:
+        directions.append("-y")
+    if delta[2] > 0:
+        directions.append("+z")
+    if delta[2] < 0:
+        directions.append("-z")
+    
+    return directions
