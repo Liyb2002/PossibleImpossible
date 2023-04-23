@@ -39,6 +39,7 @@ class Generic_object:
             choice = possible_next[0]
             rule = direction
         else:
+            print("wtf")
             choice = self.get_nextType()
             rule = self.execute_rule(choice)
         
