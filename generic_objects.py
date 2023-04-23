@@ -39,11 +39,12 @@ class Generic_object:
             choice = possible_next[0]
             rule = direction
         else:
-            print("wtf")
-            choice = self.get_nextType()
-            rule = self.execute_rule(choice)
+            return (False, [], [])
+            # print("wtf")
+            # choice = self.get_nextType()
+            # rule = self.execute_rule(choice)
         
-        return (choice, rule)
+        return (True,choice, rule)
         
     def able_next_direction(self, direction):
         for next_id in self.rules:
