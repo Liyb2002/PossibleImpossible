@@ -11,7 +11,7 @@ import numpy as np
 #find impossible intersection positions
 startPos = np.array([400,400])
 basic_scene = intersection.Scene(startPos)
-foreground_index = 6
+foreground_index = 8
 background_index = 16
 
 foreground_intersection = basic_scene.get_possible_intersects(foreground_index)
@@ -30,7 +30,7 @@ with open('objects.json', 'r') as object_file:
 #start produce
 foreground_type = 1
 background_type = 3
-steps = 4
+steps = 2
 
 success = False
 while(success != True):
