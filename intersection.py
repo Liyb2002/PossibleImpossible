@@ -29,19 +29,19 @@ class Scene:
         ray_min = self.camera.get_ray(0, 0)
 
         for k in range(0,40):
-            x = camera_pos[0] + ray[0] * (k*0.25)
-            y = camera_pos[1] + ray[1] * (k*0.25)
-            z = camera_pos[2] + ray[2] * (k*0.25)
+            x = camera_pos[0] + ray[0] * (k*0.5)
+            y = camera_pos[1] + ray[1] * (k*0.5)
+            z = camera_pos[2] + ray[2] * (k*0.5)
             pos = np.array([x, y,z])
             self.possible_intersects.append(pos)
 
-            x_max = camera_pos[0] + ray_max[0] * (k*0.25)
-            y_max = camera_pos[1] + ray_max[1] * (k*0.25)
+            x_max = camera_pos[0] + ray_max[0] * (k*0.5)
+            y_max = camera_pos[1] + ray_max[1] * (k*0.5)
             pos_max = np.array([x_max, y_max])
             self.max_screen.append(pos_max)
 
-            x_min = camera_pos[0] + ray_min[0] * (k*0.25)
-            y_min = camera_pos[1] + ray_min[1] * (k*0.25)
+            x_min = camera_pos[0] + ray_min[0] * (k*0.5)
+            y_min = camera_pos[1] + ray_min[1] * (k*0.5)
             pos_min = np.array([x_min, y_min])
             self.min_screen.append(pos_min)
 
