@@ -24,7 +24,8 @@ def execute_model(start_pos, generic_object_list, start_type, steps):
 
         next_generic_obj = generic_object_list[next_type]
         next_scope = next_generic_obj.scope
-        next_obj = procedural_objects.Procedural_object(next_type, start_pos, next_scope)
+        next_hash = next_generic_obj.generate_hash()
+        next_obj = procedural_objects.Procedural_object(next_type, start_pos, next_scope, next_hash)
         next_choice = cur_generic_obj.execute_rule(next_type)
         cur_obj = production_list[tempt_count+1]
         next_obj.set_position(cur_obj, next_choice)
@@ -71,7 +72,8 @@ def execute_model_withDirection(objStart, generic_object_list, delta, direction,
 
         next_generic_obj = generic_object_list[next_type]
         next_scope = next_generic_obj.scope
-        next_obj = procedural_objects.Procedural_object(next_type, dummy_pos, next_scope)
+        next_hash = next_generic_obj.generate_hash()
+        next_obj = procedural_objects.Procedural_object(next_type, dummy_pos, next_scope, next_hash)
         production_list.append(next_obj)
         rules_list.append(rule_chosen)
         
@@ -165,7 +167,8 @@ def start_obj(start_pos, generic_object_list, start_type):
 
     cur_type = start_type
     start_scope = generic_object_list[cur_type].scope
-    cur_obj = procedural_objects.Procedural_object(cur_type, start_pos, start_scope)
+    gen_hash = generic_object_list[cur_type].generate_hash()
+    cur_obj = procedural_objects.Procedural_object(cur_type, start_pos, start_scope, gen_hash)
     cur_obj_x = cur_obj.length[0]
     cur_obj_y = cur_obj.length[1]
     cur_obj_z = cur_obj.length[2]
