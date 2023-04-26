@@ -1,5 +1,6 @@
 import produce
 import cycle_connect
+import random
 
 class Particle:
     def __init__(self, generic_object_list):
@@ -11,14 +12,11 @@ class Particle:
     def run_particle(self,intersection, start_type, steps, isFront):
         if isFront:
             self.procedural_objects += produce.execute_model(intersection, self.generic_object_list, start_type, steps)
-            self.start = self.procedural_objects[-1]
         else:
             self.procedural_objects += produce.execute_model(intersection, self.generic_object_list, start_type, steps)
-            self.end = self.procedural_objects[-1]
 
     def run_connect(self):
-        # ending = self.find_connect_ending()
-        connect_list = cycle_connect.solve_3D(self.generic_object_list, self.start, self.end)
+        connect_list = cycle_connect.solve_3D(self.generic_object_list, self.procedural_objects[-1], self.procedural_objects[0])
         if len(connect_list) == 0:
             print("failed particle")
             self.success = False
@@ -37,3 +35,9 @@ class Particle:
             if obj.type == 1:
                 print("obj.type", obj.type)
                 return obj
+    
+    def random_object(self):
+        rd = random.randint(0, len(self.procedural_objects)-1)
+        print("len", len(self.procedural_objects))
+        print("rd", rd)
+        return rd

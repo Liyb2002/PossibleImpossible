@@ -59,5 +59,4 @@ class Generic_object:
     
     def generate_hash(self):
         gen_hash = self.id + random.uniform(0, 1)
-        print("hash", gen_hash)
         return gen_hash
