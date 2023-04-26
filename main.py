@@ -11,8 +11,8 @@ import numpy as np
 #find impossible intersection positions
 startPos = np.array([400,400])
 basic_scene = intersection.Scene(startPos)
-foreground_index = 12
-background_index = 24
+foreground_index = 8
+background_index = 16
 
 foreground_intersection = basic_scene.get_possible_intersects(foreground_index)
 background_intersection = basic_scene.get_possible_intersects(background_index)
@@ -38,7 +38,7 @@ while(success != True):
     cur_particle.run_particle(foreground_intersection, foreground_type, steps, True)
     cur_particle.run_particle(background_intersection, background_type, steps, False)
     cur_particle.run_connect()
-    cur_particle.run_connect()
+    # cur_particle.run_connect2()
 
     cur_particle.overlapping_check()
     success = cur_particle.success
@@ -46,6 +46,6 @@ while(success != True):
 
 output_writer = write2JSON.output()
 output_writer.prepare_write_debug(cur_particle.procedural_objects)
-output_writer.prepare_write(cur_particle.connect_list)
+# output_writer.prepare_write(cur_particle.connect_list)
 output_writer.write()
 

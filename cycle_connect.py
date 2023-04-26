@@ -26,26 +26,20 @@ def solve_1D(generic_object_list, delta, objStart, objEnd):
     directions = get_dirs(delta)
     directions = update_order(objStart, directions)
 
-    if delta[0] != 0:
-        available_endings = Available_Ending_With_Direction(generic_object_list, directions[0])
-        work_1, production_list_1 = produce.execute_model_withDirection(production_list[-1], generic_object_list,abs_delta,directions[0],available_endings, objEnd)
-        if work_1 != True:
-            return []
-        production_list += production_list_1
+    ok, new_production = single_execution(abs_delta, 0, generic_object_list, directions, production_list, objEnd, 0)
+    if ok != True:
+        return []
+    production_list += new_production
 
-    if delta[1] != 0:
-        available_endings = Available_Ending_With_Direction(generic_object_list, directions[1])
-        work_2, production_list_2 = produce.execute_model_withDirection(production_list[-1], generic_object_list,abs_delta,directions[1],available_endings, objEnd)
-        if work_2 != True:
-            return []
-        production_list += production_list_2
+    ok, new_production = single_execution(abs_delta, 1, generic_object_list, directions, production_list, objEnd, 1)
+    if ok != True:
+        return []
+    production_list += new_production
 
-    if delta[2] != 0:
-        available_endings = Available_Ending_With_Object(generic_object_list, objEnd)
-        work_3, production_list_3 = produce.execute_model_withDirection(production_list[-1], generic_object_list,abs_delta,directions[2],available_endings, objEnd)
-        if work_3 != True:
-            return []
-        production_list += production_list_3
+    ok, new_production = single_execution(abs_delta, 2, generic_object_list, directions, production_list, objEnd, 2)
+    if ok != True:
+        return []
+    production_list += new_production
 
     print("startPos", objStart.position)
     print("startType", objStart.type)
@@ -104,3 +98,16 @@ def update_order(objStart, directions):
         directions[1] = tempt_dir
     
     return directions
+
+def single_execution(abs_delta, index, generic_object_list, directions, production_list, objEnd, count):
+    if abs_delta[index] != 0:
+        available_endings = Available_Ending_With_Direction(generic_object_list, directions[index])
+
+        if count == 2:
+            available_endings = Available_Ending_With_Object(generic_object_list, objEnd)
+
+        ok, production_list_1 = produce.execute_model_withDirection(production_list[-1], generic_object_list,abs_delta,directions[index],available_endings, objEnd)
+        if ok != True:
+            return (ok, [])
+
+        return (ok, production_list_1)

@@ -22,6 +22,13 @@ class Particle:
             self.success = False
         self.procedural_objects += connect_list
     
+    def run_connect2(self):
+        connect_list = cycle_connect.solve_3D(self.generic_object_list, self.procedural_objects[-1], self.procedural_objects[9])
+        if len(connect_list) == 0:
+            print("failed particle")
+            self.success = False
+        self.procedural_objects += connect_list
+
     def overlapping_check(self):
         for obj_A in self.procedural_objects:
             for obj_B in self.procedural_objects:
