@@ -18,18 +18,19 @@ class Particle:
 
     def run_connect(self):
         # ending = self.find_connect_ending()
-        self.connect_list = cycle_connect.solve_3D(self.generic_object_list, self.start, self.end)
-        if len(self.connect_list) == 0:
+        connect_list = cycle_connect.solve_3D(self.generic_object_list, self.start, self.end)
+        if len(connect_list) == 0:
             print("failed particle")
             self.success = False
-        self.procedural_objects += self.connect_list
+        self.procedural_objects += connect_list
     
     def overlapping_check(self):
-        for obj_A in self.connect_list:
+        for obj_A in self.procedural_objects:
             for obj_B in self.procedural_objects:
-                overlapping = obj_A.collision_check(obj_B)
-                if overlapping:
-                    self.success = False
+                if obj_A.hash != obj_B.hash:
+                    overlapping = obj_A.collision_check(obj_B)
+                    if overlapping:
+                        self.success = False
             
     def find_connect_ending(self):
         for obj in self.back_list:
