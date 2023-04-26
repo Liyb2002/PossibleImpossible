@@ -1,5 +1,6 @@
 import produce
 import numpy as np
+import random
 
 def solve_3D(generic_object_list, objStart, objEnd):
     startPos = objStart.position
@@ -26,20 +27,13 @@ def solve_1D(generic_object_list, delta, objStart, objEnd):
     directions = get_dirs(delta)
     directions = update_order(objStart, directions)
 
-    ok, new_production = single_execution(abs_delta, 0, generic_object_list, directions, production_list, objEnd, 0)
-    if ok != True:
-        return []
-    production_list += new_production
+    orders = random_order()
+    for i in range(0,3):
+        ok, new_production = single_execution(abs_delta, orders[i], generic_object_list, directions, production_list, objEnd, i)
+        if ok != True:
+            return []
+        production_list += new_production
 
-    ok, new_production = single_execution(abs_delta, 1, generic_object_list, directions, production_list, objEnd, 1)
-    if ok != True:
-        return []
-    production_list += new_production
-
-    ok, new_production = single_execution(abs_delta, 2, generic_object_list, directions, production_list, objEnd, 2)
-    if ok != True:
-        return []
-    production_list += new_production
 
     print("startPos", objStart.position)
     print("startType", objStart.type)
@@ -98,6 +92,17 @@ def update_order(objStart, directions):
         directions[1] = tempt_dir
     
     return directions
+
+def random_order():
+    orders = []
+    first = random.randint(0, 1)
+    second = (first +1)%2
+    third = 2
+
+    orders.append(first)
+    orders.append(second)
+    orders.append(third)
+    return orders
 
 def single_execution(abs_delta, index, generic_object_list, directions, production_list, objEnd, count):
     if abs_delta[index] != 0:
