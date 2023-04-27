@@ -35,19 +35,19 @@ def solve_1D(generic_object_list, delta, objStart, objEnd):
         production_list += new_production
 
 
-    print("startPos", objStart.position)
-    print("startType", objStart.type)
-    print("startlength", objStart.length)
+    # print("startPos", objStart.position)
+    # print("startType", objStart.type)
+    # print("startlength", objStart.length)
 
-    print("endPos", objEnd.position)
-    print("endType", objEnd.type)
-    print("endlength", objEnd.length)
+    # print("endPos", objEnd.position)
+    # print("endType", objEnd.type)
+    # print("endlength", objEnd.length)
 
-    for obj in production_list:
-        print("-------------new obj-------------")
-        print("type", obj.type)
-        print(obj.position)
-        print(obj.length)
+    # for obj in production_list:
+    #     print("-------------new obj-------------")
+    #     print("type", obj.type)
+    #     print(obj.position)
+    #     print(obj.length)
 
     return production_list
 
@@ -105,6 +105,7 @@ def random_order():
     return orders
 
 def single_execution(abs_delta, index, generic_object_list, directions, production_list, objEnd, count):
+
     if abs_delta[index] != 0:
         available_endings = Available_Ending_With_Direction(generic_object_list, directions[index])
 
@@ -113,6 +114,8 @@ def single_execution(abs_delta, index, generic_object_list, directions, producti
 
         ok, production_list_1 = produce.execute_model_withDirection(production_list[-1], generic_object_list,abs_delta,directions[index],available_endings, objEnd)
         if ok != True:
-            return (ok, [])
+            return (ok, production_list)
 
         return (ok, production_list_1)
+    
+    return (True, [])
