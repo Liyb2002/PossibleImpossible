@@ -18,8 +18,10 @@ class Particle:
     def run_connect(self):
         connect_list = cycle_connect.solve_3D(self.generic_object_list, self.procedural_objects[-1], self.procedural_objects[0])
         if len(connect_list) == 0:
-            print("failed particle")
+            print("failed connect")
             self.success = False
+        else:
+            print("success connect")
         self.procedural_objects += connect_list
     
     def run_particle2(self, steps):
@@ -28,7 +30,18 @@ class Particle:
         objStart2 = self.procedural_objects[rd2]
 
         self.procedural_objects += produce.execute_model2(self.generic_object_list, objStart, steps)
+        self.start = self.procedural_objects[-1]
         self.procedural_objects += produce.execute_model2(self.generic_object_list, objStart2, steps)
+        self.end = self.procedural_objects[-1]
+
+    def run_connect2(self):
+        connect_list = cycle_connect.solve_3D(self.generic_object_list, self.start, self.end)
+        if len(connect_list) == 0:
+            print("failed connect")
+            self.success = False
+        else:
+            print("success connect")
+        self.procedural_objects += connect_list
 
     def overlapping_check(self):
         for obj_A in self.procedural_objects:
