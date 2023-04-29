@@ -27,7 +27,7 @@
 			
 import * as THREE from 'three'
 import { GLTFLoader } from '/node_modules/three/examples/jsm/loaders/GLTFLoader.js';
-import { loadBirds } from './components/birds.js';
+import { RGBELoader } from '/node_modules/three/examples/jsm/loaders/RGBELoader.js';
 
 
 const loader = new THREE.FileLoader();
@@ -77,6 +77,28 @@ geometry.setAttribute( 'color', new THREE.Float32BufferAttribute( colors, 3 ) );
 camera.position.set(camera_x, camera_y, camera_z);
 camera.lookAt(0,0,0);
 camera.up.set(0,1,0);
+
+new RGBELoader()
+.setPath( 'textures/equirectangular/' )
+.load( 'royal_esplanade_1k.hdr', function ( texture ) {
+
+	texture.mapping = THREE.EquirectangularReflectionMapping;
+
+	scene.background = texture;
+	scene.environment = texture;
+
+renderer.render( scene, camera );
+	// model
+
+} );
+
+const loader2 = new GLTFLoader().setPath( 'static/models/DamagedHelmet/glTF/' );
+loader2.load( 'DamagedHelmet.gltf', function ( gltf ) {
+
+	scene.add( gltf.scene );
+
+	renderer.render( scene, camera );
+} );
 
 
 //load a text file and output the result to the console
