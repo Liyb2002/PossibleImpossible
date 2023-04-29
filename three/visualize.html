@@ -81,23 +81,21 @@ camera.up.set(0,1,0);
 new RGBELoader()
 .setPath( 'textures/equirectangular/' )
 .load( 'royal_esplanade_1k.hdr', function ( texture ) {
-
 	texture.mapping = THREE.EquirectangularReflectionMapping;
-
-	scene.background = texture;
+	// scene.background = texture;
 	scene.environment = texture;
-
-renderer.render( scene, camera );
-	// model
-
 } );
 
 const loader2 = new GLTFLoader().setPath( 'static/models/DamagedHelmet/glTF/' );
 loader2.load( 'DamagedHelmet.gltf', function ( gltf ) {
+	gltf.scene.children[0].scale.multiplyScalar(0.5);
+
+	const model = gltf.scene;
+    model.position.setX(1);
+    model.position.setY(2);
+    model.position.setZ(1);
 
 	scene.add( gltf.scene );
-
-	renderer.render( scene, camera );
 } );
 
 
