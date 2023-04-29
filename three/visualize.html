@@ -27,6 +27,7 @@
 			
 import * as THREE from 'three'
 import { GLTFLoader } from '/node_modules/three/examples/jsm/loaders/GLTFLoader.js';
+import { loadBirds } from './components/birds.js';
 
 
 const loader = new THREE.FileLoader();
@@ -39,87 +40,54 @@ var start_mouse_x = 0
 var start_mouse_y = 0
 
 var mouse = new THREE.Vector2();
+const scene = new THREE.Scene();
+const left = -3.2, right = 3.2, top2 = 2.4, bottom = -2.4, near = 0.01, far = 100;
+const camera = new THREE.OrthographicCamera(left, right, top2, bottom, near, far);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize( window.innerWidth, window.innerHeight );
+document.body.appendChild( renderer.domElement );
+
+const geometry = new THREE.BoxGeometry( 1, 1, 1 ).toNonIndexed();
+const material = new THREE.MeshBasicMaterial( { vertexColors: true } ); 
+
+const positionAttribute = geometry.getAttribute( 'position' );
+const colors = [];
+const color = new THREE.Color();
+
+var count = 0;
+for ( let i = 0; i < positionAttribute.count; i += 12 ) {
+if (count == 0){
+	color.set( 0x435bc4 );
+}
+if (count == 1){
+	color.set( 0xb33946 );
+}
+if (count == 2){
+	color.set( 0x4287f5);
+}
+for(let j=0;j<12;j++){
+	colors.push( color.r, color.g, color.b );
+}
+count += 1
+
+}
+geometry.setAttribute( 'color', new THREE.Float32BufferAttribute( colors, 3 ) );
+
+camera.position.set(camera_x, camera_y, camera_z);
+camera.lookAt(0,0,0);
+camera.up.set(0,1,0);
 
 
 //load a text file and output the result to the console
 loader.load(
 	// resource URL
 	'./result.json',
-
 	// onLoad callback
 	function ( data ) {
-		const scene = new THREE.Scene();
-			const left = -3.2, right = 3.2, top2 = 2.4, bottom = -2.4, near = 0.01, far = 100;
-			const camera = new THREE.OrthographicCamera(left, right, top2, bottom, near, far);
-
-			const renderer = new THREE.WebGLRenderer({ antialias: true });
-			renderer.setSize( window.innerWidth, window.innerHeight );
-			document.body.appendChild( renderer.domElement );
-
-			const geometry = new THREE.BoxGeometry( 1, 1, 1 ).toNonIndexed();
-			const material = new THREE.MeshBasicMaterial( { vertexColors: true } ); 
-
-			const positionAttribute = geometry.getAttribute( 'position' );
-			const colors = [];
-			const color = new THREE.Color();
-
-		var count = 0;
-		for ( let i = 0; i < positionAttribute.count; i += 12 ) {
-			if (count == 0){
-				color.set( 0x435bc4 );
-			}
-			if (count == 1){
-				color.set( 0xb33946 );
-			}
-			if (count == 2){
-				color.set( 0x4287f5);
-			}
-			for(let j=0;j<12;j++){
-				colors.push( color.r, color.g, color.b );
-			}
-			count += 1
-
-		}
-
-		const geometry2 = new THREE.BoxGeometry( 1, 1, 1 ).toNonIndexed();
-		const material2 = new THREE.MeshBasicMaterial( { vertexColors: true } ); 
-
-		const positionAttribute2 = geometry2.getAttribute( 'position' );
-		const colors2 = [];
-		const color2 = new THREE.Color();
-
-		var count = 0;
-		for ( let i = 0; i < positionAttribute.count; i += 12 ) {
-			if (count == 0){
-				color2.set( 0x435bc4 );
-			}
-			if (count == 1){
-				color2.set( 0xb33946 );
-			}
-			if (count == 2){
-				color2.set( 0x4287f5);
-			}
-			for(let j=0;j<12;j++){
-				colors2.push( color2.r, color2.g, color2.b );
-			}
-			count += 1
-
-		}
-
-		
-		// define the new attribute
-		
-		geometry.setAttribute( 'color', new THREE.Float32BufferAttribute( colors, 3 ) );
-
-		camera.position.set(camera_x, camera_y, camera_z);
-		camera.lookAt(0,0,0);
-		camera.up.set(0,1,0);
-
 		// output the text to the console
 		var jsonData = JSON.parse(data); 
 		var objects_num = Object.keys(jsonData).length;
-		var mouse = new THREE.Vector2();
-
 		for (var i = 0; i < objects_num; i++) {
 
 			var start_x = jsonData[i]["obj"]["start_x"];
@@ -147,32 +115,36 @@ loader.load(
             cube.scale.set(scale_x*2, scale_y*2, scale_z*2);
 
             scene.add( cube );
-
 		}
+	},
+	// onProgress callback
+	function ( xhr ) {
+		console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+	},
 
+	// onError callback
+	function ( err ) {
+		console.error( 'An error happened' );
+	}
+);
+
+
+	var mouse = new THREE.Vector2();
 	document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 	document.addEventListener( 'mousedown', onDocumentMouseDown, false );    
 	document.addEventListener( 'mouseup', onDocumentMouseUp, false );   	      
 
-
 	function onDocumentMouseDown( event ) { 
-		mousePressed = true; 
-		start_mouse_x = ( event.clientX / window.innerWidth ) * 2 - 1;
-		start_mouse_y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-	
-	}
+	mousePressed = true; 
+	start_mouse_x = ( event.clientX / window.innerWidth ) * 2 - 1;
+	start_mouse_y = - ( event.clientY / window.innerHeight ) * 2 + 1;}
 	function onDocumentMouseUp( event ) { mousePressed = false}
 	function onDocumentMouseMove( event ) {
 	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-
-	}
-	const textureLoader = new THREE.TextureLoader();
-
+	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;}
 
 	function animate() {
 		requestAnimationFrame( animate );
-
 		if(mousePressed){
 			var delta_x = mouse.x - start_mouse_x;
 			var delta_y = mouse.y - start_mouse_y;
@@ -186,29 +158,12 @@ loader.load(
 
 			camera.position.set(camera_x, camera_y, camera_z);
 			camera.lookAt(0,0,0);
-
 	}
 	renderer.setClearColor( 0xffffff, 0);
-
 		renderer.render( scene, camera );
 	};
 
-
-animate();
-
-	},
-
-	// onProgress callback
-	function ( xhr ) {
-		console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
-	},
-
-	// onError callback
-	function ( err ) {
-		console.error( 'An error happened' );
-	}
-);
-
+	animate();
 
 
 
