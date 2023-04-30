@@ -35,7 +35,6 @@ class Particle:
         self.start_connect = self.procedural_objects[-1]
         self.procedural_objects += produce.execute_model2(self.generic_object_list, objStart2, steps)
         self.end_connect = self.procedural_objects[-1]
-        self.end = self.procedural_objects[-1]
 
     def overlapping_check(self):
         for obj_A in self.procedural_objects:

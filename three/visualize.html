@@ -116,7 +116,7 @@ loader.load(
 			var debug_mode = jsonData[i]["obj"]["mode"];
 			// console.log("jsonData[i]", jsonData[i]["obj"]["type"]);
 			
-			if(jsonData[i]["obj"]["type"] == 1){
+			if(jsonData[i]["obj"]["type"] == -1){
 				var a = target_mesh.clone()
 				a.position.setX(start_x);
 				a.position.setY(start_y);

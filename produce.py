@@ -29,6 +29,9 @@ def execute_model(start_pos, generic_object_list, start_type, steps):
         next_choice = cur_generic_obj.execute_rule(next_type)
         cur_obj = production_list[tempt_count+1]
         next_obj.set_position(cur_obj, next_choice)
+        cur_obj.add_connected(next_choice)
+        next_obj.add_connected(opposite_direction(next_choice))
+
 
         production_list.append(next_obj)
         cur_obj = next_obj
@@ -69,6 +72,8 @@ def execute_model2(generic_object_list, start_obj, steps):
         next_obj = procedural_objects.Procedural_object(next_type, np.array([0,0,0]), next_scope, next_hash)
         next_choice = cur_generic_obj.execute_rule(next_type)
         cur_obj = production_list[tempt_count+1]
+        cur_obj.add_connected(next_choice)
+        next_obj.add_connected(opposite_direction(next_choice))
         next_obj.set_position(cur_obj, next_choice)
 
         production_list.append(next_obj)
@@ -99,6 +104,7 @@ def execute_model_withDirection(objStart, generic_object_list, delta, direction,
     prev_upper_bound = 0
 
     current_type = objStart.type
+    cur_obj = objStart
     # detla = update_delta(direction, delta, objStart)
 
     #execute rule to get the objects
@@ -114,6 +120,8 @@ def execute_model_withDirection(objStart, generic_object_list, delta, direction,
         next_scope = next_generic_obj.scope
         next_hash = next_generic_obj.generate_hash()
         next_obj = procedural_objects.Procedural_object(next_type, dummy_pos, next_scope, next_hash)
+        cur_obj.add_connected(rule_chosen)
+        next_obj.add_connected(opposite_direction(rule_chosen))
         production_list.append(next_obj)
         rules_list.append(rule_chosen)
         
@@ -242,3 +250,19 @@ def update_delta(direction, delta, start_obj):
 
     if direction == '+z' or direction == '-z':
         delta -= np.array([0, 0, start_obj.length[2]])
+
+def opposite_direction(direction):
+    if direction == '+x':
+        return '-x'
+    if direction == '-x':
+        return '+x'
+    if direction == '+y':
+        return '-y'
+    if direction == '-y':
+        return '+y'
+    if direction == '+z':
+        return '-z'
+    if direction == '-z':
+        return '+z'
+    
+    return '+x'

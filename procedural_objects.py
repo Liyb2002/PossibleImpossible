@@ -8,6 +8,7 @@ class Procedural_object:
         self.scope = scope
         self.set_scope()
         self.hash = gen_hash
+        self.connected = []
     
     def set_type(self, type):
         self.type = type
@@ -70,6 +71,12 @@ class Procedural_object:
             return True
 
         return False
+    
+    def add_connected(self, direction):
+        for dir in self.connected:
+            if dir == direction:
+                return 
+        self.connected.append(direction)
 
 
 def getOverlap(a, b):
