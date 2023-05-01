@@ -1,0 +1,29 @@
+[
+    {
+      "object_name": "floor",
+      "is_main":  "True",
+      "structural_id": 1,
+      "subdiv": {"top": [1,2]}
+    },
+    {
+        "object_name": "spikes",
+        "is_main":  "False",
+        "main_id": 1,
+        "sub_id": 1,
+        "rule": "four-coners",
+        "scope_x": [0.02,0.02],
+        "scope_y": [0.02,0.02],
+        "scope_z": [0.02,0.02]
+        } ,
+    {
+        "object_name": "cone",
+        "is_main":  "False",
+        "main_id": 1,
+        "sub_id": 2,
+        "rule": "center",
+        "scope_x": [0.02,0.02],
+        "scope_y": [0.02,0.02],
+        "scope_z": [0.02,0.02]
+        } 
+
+ ]

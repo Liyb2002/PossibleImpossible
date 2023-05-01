@@ -5,6 +5,7 @@ import produce
 import generic_objects
 import cycle_connect
 import particle
+import decorations
 
 import numpy as np
 
@@ -41,9 +42,10 @@ while(success != True):
     cur_particle.run_connect()
     cur_particle.run_particle2(steps+ 2)
 
-    cur_particle.overlapping_check()
+    # cur_particle.overlapping_check()
     success = cur_particle.success
 
+decorations.read_decorations()
 
 output_writer = write2JSON.output()
 output_writer.prepare_write_debug(cur_particle.procedural_objects)
