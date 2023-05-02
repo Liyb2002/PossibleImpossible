@@ -7,6 +7,8 @@ class decoration_operator:
         self.main_decoration_list = []
         self.sub_decoration_list = []
         self.sub_decorations = {}
+        self.prepare_subdivs()
+
         self.read_decorations()
         self.sort_decorations()
 
@@ -27,29 +29,54 @@ class decoration_operator:
 
     def sort_decorations(self):
         for obj in self.main_decoration_list:
-            self.sub_decorations[obj.structural_id] = []
-
+            self.sub_decorations[obj.structural_id] = {}
+            for subdiv in self.subdiv_list:
+                self.sub_decorations[obj.structural_id][subdiv] = []
+        
         for obj in self.sub_decoration_list:
-            self.sub_decorations[obj.main_id].append(obj)
+            self.sub_decorations[obj.main_id][obj.subdiv].append(obj)
     
     def get_decorations(self, main_obj):
         structural_id = main_obj.structural_id
-        results = []
-        print(self.sub_decorations[structural_id])
+        return self.sub_decorations[structural_id]
 
+    def decorate(self, procedural_objects):
+        #go through all main objects produced
+        for obj in procedural_objects:
+            target_type = obj.type
+
+            #if we have decoration for this main object
+            if target_type in self.sub_decorations:
+
+                #go through all its possible subdivisions
+                for subdiv in self.subdiv_list:
+                    possible_decorations = self.sub_decorations[target_type][subdiv]
+
+                    #if we have decorations for this subdivision, pick an decoration
+                    if len(possible_decorations) > 0:
+                        decorate_obj = possible_decorations[-1]
+                        self.execute_decorations(obj, decorate_obj)
+    
+    def execute_decorations(self, main_obj, decorate_obj):
+        rule = decorate_obj.rule
+        if rule == "center":
+            print("center rule!")
+
+    
+    def prepare_subdivs(self):
+        self.subdiv_list = ["top", "bot", "left", "right", "front", "back"]
 
 
 class main_decoration_object:
     def __init__(self, info):
         self.structural_id = info['structural_id']
-        self.subdiv = info['subdiv']
-
 
 
 class sub_decoration_object:
     def __init__(self, info):
         self.main_id = info['main_id']
         self.sub_id = info['sub_id']
+        self.subdiv = info['subdiv']
         self.rule = info['rule']
         self.set_scope(info)
 

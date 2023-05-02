@@ -45,7 +45,8 @@ while(success != True):
     # cur_particle.overlapping_check()
     success = cur_particle.success
 
-decorations.decoration_operator()
+decorator = decorations.decoration_operator()
+decorator.decorate(cur_particle.procedural_objects)
 
 output_writer = write2JSON.output()
 output_writer.prepare_write_debug(cur_particle.procedural_objects)

@@ -2,14 +2,14 @@
     {
       "object_name": "floor",
       "is_main":  "True",
-      "structural_id": 1,
-      "subdiv": {"top": [1,2]}
+      "structural_id": 1
     },
     {
         "object_name": "spikes",
         "is_main":  "False",
         "main_id": 1,
         "sub_id": 1,
+        "subdiv": "top",
         "rule": "four-coners",
         "scope_x": [0.02,0.02],
         "scope_y": [0.02,0.02],
@@ -20,6 +20,7 @@
         "is_main":  "False",
         "main_id": 1,
         "sub_id": 2,
+        "subdiv": "top",
         "rule": "center",
         "scope_x": [0.02,0.02],
         "scope_y": [0.02,0.02],
