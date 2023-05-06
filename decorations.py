@@ -104,7 +104,7 @@ class decoration_operator:
 class main_decoration_object:
     def __init__(self, info):
         self.structural_id = info['structural_id']
-
+        self.subdiv = info['subdiv']
 
 class sub_decoration_object:
     def __init__(self, info):
@@ -131,3 +131,9 @@ class decoration_object_instance:
         self.type = type
         self.position = position
         self.size = size
+
+class space:
+    def __init__(self, type, min_scope, max_scope):
+        self.type = type
+        self.min_scope = min_scope
+        self.max_scope = max_scope
