@@ -46,11 +46,12 @@ while(success != True):
     success = cur_particle.success
 
 decorator = decorations.decoration_operator()
-# decoration_list = decorator.decorate(cur_particle.procedural_objects)
+decoration_list = decorator.decorate(cur_particle.procedural_objects)
+
 
 output_writer = write2JSON.output()
-output_writer.prepare_write_debug(cur_particle.procedural_objects)
-# output_writer.prepare_write_decorations(decoration_list)
+# output_writer.prepare_write_debug(cur_particle.procedural_objects)
+output_writer.prepare_write_decorations(decoration_list)
 # output_writer.prepare_write(cur_particle.connect_list)
 output_writer.write()
 
