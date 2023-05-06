@@ -31,7 +31,7 @@ with open('objects.json', 'r') as object_file:
 #start produce
 foreground_type = 1
 background_type = 3
-steps = 4
+steps = 2
 
 success = False
 while(success != True):
@@ -40,16 +40,17 @@ while(success != True):
     cur_particle.run_particle(foreground_intersection, foreground_type, steps, True)
     cur_particle.run_particle(background_intersection, background_type, steps, False)
     cur_particle.run_connect()
-    cur_particle.run_particle2(steps+ 2)
+    cur_particle.run_particle2(steps+2)
 
     # cur_particle.overlapping_check()
     success = cur_particle.success
 
 decorator = decorations.decoration_operator()
-decorator.decorate(cur_particle.procedural_objects)
+decoration_list = decorator.decorate(cur_particle.procedural_objects)
 
 output_writer = write2JSON.output()
 output_writer.prepare_write_debug(cur_particle.procedural_objects)
+output_writer.prepare_write_decorations(decoration_list)
 # output_writer.prepare_write(cur_particle.connect_list)
 output_writer.write()
 

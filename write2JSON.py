@@ -48,6 +48,21 @@ class output:
                 'mode': '1'}
                     }
             self.result.append(data)
+    
+    def prepare_write_decorations(self, decoration_list):
+        for obj in decoration_list:
+            pos = list(obj.position)
+            data = {'obj':
+                {'type': obj.type,
+                'start_x': float(obj.position[0]),
+                'start_y': float(obj.position[1]),
+                'start_z': float(obj.position[2]),
+                'scale_x': float(obj.size[0]),
+                'scale_y': float(obj.size[1]),
+                'scale_z': float(obj.size[2]),
+                'mode': '0'}
+                    }
+            self.result.append(data)
 
     def write(self):
         with open('./three/result.json', 'w') as f:
