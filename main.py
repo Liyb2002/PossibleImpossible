@@ -49,6 +49,10 @@ decorator = decorations.decoration_operator()
 decoration_list = decorator.decorate(cur_particle.procedural_objects)
 
 
+# for obj in decoration_list:
+#     print("obj.position", obj.position)
+#     print("obj.size", obj.size)
+
 output_writer = write2JSON.output()
 # output_writer.prepare_write_debug(cur_particle.procedural_objects)
 output_writer.prepare_write_decorations(decoration_list)

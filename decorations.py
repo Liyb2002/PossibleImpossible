@@ -43,7 +43,7 @@ class decoration_operator:
             #if we have decoration for this main object
             for footprint_object in self.generic_footprint_list:
                 if footprint_object.structural_id == input_type:
-                    
+
                     #get a random subdivison rule
                     subdiv_rule = footprint_object.execute_subdiv()
 
@@ -54,22 +54,15 @@ class decoration_operator:
                         nonterminal_obj = total_nonterminal_list[-1]
                         total_nonterminal_list.pop()
 
-                        generic_nonterminal_object = self.generic_nonterminal_list[obj.type]
+                        generic_nonterminal_object = self.generic_nonterminal_list[int(nonterminal_obj.type)]
                         subdiv_rule = generic_nonterminal_object.execute_subdiv()
-                        tempt_nonterminal_list, tempt_terminal_list = self.parse_rule(subdiv_rule, min_pos, max_pos)
+                        tempt_nonterminal_list, tempt_terminal_list = self.parse_rule(subdiv_rule, nonterminal_obj.min_pos, nonterminal_obj.max_pos)
                         
                         total_terminal_list += tempt_terminal_list
                         total_nonterminal_list += tempt_nonterminal_list
-
                     instance_list += total_terminal_list
         
         return instance_list
-
-    # def terminals_output(self, instance_list):
-    #     for obj in instance_list:
-    #         cur_type = obj.type
-    #         generic_terminal_object = self.generic_terminal_list[cur_type]
-    #         multiplier = generic_terminal_object.multiplier
 
 
     def parse_rule(self, subdiv_rule, min_pos, max_pos):
@@ -82,11 +75,12 @@ class decoration_operator:
 
         if split_dir == "y direction":
             for i in range(2, len(subdiv_rule)):
+                
                 new_obj_info = subdiv_rule[i]
                 tempt_min_pos = min_pos + np.array([0, culmulative_percentage * scope[1], 0])
-                tempt_max_pos = np.array([max_pos[0], tempt_min_pos[1] + new_obj_info[2]*scope[2], max_pos[2]])
                 culmulative_percentage += new_obj_info[2]
-
+                tempt_max_pos = np.array([max_pos[0], min_pos[1] + culmulative_percentage * scope[1], max_pos[2]])
+                
                 if new_obj_info[0] == "nonterminal":
                     new_instance_nonterminal_object = instance_nonterminal_object(new_obj_info[1], tempt_min_pos, tempt_max_pos)
                     nonterminal_list.append(new_instance_nonterminal_object)
@@ -98,7 +92,7 @@ class decoration_operator:
                     new_instance_terminal_object.set_position((tempt_min_pos+tempt_max_pos)*0.5)
                     new_instance_terminal_object.set_size((tempt_max_pos-tempt_min_pos)*0.5 * multiplier)
                     terminal_list.append(new_instance_terminal_object)
-                
+
         return (nonterminal_list, terminal_list)
 
 class generic_footprint_object:

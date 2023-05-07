@@ -2,7 +2,7 @@
     {
       "object_id": 1,
       "scope_x": [0.1,0.2],
-      "scope_y": [0.05,0.1],
+      "scope_y": [0.3,0.5],
       "scope_z": [0.1,0.2],
       "canTerminate": "True",
       "connect_id": [3,4,5,6,7,8],

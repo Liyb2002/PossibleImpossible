@@ -4,8 +4,8 @@
       "category":  "footprint",
       "structural_id": 1,
       "subdiv":[
-        [0.7, "y direction", ["nonterminal", "0", 0.05], ["nonterminal", "1", 0.6], ["terminal","3", 0.35]],
-        [0.3, "y direction", ["nonterminal", "0", 0.05], ["nonterminal", "1", 0.6], ["nonterminal", "0", 0.05], ["terminal","2", 0.3]]
+        [0.3, "y direction", ["nonterminal", "0", 0.05], ["nonterminal", "1", 0.9], ["terminal","3", 0.05]],
+        [0.7, "y direction", ["nonterminal", "0", 0.05], ["nonterminal", "1", 0.85], ["nonterminal", "0", 0.05], ["terminal","2", 0.05]]
       ]
     },
     {
@@ -36,7 +36,7 @@
       "category":  "terminal",
       "terminal_id": 1,
       "rule": "normal",
-      "multiplier": [0.2,0.2,1]
+      "multiplier": [0.2,1,0.2]
       } ,
     {
       "object_name": "terminal_spike",
