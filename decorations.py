@@ -86,15 +86,43 @@ class decoration_operator:
                     nonterminal_list.append(new_instance_nonterminal_object)
 
                 if new_obj_info[0] == "terminal":
-                    new_instance_terminal_object = instance_terminal_object(new_obj_info[1], tempt_min_pos, tempt_max_pos)
-                    generic_terminal_object = self.generic_terminal_list[int(new_instance_terminal_object.type)]
+                    generic_terminal_object = self.generic_terminal_list[int(new_obj_info[1])]
                     multiplier = generic_terminal_object.multiplier
-                    new_instance_terminal_object.set_position((tempt_min_pos+tempt_max_pos)*0.5)
-                    new_instance_terminal_object.set_size((tempt_max_pos-tempt_min_pos)*0.5 * multiplier)
-                    terminal_list.append(new_instance_terminal_object)
+                    rule = generic_terminal_object.rule
+                    object_size = (tempt_max_pos-tempt_min_pos)*0.5 * multiplier
+
+                    terminal_list += self.produce_terminal_instance(rule, object_size, tempt_max_pos, tempt_min_pos, new_obj_info[1])
 
         return (nonterminal_list, terminal_list)
 
+    def produce_terminal_instance(self, rule, object_size, tempt_max_pos, tempt_min_pos, terminal_type):
+        instance_list = []
+        if rule == "normal":
+            new_instance_terminal_object = instance_terminal_object(terminal_type, tempt_min_pos, tempt_max_pos)
+            new_instance_terminal_object.set_position((tempt_min_pos+tempt_max_pos)*0.5)
+            instance_list.append(new_instance_terminal_object)
+
+        if rule == "four_corners":
+            new_instance_terminal_object_0 = instance_terminal_object(terminal_type, tempt_min_pos, tempt_max_pos)
+            new_instance_terminal_object_1 = instance_terminal_object(terminal_type, tempt_min_pos, tempt_max_pos)
+            new_instance_terminal_object_2 = instance_terminal_object(terminal_type, tempt_min_pos, tempt_max_pos)
+            new_instance_terminal_object_3 = instance_terminal_object(terminal_type, tempt_min_pos, tempt_max_pos)
+
+            new_instance_terminal_object_0.set_position(tempt_min_pos + object_size)
+            new_instance_terminal_object_1.set_position(np.array([tempt_max_pos[0],tempt_min_pos[1],tempt_min_pos[2]]) + np.array([-object_size[0], object_size[1], object_size[2]]))
+            new_instance_terminal_object_2.set_position(np.array([tempt_min_pos[0],tempt_min_pos[1],tempt_max_pos[2]]) + np.array([object_size[0], object_size[1], -object_size[2]]))
+            new_instance_terminal_object_3.set_position(np.array([tempt_max_pos[0],tempt_min_pos[1],tempt_max_pos[2]]) + np.array([-object_size[0], object_size[1], -object_size[2]]))
+
+            instance_list.append(new_instance_terminal_object_0)
+            instance_list.append(new_instance_terminal_object_1)
+            instance_list.append(new_instance_terminal_object_2)
+            instance_list.append(new_instance_terminal_object_3)
+
+        for obj in instance_list:
+            obj.set_size(object_size)
+
+        return instance_list 
+        
 class generic_footprint_object:
     def __init__(self, info):
         self.structural_id = info['structural_id']
@@ -133,6 +161,7 @@ class generic_terminal_object:
         self.terminal_id = info['terminal_id']
         self.rule = info['rule']
         self.multiplier = info['multiplier']
+            
 
 class instance_nonterminal_object:
     def __init__(self, type, min_pos, max_pos):

@@ -42,8 +42,8 @@
       "object_name": "terminal_spike",
       "category":  "terminal",
       "terminal_id": 2,
-      "rule": "four corners",
-      "multiplier": [0.1,0.1,0.5]
+      "rule": "four_corners",
+      "multiplier": [0.1,1,0.1]
       },
     {
       "object_name": "terminal_roofTop",
