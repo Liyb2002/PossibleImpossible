@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Impossible Structure</title>
+		<title>update</title>
 		<style>
 			body { margin: 0; }
 		</style>
@@ -23,76 +23,73 @@
 		  </script>
 		  
 	   
-		<script type = "module">
-			
-import * as THREE from 'three'
-import { GLTFLoader } from '/node_modules/three/examples/jsm/loaders/GLTFLoader.js';
-import { RGBELoader } from '/node_modules/three/examples/jsm/loaders/RGBELoader.js';
+		  <script type="module">
+
+import * as THREE from 'three';
+
+import { GUI } from '/node_modules/three/examples/jsm/libs/lil-gui.module.min.js';
+
+import { OrbitControls } from '/node_modules/three/examples/jsm/controls/OrbitControls.js';
+
+let camera, scene, renderer;
+
+init();
+render();
+
+function init() {
+
+	renderer = new THREE.WebGLRenderer( { antialias: true } );
+	renderer.setPixelRatio( window.devicePixelRatio );
+	renderer.setSize( window.innerWidth, window.innerHeight );
+	renderer.localClippingEnabled = true;
+	document.body.appendChild( renderer.domElement );
+
+	scene = new THREE.Scene();
+
+	const left = -3.2, right = 3.2, top2 = 2.4, bottom = -2.4, near = 0.01, far = 100;
+ 	camera = new THREE.OrthographicCamera(left, right, top2, bottom, near, far);
+
+	camera.position.set( 5, 5, 5 );
+
+	const controls = new OrbitControls( camera, renderer.domElement );
+	controls.addEventListener( 'change', render ); // use only if there is no animation loop
+	controls.minDistance = 1;
+	controls.maxDistance = 100;
+	controls.enablePan = false;
+
+	const light = new THREE.HemisphereLight( 0xffffff, 0x080808, 1.5 );
+	light.position.set( - 1.25, 1, 1.25 );
+	scene.add( light );
 
 
-const loader = new THREE.FileLoader();
-var mousePressed = false;
-var camera_x = 5.0
-var camera_y = 5.0
-var camera_z = 5.0
+	const geometry = new THREE.BoxGeometry( 1, 1, 1 ).toNonIndexed();
+	const material = new THREE.MeshBasicMaterial( { vertexColors: true } ); 
 
-var start_mouse_x = 0
-var start_mouse_y = 0
+	const positionAttribute = geometry.getAttribute( 'position' );
+	const colors = [];
+	const color = new THREE.Color();
 
-var mouse = new THREE.Vector2();
-const scene = new THREE.Scene();
-const left = -3.2, right = 3.2, top2 = 2.4, bottom = -2.4, near = 0.01, far = 100;
-const camera = new THREE.OrthographicCamera(left, right, top2, bottom, near, far);
-
-const renderer = new THREE.WebGLRenderer({ antialias: true });
-renderer.setSize( window.innerWidth, window.innerHeight );
-document.body.appendChild( renderer.domElement );
-
-const geometry = new THREE.BoxGeometry( 1, 1, 1 ).toNonIndexed();
-const material = new THREE.MeshBasicMaterial( { vertexColors: true } ); 
-
-const positionAttribute = geometry.getAttribute( 'position' );
-const colors = [];
-const color = new THREE.Color();
-
-var count = 0;
-for ( let i = 0; i < positionAttribute.count; i += 12 ) {
-if (count == 0){
+	var count = 0;
+	for ( let i = 0; i < positionAttribute.count; i += 12 ) {
+	if (count == 0){
 	color.set( 0x435bc4 );
-}
-if (count == 1){
+	}
+	if (count == 1){
 	color.set( 0xb33946 );
-}
-if (count == 2){
+	}
+	if (count == 2){
 	color.set( 0x4287f5);
-}
-for(let j=0;j<12;j++){
+	}
+	for(let j=0;j<12;j++){
 	colors.push( color.r, color.g, color.b );
-}
-count += 1
+	}
+	count += 1
 
-}
-geometry.setAttribute( 'color', new THREE.Float32BufferAttribute( colors, 3 ) );
+	}
+	geometry.setAttribute( 'color', new THREE.Float32BufferAttribute( colors, 3 ) );
 
-camera.position.set(camera_x+16, camera_y+16, camera_z+16);
-camera.lookAt(0,0,0);
-camera.up.set(0,1,0);
-camera.zoom = 0.5;
-
-new RGBELoader()
-.setPath( 'textures/equirectangular/' )
-.load( 'royal_esplanade_1k.hdr', function ( texture ) {
-	texture.mapping = THREE.EquirectangularReflectionMapping;
-	// scene.background = texture;
-	scene.environment = texture;
-} );
-
-const loader2 = new GLTFLoader().setPath( 'static/models/DamagedHelmet/glTF/' );
-const result = await loader2.loadAsync('DamagedHelmet.gltf');
-const target_mesh = result.scene
-
-//load a text file and output the result to the console
-loader.load(
+	const loader = new THREE.FileLoader();
+	loader.load(
 	// resource URL
 	'./result.json',
 	// onLoad callback
@@ -126,9 +123,9 @@ loader.load(
 				scene.add(a)
 			}else{
 			var cube = new THREE.Mesh( geometry, material );
-            cube.position.set(center_x, center_y, center_z );
-            cube.scale.set(scale_x*2, scale_y*2, scale_z*2);
-            scene.add( cube );
+			cube.position.set(center_x, center_y, center_z );
+			cube.scale.set(scale_x*2, scale_y*2, scale_z*2);
+			scene.add( cube );
 		}
 		}
 	},
@@ -141,50 +138,33 @@ loader.load(
 	function ( err ) {
 		console.error( 'An error happened' );
 	}
-);
+	);
 
 
-	var mouse = new THREE.Vector2();
-	document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-	document.addEventListener( 'mousedown', onDocumentMouseDown, false );    
-	document.addEventListener( 'mouseup', onDocumentMouseUp, false );   	      
+	window.addEventListener( 'resize', onWindowResize );
 
-	function onDocumentMouseDown( event ) { 
-	mousePressed = true; 
-	start_mouse_x = ( event.clientX / window.innerWidth ) * 2 - 1;
-	start_mouse_y = - ( event.clientY / window.innerHeight ) * 2 + 1;}
-	function onDocumentMouseUp( event ) { mousePressed = false}
-	function onDocumentMouseMove( event ) {
-	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;}
+}
 
-	function animate() {
-		requestAnimationFrame( animate );
-		if(mousePressed){
-			var delta_x = mouse.x - start_mouse_x;
-			var delta_y = mouse.y - start_mouse_y;
+function onWindowResize() {
 
-			camera_x -= delta_x;
-			camera_y -= delta_y;
-			camera_z = Math.sqrt(75 - camera_x*camera_x - camera_y*camera_y);
+	camera.aspect = window.innerWidth / window.innerHeight;
+	camera.updateProjectionMatrix();
 
-			start_mouse_x = mouse.x;
-			start_mouse_y = mouse.y;
+	renderer.setSize( window.innerWidth, window.innerHeight );
 
-			camera.position.set(camera_x, camera_y, camera_z);
-			camera.lookAt(0,0,0);
-	}
-	renderer.setClearColor( 0xffffff, 0);
-		renderer.render( scene, camera );
-	};
+	render();
 
-	animate();
+}
+
+function render() {
+
+	renderer.render( scene, camera );
+
+}
+
+</script>
 
 
 
-
-
-
-		</script>
 	</body>
 </html>
