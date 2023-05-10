@@ -74,9 +74,10 @@ count += 1
 }
 geometry.setAttribute( 'color', new THREE.Float32BufferAttribute( colors, 3 ) );
 
-camera.position.set(camera_x, camera_y, camera_z);
+camera.position.set(camera_x+16, camera_y+16, camera_z+16);
 camera.lookAt(0,0,0);
 camera.up.set(0,1,0);
+camera.zoom = 0.5;
 
 new RGBELoader()
 .setPath( 'textures/equirectangular/' )

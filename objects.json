@@ -26,9 +26,9 @@
       },
       {
         "object_id": 3,
-        "scope_x": [0.02,0.02],
-        "scope_y": [0.1,0.4],
-        "scope_z": [0.02,0.02],
+        "scope_x": [0.2,0.2],
+        "scope_y": [0.2,0.8],
+        "scope_z": [0.2,0.2],
         "canTerminate": "True",
         "connect_id": [1],
         "connect_rule":{
@@ -81,9 +81,9 @@
       },
       {
         "object_id": 8,
-        "scope_x": [0.02,0.02],
-        "scope_y": [0.1,0.4],
-        "scope_z": [0.02,0.02],
+        "scope_x": [0.2,0.2],
+        "scope_y": [0.2,0.8],
+        "scope_z": [0.2,0.2],
         "canTerminate": "True",
         "connect_id": [1],
         "connect_rule":{

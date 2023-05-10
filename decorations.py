@@ -88,10 +88,11 @@ class decoration_operator:
                 if new_obj_info[0] == "terminal":
                     generic_terminal_object = self.generic_terminal_list[int(new_obj_info[1])]
                     multiplier = generic_terminal_object.multiplier
-                    rule = generic_terminal_object.rule
-                    object_size = (tempt_max_pos-tempt_min_pos)*0.5 * multiplier
+                    if multiplier[0] != 0.001 and multiplier[1] != 0.001 and multiplier[2] != 0.001:
+                        rule = generic_terminal_object.rule
+                        object_size = (tempt_max_pos-tempt_min_pos)*0.5 * multiplier
 
-                    terminal_list += self.produce_terminal_instance(rule, object_size, tempt_max_pos, tempt_min_pos, new_obj_info[1])
+                        terminal_list += self.produce_terminal_instance(rule, object_size, tempt_max_pos, tempt_min_pos, new_obj_info[1])
 
         return (nonterminal_list, terminal_list)
 

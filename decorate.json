@@ -13,7 +13,9 @@
       "category":  "footprint",
       "structural_id": 2,
       "subdiv":[
-        [1.0, "y direction", ["terminal","1", 1.0]]
+        [0.5, "y direction", ["terminal","1", 1.0]],
+        [0.5, "y direction", ["terminal","6", 1.0]]
+
       ]
     },
     {
@@ -21,7 +23,9 @@
       "category":  "footprint",
       "structural_id": 3,
       "subdiv":[
-        [1.0, "y direction", ["terminal","1", 1.0]]
+        [0.5, "y direction", ["terminal","1", 1.0]],
+        [0.5, "y direction", ["terminal","6", 1.0]]
+
       ]
     },
     {
@@ -89,7 +93,7 @@
       "multiplier": [1,1,1]
       } ,
     {
-      "object_name": "terminal_pillar",
+      "object_name": "terminal_one_pillar",
       "category":  "terminal",
       "terminal_id": 1,
       "rule": "normal",
@@ -121,8 +125,15 @@
         "category":  "terminal",
         "terminal_id": 5,
         "rule": "normal",
-        "multiplier": [0.01,0.01,0.01]
-        } 
+        "multiplier": [0.001,0.001,0.001]
+        },
+    {
+        "object_name": "terminal_fourCorner_pillar",
+        "category":  "terminal",
+        "terminal_id": 6,
+        "rule": "four_corners",
+        "multiplier": [0.15,1,0.15]
+        }
    
 
  ]
