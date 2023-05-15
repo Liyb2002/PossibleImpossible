@@ -1,4 +1,4 @@
-1 -> plane
+1 -> space
 2 -> pillar
 3 -> tower, -y direction
 4 -> bridge, -x direction
@@ -6,3 +6,7 @@
 6 -> bridge, -z direction
 7 -> bridge, +z direction
 8 -> tower, +y direction
+
+
+Assign type:
+9 -> rooftop

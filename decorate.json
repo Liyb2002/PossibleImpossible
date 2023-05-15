@@ -4,7 +4,7 @@
       "category":  "footprint",
       "structural_id": 1,
       "subdiv":[
-        [0.3, "y direction", ["nonterminal", "0", 0.05], ["nonterminal", "1", 0.9], ["terminal","3", 0.05]],
+        [0.3, "y direction", ["nonterminal", "0", 0.05], ["nonterminal", "1", 0.9], ["nonterminal", "0", 0.05]],
         [0.7, "y direction", ["nonterminal", "0", 0.05], ["nonterminal", "1", 0.85], ["nonterminal", "0", 0.05], ["terminal","2", 0.05]]
       ]
     },
@@ -61,11 +61,19 @@
       ]
     },
     {
-      "object_name": "footprint_3",
+      "object_name": "footprint_8",
       "category":  "footprint",
       "structural_id": 8,
       "subdiv":[
         [1.0, "y direction", ["terminal","1", 1.0]]
+      ]
+    },
+    {
+      "object_name": "footprint_9",
+      "category":  "footprint",
+      "structural_id": 9,
+      "subdiv":[
+        [1.0, "y direction", ["nonterminal", "0", 0.05], ["terminal", "6", 0.4], ["terminal", "3", 0.55]]
       ]
     },
 

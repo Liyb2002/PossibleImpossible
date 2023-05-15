@@ -6,6 +6,7 @@ import generic_objects
 import cycle_connect
 import particle
 import decorations
+import assign_type
 
 import numpy as np
 
@@ -45,13 +46,13 @@ while(success != True):
     # cur_particle.overlapping_check()
     success = cur_particle.success
 
+procedural_objects = assign_type.assign(cur_particle.procedural_objects)
+
+for obj in procedural_objects:
+    print("type", obj.type)
 decorator = decorations.decoration_operator()
 decoration_list = decorator.decorate(cur_particle.procedural_objects)
 
-
-# for obj in decoration_list:
-#     print("obj.position", obj.position)
-#     print("obj.size", obj.size)
 
 output_writer = write2JSON.output()
 # output_writer.prepare_write_debug(cur_particle.procedural_objects)
