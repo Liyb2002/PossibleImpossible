@@ -73,7 +73,7 @@
       "category":  "footprint",
       "structural_id": 9,
       "subdiv":[
-        [1.0, "y direction", ["nonterminal", "0", 0.05], ["terminal", "6", 0.4], ["terminal", "3", 0.55]]
+        [1.0, "y direction", ["nonterminal", "0", 0.05], ["terminal", "6", 0.4],  ["nonterminal", "0", 0.05], ["terminal", "3", 0.5]]
       ]
     },
 
@@ -119,7 +119,7 @@
       "category":  "terminal",
       "terminal_id": 3,
       "rule": "normal",
-      "multiplier": [1,1,1]
+      "multiplier": [0.8,1,0.8]
       },
       {
         "object_name": "terminal_bridge",
