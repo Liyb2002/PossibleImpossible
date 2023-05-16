@@ -43,6 +43,7 @@ let camera, scene, renderer;
 	document.body.appendChild( renderer.domElement );
 
 	scene = new THREE.Scene();
+	scene.background = new THREE.Color( 0x81ebc6 );
 
 	const left = -3.2, right = 3.2, top2 = 2.4, bottom = -2.4, near = 0.01, far = 100;
  	camera = new THREE.OrthographicCamera(left, right, top2, bottom, near, far);
@@ -59,18 +60,23 @@ let camera, scene, renderer;
 	light.position.set( - 1.25, 1, 1.25 );
 	scene.add( light );
 
-	new RGBELoader()
-	.setPath( 'textures/equirectangular/' )
-	.load( 'royal_esplanade_1k.hdr', function ( texture ) {
-	texture.mapping = THREE.EquirectangularReflectionMapping;
-	scene.environment = texture;
-	renderer.render( scene, camera );
 
-	} );
+new RGBELoader()
+.setPath( 'textures/equirectangular/' )
+.load( 'royal_esplanade_1k.hdr', function ( texture ) {
+	texture.mapping = THREE.EquirectangularReflectionMapping;
+	// scene.background = texture;
+	scene.environment = texture;
+} );
+
 
 const loader2 = new GLTFLoader().setPath( 'static/models/' );
-const result = await loader2.loadAsync('rooftop.glb');
-const target_mesh = result.scene
+var load_result = await loader2.loadAsync('roofTop.glb');
+const m3 = load_result.scene;
+var load_result = await loader2.loadAsync('terminal_7.glb');
+const m7 = load_result.scene;
+load_result = await loader2.loadAsync('terminal_sphere.glb');
+const m8 = load_result.scene;
 
 	const geometry = new THREE.BoxGeometry( 1, 1, 1 ).toNonIndexed();
 	const material = new THREE.MeshBasicMaterial( { vertexColors: true } ); 
@@ -125,23 +131,28 @@ const target_mesh = result.scene
 			var debug_mode = jsonData[i]["obj"]["mode"];
 			// console.log("jsonData[i]", jsonData[i]["obj"]["type"]);
 			
+			var a;
+			var load_mesh = true;
 			if(jsonData[i]["obj"]["type"] == 3){
-				console.log("hey")
-				var a = target_mesh.clone()
-				a.position.setX(start_x);
-				a.position.setY(start_y);
-				a.position.setZ(start_z);
-				a.children[0].scale.x = scale_x;
-				a.children[0].scale.y= scale_y;
-				a.children[0].scale.z = scale_z;
-
-				scene.add(a)
+				a = m3.clone();
+			}else if(jsonData[i]["obj"]["type"] == 7){
+				a = m7.clone();
+			}else if(jsonData[i]["obj"]["type"] == 8){
+				a = m8.clone();
 			}else{
 			var cube = new THREE.Mesh( geometry, material );
 			cube.position.set(center_x, center_y, center_z );
 			cube.scale.set(scale_x*2, scale_y*2, scale_z*2);
 			scene.add( cube );
+			load_mesh = false;
 		}
+
+		if (load_mesh){
+			a.position.set(start_x,start_y,start_z);
+			a.children[0].scale.set(scale_x, scale_y, scale_z);
+			scene.add(a);
+		}
+
 		}
 	},
 	// onProgress callback
