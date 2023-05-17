@@ -73,8 +73,8 @@
   "category":  "footprint",
   "structural_id": 9,
   "subdiv":[
-  [0.6, "y direction", ["nonterminal", "0", 0.05], ["terminal", "6", 0.4],  ["nonterminal", "0", 0.05], ["terminal", "3", 0.5]],
-  [0.4, "y direction", ["terminal", "7", 0.6], ["terminal", "8", 0.4]]
+  [0.4, "y direction", ["nonterminal", "0", 0.05], ["terminal", "6", 0.4],  ["nonterminal", "0", 0.05], ["terminal", "3", 0.5]],
+  [0.6, "y direction", ["nonterminal", "2", 1.0]]
 
   ]
   },
@@ -95,6 +95,14 @@
   [1.0, "y direction", ["terminal", "1", 1]]
   ]
   },
+  {
+    "object_name": "tower",
+    "category":  "nonterminal",
+    "nonterminal_id": 2,
+    "subdiv":[
+    [1.0, "y direction", ["terminal", "9", 0.7], ["terminal", "10", 0.15], ["terminal", "11", 0.15]]
+    ]
+    },
   {
   "object_name": "terminal_floor",
   "category":  "terminal",
@@ -159,5 +167,28 @@
   "rule": "normal",
   "multiplier": [0.5,0.5,0.5]
   }
-
+  ,
+  {
+  "object_name": "terminal_bridgeHole",
+  "category":  "terminal",
+  "terminal_id": 9,
+  "rule": "normal",
+  "multiplier": [1,1,1]
+  }
+  ,
+  {
+  "object_name": "terminal_towerTop",
+  "category":  "terminal",
+  "terminal_id": 10,
+  "rule": "normal",
+  "multiplier": [1,1,1]
+  }
+  ,
+  {
+  "object_name": "terminal_hemisSphere",
+  "category":  "terminal",
+  "terminal_id": 11,
+  "rule": "normal",
+  "multiplier": [0.5,1,0.5]
+  }
   ]

@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html>
+	<!DOCTYPE html>
+	<html>
 	<head>
 		<meta charset="utf-8">
 		<title>update</title>
@@ -14,25 +14,25 @@
 		<script type="importmap">
 			{
 			"imports": {
-			 "three": "https://cdn.skypack.dev/three@0.139.2/build/three.module",
+				"three": "https://cdn.skypack.dev/three@0.139.2/build/three.module",
 				"three/": "https://cdn.skypack.dev/three@0.139.2/",      
 				"dat.gui": "https://cdn.skypack.dev/dat.gui",
 				"three/addons/": "node_modules/three/examples/jsm/"
 			}
-		   }
-		  </script>
-		  
-	   
-		  <script type="module">
+			}
+			</script>
+			
+		
+			<script type="module">
 
-import * as THREE from 'three';
+	import * as THREE from 'three';
 
-import { GUI } from '/node_modules/three/examples/jsm/libs/lil-gui.module.min.js';
-import { OrbitControls } from '/node_modules/three/examples/jsm/controls/OrbitControls.js';
-import { GLTFLoader } from '/node_modules/three/examples/jsm/loaders/GLTFLoader.js';
-import { RGBELoader } from '/node_modules/three/examples/jsm/loaders/RGBELoader.js';
+	import { GUI } from '/node_modules/three/examples/jsm/libs/lil-gui.module.min.js';
+	import { OrbitControls } from '/node_modules/three/examples/jsm/controls/OrbitControls.js';
+	import { GLTFLoader } from '/node_modules/three/examples/jsm/loaders/GLTFLoader.js';
+	import { RGBELoader } from '/node_modules/three/examples/jsm/loaders/RGBELoader.js';
 
-let camera, scene, renderer;
+	let camera, scene, renderer;
 
 
 
@@ -46,7 +46,7 @@ let camera, scene, renderer;
 	scene.background = new THREE.Color( 0x81ebc6 );
 
 	const left = -3.2, right = 3.2, top2 = 2.4, bottom = -2.4, near = 0.01, far = 100;
- 	camera = new THREE.OrthographicCamera(left, right, top2, bottom, near, far);
+	camera = new THREE.OrthographicCamera(left, right, top2, bottom, near, far);
 
 	camera.position.set( 5, 5, 5 );
 
@@ -61,22 +61,29 @@ let camera, scene, renderer;
 	scene.add( light );
 
 
-new RGBELoader()
-.setPath( 'textures/equirectangular/' )
-.load( 'royal_esplanade_1k.hdr', function ( texture ) {
+	new RGBELoader()
+	.setPath( 'textures/equirectangular/' )
+	.load( 'royal_esplanade_1k.hdr', function ( texture ) {
 	texture.mapping = THREE.EquirectangularReflectionMapping;
 	// scene.background = texture;
 	scene.environment = texture;
-} );
+	} );
 
 
-const loader2 = new GLTFLoader().setPath( 'static/models/' );
-var load_result = await loader2.loadAsync('roofTop.glb');
-const m3 = load_result.scene;
-var load_result = await loader2.loadAsync('terminal_7.glb');
-const m7 = load_result.scene;
-load_result = await loader2.loadAsync('terminal_sphere.glb');
-const m8 = load_result.scene;
+	const loader2 = new GLTFLoader().setPath( 'static/models/' );
+	var load_result = await loader2.loadAsync('roofTop.glb');
+	const m3 = load_result.scene;
+	var load_result = await loader2.loadAsync('terminal_7.glb');
+	const m7 = load_result.scene;
+	load_result = await loader2.loadAsync('terminal_sphere.glb');
+	const m8 = load_result.scene;
+	var load_result = await loader2.loadAsync('9.glb');
+	const m9 = load_result.scene;
+	var load_result = await loader2.loadAsync('10.glb');
+	const m10 = load_result.scene;
+	var load_result = await loader2.loadAsync('11.glb');
+	const m11 = load_result.scene;
+
 
 	const geometry = new THREE.BoxGeometry( 1, 1, 1 ).toNonIndexed();
 	const material = new THREE.MeshBasicMaterial( { vertexColors: true } ); 
@@ -139,6 +146,14 @@ const m8 = load_result.scene;
 				a = m7.clone();
 			}else if(jsonData[i]["obj"]["type"] == 8){
 				a = m8.clone();
+			}else if(jsonData[i]["obj"]["type"] == 9){
+				a = m9.clone();
+			}
+			else if(jsonData[i]["obj"]["type"] == 10){
+				a = m10.clone();
+			}
+			else if(jsonData[i]["obj"]["type"] == 11){
+				a = m11.clone();
 			}else{
 			var cube = new THREE.Mesh( geometry, material );
 			cube.position.set(center_x, center_y, center_z );
@@ -149,9 +164,10 @@ const m8 = load_result.scene;
 
 		if (load_mesh){
 			a.position.set(start_x,start_y,start_z);
-			a.children[0].scale.set(scale_x, scale_y, scale_z);
+			a.scale.set(scale_x,scale_y,scale_z);
 			scene.add(a);
 		}
+
 
 		}
 	},
@@ -169,9 +185,9 @@ const m8 = load_result.scene;
 
 	window.addEventListener( 'resize', onWindowResize );
 
-render();
+	render();
 
-function onWindowResize() {
+	function onWindowResize() {
 
 	camera.aspect = window.innerWidth / window.innerHeight;
 	camera.updateProjectionMatrix();
@@ -180,17 +196,17 @@ function onWindowResize() {
 
 	render();
 
-}
+	}
 
-function render() {
+	function render() {
 
 	renderer.render( scene, camera );
 
-}
+	}
 
-</script>
+	</script>
 
 
 
 	</body>
-</html>
+	</html>
