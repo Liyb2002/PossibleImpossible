@@ -39,7 +39,7 @@
         "object_id": 4,
         "scope_x": [0.2,0.8],
         "scope_y": [0.3,0.3],
-        "scope_z": [0.1,0.1],
+        "scope_z": [0.2,0.2],
         "canTerminate": "False",
         "connect_id": [1],
         "connect_rule":{
@@ -50,7 +50,7 @@
         "object_id": 5,
         "scope_x": [0.2,0.8],
         "scope_y": [0.3,0.3],
-        "scope_z": [0.1,0.1],
+        "scope_z": [0.2,0.2],
         "canTerminate": "False",
         "connect_id": [1],
         "connect_rule":{
@@ -59,7 +59,7 @@
       },
       {
         "object_id": 6,
-        "scope_x": [0.1,0.1],
+        "scope_x": [0.2,0.2],
         "scope_y": [0.3,0.3],
         "scope_z": [0.2,0.8],
         "canTerminate": "False",
@@ -70,7 +70,7 @@
       },
       {
         "object_id": 7,
-        "scope_x": [0.1,0.1],
+        "scope_x": [0.2,0.2],
         "scope_y": [0.3,0.3],
         "scope_z": [0.2,0.8],
         "canTerminate": "False",

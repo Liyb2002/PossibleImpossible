@@ -43,7 +43,7 @@ while(success != True):
     cur_particle.run_connect()
     # cur_particle.run_particle2(steps+2)
 
-    # cur_particle.overlapping_check()
+    cur_particle.overlapping_check()
     success = cur_particle.success
 
 procedural_objects = assign_type.assign(cur_particle.procedural_objects)

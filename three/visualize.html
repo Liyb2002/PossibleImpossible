@@ -83,6 +83,10 @@
 	const m10 = load_result.scene;
 	var load_result = await loader2.loadAsync('11.glb');
 	const m11 = load_result.scene;
+	var load_result = await loader2.loadAsync('12_0.glb');
+	const m12_0 = load_result.scene;
+	var load_result = await loader2.loadAsync('12_1.glb');
+	const m12_1 = load_result.scene;
 
 
 	const geometry = new THREE.BoxGeometry( 1, 1, 1 ).toNonIndexed();
@@ -139,6 +143,8 @@
 			// console.log("jsonData[i]", jsonData[i]["obj"]["type"]);
 			
 			var a;
+			var rand = Math.random();
+			console.log("rand", rand);
 			var load_mesh = true;
 			if(jsonData[i]["obj"]["type"] == 3){
 				a = m3.clone();
@@ -154,6 +160,11 @@
 			}
 			else if(jsonData[i]["obj"]["type"] == 11){
 				a = m11.clone();
+			}else if(jsonData[i]["obj"]["type"] == 12 && rand<0.5){
+				a = m12_0.clone();
+			}
+			else if(jsonData[i]["obj"]["type"] == 12 ){
+				a = m12_1.clone();
 			}else{
 			var cube = new THREE.Mesh( geometry, material );
 			cube.position.set(center_x, center_y, center_z );
