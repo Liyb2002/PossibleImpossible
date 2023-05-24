@@ -4,9 +4,7 @@
   "category":  "footprint",
   "structural_id": 1,
   "subdiv":[
-  [0.3, "y direction", ["nonterminal", "0", 0.05], ["nonterminal", "1", 0.9], ["nonterminal", "0", 0.05]],
-  [0.7, "y direction", ["nonterminal", "0", 0.05], ["nonterminal", "1", 0.85], ["nonterminal", "0", 0.05], ["terminal","2", 0.05]]
-  ]
+  [1.0, "y direction", ["terminal", "14", 0.4]]  ]
   },
   {
   "object_name": "footprint_2",
@@ -73,8 +71,7 @@
   "category":  "footprint",
   "structural_id": 9,
   "subdiv":[
-  [0.4, "y direction", ["nonterminal", "0", 0.05], ["terminal", "6", 0.4],  ["nonterminal", "0", 0.05], ["terminal", "3", 0.5]],
-  [0.6, "y direction", ["nonterminal", "2", 1.0]]
+  [1.0, "y direction", ["nonterminal", "2", 1.0]]
 
   ]
   },
@@ -100,8 +97,10 @@
     "category":  "nonterminal",
     "nonterminal_id": 2,
     "subdiv":[
-    [1.0, "y direction", ["terminal", "9", 0.7], ["terminal", "10", 0.15], ["terminal", "11", 0.15]]
-    ]
+    [0.6, "y direction", ["terminal", "13", 0.08], ["terminal", "9", 0.62], ["terminal", "10", 0.15], ["terminal", "11", 0.15]],
+    [0.4, "y direction", ["terminal", "13", 0.08], ["terminal", "9", 0.62], ["terminal", "10", 0.15], ["terminal", "11", 0.15]]
+  
+  ]
     },
   {
   "object_name": "terminal_floor",
@@ -195,6 +194,20 @@
   "object_name": "terminal_bridge_ZDir",
   "category":  "terminal",
   "terminal_id": 12,
+  "rule": "normal",
+  "multiplier": [1,1,1]
+  },
+  {
+  "object_name": "tower_base",
+  "category":  "terminal",
+  "terminal_id": 13,
+  "rule": "normal",
+  "multiplier": [1,1,1]
+  },
+  {
+  "object_name": "solid_tower",
+  "category":  "terminal",
+  "terminal_id": 14,
   "rule": "normal",
   "multiplier": [1,1,1]
   }

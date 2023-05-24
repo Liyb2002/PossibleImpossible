@@ -73,6 +73,8 @@
 	const loader2 = new GLTFLoader().setPath( 'static/models/' );
 	var load_result = await loader2.loadAsync('roofTop.glb');
 	const m3 = load_result.scene;
+	var load_result = await loader2.loadAsync('4.glb');
+	const m4 = load_result.scene;
 	var load_result = await loader2.loadAsync('terminal_7.glb');
 	const m7 = load_result.scene;
 	load_result = await loader2.loadAsync('terminal_sphere.glb');
@@ -87,6 +89,10 @@
 	const m12_0 = load_result.scene;
 	var load_result = await loader2.loadAsync('12_1.glb');
 	const m12_1 = load_result.scene;
+	var load_result = await loader2.loadAsync('13.glb');
+	const m13 = load_result.scene;
+	var load_result = await loader2.loadAsync('14.glb');
+	const m14 = load_result.scene;
 
 
 	const geometry = new THREE.BoxGeometry( 1, 1, 1 ).toNonIndexed();
@@ -148,6 +154,8 @@
 			var load_mesh = true;
 			if(jsonData[i]["obj"]["type"] == 3){
 				a = m3.clone();
+			}else if(jsonData[i]["obj"]["type"] == 4){
+				a = m4.clone();
 			}else if(jsonData[i]["obj"]["type"] == 7){
 				a = m7.clone();
 			}else if(jsonData[i]["obj"]["type"] == 8){
@@ -165,6 +173,10 @@
 			}
 			else if(jsonData[i]["obj"]["type"] == 12 ){
 				a = m12_1.clone();
+			}else if(jsonData[i]["obj"]["type"] == 13 ){
+				a = m13.clone();
+			}else if(jsonData[i]["obj"]["type"] == 14 ){
+				a = m14.clone();
 			}else{
 			var cube = new THREE.Mesh( geometry, material );
 			cube.position.set(center_x, center_y, center_z );
