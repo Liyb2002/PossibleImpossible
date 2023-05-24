@@ -12,7 +12,7 @@
   "structural_id": 2,
   "subdiv":[
   [0.5, "y direction", ["terminal","1", 1.0]],
-  [0.5, "y direction", ["terminal","6", 1.0]]
+  [0.5, "y direction", ["terminal","15", 1.0]]
 
   ]
   },
@@ -22,7 +22,7 @@
   "structural_id": 3,
   "subdiv":[
   [0.5, "y direction", ["terminal","1", 1.0]],
-  [0.5, "y direction", ["terminal","6", 1.0]]
+  [0.5, "y direction", ["terminal","9", 1.0]]
 
   ]
   },
@@ -85,7 +85,7 @@
   ]
   },
   {
-  "object_name": "nonterminal_pillar",
+  "object_name": "nonterminal_ladder",
   "category":  "nonterminal",
   "nonterminal_id": 1,
   "subdiv":[
@@ -110,11 +110,11 @@
   "multiplier": [1,1,1]
   } ,
   {
-  "object_name": "terminal_one_pillar",
+  "object_name": "terminal_ladder",
   "category":  "terminal",
   "terminal_id": 1,
   "rule": "normal",
-  "multiplier": [0.2,1,0.2]
+  "multiplier": [0.6,1,0.4]
   } ,
   {
   "object_name": "terminal_spike",
@@ -205,9 +205,16 @@
   "multiplier": [1,1,1]
   },
   {
-  "object_name": "solid_tower",
+  "object_name": "valve",
   "category":  "terminal",
   "terminal_id": 14,
+  "rule": "normal",
+  "multiplier": [1,1,1]
+  },
+  {
+  "object_name": "water_fall",
+  "category":  "terminal",
+  "terminal_id": 15,
   "rule": "normal",
   "multiplier": [1,1,1]
   }
