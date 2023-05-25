@@ -11,16 +11,26 @@ class Particle:
         self.procedural_objects = []
 
 
-    def run_particle(self,intersection, start_type, steps, isFront):
-        cur_obj = start_obj(intersection, self.generic_object_list, start_type)
+    def run_particle(self,intersection, start_type, connected_dir, steps, isFront):
+        cur_obj = start_obj(intersection, self.generic_object_list, start_type, connected_dir)
         self.procedural_objects.append(cur_obj)
 
         if isFront:
-            self.procedural_objects += produce.execute_model(self.generic_object_list, cur_obj, steps)
+            results = produce.execute_model(self.generic_object_list, cur_obj, steps)
+            if len(results) == 0:
+                return False
+            self.procedural_objects += results
             self.start_connect = self.procedural_objects[-1]
+            return True
+
         else:
-            self.procedural_objects += produce.execute_model(self.generic_object_list, cur_obj, steps)
+            results = produce.execute_model(self.generic_object_list, cur_obj, steps)
+            if len(results) == 0:
+                return False
+
+            self.procedural_objects += results
             self.end_connect = self.procedural_objects[-1]
+            return True
 
     def run_connect(self):
         connect_list = cycle_connect.solve_3D(self.generic_object_list, self.start_connect, self.end_connect)
@@ -75,7 +85,7 @@ class Particle:
         return (rd1, rd2)
 
 
-def start_obj(start_pos, generic_object_list, start_type):
+def start_obj(start_pos, generic_object_list, start_type, connected_dir):
 
     cur_type = start_type
     start_scope = generic_object_list[cur_type].scope
@@ -86,5 +96,6 @@ def start_obj(start_pos, generic_object_list, start_type):
     cur_obj_z = cur_obj.length[2]
     update_pos = np.array([cur_obj_x, cur_obj_y, cur_obj_z])
     cur_obj.arbitrary_set_position(start_pos - update_pos)
+    cur_obj.add_connected(connected_dir)
 
     return cur_obj

@@ -9,13 +9,26 @@ class Generic_object:
         self.canTerminate = info['canTerminate']
         self.rules = info['connect_rule']
 
-    def get_nextType(self):
+    def get_nextType(self, unavailable_dirs):
         if self.connect_id == []:
             print("terminate")
             return
-        
-        choice = random.choice(self.connect_id)
-        return choice
+
+        count = 0
+        while count <3:
+            count += 1
+            choice = random.choice(self.connect_id)
+            direction = self.execute_rule(choice)
+            available_next = True
+
+            for unavailable_dir in unavailable_dirs:
+                if direction == unavailable_dir:
+                    available_next = False
+
+            if available_next: 
+                return choice
+            
+        return None
     
     def set_scope(self, info):
         scope_x = info['scope_x']

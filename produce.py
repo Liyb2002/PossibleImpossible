@@ -17,17 +17,20 @@ def execute_model(generic_object_list, start_obj, steps):
         next_type = None
 
         while(tempt_count >= 0 and next_type == None):
+            cur_obj = production_list[tempt_count]
             cur_type = production_list[tempt_count].type
             cur_generic_obj = generic_object_list[cur_type]
-            next_type = cur_generic_obj.get_nextType()
+            next_type = cur_generic_obj.get_nextType(cur_obj.connected)
             tempt_count -=1
 
+        if next_type == None:
+            return []
+        
         next_generic_obj = generic_object_list[next_type]
         next_scope = next_generic_obj.scope
         next_hash = next_generic_obj.generate_hash()
         next_obj = procedural_objects.Procedural_object(next_type, np.array([0,0,0]), next_scope, next_hash)
         next_choice = cur_generic_obj.execute_rule(next_type)
-        cur_obj = production_list[tempt_count+1]
         cur_obj.add_connected(next_choice)
         next_obj.add_connected(opposite_direction(next_choice))
         next_obj.set_position(cur_obj, next_choice)

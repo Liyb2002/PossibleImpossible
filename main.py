@@ -31,15 +31,23 @@ with open('objects.json', 'r') as object_file:
 
 #start produce
 foreground_type = 1
+foreground_connect = "-y"
 background_type = 3
+background_connect = "+y"
+
 steps = 2
 
 success = False
 while(success != True):
     print("-----------------")
     cur_particle = particle.Particle(generic_object_list)
-    cur_particle.run_particle(foreground_intersection, foreground_type, steps, True)
-    cur_particle.run_particle(background_intersection, background_type, steps, False)
+    ok = cur_particle.run_particle(foreground_intersection, foreground_type, foreground_connect, steps, True)
+    if not ok :
+        continue
+    ok = cur_particle.run_particle(background_intersection, background_type, background_connect, steps, False)
+    if not ok :
+        continue
+
     cur_particle.run_connect()
     # cur_particle.run_particle2(steps+2)
 
