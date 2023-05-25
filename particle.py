@@ -16,19 +16,28 @@ class Particle:
         self.procedural_objects.append(cur_obj)
 
         if isFront:
-            results = produce.execute_model(self.generic_object_list, cur_obj, steps)
-            if len(results) == 0:
-                return False
-            self.procedural_objects += results
+            step = 0
+            while step < steps:
+                step +=1
+                results = produce.execute_model(self.generic_object_list, cur_obj, 1)
+                if len(results) == 0:
+                    return False
+                cur_obj = results[-1]
+                self.procedural_objects += results
+
             self.start_connect = self.procedural_objects[-1]
             return True
 
         else:
-            results = produce.execute_model(self.generic_object_list, cur_obj, steps)
-            if len(results) == 0:
-                return False
-
-            self.procedural_objects += results
+            step = 0
+            while step < steps:
+                step +=1
+                results = produce.execute_model(self.generic_object_list, cur_obj, steps)
+                if len(results) == 0:
+                    return False
+                cur_obj = results[-1]
+                self.procedural_objects += results
+                
             self.end_connect = self.procedural_objects[-1]
             return True
 
