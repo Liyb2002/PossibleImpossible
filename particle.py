@@ -24,6 +24,7 @@ class Particle:
                     return False
                 cur_obj = results[-1]
                 self.procedural_objects += results
+                self.density_score()
 
             self.start_connect = self.procedural_objects[-1]
             return True
@@ -37,7 +38,7 @@ class Particle:
                     return False
                 cur_obj = results[-1]
                 self.procedural_objects += results
-                
+
             self.end_connect = self.procedural_objects[-1]
             return True
 
@@ -92,6 +93,20 @@ class Particle:
                 break
 
         return (rd1, rd2)
+    
+    def density_score(self):
+        added_object = self.procedural_objects[-1]
+        k = 1.0
+        expanded_cube_length = added_object.length + np.array([k,k,k])
+        expanded_cube_size = expanded_cube_length[0] * expanded_cube_length[1] * expanded_cube_length[2] * 8
+        sum_overlapping_size = added_object.length[0] * added_object.length[1] * added_object.length[2] * 8
+
+        for obj in self.procedural_objects[:-1]:
+            sum_overlapping_size += procedural_objects.getOverlap3D(added_object.position, expanded_cube_length, obj.position, obj.length)
+        
+        proportion = sum_overlapping_size / expanded_cube_size
+        print("proportion",proportion )
+
 
 
 def start_obj(start_pos, generic_object_list, start_type, connected_dir):

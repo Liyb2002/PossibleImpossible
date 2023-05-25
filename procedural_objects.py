@@ -79,5 +79,20 @@ class Procedural_object:
         self.connected.append(direction)
 
 
+def getOverlap3D(objectA_position, objectA_size, objectB_position, objectB_size):
+    A_x = [objectA_position[0] - objectA_size[0], objectA_position[0] + objectA_size[0]]
+    B_x = [objectB_position[0] - objectB_size[0], objectB_position[0] + objectB_size[0]]
+    overlap_x = getOverlap(A_x, B_x)
+
+    A_y = [objectA_position[1] - objectA_size[1], objectA_position[1] + objectA_size[1]]
+    B_y = [objectB_position[1] - objectB_size[1], objectB_position[1] + objectB_size[1]]
+    overlap_y = getOverlap(A_y, B_y)
+
+    A_z = [objectA_position[2] - objectA_size[2], objectA_position[2] + objectA_size[2]]
+    B_z = [objectB_position[2] - objectB_size[2], objectB_position[2] + objectB_size[2]]
+    overlap_z = getOverlap(A_z, B_z)
+
+    return overlap_x * overlap_y * overlap_z
+
 def getOverlap(a, b):
     return max(0, min(a[1], b[1]) - max(a[0], b[0]))
