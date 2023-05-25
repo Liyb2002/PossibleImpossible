@@ -5,9 +5,17 @@ class Generic_object:
     def __init__(self, info):
         self.id = info['object_id']
         self.set_scope(info)
-        self.connect_id = info['connect_id']
+        self.connect_id = []
         self.canTerminate = info['canTerminate']
         self.rules = info['connect_rule']
+        self.probabilities = []
+
+        self.set_connect_ids(info['connect_id'])
+
+    def set_connect_ids(self, id_tuples):
+        for id_tuple in id_tuples:
+            self.connect_id.append(id_tuple[0])
+            self.probabilities.append(id_tuple)
 
     def get_nextType(self, unavailable_dirs):
         if self.connect_id == []:
@@ -16,7 +24,15 @@ class Generic_object:
 
         count = 0
         while count <3:
+            rand = random.uniform(0, 1)
+            sum_prob = 0
             count += 1
+
+            for id_tuple in self.probabilities:
+                sum_prob += id_tuple[1]
+                if sum_prob >= rand:
+                    choice = id_tuple[0]
+
             choice = random.choice(self.connect_id)
             direction = self.execute_rule(choice)
             available_next = True
