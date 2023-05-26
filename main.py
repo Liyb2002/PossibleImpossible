@@ -7,6 +7,7 @@ import cycle_connect
 import particle
 import decorations
 import assign_type
+import parseTree
 
 import numpy as np
 
@@ -24,11 +25,13 @@ generic_object_list = []
 with open('objects.json', 'r') as object_file:
     objects_data = json.load(object_file)
 
-    generic_object_list.append(objects_data[0])
+    generic_object_list.append(generic_objects.Generic_object(objects_data[0]))
     for object_data in objects_data:
         new_object = generic_objects.Generic_object(object_data)
         generic_object_list.append(new_object)
 
+#parse probability tree
+parsedProb = parseTree.parseProb(generic_object_list, generic_object_list[1])
 #start produce
 foreground_type = 1
 foreground_connect = "-y"
@@ -56,8 +59,6 @@ while(success != True):
 
 procedural_objects = assign_type.assign(cur_particle.procedural_objects)
 
-for obj in procedural_objects:
-    print("type", obj.type)
 decorator = decorations.decoration_operator()
 decoration_list = decorator.decorate(cur_particle.procedural_objects)
 

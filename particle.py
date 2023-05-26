@@ -105,7 +105,6 @@ class Particle:
             sum_overlapping_size += procedural_objects.getOverlap3D(added_object.position, expanded_cube_length, obj.position, obj.length)
         
         proportion = sum_overlapping_size / expanded_cube_size
-        print("proportion",proportion )
 
 
 
