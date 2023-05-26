@@ -9,11 +9,13 @@ class Particle:
         self.generic_object_list = generic_object_list
         self.success = True
         self.procedural_objects = []
+        self.targetProb = {}
 
 
-    def run_particle(self,intersection, start_type, connected_dir, steps, isFront):
+    def run_particle(self,intersection, start_type, connected_dir, steps, targetProb, isFront):
         cur_obj = start_obj(intersection, self.generic_object_list, start_type, connected_dir)
         self.procedural_objects.append(cur_obj)
+        self.targetProb = targetProb
 
         if isFront:
             step = 0
@@ -25,6 +27,7 @@ class Particle:
                 cur_obj = results[-1]
                 self.procedural_objects += results
                 self.density_score()
+                self.probability_score()
 
             self.start_connect = self.procedural_objects[-1]
             return True
@@ -104,8 +107,24 @@ class Particle:
         for obj in self.procedural_objects[:-1]:
             sum_overlapping_size += procedural_objects.getOverlap3D(added_object.position, expanded_cube_length, obj.position, obj.length)
         
-        proportion = sum_overlapping_size / expanded_cube_size
+        proportion_score = sum_overlapping_size / expanded_cube_size
+        return proportion_score
 
+    def probability_score(self):
+        current_Prob = {}
+        probability_score = 0
+
+        for generic_obj in self.generic_object_list:
+            current_Prob[generic_obj.id] = 0
+
+        for obj in self.procedural_objects:
+            current_Prob[obj.type] += 1 / len(self.procedural_objects)
+        
+        for key in current_Prob:
+            diff = current_Prob[key] - self.targetProb[key]
+            probability_score += (1-diff) * (1-diff)
+        
+        return probability_score
 
 
 def start_obj(start_pos, generic_object_list, start_type, connected_dir):

@@ -31,12 +31,14 @@ with open('objects.json', 'r') as object_file:
         generic_object_list.append(new_object)
 
 #parse probability tree
-parsedProb = parseTree.parseProb(generic_object_list, generic_object_list[1])
 #start produce
 foreground_type = 1
 foreground_connect = "-y"
+foreground_parsedProb = parseTree.parseProb(generic_object_list, generic_object_list[foreground_type])
+
 background_type = 3
 background_connect = "+y"
+background_parsedProb = parseTree.parseProb(generic_object_list, generic_object_list[background_type])
 
 steps = 2
 
@@ -44,10 +46,10 @@ success = False
 while(success != True):
     print("-----------------")
     cur_particle = particle.Particle(generic_object_list)
-    ok = cur_particle.run_particle(foreground_intersection, foreground_type, foreground_connect, steps, True)
+    ok = cur_particle.run_particle(foreground_intersection, foreground_type, foreground_connect, steps, foreground_parsedProb, True)
     if not ok :
         continue
-    ok = cur_particle.run_particle(background_intersection, background_type, background_connect, steps, False)
+    ok = cur_particle.run_particle(background_intersection, background_type, background_connect, steps, background_parsedProb, False)
     if not ok :
         continue
 
