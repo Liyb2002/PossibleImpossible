@@ -49,7 +49,9 @@ class Particle:
             return True
 
     def run_connect(self):
-        connect_list = cycle_connect.solve_3D(self.generic_object_list, self.start_connect, self.end_connect)
+        connect_list = []
+
+        connect_list += cycle_connect.solve_1D(self.generic_object_list, self.start_connect, self.end_connect)
         if len(connect_list) == 0:
             print("failed connect")
             self.success = False

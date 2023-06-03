@@ -2,22 +2,11 @@ import produce
 import numpy as np
 import random
 
-def solve_3D(generic_object_list, objStart, objEnd):
+def solve_1D(generic_object_list, objStart, objEnd):
     startPos = objStart.position
     endPos = objEnd.position
 
-    # print("startPos", startPos)
-    # print("startlength", objStart.length)
-
-    # print("endPos", endPos)
-    # print("endlength", objEnd.length)
-
     delta = endPos - startPos
-
-    production_list = solve_1D(generic_object_list, delta, objStart, objEnd)
-    return production_list
-
-def solve_1D(generic_object_list, delta, objStart, objEnd):
 
     production_list = []
     production_list.append(objStart)
@@ -33,21 +22,6 @@ def solve_1D(generic_object_list, delta, objStart, objEnd):
         if ok != True:
             return []
         production_list += new_production
-
-
-    # print("startPos", objStart.position)
-    # print("startType", objStart.type)
-    # print("startlength", objStart.length)
-
-    # print("endPos", objEnd.position)
-    # print("endType", objEnd.type)
-    # print("endlength", objEnd.length)
-
-    # for obj in production_list:
-    #     print("-------------new obj-------------")
-    #     print("type", obj.type)
-    #     print(obj.position)
-    #     print(obj.length)
 
     return production_list
 
