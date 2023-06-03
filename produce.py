@@ -75,51 +75,52 @@ class connect_execution:
     def execute_model_withDirection(self):
         #return 0->fail, 1->continue, 2->end
         #execute rule to get the objects
-        while True:
-            current_generic_obj = self.generic_object_list[self.current_type]
+        current_generic_obj = self.generic_object_list[self.current_type]
 
-            ok, next_type, rule_chosen = current_generic_obj.get_nextType_with_direction(self.direction)
-            if ok != True:
-                return (False, [])
-            next_type = int(next_type)
+        ok, next_type, rule_chosen = current_generic_obj.get_nextType_with_direction(self.direction)
+        if ok != True:
+            return 0
+        next_type = int(next_type)
 
-            next_generic_obj = self.generic_object_list[next_type]
-            next_scope = next_generic_obj.scope
-            next_hash = next_generic_obj.generate_hash()
-            next_obj = procedural_objects.Procedural_object(next_type, np.array([0,0,0]), next_scope, next_hash)
-            self.cur_obj.add_connected(rule_chosen)
-            next_obj.add_connected(opposite_direction(rule_chosen))
-            self.production_list.append(next_obj)
-            self.rules_list.append(rule_chosen)
-            
-            if self.direction_idx != 2:
-                self.lower_bound += next_scope[self.direction_idx][0] + self.prev_lower_bound
-                self.current_bound += next_obj.length[self.direction_idx] + self.prev_current_bound
-                self.upper_bound += next_scope[self.direction_idx][1] + self.prev_upper_bound
-                self.prev_lower_bound = next_scope[self.direction_idx][0]
-                self.prev_current_bound = next_obj.length[self.direction_idx]
-                self.prev_upper_bound = next_scope[self.direction_idx][1]
-            elif self.objEnd.type == 3 or self.objEnd.type == 8:
-                self.lower_bound += next_scope[self.direction_idx][0] + self.prev_lower_bound
-                self.current_bound += next_obj.length[self.direction_idx] + self.prev_current_bound
-                self.upper_bound += next_scope[self.direction_idx][1] + self.prev_upper_bound
-                self.prev_lower_bound = next_scope[self.direction_idx][0]
-                self.prev_current_bound = next_obj.length[self.direction_idx]
-                self.prev_upper_bound = next_scope[self.direction_idx][1]
-            else:
-                self.lower_bound += next_scope[self.direction_idx][0] *2
-                self.current_bound += next_obj.length[self.direction_idx] *2
-                self.upper_bound += next_scope[self.direction_idx][1] *2
+        next_generic_obj = self.generic_object_list[next_type]
+        next_scope = next_generic_obj.scope
+        next_hash = next_generic_obj.generate_hash()
+        next_obj = procedural_objects.Procedural_object(next_type, np.array([0,0,0]), next_scope, next_hash)
+        self.cur_obj.add_connected(rule_chosen)
+        next_obj.add_connected(opposite_direction(rule_chosen))
+        self.production_list.append(next_obj)
+        self.rules_list.append(rule_chosen)
+        
+        if self.direction_idx != 2:
+            self.lower_bound += next_scope[self.direction_idx][0] + self.prev_lower_bound
+            self.current_bound += next_obj.length[self.direction_idx] + self.prev_current_bound
+            self.upper_bound += next_scope[self.direction_idx][1] + self.prev_upper_bound
+            self.prev_lower_bound = next_scope[self.direction_idx][0]
+            self.prev_current_bound = next_obj.length[self.direction_idx]
+            self.prev_upper_bound = next_scope[self.direction_idx][1]
+        elif self.objEnd.type == 3 or self.objEnd.type == 8:
+            self.lower_bound += next_scope[self.direction_idx][0] + self.prev_lower_bound
+            self.current_bound += next_obj.length[self.direction_idx] + self.prev_current_bound
+            self.upper_bound += next_scope[self.direction_idx][1] + self.prev_upper_bound
+            self.prev_lower_bound = next_scope[self.direction_idx][0]
+            self.prev_current_bound = next_obj.length[self.direction_idx]
+            self.prev_upper_bound = next_scope[self.direction_idx][1]
+        else:
+            self.lower_bound += next_scope[self.direction_idx][0] *2
+            self.current_bound += next_obj.length[self.direction_idx] *2
+            self.upper_bound += next_scope[self.direction_idx][1] *2
 
-            self.current_type = next_type
+        self.current_type = next_type
 
-            if self.upper_bound>self.delta[self.direction_idx] and self.lower_bound<self.delta[self.direction_idx] and valid_ending(self.available_endings, self.current_type):
-                return self.set_scope()
-            
-            if self.lower_bound > self.delta[self.direction_idx]:
-                print("failed")
-                return (False, [])
+        if self.upper_bound>self.delta[self.direction_idx] and self.lower_bound<self.delta[self.direction_idx] and valid_ending(self.available_endings, self.current_type):
+            return 2
+        
+        if self.lower_bound > self.delta[self.direction_idx]:
+            print("failed")
+            return 0
 
+        return 1
+        
     def set_scope(self):
         #find exact scope of the objects
         if self.current_bound < self.delta[self.direction_idx]:
@@ -138,7 +139,7 @@ class connect_execution:
             self.cur_obj = self.production_list[i]
             self.cur_obj.set_position(prev_obj, self.rules_list[i])
 
-        return (True, self.production_list)
+        return self.production_list
     
 def add_scope(current_bound, delta, production_list, direction_idx):
     # print("do add scope")

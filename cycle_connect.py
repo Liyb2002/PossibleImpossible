@@ -113,10 +113,15 @@ def single_execution(abs_delta, index, generic_object_list, directions, producti
             available_endings = Available_Ending_With_Object(generic_object_list, objEnd)
 
         connect_particle = produce.connect_execution(production_list[-1], generic_object_list,abs_delta,directions[index],available_endings, objEnd)
-        ok, production_list_1 = connect_particle.execute_model_withDirection()
-        if ok != True:
-            return (ok, production_list)
+        ok = 1
 
-        return (ok, production_list_1)
+        while ok == 1:
+            ok = connect_particle.execute_model_withDirection()
+        
+        if ok == 0:
+            return (False, [])
+        
+        if ok == 2:
+            return (True, connect_particle.set_scope())
     
     return (True, [])
