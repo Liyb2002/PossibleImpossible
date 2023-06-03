@@ -47,89 +47,98 @@ def execute_model(generic_object_list, start_obj, steps):
     production_list.pop(0)
     return production_list
 
-def execute_model_withDirection(objStart, generic_object_list, delta, direction, available_endings, objEnd):
-    dummy_pos = np.array([0,0,0])
-    production_list = []
-    rules_list = []
+class connect_execution:
+    def __init__(self, objStart, generic_object_list, delta, direction, available_endings, objEnd):
+        self.objStart = objStart
+        self.generic_object_list = generic_object_list
+        self.delta = delta
+        self.direction = direction
+        self.available_endings = available_endings
+        self.objEnd = objEnd
 
-    direction_idx = direction_to_index(direction)
+    def execute_model_withDirection(self):
+        dummy_pos = np.array([0,0,0])
+        production_list = []
+        rules_list = []
 
-    lower_bound = objStart.length[direction_idx]
-    current_bound = objStart.length[direction_idx]
-    upper_bound = objStart.length[direction_idx]
+        direction_idx = direction_to_index(self.direction)
 
-    prev_lower_bound = 0
-    prev_current_bound = 0
-    prev_upper_bound = 0
+        lower_bound = self.objStart.length[direction_idx]
+        current_bound = self.objStart.length[direction_idx]
+        upper_bound = self.objStart.length[direction_idx]
 
-    current_type = objStart.type
-    cur_obj = objStart
-    # detla = update_delta(direction, delta, objStart)
+        prev_lower_bound = 0
+        prev_current_bound = 0
+        prev_upper_bound = 0
 
-    #execute rule to get the objects
-    while True:
-        current_generic_obj = generic_object_list[current_type]
+        current_type = self.objStart.type
+        cur_obj = self.objStart
+        # detla = update_delta(direction, delta, objStart)
 
-        ok, next_type, rule_chosen = current_generic_obj.get_nextType_with_direction(direction)
-        if ok != True:
-            return (False, [])
-        next_type = int(next_type)
+        #execute rule to get the objects
+        while True:
+            current_generic_obj = self.generic_object_list[current_type]
 
-        next_generic_obj = generic_object_list[next_type]
-        next_scope = next_generic_obj.scope
-        next_hash = next_generic_obj.generate_hash()
-        next_obj = procedural_objects.Procedural_object(next_type, dummy_pos, next_scope, next_hash)
-        cur_obj.add_connected(rule_chosen)
-        next_obj.add_connected(opposite_direction(rule_chosen))
-        production_list.append(next_obj)
-        rules_list.append(rule_chosen)
-        
-        if direction_idx != 2:
-            lower_bound += next_scope[direction_idx][0] + prev_lower_bound
-            current_bound += next_obj.length[direction_idx] + prev_current_bound
-            upper_bound += next_scope[direction_idx][1] + prev_upper_bound
-            prev_lower_bound = next_scope[direction_idx][0]
-            prev_current_bound = next_obj.length[direction_idx]
-            prev_upper_bound = next_scope[direction_idx][1]
-        elif objEnd.type == 3 or objEnd.type == 8:
-            lower_bound += next_scope[direction_idx][0] + prev_lower_bound
-            current_bound += next_obj.length[direction_idx] + prev_current_bound
-            upper_bound += next_scope[direction_idx][1] + prev_upper_bound
-            prev_lower_bound = next_scope[direction_idx][0]
-            prev_current_bound = next_obj.length[direction_idx]
-            prev_upper_bound = next_scope[direction_idx][1]
-        else:
-            lower_bound += next_scope[direction_idx][0] *2
-            current_bound += next_obj.length[direction_idx] *2
-            upper_bound += next_scope[direction_idx][1] *2
+            ok, next_type, rule_chosen = current_generic_obj.get_nextType_with_direction(self.direction)
+            if ok != True:
+                return (False, [])
+            next_type = int(next_type)
 
-        current_type = next_type
+            next_generic_obj = self.generic_object_list[next_type]
+            next_scope = next_generic_obj.scope
+            next_hash = next_generic_obj.generate_hash()
+            next_obj = procedural_objects.Procedural_object(next_type, dummy_pos, next_scope, next_hash)
+            cur_obj.add_connected(rule_chosen)
+            next_obj.add_connected(opposite_direction(rule_chosen))
+            production_list.append(next_obj)
+            rules_list.append(rule_chosen)
+            
+            if direction_idx != 2:
+                lower_bound += next_scope[direction_idx][0] + prev_lower_bound
+                current_bound += next_obj.length[direction_idx] + prev_current_bound
+                upper_bound += next_scope[direction_idx][1] + prev_upper_bound
+                prev_lower_bound = next_scope[direction_idx][0]
+                prev_current_bound = next_obj.length[direction_idx]
+                prev_upper_bound = next_scope[direction_idx][1]
+            elif self.objEnd.type == 3 or self.objEnd.type == 8:
+                lower_bound += next_scope[direction_idx][0] + prev_lower_bound
+                current_bound += next_obj.length[direction_idx] + prev_current_bound
+                upper_bound += next_scope[direction_idx][1] + prev_upper_bound
+                prev_lower_bound = next_scope[direction_idx][0]
+                prev_current_bound = next_obj.length[direction_idx]
+                prev_upper_bound = next_scope[direction_idx][1]
+            else:
+                lower_bound += next_scope[direction_idx][0] *2
+                current_bound += next_obj.length[direction_idx] *2
+                upper_bound += next_scope[direction_idx][1] *2
 
-        if upper_bound>delta[direction_idx] and lower_bound<delta[direction_idx] and valid_ending(available_endings, current_type):
-            break
-        
-        if lower_bound > delta[direction_idx]:
-            print("failed")
-            return (False, [])
+            current_type = next_type
 
-    #find exact scope of the objects
-    if current_bound < delta[direction_idx]:
-        production_list = add_scope(current_bound, delta, production_list, direction_idx)
+            if upper_bound>self.delta[direction_idx] and lower_bound<self.delta[direction_idx] and valid_ending(self.available_endings, current_type):
+                break
+            
+            if lower_bound > self.delta[direction_idx]:
+                print("failed")
+                return (False, [])
 
-    if current_bound > delta[direction_idx]:
-        production_list = minus_scope(current_bound, delta, production_list, direction_idx)
+        #find exact scope of the objects
+        if current_bound < self.delta[direction_idx]:
+            production_list = add_scope(current_bound, self.delta, production_list, direction_idx)
 
-    # production_list = adjust_scope(production_list)
+        if current_bound > self.delta[direction_idx]:
+            production_list = minus_scope(current_bound, self.delta, production_list, direction_idx)
 
-    #set object positions
-    first_obj = production_list[0]
-    first_obj.set_position(objStart, rules_list[0])
-    for i in range(1, len(production_list)):
-        prev_obj = production_list[i-1]
-        cur_obj = production_list[i]
-        cur_obj.set_position(prev_obj, rules_list[i])
+        # production_list = adjust_scope(production_list)
 
-    return (True, production_list)
+        #set object positions
+        first_obj = production_list[0]
+        first_obj.set_position(self.objStart, rules_list[0])
+        for i in range(1, len(production_list)):
+            prev_obj = production_list[i-1]
+            cur_obj = production_list[i]
+            cur_obj.set_position(prev_obj, rules_list[i])
+
+        return (True, production_list)
     
 def add_scope(current_bound, delta, production_list, direction_idx):
     # print("do add scope")
