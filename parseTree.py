@@ -37,8 +37,8 @@ def parseProb(generic_object_list, start_obj):
     
     for key in parsedProb:
         parsedProb[key] = parsedProb[key] / total_prob
-        print("generic id", key)
-        print("prob", parsedProb[key])
+        # print("generic id", key)
+        # print("prob", parsedProb[key])
 
     return parsedProb
 

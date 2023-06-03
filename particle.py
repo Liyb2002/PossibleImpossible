@@ -10,10 +10,12 @@ class Particle:
         self.success = True
         self.procedural_objects = []
         self.targetProb = {}
+        self.eye=np.array([5.0, 5.0, 5.0])
 
 
     def run_particle(self,intersection, start_type, connected_dir, steps, targetProb, isFront):
         cur_obj = start_obj(intersection, self.generic_object_list, start_type, connected_dir)
+        intersection_obj = cur_obj
         self.procedural_objects.append(cur_obj)
         self.targetProb = targetProb
 
@@ -28,6 +30,7 @@ class Particle:
                 self.procedural_objects += results
                 self.density_score()
                 self.probability_score()
+                self.occulusion_score(intersection_obj, results)
 
             self.start_connect = self.procedural_objects[-1]
             return True
@@ -126,6 +129,14 @@ class Particle:
         
         return probability_score
 
+    def occulusion_score(self, intersection_obj, new_Obj_list):
+        occulusion_score = 0
+        for obj in new_Obj_list:
+            occulusion_score += 200
+            occulusion_score += check_occlusion(obj, intersection_obj, self.eye)
+
+
+
 
 def start_obj(start_pos, generic_object_list, start_type, connected_dir):
 
@@ -141,3 +152,72 @@ def start_obj(start_pos, generic_object_list, start_type, connected_dir):
     cur_obj.add_connected(connected_dir)
 
     return cur_obj
+
+def check_occlusion(front_obj, back_obj, eye):
+    score = 0
+
+    pt0 = back_obj.position
+    ray0 = pt0 - eye
+    ray0 = ray0 / np.linalg.norm(ray0)
+    is_occluded =  ray_intersecting_Obj(front_obj, ray0, eye)
+    if is_occluded:
+        score -= 100
+
+    pt1 = back_obj.position + back_obj.length
+    ray1 = pt1 - eye
+    ray1 = ray1 / np.linalg.norm(ray1)
+    is_occluded =  ray_intersecting_Obj(front_obj, ray1, eye)
+    if is_occluded:
+        score -= 50
+
+
+    pt2 = back_obj.position - back_obj.length
+    ray2 = pt2 - eye
+    ray2 = ray2 / np.linalg.norm(ray2)
+    is_occluded =  ray_intersecting_Obj(front_obj, ray2, eye)
+    if is_occluded:
+        score -= 50
+    
+    return score
+
+
+
+def ray_intersecting_Obj(front_obj, ro, rd):
+    minX = front_obj.position[0] - front_obj.length[0]
+    maxX = front_obj.position[0] + front_obj.length[0]
+    minY = front_obj.position[1] - front_obj.length[1]
+    maxY = front_obj.position[1] + front_obj.length[1]
+    minZ = front_obj.position[2] - front_obj.length[2]
+    maxZ = front_obj.position[2] + front_obj.length[2]
+
+    tMin = (minX - ro[0]) / rd[0]
+    tMax = (maxX - ro[0]) / rd[0]
+
+    if tMin > tMax:
+        swap(tMin, tMax)
+    
+    tMinY = (minY - ro[1]) / rd[1]
+    tMaxY = (maxY - ro[1]) / rd[1]
+    if tMinY > tMaxY:
+        swap(tMinY, tMaxY)
+
+    if (tMin > tMaxY) or (tMinY > tMax):
+        return False
+    
+    if tMinY > tMin:
+        tMin = tMinY
+
+    if tMaxY < tMax:
+        tMax = tMaxY
+    
+    tMinZ = (minZ - ro[2]) / rd[2]
+    tMaxZ = (maxZ - ro[2]) / rd[2]
+
+    if tMinZ > tMaxZ:
+        swap(tMinZ, tMaxZ)
+    
+    if (tMin > tMaxZ) or (tMinZ > tMax):
+        return False
+    
+    return True
+
