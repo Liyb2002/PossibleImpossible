@@ -69,12 +69,11 @@ class connect_execution:
         self.current_type = self.objStart.type
         self.cur_obj = self.objStart
 
+        self.production_list = []
+        self.rules_list = []
+
     def execute_model_withDirection(self):
-        production_list = []
-        rules_list = []
-
-        # detla = update_delta(direction, delta, objStart)
-
+        #return 0->fail, 1->continue, 2->end
         #execute rule to get the objects
         while True:
             current_generic_obj = self.generic_object_list[self.current_type]
@@ -90,8 +89,8 @@ class connect_execution:
             next_obj = procedural_objects.Procedural_object(next_type, np.array([0,0,0]), next_scope, next_hash)
             self.cur_obj.add_connected(rule_chosen)
             next_obj.add_connected(opposite_direction(rule_chosen))
-            production_list.append(next_obj)
-            rules_list.append(rule_chosen)
+            self.production_list.append(next_obj)
+            self.rules_list.append(rule_chosen)
             
             if self.direction_idx != 2:
                 self.lower_bound += next_scope[self.direction_idx][0] + self.prev_lower_bound
@@ -115,30 +114,31 @@ class connect_execution:
             self.current_type = next_type
 
             if self.upper_bound>self.delta[self.direction_idx] and self.lower_bound<self.delta[self.direction_idx] and valid_ending(self.available_endings, self.current_type):
-                break
+                return self.set_scope()
             
             if self.lower_bound > self.delta[self.direction_idx]:
                 print("failed")
                 return (False, [])
 
+    def set_scope(self):
         #find exact scope of the objects
         if self.current_bound < self.delta[self.direction_idx]:
-            production_list = add_scope(self.current_bound, self.delta, production_list, self.direction_idx)
+            self.production_list = add_scope(self.current_bound, self.delta, self.production_list, self.direction_idx)
 
         if self.current_bound > self.delta[self.direction_idx]:
-            production_list = minus_scope(self.current_bound, self.delta, production_list, self.direction_idx)
+            self.production_list = minus_scope(self.current_bound, self.delta, self.production_list, self.direction_idx)
 
         # production_list = adjust_scope(production_list)
 
         #set object positions
-        first_obj = production_list[0]
-        first_obj.set_position(self.objStart, rules_list[0])
-        for i in range(1, len(production_list)):
-            prev_obj = production_list[i-1]
-            self.cur_obj = production_list[i]
-            self.cur_obj.set_position(prev_obj, rules_list[i])
+        first_obj = self.production_list[0]
+        first_obj.set_position(self.objStart, self.rules_list[0])
+        for i in range(1, len(self.production_list)):
+            prev_obj = self.production_list[i-1]
+            self.cur_obj = self.production_list[i]
+            self.cur_obj.set_position(prev_obj, self.rules_list[i])
 
-        return (True, production_list)
+        return (True, self.production_list)
     
 def add_scope(current_bound, delta, production_list, direction_idx):
     # print("do add scope")
