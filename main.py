@@ -64,7 +64,7 @@ procedural_objects = assign_type.assign(cur_particle.procedural_objects)
 decorator = decorations.decoration_operator()
 decoration_list = decorator.decorate(cur_particle.procedural_objects)
 
-
+print("success!")
 output_writer = write2JSON.output()
 # output_writer.prepare_write_debug(cur_particle.procedural_objects)
 output_writer.prepare_write_decorations(decoration_list)

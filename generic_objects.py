@@ -69,9 +69,6 @@ class Generic_object:
             rule = direction
         else:
             return (False, [], [])
-            # print("wtf")
-            # choice = self.get_nextType()
-            # rule = self.execute_rule(choice)
         
         return (True,choice, rule)
         

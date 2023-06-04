@@ -32,6 +32,10 @@ class Particle:
                 self.probability_score()
                 self.occulusion_score(intersection_obj, results)
 
+                for obj in results:
+                    if not self.overlapping_check_obj(obj):
+                        return False
+
             self.start_connect = self.procedural_objects[-1]
             return True
 
@@ -44,6 +48,10 @@ class Particle:
                     return False
                 cur_obj = results[-1]
                 self.procedural_objects += results
+
+                for obj in results:
+                    if not self.overlapping_check_obj(obj):
+                        return False
 
             self.end_connect = self.procedural_objects[-1]
             return True
@@ -82,7 +90,13 @@ class Particle:
                     return 
                 
                 if ok == 2:
-                    production_list += connect_particle.set_scope()
+                    tempt_result = connect_particle.set_scope()
+                    production_list += tempt_result
+                    for obj in tempt_result:
+                        if not self.overlapping_check_obj(obj):
+                            self.success = False
+                            return 
+
 
         self.procedural_objects += production_list
     
@@ -102,8 +116,20 @@ class Particle:
                 if obj_A.hash != obj_B.hash:
                     overlapping = obj_A.collision_check(obj_B)
                     if overlapping:
+                        print("final overlapping check failed")
                         self.success = False
-            
+    
+    def overlapping_check_obj(self, obj_A):
+        for obj_B in self.procedural_objects:
+            if obj_A.hash != obj_B.hash:
+                overlapping = obj_A.collision_check(obj_B)
+                if overlapping:
+                    print("step by step overlapping check failed")
+                    self.success = False
+                    return False
+        
+        return True
+
     def find_connect_ending(self):
         for obj in self.back_list:
             if obj.type == 1:
