@@ -49,7 +49,6 @@ class Particle:
             return True
 
     def run_connect(self):
-        connect_list = []
         startPos = self.start_connect.position
         endPos = self.end_connect.position
 
@@ -62,14 +61,17 @@ class Particle:
 
         directions = cycle_connect.get_dirs(delta)
         directions = cycle_connect.update_order(self.start_connect, directions)
+        orders = cycle_connect.random_order()
 
-        connect_list += cycle_connect.solve_1D(abs_delta, self.generic_object_list, directions, production_list, self.end_connect)
-        if len(connect_list) == 0:
-            print("failed connect")
-            self.success = False
-        else:
-            print("success connect")
-        self.procedural_objects += connect_list
+        for i in range(0,3):
+            tempt_result = cycle_connect.solve_1D(abs_delta, self.generic_object_list, directions, production_list, self.end_connect, orders, i)
+            if len(tempt_result) == 0:
+                self.success = False
+                return 
+
+            production_list += tempt_result
+
+        self.procedural_objects += production_list
     
     def run_particle2(self, steps):
         rd1, rd2 = self.random_object()
