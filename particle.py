@@ -64,11 +64,10 @@ class Particle:
         orders = cycle_connect.random_order()
 
         for i in range(0,3):
-            tempt_result = cycle_connect.solve_1D(abs_delta, self.generic_object_list, directions, production_list, self.end_connect, orders, i)
-            if len(tempt_result) == 0:
+            ok, tempt_result = cycle_connect.single_execution(abs_delta, orders[i], self.generic_object_list, directions, production_list, self.end_connect, i)
+            if not ok:
                 self.success = False
                 return 
-
             production_list += tempt_result
 
         self.procedural_objects += production_list

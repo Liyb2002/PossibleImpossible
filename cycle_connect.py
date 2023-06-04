@@ -1,18 +1,7 @@
 import produce
 import numpy as np
 import random
-
-def solve_1D(abs_delta, generic_object_list, directions, production_list, objEnd, orders, i):
-    ok, new_production = single_execution(abs_delta, orders[i], generic_object_list, directions, production_list, objEnd, i)
-    if ok != True:
-        return []
-    
-    return new_production
         
-    #     production_list += new_production
-
-    # return production_list
-
 def Available_Ending_With_Object(generic_object_list, target_obj):
     possible_endings = []
     for i in range(1, len(generic_object_list)):
