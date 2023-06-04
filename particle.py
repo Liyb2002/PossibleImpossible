@@ -64,11 +64,35 @@ class Particle:
         orders = cycle_connect.random_order()
 
         for i in range(0,3):
-            ok, tempt_result = cycle_connect.single_execution(abs_delta, orders[i], self.generic_object_list, directions, production_list, self.end_connect, i)
-            if not ok:
-                self.success = False
-                return 
-            production_list += tempt_result
+            index = orders[i]
+            if abs_delta[index] != 0:
+                available_endings = cycle_connect.Available_Ending_With_Direction(self.generic_object_list, directions[index])
+
+                if i == 2:
+                    available_endings = cycle_connect.Available_Ending_With_Object(self.generic_object_list, self.end_connect)
+
+                connect_particle = produce.connect_execution(production_list[-1], self.generic_object_list,abs_delta,directions[index],available_endings, self.end_connect)
+                ok = 1
+
+                while ok == 1:
+                    ok = connect_particle.execute_model_withDirection()
+                
+                if ok == 0:
+                    self.success = False
+                    return 
+                
+                if ok == 2:
+                    production_list += connect_particle.set_scope()
+
+
+
+
+        # for i in range(0,3):
+        #     ok, tempt_result = cycle_connect.single_execution(abs_delta, orders[i], self.generic_object_list, directions, production_list, self.end_connect, i)
+        #     if not ok:
+        #         self.success = False
+        #         return 
+        #     production_list += tempt_result
 
         self.procedural_objects += production_list
     
