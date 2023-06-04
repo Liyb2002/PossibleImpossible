@@ -50,8 +50,20 @@ class Particle:
 
     def run_connect(self):
         connect_list = []
+        startPos = self.start_connect.position
+        endPos = self.end_connect.position
 
-        connect_list += cycle_connect.solve_1D(self.generic_object_list, self.start_connect, self.end_connect)
+        delta = endPos - startPos
+
+        production_list = []
+        production_list.append(self.start_connect)
+        abs_delta = np.array([abs(delta[0]), abs(delta[1]), abs(delta[2])])
+        abs_delta -= np.array([0, 0, self.end_connect.length[2]])
+
+        directions = cycle_connect.get_dirs(delta)
+        directions = cycle_connect.update_order(self.start_connect, directions)
+
+        connect_list += cycle_connect.solve_1D(abs_delta, self.generic_object_list, directions, production_list, self.end_connect)
         if len(connect_list) == 0:
             print("failed connect")
             self.success = False

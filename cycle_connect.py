@@ -2,19 +2,7 @@ import produce
 import numpy as np
 import random
 
-def solve_1D(generic_object_list, objStart, objEnd):
-    startPos = objStart.position
-    endPos = objEnd.position
-
-    delta = endPos - startPos
-
-    production_list = []
-    production_list.append(objStart)
-    abs_delta = np.array([abs(delta[0]), abs(delta[1]), abs(delta[2])])
-    abs_delta -= np.array([0, 0, objEnd.length[2]])
-
-    directions = get_dirs(delta)
-    directions = update_order(objStart, directions)
+def solve_1D(abs_delta, generic_object_list, directions, production_list, objEnd):
 
     orders = random_order()
     for i in range(0,3):
