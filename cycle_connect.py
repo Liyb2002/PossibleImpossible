@@ -54,25 +54,3 @@ def random_order():
     orders.append(second)
     orders.append(third)
     return orders
-
-def single_execution(abs_delta, index, generic_object_list, directions, production_list, objEnd, count):
-
-    if abs_delta[index] != 0:
-        available_endings = Available_Ending_With_Direction(generic_object_list, directions[index])
-
-        if count == 2:
-            available_endings = Available_Ending_With_Object(generic_object_list, objEnd)
-
-        connect_particle = produce.connect_execution(production_list[-1], generic_object_list,abs_delta,directions[index],available_endings, objEnd)
-        ok = 1
-
-        while ok == 1:
-            ok = connect_particle.execute_model_withDirection()
-        
-        if ok == 0:
-            return (False, [])
-        
-        if ok == 2:
-            return (True, connect_particle.set_scope())
-    
-    return (True, [])

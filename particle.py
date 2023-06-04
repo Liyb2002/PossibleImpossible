@@ -84,16 +84,6 @@ class Particle:
                 if ok == 2:
                     production_list += connect_particle.set_scope()
 
-
-
-
-        # for i in range(0,3):
-        #     ok, tempt_result = cycle_connect.single_execution(abs_delta, orders[i], self.generic_object_list, directions, production_list, self.end_connect, i)
-        #     if not ok:
-        #         self.success = False
-        #         return 
-        #     production_list += tempt_result
-
         self.procedural_objects += production_list
     
     def run_particle2(self, steps):
