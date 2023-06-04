@@ -11,6 +11,7 @@ class Particle:
         self.procedural_objects = []
         self.targetProb = {}
         self.eye=np.array([5.0, 5.0, 5.0])
+        self.score = 0
 
 
     def run_particle(self,intersection, start_type, connected_dir, steps, targetProb, isFront):
@@ -28,13 +29,7 @@ class Particle:
                     return False
                 cur_obj = results[-1]
                 self.procedural_objects += results
-                self.density_score()
-                self.probability_score()
-                self.occulusion_score(intersection_obj, results)
-
-                for obj in results:
-                    if not self.overlapping_check_obj(obj):
-                        return False
+                self.calculate_score(intersection_obj, results)
 
             self.start_connect = self.procedural_objects[-1]
             return True
@@ -48,6 +43,7 @@ class Particle:
                     return False
                 cur_obj = results[-1]
                 self.procedural_objects += results
+                self.calculate_score(intersection_obj, results)
 
                 for obj in results:
                     if not self.overlapping_check_obj(obj):
@@ -155,6 +151,20 @@ class Particle:
 
         return (rd1, rd2)
     
+    def calculate_score(self, intersection_obj, results):
+        density_score = self.density_score()
+        probability_score = self.probability_score()
+        occulusion_score = self.occulusion_score(intersection_obj, results)
+        overlapping_score = 1
+        for obj in results:
+            if not self.overlapping_check_obj(obj):
+                overlapping_score = 0
+
+        self.score = (density_score + probability_score + occulusion_score) *  overlapping_score
+
+    def get_score(self):
+        return self.score
+
     def density_score(self):
         added_object = self.procedural_objects[-1]
         k = 1.0
@@ -165,7 +175,7 @@ class Particle:
         for obj in self.procedural_objects[:-1]:
             sum_overlapping_size += procedural_objects.getOverlap3D(added_object.position, expanded_cube_length, obj.position, obj.length)
         
-        proportion_score = sum_overlapping_size / expanded_cube_size
+        proportion_score = sum_overlapping_size / expanded_cube_size * 100
         return proportion_score
 
     def probability_score(self):
@@ -187,9 +197,11 @@ class Particle:
     def occulusion_score(self, intersection_obj, new_Obj_list):
         occulusion_score = 0
         for obj in new_Obj_list:
-            occulusion_score += 200
+            occulusion_score += 5
             occulusion_score += check_occlusion(obj, intersection_obj, self.eye)
-
+        
+        return occulusion_score
+    
 
 
 
@@ -216,14 +228,14 @@ def check_occlusion(front_obj, back_obj, eye):
     ray0 = ray0 / np.linalg.norm(ray0)
     is_occluded =  ray_intersecting_Obj(front_obj, ray0, eye)
     if is_occluded:
-        score -= 100
+        score -= 5
 
     pt1 = back_obj.position + back_obj.length
     ray1 = pt1 - eye
     ray1 = ray1 / np.linalg.norm(ray1)
     is_occluded =  ray_intersecting_Obj(front_obj, ray1, eye)
     if is_occluded:
-        score -= 50
+        score -= 3
 
 
     pt2 = back_obj.position - back_obj.length
@@ -231,7 +243,7 @@ def check_occlusion(front_obj, back_obj, eye):
     ray2 = ray2 / np.linalg.norm(ray2)
     is_occluded =  ray_intersecting_Obj(front_obj, ray2, eye)
     if is_occluded:
-        score -= 50
+        score -= 3
     
     return score
 
