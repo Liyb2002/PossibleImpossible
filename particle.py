@@ -11,7 +11,7 @@ class Particle:
         self.procedural_objects = []
         self.targetProb = {}
         self.eye=np.array([5.0, 5.0, 5.0])
-        self.score = 0
+        self.score = 1
 
 
     def run_particle(self,intersection, start_type, connected_dir, steps, targetProb, isFront):

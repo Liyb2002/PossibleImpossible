@@ -8,6 +8,7 @@ import particle
 import decorations
 import assign_type
 import parseTree
+import resample
 
 import numpy as np
 
@@ -41,6 +42,22 @@ background_connect = "+y"
 background_parsedProb = parseTree.parseProb(generic_object_list, generic_object_list[background_type])
 
 steps = 2
+
+particle_list = []
+score_list = []
+num_particles = 100
+
+for i in range(num_particles):
+    tempt_particle = particle.Particle(generic_object_list)
+    tempt_score = tempt_particle.get_score()
+    particle_list.append(tempt_particle)
+    score_list.append(tempt_score)
+
+
+particle_list = resample.resample_particles(particle_list, score_list)
+
+
+
 
 success = False
 while(success != True):
