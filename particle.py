@@ -33,7 +33,7 @@ class Particle:
 
         if step == 0 and not isFront:
             self.end_connect = self.procedural_objects[-1]
-
+        
 
 
     def run_connect(self):

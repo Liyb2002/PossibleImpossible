@@ -47,27 +47,53 @@ particle_list = []
 score_list = []
 num_particles = 300
 
+
 for i in range(num_particles):
     tempt_particle = particle.Particle(generic_object_list)
-    tempt_score = tempt_particle.get_score()
-
     tempt_particle.prepare_particle(foreground_intersection, foreground_type, foreground_connect, foreground_parsedProb)
-    step = steps
-    while step > 0:
-        step -= 1
-        tempt_particle.run_step(step, True)
+    particle_list.append(tempt_particle)
+
+for s in range(steps):
+    cur_step = steps - s -1
+
+    for i in range(len(particle_list)):
+        tempt_particle = particle_list[i]
+        tempt_particle.run_step(cur_step, True)
+
+
+for i in range(len(particle_list)):
+    tempt_particle = particle_list[i]
+    tempt_particle.prepare_particle(background_intersection, background_type, background_connect, background_parsedProb)
+    
+for s in range(steps):
+    cur_step = steps - s -1
+
+    for i in range(len(particle_list)):
+        tempt_particle = particle_list[i]
+        tempt_particle.run_step(cur_step, False)
+
+
+# for i in range(num_particles):
+#     tempt_particle = particle.Particle(generic_object_list)
+#     tempt_score = tempt_particle.get_score()
+
+#     tempt_particle.prepare_particle(foreground_intersection, foreground_type, foreground_connect, foreground_parsedProb)
+#     step = steps
+#     while step > 0:
+#         step -= 1
+#         tempt_particle.run_step(step, True)
     
 
-    tempt_particle.prepare_particle(background_intersection, background_type, background_connect, background_parsedProb)
-    step = steps
-    while step > 0:
-        step -= 1
-        tempt_particle.run_step(step, False)
+#     tempt_particle.prepare_particle(background_intersection, background_type, background_connect, background_parsedProb)
+#     step = steps
+#     while step > 0:
+#         step -= 1
+#         tempt_particle.run_step(step, False)
 
-    particle_list.append(tempt_particle)
-    score_list.append(tempt_score)
+#     particle_list.append(tempt_particle)
+#     score_list.append(tempt_score)
 
-particle_list = resample.resample_particles(particle_list, score_list)
+# particle_list = resample.resample_particles(particle_list, score_list)
 
 score_list = []
 result_particle = None
@@ -80,29 +106,17 @@ for i in range(len(particle_list)):
 
 
 
-# success = False
-# while(success != True):
-#     print("-----------------")
-#     cur_particle = particle.Particle(generic_object_list)
-#     ok = cur_particle.run_particle(foreground_intersection, foreground_type, foreground_connect, steps, foreground_parsedProb, True)
-#     if not ok :
-#         continue
-#     ok = cur_particle.run_particle(background_intersection, background_type, background_connect, steps, background_parsedProb, False)
-#     if not ok :
-#         continue
-
-#     cur_particle.run_connect()
-#     # cur_particle.run_particle2(steps+2)
-
-#     cur_particle.overlapping_check()
-#     success = cur_particle.success
-
 procedural_objects = assign_type.assign(result_particle.procedural_objects)
 
 decorator = decorations.decoration_operator()
 decoration_list = decorator.decorate(result_particle.procedural_objects)
 
 print("success!")
+
+for s in range(steps):
+    cur_step = steps - s -1
+    print("cur_step", cur_step)
+
 output_writer = write2JSON.output()
 # output_writer.prepare_write_debug(cur_particle.procedural_objects)
 output_writer.prepare_write_decorations(decoration_list)
