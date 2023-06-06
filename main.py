@@ -45,7 +45,7 @@ steps = 2
 
 particle_list = []
 score_list = []
-num_particles = 300
+num_particles = 1000
 
 
 for i in range(num_particles):
@@ -56,10 +56,14 @@ for i in range(num_particles):
 for s in range(steps):
     cur_step = steps - s -1
 
+    score_list = []
+    print("len(particle_list)", len(particle_list))
     for i in range(len(particle_list)):
         tempt_particle = particle_list[i]
         tempt_particle.run_step(cur_step, True)
+        score_list.append(tempt_particle.get_score())
 
+    particle_list = resample.resample_particles(particle_list, score_list)
 
 for i in range(len(particle_list)):
     tempt_particle = particle_list[i]
@@ -71,29 +75,11 @@ for s in range(steps):
     for i in range(len(particle_list)):
         tempt_particle = particle_list[i]
         tempt_particle.run_step(cur_step, False)
+        score_list.append(tempt_particle.get_score())
+
+    particle_list = resample.resample_particles(particle_list, score_list)
 
 
-# for i in range(num_particles):
-#     tempt_particle = particle.Particle(generic_object_list)
-#     tempt_score = tempt_particle.get_score()
-
-#     tempt_particle.prepare_particle(foreground_intersection, foreground_type, foreground_connect, foreground_parsedProb)
-#     step = steps
-#     while step > 0:
-#         step -= 1
-#         tempt_particle.run_step(step, True)
-    
-
-#     tempt_particle.prepare_particle(background_intersection, background_type, background_connect, background_parsedProb)
-#     step = steps
-#     while step > 0:
-#         step -= 1
-#         tempt_particle.run_step(step, False)
-
-#     particle_list.append(tempt_particle)
-#     score_list.append(tempt_score)
-
-# particle_list = resample.resample_particles(particle_list, score_list)
 
 score_list = []
 result_particle = None
