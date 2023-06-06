@@ -51,12 +51,21 @@ for i in range(num_particles):
     tempt_particle = particle.Particle(generic_object_list)
     tempt_score = tempt_particle.get_score()
 
-    ok1 = tempt_particle.run_particle(foreground_intersection, foreground_type, foreground_connect, steps, foreground_parsedProb, True)
-    ok2 = tempt_particle.run_particle(background_intersection, background_type, background_connect, steps, background_parsedProb, False)
+    tempt_particle.prepare_particle(foreground_intersection, foreground_type, foreground_connect, foreground_parsedProb)
+    step = steps
+    while step > 0:
+        step -= 1
+        tempt_particle.run_step(step, True)
+    
 
-    if ok1 and ok2:
-        particle_list.append(tempt_particle)
-        score_list.append(tempt_score)
+    tempt_particle.prepare_particle(background_intersection, background_type, background_connect, background_parsedProb)
+    step = steps
+    while step > 0:
+        step -= 1
+        tempt_particle.run_step(step, False)
+
+    particle_list.append(tempt_particle)
+    score_list.append(tempt_score)
 
 particle_list = resample.resample_particles(particle_list, score_list)
 

@@ -14,43 +14,27 @@ class Particle:
         self.score = 1
 
 
-    def run_particle(self,intersection, start_type, connected_dir, steps, targetProb, isFront):
-        cur_obj = start_obj(intersection, self.generic_object_list, start_type, connected_dir)
-        intersection_obj = cur_obj
-        self.procedural_objects.append(cur_obj)
+    def prepare_particle(self,intersection, start_type, connected_dir, targetProb):
+        self.cur_obj = start_obj(intersection, self.generic_object_list, start_type, connected_dir)
+        self.intersection_obj = self.cur_obj
+        self.procedural_objects.append(self.cur_obj)
         self.targetProb = targetProb
 
-        if isFront:
-            step = 0
-            while step < steps:
-                step +=1
-                results = produce.execute_model(self.generic_object_list, cur_obj, 1)
-                if len(results) == 0:
-                    return False
-                cur_obj = results[-1]
-                self.procedural_objects += results
-                self.calculate_score(intersection_obj, results)
+    def run_step(self, step, isFront):
+        results = produce.execute_model(self.generic_object_list, self.cur_obj, 1)
+        if len(results) == 0:
+            return False
+        self.cur_obj = results[-1]
+        self.procedural_objects += results
+        self.calculate_score(self.intersection_obj, results)
 
+        if step == 0 and isFront:
             self.start_connect = self.procedural_objects[-1]
-            return True
 
-        else:
-            step = 0
-            while step < steps:
-                step +=1
-                results = produce.execute_model(self.generic_object_list, cur_obj, steps)
-                if len(results) == 0:
-                    return False
-                cur_obj = results[-1]
-                self.procedural_objects += results
-                self.calculate_score(intersection_obj, results)
-
-                for obj in results:
-                    if not self.overlapping_check_obj(obj):
-                        return False
-
+        if step == 0 and not isFront:
             self.end_connect = self.procedural_objects[-1]
-            return True
+
+
 
     def run_connect(self):
         startPos = self.start_connect.position
