@@ -45,7 +45,7 @@ steps = 10
 
 particle_list = []
 score_list = []
-num_particles = steps * 200
+num_particles = steps * 100
 
 
 for i in range(num_particles):
@@ -74,6 +74,7 @@ for i in range(len(particle_list)):
 for s in range(steps):
     cur_step = steps - s -1
 
+    score_list = []
     for i in range(len(particle_list)):
         tempt_particle = particle_list[i]
         tempt_particle.run_step(cur_step, False)
