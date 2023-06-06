@@ -41,11 +41,11 @@ background_type = 3
 background_connect = "+y"
 background_parsedProb = parseTree.parseProb(generic_object_list, generic_object_list[background_type])
 
-steps = 2
+steps = 10
 
 particle_list = []
 score_list = []
-num_particles = 1000
+num_particles = steps * 200
 
 
 for i in range(num_particles):
@@ -55,15 +55,17 @@ for i in range(num_particles):
 
 for s in range(steps):
     cur_step = steps - s -1
+    print("cur_step", cur_step)
 
     score_list = []
-    print("len(particle_list)", len(particle_list))
     for i in range(len(particle_list)):
         tempt_particle = particle_list[i]
         tempt_particle.run_step(cur_step, True)
         score_list.append(tempt_particle.get_score())
 
     particle_list = resample.resample_particles(particle_list, score_list)
+
+print("front generation complete")
 
 for i in range(len(particle_list)):
     tempt_particle = particle_list[i]
@@ -79,10 +81,11 @@ for s in range(steps):
 
     particle_list = resample.resample_particles(particle_list, score_list)
 
+print("back generation complete")
 
 
-score_list = []
 result_particle = None
+print("len(particle_list)", len(particle_list))
 for i in range(len(particle_list)):
     particle_list[i].run_connect()
     if particle_list[i].success:
@@ -93,16 +96,10 @@ for i in range(len(particle_list)):
 
 
 procedural_objects = assign_type.assign(result_particle.procedural_objects)
-
 decorator = decorations.decoration_operator()
 decoration_list = decorator.decorate(result_particle.procedural_objects)
 
 print("success!")
-
-for s in range(steps):
-    cur_step = steps - s -1
-    print("cur_step", cur_step)
-
 output_writer = write2JSON.output()
 # output_writer.prepare_write_debug(cur_particle.procedural_objects)
 output_writer.prepare_write_decorations(decoration_list)

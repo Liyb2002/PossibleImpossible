@@ -19,7 +19,7 @@ class Generic_object:
 
     def get_nextType(self, unavailable_dirs):
         if self.connect_id == []:
-            print("terminate")
+            # print("terminate")
             return
 
         count = 0

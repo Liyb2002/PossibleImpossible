@@ -23,6 +23,7 @@ class Particle:
     def run_step(self, step, isFront):
         results = produce.execute_model(self.generic_object_list, self.cur_obj, 1)
         if len(results) == 0:
+            self.score = 0
             return False
         self.cur_obj = results[-1]
         self.procedural_objects += results
@@ -96,7 +97,7 @@ class Particle:
                 if obj_A.hash != obj_B.hash:
                     overlapping = obj_A.collision_check(obj_B)
                     if overlapping:
-                        print("final overlapping check failed")
+                        # print("final overlapping check failed")
                         self.success = False
     
     def overlapping_check_obj(self, obj_A):
@@ -104,7 +105,7 @@ class Particle:
             if obj_A.hash != obj_B.hash:
                 overlapping = obj_A.collision_check(obj_B)
                 if overlapping:
-                    print("step by step overlapping check failed")
+                    # print("step by step overlapping check failed")
                     self.success = False
                     return False
         
@@ -142,9 +143,12 @@ class Particle:
         overlapping_score = 1
         for obj in results:
             if not self.overlapping_check_obj(obj):
-                overlapping_score = 0
+                overlapping_score = 0            
 
         self.score = (density_score + probability_score + occulusion_score) *  overlapping_score
+
+        if len(results) == 0:
+            self.score = 0
 
     def get_score(self):
         return self.score
