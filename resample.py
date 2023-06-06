@@ -1,6 +1,5 @@
 from copy import deepcopy
 
-
 def resample_particles(particle_list, score_list):
     new_particle_list = []
 
