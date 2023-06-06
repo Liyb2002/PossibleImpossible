@@ -19,7 +19,7 @@ with open('objects.json', 'r') as object_file:
 
 
 class_generate = generate.generate_helper(generic_object_list)
-decoration_list = class_generate.decoration_list
+decoration_list = class_generate.finish()
 
 print("success!")
 output_writer = write2JSON.output()
