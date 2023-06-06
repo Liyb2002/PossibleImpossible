@@ -16,7 +16,9 @@ class generate_helper:
         self.particle_list = []
         self.score_list = []
         self.result_particle = None
-
+        
+    
+    def smc_process(self):
         num_particles = 1000
         for i in range(num_particles):
             tempt_particle = particle.Particle(self.generic_object_list)
@@ -34,13 +36,14 @@ class generate_helper:
         foreground_connect = "-y"
         background_type = 3
         background_connect = "+y"
-        steps = 3
+        steps = 2
 
         self.procedural_generate(foreground_type, foreground_connect, foreground_intersection, steps, True)
         self.procedural_generate(background_type, background_connect, background_intersection, steps, False)
         self.connect()
-        
-    
+        return self.finish()
+
+
     def procedural_generate(self, start_type, connect_direction, intersection_pos, steps, isFront):
         parsedProb = parseTree.parseProb(self.generic_object_list, self.generic_object_list[start_type])
 
@@ -80,5 +83,63 @@ class generate_helper:
         procedural_objects = assign_type.assign(self.result_particle.procedural_objects)
         decorator = decorations.decoration_operator()
         decoration_list = decorator.decorate(self.result_particle.procedural_objects)
+        print("len(decoration_list)", len(decoration_list))
+        return decoration_list
+
+    def recursive_process(self):
+        #find impossible intersection positions
+        startPos = np.array([400,400])
+        basic_scene = intersection.Scene(startPos)
+        foreground_index = 8
+        background_index = 16
+
+        foreground_intersection = basic_scene.get_possible_intersects(foreground_index)
+        background_intersection = basic_scene.get_possible_intersects(background_index)
+
+        #parse probability tree
+        #start produce
+        foreground_type = 1
+        foreground_connect = "-y"
+        foreground_parsedProb = parseTree.parseProb(self.generic_object_list, self.generic_object_list[foreground_type])
+
+        background_type = 3
+        background_connect = "+y"
+        background_parsedProb = parseTree.parseProb(self.generic_object_list, self.generic_object_list[background_type])
+
+        steps = 2
+
+        success = False
+        while(success != True):
+            print("-----------------")
+            cur_particle = particle.Particle(self.generic_object_list)
+            cur_particle.prepare_particle(foreground_intersection, foreground_type, foreground_connect, foreground_parsedProb)
+
+            for s in range(steps):
+                cur_step = steps - s -1
+                cur_particle.run_step(cur_step, True)
+            if cur_particle.score == 0:
+                continue
+
+            cur_particle.prepare_particle(background_intersection, background_type, background_connect, background_parsedProb)
+            for s in range(steps):
+                cur_step = steps - s -1
+                print("cur_step", cur_step)
+
+                cur_particle.run_step(cur_step, False)
+            if cur_particle.score == 0:
+                continue
+
+
+            cur_particle.run_connect()
+            cur_particle.overlapping_check()
+            success = cur_particle.success
+            if cur_particle.score == 0:
+                continue
+
+
+        procedural_objects = assign_type.assign(cur_particle.procedural_objects)
+
+        decorator = decorations.decoration_operator()
+        decoration_list = decorator.decorate(cur_particle.procedural_objects)
 
         return decoration_list
