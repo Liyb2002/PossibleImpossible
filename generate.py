@@ -145,7 +145,7 @@ class generate_helper:
 
             phase2 = cur_particle.procedural_objects
 
-        procedural_objects = assign_type.assign(cur_particle.procedural_objects)
+        # procedural_objects = assign_type.assign(cur_particle.procedural_objects)
 
         decoration_list = decorator.decorate(cur_particle.procedural_objects)
 

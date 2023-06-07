@@ -5,7 +5,22 @@ class output:
     def __init__(self):
         self.result = []
 
+    def edit_skeleton(self, production_list):
+        for obj in production_list:
+            if obj.type == 1:
+                obj.length[0] = obj.length[0] * 1.2
+                obj.length[1] = obj.length[1] * 1.2
+                obj.length[2] = obj.length[2] * 1.2
+            
+            if obj.type == 4 or obj.type == 5 or obj.type == 6 or obj.type == 7:
+                obj.length[1] = obj.length[1] * 0.2
+
+            if obj.type == 3 or obj.type == 5:
+                obj.length[0] = obj.length[0] * 0.8
+                obj.length[2] = obj.length[2] * 0.8
+
     def prepare_write_skeleton(self, production_list):
+        self.edit_skeleton(production_list)
         for obj in production_list:
             pos = list(obj.position)
             data = {'obj':

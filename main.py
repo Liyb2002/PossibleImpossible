@@ -33,6 +33,6 @@ output_writer.write_phase1()
 output_writer.prepare_write_skeleton(phase1)
 output_writer.write_phase2()
 
-output_writer.prepare_write_decorations(decoration_list)
+output_writer.prepare_write_decorations(phase3)
 output_writer.write()
 
