@@ -87,6 +87,7 @@ class generate_helper:
         return decoration_list
 
     def recursive_process(self):
+        #phrase: 1->random walk, 2->connect, 3-> decorations
         #find impossible intersection positions
         startPos = np.array([400,400])
         basic_scene = intersection.Scene(startPos)
@@ -107,8 +108,12 @@ class generate_helper:
         background_parsedProb = parseTree.parseProb(self.generic_object_list, self.generic_object_list[background_type])
 
         steps = 2
-
         success = False
+
+        phase1 = []
+        phase2 = []
+        phase3 = []
+
         while(success != True):
             print("-----------------")
             cur_particle = particle.Particle(self.generic_object_list)
@@ -129,6 +134,7 @@ class generate_helper:
             if cur_particle.score == 0:
                 continue
 
+            phase1 = cur_particle.procedural_objects
 
             cur_particle.run_connect()
             cur_particle.overlapping_check()
@@ -136,10 +142,12 @@ class generate_helper:
             if cur_particle.score == 0:
                 continue
 
+            phase2 = cur_particle.procedural_objects
 
         procedural_objects = assign_type.assign(cur_particle.procedural_objects)
 
         decorator = decorations.decoration_operator()
         decoration_list = decorator.decorate(cur_particle.procedural_objects)
 
-        return decoration_list
+        phase3 = decoration_list
+        return (phase1, phase2, phase3)

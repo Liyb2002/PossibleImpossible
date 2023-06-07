@@ -19,11 +19,14 @@ with open('objects.json', 'r') as object_file:
 
 
 class_generate = generate.generate_helper(generic_object_list)
-decoration_list = class_generate.recursive_process()
+# decoration_list = class_generate.smc_process()
+
+
+phase1, phase2, phase3 = class_generate.recursive_process()
 
 print("success!")
 output_writer = write2JSON.output()
 # output_writer.prepare_write_debug(cur_particle.procedural_objects)
-output_writer.prepare_write_decorations(decoration_list)
+output_writer.prepare_write_decorations(phase3)
 output_writer.write()
 
