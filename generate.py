@@ -114,6 +114,7 @@ class generate_helper:
         phase2 = []
         phase3 = []
 
+        decorator = decorations.decoration_operator()
         while(success != True):
             print("-----------------")
             cur_particle = particle.Particle(self.generic_object_list)
@@ -146,7 +147,6 @@ class generate_helper:
 
         procedural_objects = assign_type.assign(cur_particle.procedural_objects)
 
-        decorator = decorations.decoration_operator()
         decoration_list = decorator.decorate(cur_particle.procedural_objects)
 
         phase3 = decoration_list

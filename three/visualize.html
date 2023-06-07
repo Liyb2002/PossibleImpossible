@@ -129,7 +129,7 @@
 	const loader = new THREE.FileLoader();
 	loader.load(
 	// resource URL
-	'./result.json',
+	'./phase1.json',
 	// onLoad callback
 	function ( data ) {
 		// output the text to the console
@@ -150,42 +150,42 @@
 			var center_z = start_z;
 			
 			var debug_mode = jsonData[i]["obj"]["mode"];
-			// console.log("jsonData[i]", jsonData[i]["obj"]["type"]);
+			console.log("jsonData[i]", jsonData[i]["obj"]["mode"] == 0);
 			
 			var a;
 			var rand = Math.random();
 			console.log("rand", rand);
 			var load_mesh = true;
-			if(jsonData[i]["obj"]["type"] == 1){
+			if(jsonData[i]["obj"]["type"] == 1 && jsonData[i]["obj"]["mode"] == 1){
 				a = m1.clone();
-			}else if(jsonData[i]["obj"]["type"] == 3){
+			}else if(jsonData[i]["obj"]["type"] == 3 && jsonData[i]["obj"]["mode"] == 1){
 				a = m3.clone();
-			}else if(jsonData[i]["obj"]["type"] == 4){
+			}else if(jsonData[i]["obj"]["type"] == 4 && jsonData[i]["obj"]["mode"] == 1){
 				a = m4.clone();
-			}else if(jsonData[i]["obj"]["type"] == 7){
+			}else if(jsonData[i]["obj"]["type"] == 7 && jsonData[i]["obj"]["mode"] == 1){
 				a = m7.clone();
-			}else if(jsonData[i]["obj"]["type"] == 8){
+			}else if(jsonData[i]["obj"]["type"] == 8 && jsonData[i]["obj"]["mode"] == 1){
 				a = m8.clone();
-			}else if(jsonData[i]["obj"]["type"] == 9){
+			}else if(jsonData[i]["obj"]["type"] == 9 && jsonData[i]["obj"]["mode"] == 1){
 				a = m9.clone();
 			}
-			else if(jsonData[i]["obj"]["type"] == 10){
+			else if(jsonData[i]["obj"]["type"] == 10 && jsonData[i]["obj"]["mode"] == 1){
 				a = m10.clone();
 			}
-			else if(jsonData[i]["obj"]["type"] == 11){
+			else if(jsonData[i]["obj"]["type"] == 11 && jsonData[i]["obj"]["mode"] == 1){
 				a = m11.clone();
-			}else if(jsonData[i]["obj"]["type"] == 12 && rand<0.5){
+			}else if(jsonData[i]["obj"]["type"] == 12 && rand<0.5 && jsonData[i]["obj"]["mode"] == 1){
 				a = m12_0.clone();
 			}
-			else if(jsonData[i]["obj"]["type"] == 12 ){
+			else if(jsonData[i]["obj"]["type"] == 12 && jsonData[i]["obj"]["mode"] == 1){
 				a = m12_1.clone();
-			}else if(jsonData[i]["obj"]["type"] == 13 ){
+			}else if(jsonData[i]["obj"]["type"] == 13 && jsonData[i]["obj"]["mode"] == 1){
 				a = m13.clone();
-			}else if(jsonData[i]["obj"]["type"] == 14 ){
+			}else if(jsonData[i]["obj"]["type"] == 14 && jsonData[i]["obj"]["mode"] == 1){
 				a = m14.clone();
-			}else if(jsonData[i]["obj"]["type"] == 15 ){
+			}else if(jsonData[i]["obj"]["type"] == 15 && jsonData[i]["obj"]["mode"] == 1){
 				a = m15.clone();
-			}else{
+			}else if(jsonData[i]["obj"]["mode"] == 0){
 			var cube = new THREE.Mesh( geometry, material );
 			cube.position.set(center_x, center_y, center_z );
 			cube.scale.set(scale_x*2, scale_y*2, scale_z*2);

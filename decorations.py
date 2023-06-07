@@ -182,3 +182,4 @@ class instance_terminal_object:
 
     def set_size(self, size):
         self.size = size 
+
