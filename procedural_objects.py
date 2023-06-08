@@ -47,6 +47,10 @@ class Procedural_object:
         if(rule == '+z'):
             self.position = prev_pos + np.array([0, 0, prev_z]) + np.array([0,0,self.length[2]])
 
+        if(rule == '-x2'):
+            self.position = prev_pos - np.array([prev_x, 0, 0]) - np.array([self.length[0],0,0])
+            self.arriving_rule = '-x'
+            
         self.arriving_rule = rule
 
     def arbitrary_set_position(self, position):
