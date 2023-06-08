@@ -71,11 +71,19 @@
   "category":  "footprint",
   "structural_id": 9,
   "subdiv":[
+  [1.0, "y direction", ["nonterminal", "2", 1.0]]
+
+  ]
+  },
+  {
+  "object_name": "footprint_10",
+  "category":  "footprint",
+  "structural_id": 10,
+  "subdiv":[
   [1.0, "y direction", ["terminal", "16", 1.0]]
 
   ]
   },
-
   {
   "object_name": "nonterminal_floor",
   "category":  "nonterminal",
@@ -219,7 +227,7 @@
   "multiplier": [1,1,1]
   },
   {
-  "object_name": "stair",
+  "object_name": "stairs",
   "category":  "terminal",
   "terminal_id": 16,
   "rule": "normal",
