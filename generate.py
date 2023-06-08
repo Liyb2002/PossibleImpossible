@@ -83,7 +83,6 @@ class generate_helper:
         procedural_objects = assign_type.assign(self.result_particle.procedural_objects)
         decorator = decorations.decoration_operator()
         decoration_list = decorator.decorate(self.result_particle.procedural_objects)
-        print("len(decoration_list)", len(decoration_list))
         return decoration_list
 
     def recursive_process(self):

@@ -106,7 +106,7 @@
         "scope_y": [0.6,0.6],
         "scope_z": [0.2,0.2],
         "canTerminate": "Dummy for RoofTop",
-        "cycle_connect": "Dummy for RoofTop",
+        "cycle_connect": "True",
         "connect_id": [],
         "connect_rule":{
         }

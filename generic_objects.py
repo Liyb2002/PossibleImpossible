@@ -9,6 +9,7 @@ class Generic_object:
         self.canTerminate = info['canTerminate']
         self.rules = info['connect_rule']
         self.probabilities = []
+        self.cycle_connect = info['cycle_connect']
 
         self.set_connect_ids(info['connect_id'])
 

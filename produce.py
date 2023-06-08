@@ -84,6 +84,8 @@ class connect_execution:
         next_type = int(next_type)
 
         next_generic_obj = self.generic_object_list[next_type]
+        if next_generic_obj.cycle_connect == 'False':
+            return 0
         next_scope = next_generic_obj.scope
         next_hash = next_generic_obj.generate_hash()
         next_obj = procedural_objects.Procedural_object(next_type, np.array([0,0,0]), next_scope, next_hash)
