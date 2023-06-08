@@ -25,6 +25,10 @@ decoration_list = class_generate.smc_process()
 phase1, phase2, phase3 = class_generate.recursive_process()
 
 print("success!")
+
+
+for obj in phase3:
+    print("obj id", obj.type)
 output_writer = write2JSON.output()
 # output_writer.prepare_write_debug(cur_particle.procedural_objects)
 # output_writer.prepare_write_skeleton(phase1)
