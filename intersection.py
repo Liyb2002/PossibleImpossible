@@ -57,7 +57,9 @@ class Scene:
 
         return np.array([x, y, worldPos[2]])
 
-
+    def get_uv(self, point):
+        return self.camera.get_uv(point)
+        
     def get_max_screen(self, k):
         return np.array([self.max_screen[k][0], self.max_screen[k][1]])
     

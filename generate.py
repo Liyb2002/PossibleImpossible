@@ -32,6 +32,8 @@ class generate_helper:
         foreground_intersection = basic_scene.get_possible_intersects(foreground_index)
         background_intersection = basic_scene.get_possible_intersects(background_index)
 
+        basic_scene.get_uv(background_intersection)
+
         foreground_type = 1
         foreground_connect = "-y"
         background_type = 3
