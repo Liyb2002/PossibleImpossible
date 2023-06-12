@@ -45,7 +45,7 @@
         "scope_z": [0.2,0.2],
         "canTerminate": "False",
         "cycle_connect": "True",
-        "connect_id": [[10,0.5], [1, 0.5]],
+        "connect_id": [[10,0.9], [1, 0.1]],
         "connect_rule":{
           "10" : [ "-x"],
           "1" : [ "-x"]

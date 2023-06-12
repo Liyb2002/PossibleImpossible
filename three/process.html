@@ -2,7 +2,7 @@
 	<html>
 	<head>
 		<meta charset="utf-8">
-		<title>Result</title>
+		<title>Process</title>
 		<style>
 			body { margin: 0; }
 		</style>
@@ -70,36 +70,6 @@
 	} );
 
 
-	const loader2 = new GLTFLoader().setPath( 'static/models/' );
-	var load_result = await loader2.loadAsync('1.glb');
-	const m1 = load_result.scene;
-	var load_result = await loader2.loadAsync('roofTop.glb');
-	const m3 = load_result.scene;
-	var load_result = await loader2.loadAsync('4.glb');
-	const m4 = load_result.scene;
-	var load_result = await loader2.loadAsync('terminal_7.glb');
-	const m7 = load_result.scene;
-	load_result = await loader2.loadAsync('terminal_sphere.glb');
-	const m8 = load_result.scene;
-	var load_result = await loader2.loadAsync('9.glb');
-	const m9 = load_result.scene;
-	var load_result = await loader2.loadAsync('10.glb');
-	const m10 = load_result.scene;
-	var load_result = await loader2.loadAsync('11.glb');
-	const m11 = load_result.scene;
-	var load_result = await loader2.loadAsync('12_0.glb');
-	const m12_0 = load_result.scene;
-	var load_result = await loader2.loadAsync('12_1.glb');
-	const m12_1 = load_result.scene;
-	var load_result = await loader2.loadAsync('13.glb');
-	const m13 = load_result.scene;
-	var load_result = await loader2.loadAsync('14.glb');
-	const m14 = load_result.scene;
-	var load_result = await loader2.loadAsync('15.glb');
-	const m15 = load_result.scene;
-	var load_result = await loader2.loadAsync('16.glb');
-	const m16 = load_result.scene;
-
 	const geometry = new THREE.BoxGeometry( 1, 1, 1 ).toNonIndexed();
 	const material = new THREE.MeshBasicMaterial( { vertexColors: true } ); 
 
@@ -157,44 +127,13 @@
 			var rand = Math.random();
 			console.log("rand", rand);
 			var load_mesh = true;
-			if(jsonData[i]["obj"]["type"] == 1 && jsonData[i]["obj"]["mode"] == 1){
-				a = m1.clone();
-			}else if(jsonData[i]["obj"]["type"] == 3 && jsonData[i]["obj"]["mode"] == 1){
-				a = m3.clone();
-			}else if(jsonData[i]["obj"]["type"] == 4 && jsonData[i]["obj"]["mode"] == 1){
-				a = m4.clone();
-			}else if(jsonData[i]["obj"]["type"] == 7 && jsonData[i]["obj"]["mode"] == 1){
-				a = m7.clone();
-			}else if(jsonData[i]["obj"]["type"] == 8 && jsonData[i]["obj"]["mode"] == 1){
-				a = m8.clone();
-			}else if(jsonData[i]["obj"]["type"] == 9 && jsonData[i]["obj"]["mode"] == 1){
-				a = m9.clone();
-			}
-			else if(jsonData[i]["obj"]["type"] == 10 && jsonData[i]["obj"]["mode"] == 1){
-				a = m10.clone();
-			}
-			else if(jsonData[i]["obj"]["type"] == 11 && jsonData[i]["obj"]["mode"] == 1){
-				a = m11.clone();
-			}else if(jsonData[i]["obj"]["type"] == 12 && rand<0.5 && jsonData[i]["obj"]["mode"] == 1){
-				a = m12_0.clone();
-			}
-			else if(jsonData[i]["obj"]["type"] == 12 && jsonData[i]["obj"]["mode"] == 1){
-				a = m12_1.clone();
-			}else if(jsonData[i]["obj"]["type"] == 13 && jsonData[i]["obj"]["mode"] == 1){
-				a = m13.clone();
-			}else if(jsonData[i]["obj"]["type"] == 14 && jsonData[i]["obj"]["mode"] == 1){
-				a = m14.clone();
-			}else if(jsonData[i]["obj"]["type"] == 15 && jsonData[i]["obj"]["mode"] == 1){
-				a = m15.clone();
-			}else if(jsonData[i]["obj"]["type"] == 16 && jsonData[i]["obj"]["mode"] == 1){
-				a = m16.clone();
-			}else{
+
 			var cube = new THREE.Mesh( geometry, material );
 			cube.position.set(center_x, center_y, center_z );
 			cube.scale.set(scale_x*2, scale_y*2, scale_z*2);
 			scene.add( cube );
 			load_mesh = false;
-		}
+		
 
 		if (load_mesh){
 			a.position.set(start_x,start_y,start_z);

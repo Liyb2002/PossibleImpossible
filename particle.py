@@ -3,6 +3,8 @@ import cycle_connect
 import random
 import procedural_objects
 import numpy as np
+import math
+
 
 class Particle:
     def __init__(self, generic_object_list):
@@ -168,8 +170,7 @@ class Particle:
 
     def probability_score(self):
         current_Prob = {}
-        probability_score = 0
-
+        KL = 0
         for generic_obj in self.generic_object_list:
             current_Prob[generic_obj.id] = 0
 
@@ -177,10 +178,13 @@ class Particle:
             current_Prob[obj.type] += 1 / len(self.procedural_objects)
         
         for key in current_Prob:
-            diff = current_Prob[key] - self.targetProb[key]
-            probability_score += (1-diff) * (1-diff)
-        
-        return probability_score
+            term = self.targetProb[key]
+
+            if current_Prob[key] != 0:
+                term = self.targetProb[key] * math.log(self.targetProb[key] / current_Prob[key])
+            KL += term
+
+        return (1-KL) * (1-KL)
 
     def occulusion_score(self, intersection_obj, new_Obj_list):
         occulusion_score = 0
