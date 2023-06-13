@@ -43,7 +43,8 @@ class generate_helper:
 
         self.procedural_generate(foreground_type, foreground_connect, foreground_intersection, steps, True)
         self.procedural_generate(background_type, background_connect, background_intersection, steps, False)
-        self.connect()
+        # self.connect()
+        self.result_particle = self.particle_list[0]
         return self.finish()
 
 
@@ -64,7 +65,7 @@ class generate_helper:
             for i in range(len(self.particle_list)):
                 tempt_particle = self.particle_list[i]
                 tempt_particle.run_step(cur_step, isFront)
-                score_list.append(tempt_particle.get_score())
+                score_list.append([i, tempt_particle.get_score()])
 
             self.particle_list = resample.resample_particles(self.particle_list, score_list)
 

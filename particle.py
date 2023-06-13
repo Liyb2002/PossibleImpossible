@@ -158,7 +158,7 @@ class Particle:
             self.score = 0
 
     def get_score(self):
-        print("self.score", self.score)
+        # print("self.score", self.score)
         return self.score
 
     def density_score(self):
