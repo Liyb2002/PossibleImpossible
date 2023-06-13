@@ -158,6 +158,7 @@ class Particle:
             self.score = 0
 
     def get_score(self):
+        print("self.score", self.score)
         return self.score
 
     def density_score(self):
@@ -200,11 +201,16 @@ class Particle:
         return occulusion_score
     
     def constraints_score(self, new_Obj_list):
+        score = 0
         for obj in new_Obj_list:
             obj_center = obj.position
             u, v = self.camera.get_uv(obj_center)
-            print("uv", u, v)
 
+            for constraints in self.constraints_pts:
+                if abs(u - constraints[0])< 20 and abs(v - constraints[1])< 20:
+                    score += 10
+        
+        self.score += score
 
 
 
