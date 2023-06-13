@@ -5,6 +5,7 @@ import intersection
 import resample
 import assign_type
 import decorations
+import constraints_loader
 
 import numpy as np
 
@@ -16,6 +17,7 @@ class generate_helper:
         self.particle_list = []
         self.score_list = []
         self.result_particle = None
+        self.guided_pts = constraints_loader.load_constraints()
         
     
     def smc_process(self):
