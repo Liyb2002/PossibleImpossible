@@ -38,7 +38,7 @@ class Camera:
         intersection_pt = find_intersection(self.cam_origin, point, self.plane)
         v = (intersection_pt[1] - self.cam_lower_left_corner[1]) / self.cam_vertical[1]
         u = (intersection_pt[0] - (self.cam_lower_left_corner[0] + v*self.cam_vertical[0])) / self.cam_horizontal[0]
-        print("v,", v, "u", u)
+        return (u*800, v*800)
 
     def get_camera_origin(self):
         return self.cam_origin

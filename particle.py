@@ -7,13 +7,17 @@ import math
 import perspective
 
 class Particle:
-    def __init__(self, generic_object_list):
+    def __init__(self, generic_object_list, guided_pts):
         self.generic_object_list = generic_object_list
         self.success = True
         self.procedural_objects = []
         self.targetProb = {}
         self.eye=np.array([5.0, 5.0, 5.0])
+
         self.score = 1
+
+        self.camera = perspective.Camera()
+        self.constraints_pts = guided_pts
 
 
     def prepare_particle(self,intersection, start_type, connected_dir, targetProb):
@@ -142,6 +146,7 @@ class Particle:
         density_score = self.density_score()
         probability_score = self.probability_score()
         occulusion_score = self.occulusion_score(intersection_obj, results)
+        self.constraints_score(results)
         overlapping_score = 1
         for obj in results:
             if not self.overlapping_check_obj(obj):
@@ -194,6 +199,12 @@ class Particle:
         
         return occulusion_score
     
+    def constraints_score(self, new_Obj_list):
+        for obj in new_Obj_list:
+            obj_center = obj.position
+            u, v = self.camera.get_uv(obj_center)
+            print("uv", u, v)
+
 
 
 

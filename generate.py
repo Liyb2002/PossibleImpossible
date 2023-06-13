@@ -17,13 +17,14 @@ class generate_helper:
         self.particle_list = []
         self.score_list = []
         self.result_particle = None
+
         self.guided_pts = constraints_loader.load_constraints()
         
     
     def smc_process(self):
         num_particles = 1000
         for i in range(num_particles):
-            tempt_particle = particle.Particle(self.generic_object_list)
+            tempt_particle = particle.Particle(self.generic_object_list, self.guided_pts)
             self.particle_list.append(tempt_particle)
 
         startPos = np.array([400,400])
@@ -33,8 +34,6 @@ class generate_helper:
 
         foreground_intersection = basic_scene.get_possible_intersects(foreground_index)
         background_intersection = basic_scene.get_possible_intersects(background_index)
-
-        basic_scene.get_uv(background_intersection)
 
         foreground_type = 1
         foreground_connect = "-y"
@@ -120,7 +119,7 @@ class generate_helper:
         decorator = decorations.decoration_operator()
         while(success != True):
             print("-----------------")
-            cur_particle = particle.Particle(self.generic_object_list)
+            cur_particle = particle.Particle(self.generic_object_list, self.guided_pts)
             cur_particle.prepare_particle(foreground_intersection, foreground_type, foreground_connect, foreground_parsedProb)
 
             for s in range(steps):
