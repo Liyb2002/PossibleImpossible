@@ -146,13 +146,13 @@ class Particle:
         density_score = self.density_score()
         probability_score = self.probability_score()
         occulusion_score = self.occulusion_score(intersection_obj, results)
-        self.constraints_score(results)
+        constraints_score = self.constraints_score(results)
         overlapping_score = 1
         for obj in results:
             if not self.overlapping_check_obj(obj):
                 overlapping_score = 0            
 
-        self.score = (density_score + probability_score + occulusion_score) *  overlapping_score
+        self.score = (density_score + probability_score + occulusion_score + constraints_score) *  overlapping_score
 
         if len(results) == 0:
             self.score = 0
@@ -201,17 +201,16 @@ class Particle:
         return occulusion_score
     
     def constraints_score(self, new_Obj_list):
-        score = 0
+        constraints_score = 0
         for obj in new_Obj_list:
             obj_center = obj.position
             u, v = self.camera.get_uv(obj_center)
 
             for constraints in self.constraints_pts:
                 if abs(u - constraints[0])< 20 and abs(v - constraints[1])< 20:
-                    score += 10
+                    constraints_score += 20
         
-        self.score += score
-
+        return constraints_score
 
 
 def start_obj(start_pos, generic_object_list, start_type, connected_dir):

@@ -43,8 +43,9 @@ class generate_helper:
 
         self.procedural_generate(foreground_type, foreground_connect, foreground_intersection, steps, True)
         self.procedural_generate(background_type, background_connect, background_intersection, steps, False)
-        # self.connect()
-        self.result_particle = self.particle_list[0]
+        self.connect()
+
+        # self.result_particle = self.particle_list[0]
         return self.finish()
 
 

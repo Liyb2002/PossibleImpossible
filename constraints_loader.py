@@ -11,7 +11,7 @@ def load_constraints():
             startPos = guide_obj['startPos']
             endPos = guide_obj['endPos']
             
-            for i in range(3):
+            for i in range(10):
                 random_x = random.randint(startPos[0], endPos[0])
                 random_y = random.randint(startPos[1], endPos[1])
                 newPt = [random_x, random_y]
