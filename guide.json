@@ -1,22 +1,22 @@
 [
     {
     "rect_id": 1,
-    "startPos": [400, 400],
-    "endPos": [600, 450]    
-    },
-    {
-    "rect_id": 2,
-    "startPos": [600, 200],
-    "endPos": [650, 450]    
-    },
-    {
-    "rect_id": 3,
-    "startPos": [350, 200],
+    "startPos": [200, 400],
     "endPos": [400, 450]    
     },
     {
-    "rect_id": 4,
+    "rect_id": 2,
     "startPos": [400, 200],
-    "endPos": [600, 250]    
+    "endPos": [450, 400]    
+    },
+    {
+    "rect_id": 3,
+    "startPos": [200, 200],
+    "endPos": [400, 250]    
+    },
+    {
+    "rect_id": 4,
+    "startPos": [200, 200],
+    "endPos": [250, 400]    
     }
 ]

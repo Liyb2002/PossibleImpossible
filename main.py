@@ -37,6 +37,8 @@ output_writer = write2JSON.output()
 # output_writer.prepare_write_skeleton(phase1)
 # output_writer.write_phase2()
 
-output_writer.prepare_write_decorations(decoration_list)
-output_writer.write()
+output_writer.write_small_cubes(class_generate.small_cubes)
+
+# output_writer.prepare_write_decorations(decoration_list)
+# output_writer.write()
 

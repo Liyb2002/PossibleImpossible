@@ -27,13 +27,15 @@ class generate_helper:
             tempt_particle = particle.Particle(self.generic_object_list, self.guided_pts)
             self.particle_list.append(tempt_particle)
 
-        startPos = np.array([400,400])
+        startPos = np.array([200,600])
         basic_scene = intersection.Scene(startPos)
         foreground_index = 8
         background_index = 16
 
         foreground_intersection = basic_scene.get_possible_intersects(foreground_index)
         background_intersection = basic_scene.get_possible_intersects(background_index)
+
+        self.small_cubes = constraints_loader.guide_visualizer(self.guided_pts, foreground_index)
 
         foreground_type = 1
         foreground_connect = "-y"

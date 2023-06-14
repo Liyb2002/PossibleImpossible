@@ -68,3 +68,16 @@ class Scene:
     
     def get_possible_intersects(self, k):
         return np.array([self.possible_intersects[k][0], self.possible_intersects[k][1], self.possible_intersects[k][2]])
+
+    def get_arbitrary_pos(self, k, uv):
+        u = uv[0] / self.image_width
+        v = uv[1] / self.image_height
+        camera_pos = self.camera.get_camera_origin()
+        ray = self.camera.get_ray(u, v)
+
+        x = camera_pos[0] + ray[0] * (k*0.5)
+        y = camera_pos[1] + ray[1] * (k*0.5)
+        z = camera_pos[2] + ray[2] * (k*0.5)
+        pos = np.array([x, y,z])
+
+        return pos
