@@ -18,6 +18,7 @@ class Particle:
 
         self.camera = perspective.Camera()
         self.constraints_pts = guided_pts
+        self.hit_constraints = 0
 
 
     def prepare_particle(self,intersection, start_type, connected_dir, targetProb):
@@ -209,6 +210,7 @@ class Particle:
             for constraints in self.constraints_pts:
                 if abs(u - constraints[0])< 20 and abs(v - constraints[1])< 20:
                     constraints_score += 20
+                    self.hit_constraints += 1
         
         return constraints_score
 

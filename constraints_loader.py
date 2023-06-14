@@ -13,7 +13,7 @@ def load_constraints():
             startPos = guide_obj['startPos']
             endPos = guide_obj['endPos']
             
-            for i in range(10):
+            for i in range(20):
                 random_x = random.randint(startPos[0], endPos[0])
                 random_y = random.randint(startPos[1], endPos[1])
                 newPt = [random_x, random_y]
@@ -23,7 +23,7 @@ def load_constraints():
 
 def guide_visualizer(sampled_points, foreground_index):
     dummy_Pos = np.array([0,0])
-    dummy_scope = [0.05, 0.05]
+    dummy_scope = [0.02, 0.02]
     basic_scene = intersection.Scene(dummy_Pos)
 
     small_cubes = []

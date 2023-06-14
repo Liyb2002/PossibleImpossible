@@ -22,12 +22,12 @@ class generate_helper:
         
     
     def smc_process(self):
-        num_particles = 1000
+        num_particles = 3000
         for i in range(num_particles):
             tempt_particle = particle.Particle(self.generic_object_list, self.guided_pts)
             self.particle_list.append(tempt_particle)
 
-        startPos = np.array([200,600])
+        startPos = np.array([400,400])
         basic_scene = intersection.Scene(startPos)
         foreground_index = 8
         background_index = 16
@@ -45,10 +45,13 @@ class generate_helper:
 
         self.procedural_generate(foreground_type, foreground_connect, foreground_intersection, steps, True)
         self.procedural_generate(background_type, background_connect, background_intersection, steps, False)
-        self.connect()
+        # self.connect()
 
-        # self.result_particle = self.particle_list[0]
-        return self.finish()
+        self.result_particle = self.particle_list[0]
+
+        for partt in self.particle_list:
+            print("hit hit", partt.hit_constraints)
+        return self.result_particle.procedural_objects
 
 
     def procedural_generate(self, start_type, connect_direction, intersection_pos, steps, isFront):
@@ -78,12 +81,14 @@ class generate_helper:
 
     def connect(self):
         print("len(particle_list)", len(self.particle_list))
+        working_list = []
         for i in range(len(self.particle_list)):
             self.particle_list[i].run_connect()
             if self.particle_list[i].success:
                 print("success")
-                self.result_particle = self.particle_list[i]
-                break
+                working_list.append(self.particle_list[i])
+                
+        self.result_particle = self.particle_list[i]
 
 
     def finish(self):
