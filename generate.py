@@ -35,7 +35,7 @@ class generate_helper:
         foreground_intersection = basic_scene.get_possible_intersects(foreground_index)
         background_intersection = basic_scene.get_possible_intersects(background_index)
 
-        self.small_cubes = constraints_loader.guide_visualizer(self.guided_pts, foreground_index)
+        # self.small_cubes = constraints_loader.guide_visualizer(self.guided_pts, foreground_index)
 
         foreground_type = 1
         foreground_connect = "-y"
@@ -46,12 +46,10 @@ class generate_helper:
         self.procedural_generate(foreground_type, foreground_connect, foreground_intersection, steps, True)
         self.procedural_generate(background_type, background_connect, background_intersection, steps, False)
         # self.connect()
-
+        
         self.result_particle = self.particle_list[0]
-
-        for partt in self.particle_list:
-            print("hit hit", partt.hit_constraints)
-        return self.result_particle.procedural_objects
+        print("constraint pts", self.result_particle.hit_constraints)
+        return self.finish()
 
 
     def procedural_generate(self, start_type, connect_direction, intersection_pos, steps, isFront):
@@ -87,8 +85,10 @@ class generate_helper:
             if self.particle_list[i].success:
                 print("success")
                 working_list.append(self.particle_list[i])
-                
-        self.result_particle = self.particle_list[i]
+
+        for particle in working_list:
+            print("constraints", particle.hit_constraints) 
+            self.result_particle = particle
 
 
     def finish(self):
