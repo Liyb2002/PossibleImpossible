@@ -23,14 +23,14 @@ def load_constraints():
 
 def guide_visualizer(sampled_points, foreground_index):
     dummy_Pos = np.array([0,0])
-    dummy_scope = [0.1, 0.1]
+    dummy_scope = [0.05, 0.05]
     basic_scene = intersection.Scene(dummy_Pos)
 
     small_cubes = []
     for pts in sampled_points:
         pos = basic_scene.get_arbitrary_pos(foreground_index, pts)
-        procedural_objects.Procedural_object(-1, pos, np.array([dummy_scope,dummy_scope,dummy_scope]), "00000")
-        small_cubes.append(procedural_objects)
+        cube = procedural_objects.Procedural_object(-1, pos, np.array([dummy_scope,dummy_scope,dummy_scope]), "00000")
+        small_cubes.append(cube)
     
     return small_cubes
 
