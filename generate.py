@@ -45,10 +45,10 @@ class generate_helper:
 
         self.procedural_generate(foreground_type, foreground_connect, foreground_intersection, steps, True)
         self.procedural_generate(background_type, background_connect, background_intersection, steps, False)
-        # self.connect()
+        self.connect()
         
-        self.result_particle = self.particle_list[0]
-        print("constraint pts", self.result_particle.hit_constraints)
+        # self.result_particle = self.particle_list[0]
+        # print("constraint pts", self.result_particle.hit_constraints)
         return self.finish()
 
 
@@ -86,9 +86,13 @@ class generate_helper:
                 print("success")
                 working_list.append(self.particle_list[i])
 
+        highest_hit = 0
         for particle in working_list:
-            print("constraints", particle.hit_constraints) 
-            self.result_particle = particle
+            if particle.hit_constraints > highest_hit:
+                self.result_particle = particle
+                highest_hit = particle.hit_constraints
+        
+        print("hit result", self.result_particle.hit_constraints)
 
 
     def finish(self):

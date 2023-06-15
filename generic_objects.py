@@ -66,7 +66,7 @@ class Generic_object:
                     possible_next.append(next_id)
         
         if len(possible_next) != 0:
-            choice = possible_next[0]
+            choice = possible_next[-1]
             rule = direction
         else:
             return (False, [], [])

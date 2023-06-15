@@ -79,12 +79,13 @@ class connect_execution:
 
         ok, next_type, rule_chosen = current_generic_obj.get_nextType_with_direction(self.direction)
         if ok != True:
-            # print("can't find next object available")
+            print("can't find next object available")
             return 0
         next_type = int(next_type)
 
         next_generic_obj = self.generic_object_list[next_type]
         if next_generic_obj.cycle_connect == 'False':
+            print("is not cycle_connect obj")
             return 0
         next_scope = next_generic_obj.scope
         next_hash = next_generic_obj.generate_hash()
@@ -119,7 +120,7 @@ class connect_execution:
             return 2
         
         if self.lower_bound > self.delta[self.direction_idx]:
-            # print("lower bound larger than delta")
+            print("lower bound larger than delta")
             return 0
 
         return 1
