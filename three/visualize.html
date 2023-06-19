@@ -130,7 +130,7 @@
 	const loader = new THREE.FileLoader();
 	loader.load(
 	// resource URL
-	'./result.json',
+	'./phase3.json',
 	// onLoad callback
 	function ( data ) {
 		// output the text to the console
@@ -169,6 +169,7 @@
 				a = m8.clone();
 			}else if(jsonData[i]["obj"]["type"] == 9 && jsonData[i]["obj"]["mode"] == 1){
 				a = m9.clone();
+				// a.rotation.z = 0.5;
 			}
 			else if(jsonData[i]["obj"]["type"] == 10 && jsonData[i]["obj"]["mode"] == 1){
 				a = m10.clone();

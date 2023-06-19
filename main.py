@@ -22,7 +22,7 @@ class_generate = generate.generate_helper(generic_object_list)
 decoration_list = class_generate.smc_process()
 
 
-# phase1, phase2, phase3 = class_generate.recursive_process()
+phase1, phase2, phase3 = class_generate.recursive_process()
 
 print("success!")
 
@@ -34,11 +34,11 @@ output_writer = write2JSON.output()
 # output_writer.prepare_write_skeleton(phase1)
 # output_writer.write_phase1()
 
-# output_writer.prepare_write_skeleton(phase1)
-# output_writer.write_phase2()
+output_writer.write_skeleton(phase2, './three/phase2.json')
+output_writer.write_result(phase3, './three/phase3.json')
 
 # output_writer.write_small_cubes(class_generate.small_cubes)
 
-output_writer.prepare_write_decorations(decoration_list)
-output_writer.write()
+# output_writer.prepare_write_decorations(decoration_list)
+# output_writer.write()
 

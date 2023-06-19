@@ -9,4 +9,4 @@
 
 
 Assign type:
-9 -> rooftop
+9 -> tower with rooftop

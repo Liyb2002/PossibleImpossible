@@ -6,7 +6,7 @@ import intersection
 
 def load_constraints():
     sampled_points = []
-    with open('guide.json', 'r') as object_file:
+    with open('guide_a.json', 'r') as object_file:
         guides = json.load(object_file)
 
         for guide_obj in guides:

@@ -95,14 +95,7 @@ class connect_execution:
         self.production_list.append(next_obj)
         self.rules_list.append(rule_chosen)
         
-        if self.direction_idx != 2:
-            self.lower_bound += next_scope[self.direction_idx][0] + self.prev_lower_bound
-            self.current_bound += next_obj.length[self.direction_idx] + self.prev_current_bound
-            self.upper_bound += next_scope[self.direction_idx][1] + self.prev_upper_bound
-            self.prev_lower_bound = next_scope[self.direction_idx][0]
-            self.prev_current_bound = next_obj.length[self.direction_idx]
-            self.prev_upper_bound = next_scope[self.direction_idx][1]
-        elif self.objEnd.type == 3 or self.objEnd.type == 8:
+        if self.objEnd.type == 3 or self.objEnd.type == 8:
             self.lower_bound += next_scope[self.direction_idx][0] + self.prev_lower_bound
             self.current_bound += next_obj.length[self.direction_idx] + self.prev_current_bound
             self.upper_bound += next_scope[self.direction_idx][1] + self.prev_upper_bound
