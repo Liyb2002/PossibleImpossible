@@ -2,14 +2,17 @@ import numpy as np
 import random
 
 class Procedural_object:
-    def __init__(self, type, position, scope, gen_hash):
+    def __init__(self, type, position, scope, gen_hash, next_offset,next_rotation):
         self.type = type
         self.position = position
         self.scope = scope
         self.set_scope()
         self.hash = gen_hash
         self.connected = []
-    
+        self.offset = next_offset
+        self.rotation = np.array([random.choice(next_rotation[0]), random.choice(next_rotation[1]), random.choice(next_rotation[2])])
+
+
     def set_type(self, type):
         self.type = type
     
@@ -30,31 +33,33 @@ class Procedural_object:
         prev_z = prev_obj.length[2]
 
         if(rule == '-x'):
-            self.position = prev_pos - np.array([prev_x, 0, 0]) - np.array([self.length[0],0,0])
+            self.position = prev_pos - np.array([prev_x, 0, 0]) - np.array([self.length[0],0,0]) + np.array([self.offset[0],self.offset[1],self.offset[2]])
 
         if(rule == '+x'):
-            self.position = prev_pos + np.array([prev_x, 0, 0]) + np.array([self.length[0],0,0])
+            self.position = prev_pos + np.array([prev_x, 0, 0]) + np.array([self.length[0],0,0]) + np.array([self.offset[0],self.offset[1],self.offset[2]])
         
         if(rule == '-y'):
-            self.position = prev_pos - np.array([0, prev_y, 0]) - np.array([0,self.length[1],0])
+            self.position = prev_pos - np.array([0, prev_y, 0]) - np.array([0,self.length[1],0]) + np.array([self.offset[0],self.offset[1],self.offset[2]])
         
         if(rule == '+y'):
-            self.position = prev_pos + np.array([0, prev_y, 0]) + np.array([0,self.length[1],0])
+            self.position = prev_pos + np.array([0, prev_y, 0]) + np.array([0,self.length[1],0]) + np.array([self.offset[0],self.offset[1],self.offset[2]])
        
         if(rule == '-z'):
-            self.position = prev_pos - np.array([0, 0, prev_z]) - np.array([0,0,self.length[2]])
+            self.position = prev_pos - np.array([0, 0, prev_z]) - np.array([0,0,self.length[2]]) + np.array([self.offset[0],self.offset[1],self.offset[2]])
 
         if(rule == '+z'):
-            self.position = prev_pos + np.array([0, 0, prev_z]) + np.array([0,0,self.length[2]])
-
-        if(rule == '-x2'):
-            self.position = prev_pos - np.array([prev_x, -prev_y, 0]) - np.array([self.length[0],0 ,0])
-            self.arriving_rule = '-x'
+            self.position = prev_pos + np.array([0, 0, prev_z]) + np.array([0,0,self.length[2]]) + np.array([self.offset[0],self.offset[1],self.offset[2]])
             
         self.arriving_rule = rule
 
     def arbitrary_set_position(self, position):
         self.position = position
+
+    def arbitrary_set_length(self, length):
+        len_x = length[0]
+        len_y = length[1]
+        len_z = length[2]
+        self.length = np.array([len_x, len_y, len_z])
 
     def collision_check(self, objB):
         A_x = [self.position[0] - self.length[0], self.position[0] + self.length[0]]

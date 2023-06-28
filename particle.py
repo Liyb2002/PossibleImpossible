@@ -123,6 +123,14 @@ class Particle:
             if obj.type == 1:
                 return obj
     
+    def add_statue(self, background_position):
+        dummy_scope = [0.02, 0.02]
+        statue_pos = background_position + np.array([random.random()*2 + 1.5, 0, random.random() - 3.5])
+        statue = procedural_objects.Procedural_object(15, np.array([0,-1.5,0]), np.array([dummy_scope,dummy_scope,dummy_scope]), "00000", np.array([0,0,0]), np.array([[0],[0],[0]]))
+        statue.arbitrary_set_length(np.array([0.5,1.0,0.5]))
+        statue.arbitrary_set_position(statue_pos)
+        self.procedural_objects.append(statue)
+
     def random_object(self):
         rd1 = 0
         rd2 = 0
@@ -147,13 +155,19 @@ class Particle:
         density_score = self.density_score()
         probability_score = self.probability_score()
         occulusion_score = self.occulusion_score(intersection_obj, results)
-        constraints_score = self.constraints_score(results)
+        constraints_score = self.constraints_score(results) * 0.0
         overlapping_score = 1
         for obj in results:
             if not self.overlapping_check_obj(obj):
                 overlapping_score = 0            
 
+        overlapping_score = 1
+
         self.score = (density_score + probability_score + occulusion_score + constraints_score) *  overlapping_score
+        # print("density_score", density_score)
+        # print("probability_score", probability_score)
+        # print("occulusion_score", occulusion_score)
+        # print("constraints_score", constraints_score)
 
         if len(results) == 0:
             self.score = 0
@@ -182,6 +196,9 @@ class Particle:
             current_Prob[generic_obj.id] = 0
 
         for obj in self.procedural_objects:
+            if obj.type > len(current_Prob):
+                continue
+
             current_Prob[obj.type] += 1 / len(self.procedural_objects)
         
         for key in current_Prob:
@@ -220,7 +237,9 @@ def start_obj(start_pos, generic_object_list, start_type, connected_dir):
     cur_type = start_type
     start_scope = generic_object_list[cur_type].scope
     gen_hash = generic_object_list[cur_type].generate_hash()
-    cur_obj = procedural_objects.Procedural_object(cur_type, start_pos, start_scope, gen_hash)
+    next_offset = [0.0,0.0,0.0]
+    next_rotation = generic_object_list[cur_type].rotation
+    cur_obj = procedural_objects.Procedural_object(cur_type, start_pos, start_scope, gen_hash,next_offset,next_rotation)
     cur_obj_x = cur_obj.length[0]
     cur_obj_y = cur_obj.length[1]
     cur_obj_z = cur_obj.length[2]

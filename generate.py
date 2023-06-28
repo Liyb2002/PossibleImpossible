@@ -30,7 +30,7 @@ class generate_helper:
         startPos = np.array([400,400])
         basic_scene = intersection.Scene(startPos)
         foreground_index = 8
-        background_index = 16
+        background_index = 18
 
         foreground_intersection = basic_scene.get_possible_intersects(foreground_index)
         background_intersection = basic_scene.get_possible_intersects(background_index)
@@ -47,8 +47,6 @@ class generate_helper:
         self.procedural_generate(background_type, background_connect, background_intersection, steps, False)
         self.connect()
         
-        # self.result_particle = self.particle_list[0]
-        # print("constraint pts", self.result_particle.hit_constraints)
         return self.finish()
 
 
@@ -57,9 +55,11 @@ class generate_helper:
 
         score_list = []
 
+        print("111len(particle_list)", len(self.particle_list))
         for i in range(len(self.particle_list)):
             tempt_particle = self.particle_list[i]
             tempt_particle.prepare_particle(intersection_pos, start_type, connect_direction, parsedProb)
+
 
         for s in range(steps):
             cur_step = steps - s -1
@@ -73,6 +73,8 @@ class generate_helper:
 
             self.particle_list = resample.resample_particles(self.particle_list, score_list)
 
+        print("222len(particle_list)", len(self.particle_list))
+
         print("generation complete")
 
 
@@ -85,20 +87,21 @@ class generate_helper:
             if self.particle_list[i].success:
                 print("success")
                 working_list.append(self.particle_list[i])
+                self.result_particle = self.particle_list[i]
 
-        highest_hit = 0
-        for particle in working_list:
-            if particle.hit_constraints > highest_hit:
-                self.result_particle = particle
-                highest_hit = particle.hit_constraints
+        # highest_hit = 0
+        # for particle in working_list:
+        #     if particle.hit_constraints > highest_hit:
+        #         self.result_particle = particle
+        #         highest_hit = particle.hit_constraints
         
-        print("hit result", self.result_particle.hit_constraints)
+        # print("hit result", self.result_particle.hit_constraints)
 
 
     def finish(self):
         procedural_objects = assign_type.assign(self.result_particle.procedural_objects)
         decorator = decorations.decoration_operator()
-        decoration_list = decorator.decorate(self.result_particle.procedural_objects)
+        decoration_list = decorator.decorate(procedural_objects)
         return decoration_list
 
     def recursive_process(self):

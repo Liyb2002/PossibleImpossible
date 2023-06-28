@@ -12,7 +12,7 @@ def assign(procedural_objects):
                     assign_available = False
             
             if assign_available:
-                offset = random.uniform(0.05, 0.1)
+                offset = random.uniform(0.1, 0.25)
                 obj.position += np.array([0, offset, 0])
                 obj.length += np.array([0, offset, 0])
                 obj.type = 9
