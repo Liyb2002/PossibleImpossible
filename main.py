@@ -31,4 +31,5 @@ print("success!")
 
 output_writer = write2JSON.output()
 
+output_writer.write_proceudral_objects(class_generate.small_cubes, './three/guides.json')
 output_writer.write_result(decoration_list, './three/result.json')
