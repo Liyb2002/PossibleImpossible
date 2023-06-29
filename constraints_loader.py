@@ -29,7 +29,7 @@ def guide_visualizer(sampled_points, foreground_index):
     small_cubes = []
     for pts in sampled_points:
         pos = basic_scene.get_arbitrary_pos(foreground_index, pts)
-        cube = procedural_objects.Procedural_object(-1, pos, np.array([dummy_scope,dummy_scope,dummy_scope]), "00000", np.array([0,0,0]), np.array([[0],[0],[0]]))
+        cube = procedural_objects.Procedural_object(-1, pos, np.array([dummy_scope,dummy_scope,dummy_scope]), "00000")
         small_cubes.append(cube)
     
     return small_cubes

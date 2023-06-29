@@ -29,9 +29,7 @@ def execute_model(generic_object_list, start_obj, steps):
         next_generic_obj = generic_object_list[next_type]
         next_scope = next_generic_obj.scope
         next_hash = next_generic_obj.generate_hash()
-        next_offset = cur_generic_obj.get_offset(next_type)
-        next_rotation = next_generic_obj.rotation
-        next_obj = procedural_objects.Procedural_object(next_type, np.array([0,0,0]), next_scope, next_hash, next_offset, next_rotation)
+        next_obj = procedural_objects.Procedural_object(next_type, np.array([0,0,0]), next_scope, next_hash)
         next_choice = cur_generic_obj.execute_rule(next_type)
         cur_obj.add_connected(next_choice)
         next_obj.add_connected(opposite_direction(next_choice))
@@ -81,26 +79,29 @@ class connect_execution:
 
         ok, next_type, rule_chosen = current_generic_obj.get_nextType_with_direction(self.direction)
         if ok != True:
-            # print("current_generic_obj type", current_generic_obj.id, "target direction", self.direction)
             # print("can't find next object available")
             return 0
         next_type = int(next_type)
 
         next_generic_obj = self.generic_object_list[next_type]
         if next_generic_obj.cycle_connect == 'False':
-            # print("is not cycle_connect obj")
             return 0
         next_scope = next_generic_obj.scope
         next_hash = next_generic_obj.generate_hash()
-        next_offset = current_generic_obj.get_offset(next_type)
-        next_rotation = next_generic_obj.rotation
-        next_obj = procedural_objects.Procedural_object(next_type, np.array([0,0,0]), next_scope, next_hash,next_offset,next_rotation)
+        next_obj = procedural_objects.Procedural_object(next_type, np.array([0,0,0]), next_scope, next_hash)
         self.cur_obj.add_connected(rule_chosen)
         next_obj.add_connected(opposite_direction(rule_chosen))
         self.production_list.append(next_obj)
         self.rules_list.append(rule_chosen)
         
-        if self.objEnd.type == 3 or self.objEnd.type == 8:
+        if self.direction_idx != 2:
+            self.lower_bound += next_scope[self.direction_idx][0] + self.prev_lower_bound
+            self.current_bound += next_obj.length[self.direction_idx] + self.prev_current_bound
+            self.upper_bound += next_scope[self.direction_idx][1] + self.prev_upper_bound
+            self.prev_lower_bound = next_scope[self.direction_idx][0]
+            self.prev_current_bound = next_obj.length[self.direction_idx]
+            self.prev_upper_bound = next_scope[self.direction_idx][1]
+        elif self.objEnd.type == 3 or self.objEnd.type == 8:
             self.lower_bound += next_scope[self.direction_idx][0] + self.prev_lower_bound
             self.current_bound += next_obj.length[self.direction_idx] + self.prev_current_bound
             self.upper_bound += next_scope[self.direction_idx][1] + self.prev_upper_bound

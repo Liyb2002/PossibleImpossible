@@ -7,21 +7,16 @@ class Generic_object:
         self.set_scope(info)
         self.connect_id = []
         self.canTerminate = info['canTerminate']
-        self.rotation = info['rotation']
         self.rules = info['connect_rule']
         self.probabilities = []
         self.cycle_connect = info['cycle_connect']
 
         self.set_connect_ids(info['connect_id'])
-        self.offsets = info['offsets']
 
     def set_connect_ids(self, id_tuples):
         for id_tuple in id_tuples:
             self.connect_id.append(id_tuple[0])
             self.probabilities.append(id_tuple)
-
-    def get_offset(self, id):
-        return self.offsets[str(id)]
 
     def get_nextType(self, unavailable_dirs):
         if self.connect_id == []:
@@ -71,7 +66,7 @@ class Generic_object:
                     possible_next.append(next_id)
         
         if len(possible_next) != 0:
-            choice = possible_next[-1]
+            choice = possible_next[0]
             rule = direction
         else:
             return (False, [], [])

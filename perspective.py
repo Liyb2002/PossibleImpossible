@@ -34,6 +34,30 @@ class Camera:
         r = self.cam_lower_left_corner + u * self.cam_horizontal + v * self.cam_vertical - self.cam_origin
         return r
     
+    def get_ray_origin(self, u, v):
+        screen_width = 800                  
+        screen_height = 800                  
+        world_width = 10.0                    
+        world_height = (screen_height / screen_width) * world_width 
+
+        direction = self.lookat - self.lookfrom
+        direction /= np.linalg.norm(direction)
+        right = np.cross(direction, self.vup)
+        right /= np.linalg.norm(right)
+        up = np.cross(right, direction)
+
+        ndc_x = (2 * u) - 1
+        ndc_y = 1 - (2 * v)
+
+        world_x = self.lookfrom[0] + (ndc_x * world_width * 0.5 * right[0])
+        world_y = self.lookfrom[1] + (ndc_y * world_height * 0.5 * up[1])
+        world_z = self.lookfrom[2] + (self.lookat[2] - self.lookfrom[2])
+
+        # Create the ray from the camera to the current pixel
+        ray_origin = np.array([world_x, world_y, world_z])
+        return ray_origin
+
+    
     def get_uv(self, point):
         intersection_pt = find_intersection(self.cam_origin, point, self.plane)
         v = (intersection_pt[1] - self.cam_lower_left_corner[1]) / self.cam_vertical[1]

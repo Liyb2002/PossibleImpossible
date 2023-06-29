@@ -16,9 +16,6 @@ class output:
                 'scale_x': float(obj.size[0]),
                 'scale_y': float(obj.size[1]),
                 'scale_z': float(obj.size[2]),
-                'rotation_x' : float(obj.rotation[0]),
-                'rotation_y' : float(obj.rotation[1]),
-                'rotation_z' : float(obj.rotation[2]),
                 'mode': '1'}
                     }
             self.result.append(data)
@@ -38,9 +35,6 @@ class output:
                 'scale_x': float(obj.length[0]),
                 'scale_y': float(obj.length[1]),
                 'scale_z': float(obj.length[2]),
-                'rotation_x' : float(obj.rotation[0]),
-                'rotation_y' : float(obj.rotation[1]),
-                'rotation_z' : float(obj.rotation[2]),
                 'mode': '1'}
                     }
             self.result.append(data)

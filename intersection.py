@@ -23,10 +23,8 @@ class Scene:
         u = (self.x_start) / self.image_width
         v = (self.y_start) / self.image_height
         camera_pos = self.camera.get_camera_origin()
-        ray = self.camera.get_ray(u, v)
-
-        ray_max = self.camera.get_ray(1, 1)
-        ray_min = self.camera.get_ray(0, 0)
+        ray = self.camera.get_ray(u, u)
+        ro = self.camera.get_ray_origin(u, v)
 
         for k in range(0,40):
             x = camera_pos[0] + ray[0] * (k*0.5)
@@ -34,16 +32,6 @@ class Scene:
             z = camera_pos[2] + ray[2] * (k*0.5)
             pos = np.array([x, y,z])
             self.possible_intersects.append(pos)
-
-            x_max = camera_pos[0] + ray_max[0] * (k*0.5)
-            y_max = camera_pos[1] + ray_max[1] * (k*0.5)
-            pos_max = np.array([x_max, y_max])
-            self.max_screen.append(pos_max)
-
-            x_min = camera_pos[0] + ray_min[0] * (k*0.5)
-            y_min = camera_pos[1] + ray_min[1] * (k*0.5)
-            pos_min = np.array([x_min, y_min])
-            self.min_screen.append(pos_min)
 
     def get_intersection_t(self, screenPos, worldPos):
         u = (screenPos[0]) / self.image_width
