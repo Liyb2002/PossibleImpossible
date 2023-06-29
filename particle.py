@@ -15,7 +15,7 @@ class Particle:
         self.eye=np.array([5.0, 5.0, 5.0])
         self.score = 1
 
-        self.camera = perspective.Camera()
+        self.camera = perspective.ortho_camera()
         self.constraints_pts = guided_pts
         self.hit_constraints = 0
 
@@ -44,6 +44,9 @@ class Particle:
 
 
     def run_connect(self):
+        print("self.start_connect.type", self.start_connect.type)
+        print("self.end_connect.type", self.end_connect.type)
+
         startPos = self.start_connect.position
         endPos = self.end_connect.position
 
@@ -152,7 +155,7 @@ class Particle:
             if not self.overlapping_check_obj(obj):
                 overlapping_score = 0            
 
-        self.score = (density_score + probability_score + occulusion_score) *  overlapping_score
+        self.score = (density_score + probability_score + occulusion_score) *  overlapping_score + 100
 
         if len(results) == 0:
             self.score = 0

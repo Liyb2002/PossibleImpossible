@@ -19,7 +19,7 @@ with open('objects.json', 'r') as object_file:
 
 
 
-startPos = np.array([400,400])
+startPos = np.array([700,400])
 class_generate = generate.generate_helper(generic_object_list)
 result_list = class_generate.smc_process(startPos)
 

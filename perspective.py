@@ -3,69 +3,6 @@ import numpy as np
 import math
 
 PI = 3.14
-
-class Camera:
-    def __init__(self, fov=60, aspect_ratio=1.0):
-        # Camera parameters
-        self.lookfrom = np.array([5.0, 5.0, 5.0])
-        self.lookat = np.array([0.0, 0.0, 0.0])
-        self.vup = np.array([0.0, 1.0, 0.0])
-        self.fov = fov
-        self.aspect_ratio = aspect_ratio
-        
-        theta = self.fov * (PI / 180.0)
-        half_height = math.tan(theta / 2.0)
-        half_width = self.aspect_ratio * half_height
-        self.cam_origin = self.lookfrom
-        
-        w = self.lookfrom - self.lookat
-        w = w / np.linalg.norm(w)
-        u = np.cross(self.vup,w)
-        u = u / np.linalg.norm(u)
-        v = np.cross(w,u)
-        
-        self.cam_lower_left_corner = self.cam_origin - half_width * u - half_height * v - w
-        self.cam_horizontal = 2 * half_width * u
-        self.cam_vertical = 2 * half_height * v
-
-        self.plane = find_plane(u, v, self.cam_lower_left_corner)
-
-    def get_ray(self, u, v):
-        r = self.cam_lower_left_corner + u * self.cam_horizontal + v * self.cam_vertical - self.cam_origin
-        return r
-    
-    def get_ray_origin(self, u, v):
-        screen_width = 800                  
-        screen_height = 800                  
-        world_width = 10.0                    
-        world_height = (screen_height / screen_width) * world_width 
-
-        direction = self.lookat - self.lookfrom
-        direction /= np.linalg.norm(direction)
-        right = np.cross(direction, self.vup)
-        right /= np.linalg.norm(right)
-        up = np.cross(right, direction)
-
-        ndc_x = (2 * u) - 1
-        ndc_y = 1 - (2 * v)
-
-        world_x = self.lookfrom[0] + (ndc_x * world_width * 0.5 * right[0])
-        world_y = self.lookfrom[1] + (ndc_y * world_height * 0.5 * up[1])
-        world_z = self.lookfrom[2] + (self.lookat[2] - self.lookfrom[2])
-
-        # Create the ray from the camera to the current pixel
-        ray_origin = np.array([world_x, world_y, world_z])
-        return ray_origin
-
-    
-    def get_uv(self, point):
-        intersection_pt = find_intersection(self.cam_origin, point, self.plane)
-        v = (intersection_pt[1] - self.cam_lower_left_corner[1]) / self.cam_vertical[1]
-        u = (intersection_pt[0] - (self.cam_lower_left_corner[0] + v*self.cam_vertical[0])) / self.cam_horizontal[0]
-        return (u*800, v*800)
-
-    def get_camera_origin(self):
-        return self.cam_origin
     
 
     # Function to find the equation of a plane given two lines
@@ -83,18 +20,87 @@ def find_plane(dir1, dir2, point):
     # Return the coefficients of the plane equation
     return np.append(normal_vector, constant)
 
-# Function to find the intersection of a line and a plane
-def find_intersection(camera_origin, target_point , plane):
-    # Extract the coefficients of the plane equation
-    a, b, c, d = plane
+def find_intersection(plane_eq, point, direction_vector):
+    # Extract plane equation coefficients
+    A, B, C, D = plane_eq
+
+    # Extract point coordinates
+    px, py, pz = point
+
+    # Extract direction vector components
+    dx, dy, dz = direction_vector
+
+    # Calculate dot product
+    dot_product = A * dx + B * dy + C * dz
+
+    # Check if direction vector is parallel to the plane
+    if dot_product == 0:
+        print("Direction vector is parallel to the plane. No intersection point exists.")
+        return None
+
+    # Calculate parameter t
+    t = - (A * px + B * py + C * pz + D) / dot_product
+
+    # Calculate intersection point
+    intersection_x = px + t * dx
+    intersection_y = py + t * dy
+    intersection_z = pz + t * dz
+
+    return intersection_x, intersection_y, intersection_z
+
+
+class ortho_camera:
+    def __init__(self):
+        # Define the camera parameters
+        self.camera_position = np.array([5.0, 5.0, 5.0])  # Camera position in 3D space
+        self.lookat_point = np.array([0.0, 0.0, 0.0])   # Look-at point (where the camera is pointing)
+        self.up_vector = np.array([0.0, 1.0, 0.0])       # Up vector for camera orientation
+        self.screen_width = 800                    # Width of the screen in pixels
+        self.screen_height = 800                   # Height of the screen in pixels
+        self.world_width = 5.0                      # Width of the world coordinates
+        self.world_height = (self.screen_height / self.screen_width) * self.world_width  # Height of the world coordinates
+
+        # Calculate the direction vectors
+        self.direction = self.lookat_point - self.camera_position
+        self.direction /= np.linalg.norm(self.direction)
+        self.right = np.cross(self.direction, self.up_vector)
+        self.right /= np.linalg.norm(self.right)
+        self.up = np.cross(self.right, self.direction)
+
+        self.plane = find_plane(self.right, self.up, self.camera_position)
+
+    def get_ray(self, x,y):
+        ndc_x = (2 * x / self.screen_width) - 1
+        ndc_y = 1 - (2 * y / self.screen_height)
+
+        # Calculate the world coordinates of the current pixel
+        world_x = self.camera_position[0] + (ndc_x * self.world_width * 0.5 * self.right[0])
+        world_y = self.camera_position[1] + (ndc_y * self.world_height * 0.5 * self.up[1])
+        world_z = self.camera_position[2] 
+
+        # Create the ray from the camera to the current pixel
+        ray_origin = np.array([world_x, world_y, world_z])
+
+        return ray_origin
+
+    def get_intersections(self, startPos, k1, k2):
+        ro = self.get_ray(startPos[0], startPos[1])
+        pos_1 = ro + (k1 *0.25) * self.direction
+        pos_2 = ro + (k2 *0.25) * self.direction
+
+        return (pos_1, pos_2)
+
+    def get_position(self, startPos, k):
+        ro = self.get_ray(startPos[0], startPos[1])
+        pos = ro + (k *0.25) * self.direction
+
+        return pos
     
-    # Calculate the direction vector of the line
-    dir_vector = target_point - camera_origin
-    
-    # Calculate the parameter t at the intersection point
-    t = (-d - np.dot(plane[:3], camera_origin)) / np.dot(plane[:3], dir_vector)
-    
-    # Calculate the coordinates of the intersection point
-    intersection_point = camera_origin + t * dir_vector
-    
-    return intersection_point
+    def get_uv(self, point):
+        intersection_pt = find_intersection(self.plane, point, self.direction)
+        u = (intersection_pt[0] - self.camera_position[0]) / self.right[0]
+        v = (intersection_pt[1] - self.camera_position[1]) / self.up[1]
+
+        # print("u", u, "v", v)
+        return (u*800, v*800)
+

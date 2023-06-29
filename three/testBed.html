@@ -45,9 +45,11 @@
 	scene = new THREE.Scene();
 	scene.background = new THREE.Color( 0x81ebc6 );
 
-	const width = 10.0, height = 10.0;
+	const near = 1, far = 100;
+	const width = 5.0, height = 5.0;
+	// camera = new THREE.OrthographicCamera(left, right, top2, bottom, near, far);
 	camera = new THREE.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, 1, 1000 );
-	// camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+	camera.lookAt(0.0, 0.0, 1.0);
 
 	camera.position.set( 5, 5, 5 );
 
@@ -97,64 +99,16 @@
 	}
 	geometry.setAttribute( 'color', new THREE.Float32BufferAttribute( colors, 3 ) );
 
+var cube = new THREE.Mesh( geometry, material );
+cube.position.set( 2.51947425 ,2.31436837 ,3.84529946 );
+cube.scale.set(0.5, 0.5, 0.5);
+scene.add( cube );
 
-	const loader = new THREE.FileLoader();
-	loader.load(
-	// resource URL
-	'./result.json',
-	// onLoad callback
-	function ( data ) {
-		// output the text to the console
-		var jsonData = JSON.parse(data); 
-		var objects_num = Object.keys(jsonData).length;
-		for (var i = 0; i < objects_num; i++) {
+var cube2 = new THREE.Mesh( geometry, material );
+cube2.position.set( 1.41834793 ,-1.43840838  ,0.09252271  );
+cube2.scale.set(0.5, 0.5, 0.5);
+scene.add( cube2 );
 
-			var start_x = jsonData[i]["obj"]["start_x"];
-			var start_y = jsonData[i]["obj"]["start_y"];
-			var start_z = jsonData[i]["obj"]["start_z"];
-
-			var scale_x = jsonData[i]["obj"]["scale_x"];
-			var scale_y = jsonData[i]["obj"]["scale_y"];
-			var scale_z = jsonData[i]["obj"]["scale_z"];
-
-			var center_x = start_x;
-			var center_y = start_y ;
-			var center_z = start_z;
-			
-			var debug_mode = jsonData[i]["obj"]["mode"];
-			console.log("jsonData[i]", jsonData[i]["obj"]["mode"] == 0);
-			
-			var a;
-			var rand = Math.random();
-			console.log("rand", rand);
-			var load_mesh = true;
-
-			var cube = new THREE.Mesh( geometry, material );
-			cube.position.set(center_x, center_y, center_z );
-			cube.scale.set(scale_x*2, scale_y*2, scale_z*2);
-			scene.add( cube );
-			load_mesh = false;
-		
-
-		if (load_mesh){
-			a.position.set(start_x,start_y,start_z);
-			a.scale.set(scale_x,scale_y,scale_z);
-			scene.add(a);
-		}
-
-
-		}
-	},
-	// onProgress callback
-	function ( xhr ) {
-		console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
-	},
-
-	// onError callback
-	function ( err ) {
-		console.error( 'An error happened' );
-	}
-	);
 
 
 	window.addEventListener( 'resize', onWindowResize );

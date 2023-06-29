@@ -1,11 +1,12 @@
 
 import parseTree
 import particle
-import intersection
 import resample
 import assign_type
 import decorations
 import constraints_loader
+import perspective
+
 from copy import deepcopy
 
 import numpy as np
@@ -22,17 +23,17 @@ class generate_helper:
         
     
     def smc_process(self, startPos):
-        num_particles = 1000
+        num_particles = 3000
         for i in range(num_particles):
             tempt_particle = particle.Particle(self.generic_object_list, self.sampled_points)
             self.particle_list.append(tempt_particle)
 
-        basic_scene = intersection.Scene(startPos)
         foreground_index = 8
         background_index = 16
 
-        foreground_intersection = basic_scene.get_possible_intersects(foreground_index)
-        background_intersection = basic_scene.get_possible_intersects(background_index)
+
+        camera = perspective.ortho_camera()
+        foreground_intersection, background_intersection = camera.get_intersections(startPos, foreground_index, background_index)
 
         foreground_type = 1
         foreground_connect = "-y"
@@ -40,33 +41,34 @@ class generate_helper:
         background_connect = "+y"
         steps = 1
 
+        print("foreground_intersection", foreground_intersection, "background_intersection", background_intersection)
         self.small_cubes = constraints_loader.guide_visualizer(self.sampled_points, foreground_index)
         self.procedural_generate(foreground_type, foreground_connect, foreground_intersection, steps, True)
         self.procedural_generate(background_type, background_connect, background_intersection, steps, False)
         self.connect()
 
-        self.reproduce_particle_list(num_particles)
+        # self.reproduce_particle_list(num_particles)
 
-        basic_scene2 = intersection.Scene(np.array([100,100]))
-        foreground_index = 8
-        background_index = 16
+        # basic_scene2 = intersection.Scene(np.array([100,100]))
+        # foreground_index = 8
+        # background_index = 16
 
-        foreground_intersection = basic_scene2.get_possible_intersects(foreground_index)
-        background_intersection = basic_scene2.get_possible_intersects(background_index)
+        # foreground_intersection = basic_scene2.get_possible_intersects(foreground_index)
+        # background_intersection = basic_scene2.get_possible_intersects(background_index)
 
-        foreground_type = 1
-        foreground_connect = "-y"
-        background_type = 3
-        background_connect = "+y"
-        steps = 1
+        # foreground_type = 1
+        # foreground_connect = "-y"
+        # background_type = 3
+        # background_connect = "+y"
+        # steps = 1
 
-        self.procedural_generate(foreground_type, foreground_connect, foreground_intersection, steps, True)
-        self.procedural_generate(background_type, background_connect, background_intersection, steps, False)
-        self.connect()
+        # self.procedural_generate(foreground_type, foreground_connect, foreground_intersection, steps, True)
+        # self.procedural_generate(background_type, background_connect, background_intersection, steps, False)
+        # self.connect()
 
         self.select_result_particle()
         return self.result_particle.procedural_objects
-
+        # return self.particle_list[0].procedural_objects
 
     def procedural_generate(self, start_type, connect_direction, intersection_pos, steps, isFront):
         parsedProb = parseTree.parseProb(self.generic_object_list, self.generic_object_list[start_type])
@@ -89,12 +91,12 @@ class generate_helper:
 
             self.particle_list = resample.resample_particles(self.particle_list, score_list)
 
-        print("generation complete")
+        print("random walk phase complete")
 
 
 
     def connect(self):
-        print("len(particle_list)", len(self.particle_list))
+        print("to connect, len(particle_list)", len(self.particle_list))
 
         success_connect_list = []
         for i in range(len(self.particle_list)):
@@ -112,7 +114,7 @@ class generate_helper:
                 highest_hit = particle.hit_constraints
                 print("current hit", particle.hit_constraints)
     
-        print("hit result", self.result_particle.hit_constraints)
+        # print("hit result", self.result_particle.hit_constraints)
 
     def reproduce_particle_list(self, num_particles):
         new_particle_list = []

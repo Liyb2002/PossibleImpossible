@@ -2,7 +2,7 @@ import json
 import random
 import numpy as np
 import procedural_objects
-import intersection
+import perspective
 
 def load_constraints():
     sampled_points = []
@@ -24,11 +24,11 @@ def load_constraints():
 def guide_visualizer(sampled_points, foreground_index):
     dummy_Pos = np.array([0,0])
     dummy_scope = [0.01, 0.01]
-    basic_scene = intersection.Scene(dummy_Pos)
+    camera = perspective.ortho_camera()
 
     small_cubes = []
     for pts in sampled_points:
-        pos = basic_scene.get_arbitrary_pos(foreground_index, pts)
+        pos = camera.get_position(pts, foreground_index)
         cube = procedural_objects.Procedural_object(-1, pos, np.array([dummy_scope,dummy_scope,dummy_scope]), "00000")
         small_cubes.append(cube)
     

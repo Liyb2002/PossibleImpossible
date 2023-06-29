@@ -15,6 +15,9 @@ class Scene:
         self.image_height = 800
         self.image_width = 800
 
+        self.screen_height = 10.0
+        self.screen_width = 10.0
+
         self.camera = perspective.Camera()
         self.get_impossible_intersection()
         
@@ -24,12 +27,14 @@ class Scene:
         v = (self.y_start) / self.image_height
         camera_pos = self.camera.get_camera_origin()
         ray = self.camera.get_ray(u, u)
-        ro = self.camera.get_ray_origin(u, v)
+        ro_x = camera_pos[0] + (2 * u - 1) * self.screen_width
+        ro_y = camera_pos[1] + (1 - 2 * v) * self.screen_height
+        ro = np.array([ro_x, ro_y, camera_pos[2]])
 
         for k in range(0,40):
-            x = camera_pos[0] + ray[0] * (k*0.5)
-            y = camera_pos[1] + ray[1] * (k*0.5)
-            z = camera_pos[2] + ray[2] * (k*0.5)
+            x = ro[0] + ray[0] * (k*0.5)
+            y = ro[1] + ray[1] * (k*0.5)
+            z = ro[2] + ray[2] * (k*0.5)
             pos = np.array([x, y,z])
             self.possible_intersects.append(pos)
 
