@@ -79,8 +79,7 @@ class connect_execution:
 
         ok, next_type, rule_chosen = current_generic_obj.get_nextType_with_direction(self.direction)
         if ok != True:
-            print("current type", current_generic_obj.id, "target direction", self.direction)
-            print("can't find next object available")
+            # print("can't find next object available")
             return 0
         next_type = int(next_type)
 
@@ -117,7 +116,6 @@ class connect_execution:
         self.current_type = next_type
 
         if self.upper_bound>self.delta[self.direction_idx] and self.lower_bound<self.delta[self.direction_idx] and valid_ending(self.available_endings, self.current_type):
-            print("pass once")
             return 2
         
         if self.lower_bound > self.delta[self.direction_idx]:

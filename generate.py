@@ -1,12 +1,12 @@
 
 import parseTree
 import particle
+import intersection
 import resample
 import assign_type
 import decorations
-import constraints_loader
 import perspective
-
+import constraints_loader
 from copy import deepcopy
 
 import numpy as np
@@ -20,55 +20,46 @@ class generate_helper:
         self.score_list = []
         self.result_particle = None
         self.sampled_points = constraints_loader.load_constraints()
-        
+
     
-    def smc_process(self, startPos):
+    def smc_process(self):
         num_particles = 3000
         for i in range(num_particles):
             tempt_particle = particle.Particle(self.generic_object_list, self.sampled_points)
             self.particle_list.append(tempt_particle)
 
-        foreground_index = 8
-        background_index = 16
-
+        startPos = np.array([400,400])
+        foreground_index = 12
+        background_index = 24
 
         camera = perspective.ortho_camera()
         foreground_intersection, background_intersection = camera.get_intersections(startPos, foreground_index, background_index)
+
 
         foreground_type = 1
         foreground_connect = "-y"
         background_type = 3
         background_connect = "+y"
-        steps = 1
+        steps = 2
 
-        print("foreground_intersection", foreground_intersection, "background_intersection", background_intersection)
         self.small_cubes = constraints_loader.guide_visualizer(self.sampled_points, foreground_index)
-        self.procedural_generate(foreground_type, foreground_connect, foreground_intersection, steps, True)
-        self.procedural_generate(background_type, background_connect, background_intersection, steps, False)
+
+        self.procedural_generate(foreground_type, foreground_connect, foreground_intersection+np.array([0.05,0.075,0.05]), steps, True)
+        self.procedural_generate(background_type, background_connect, background_intersection-np.array([0.05,0.15,0.05]), steps, False)
+        self.connect()
+        self.reproduce_particle_list(num_particles)
+
+
+        startPos = np.array([100,800])
+        foreground_intersection, background_intersection = camera.get_intersections(startPos, foreground_index, background_index)
+        self.procedural_generate(foreground_type, foreground_connect, foreground_intersection+np.array([0.05,0.075,0.05]), steps, True)
+        self.procedural_generate(background_type, background_connect, background_intersection-np.array([0.05,0.15,0.05]), steps, False)
         self.connect()
 
-        # self.reproduce_particle_list(num_particles)
-
-        # basic_scene2 = intersection.Scene(np.array([100,100]))
-        # foreground_index = 8
-        # background_index = 16
-
-        # foreground_intersection = basic_scene2.get_possible_intersects(foreground_index)
-        # background_intersection = basic_scene2.get_possible_intersects(background_index)
-
-        # foreground_type = 1
-        # foreground_connect = "-y"
-        # background_type = 3
-        # background_connect = "+y"
-        # steps = 1
-
-        # self.procedural_generate(foreground_type, foreground_connect, foreground_intersection, steps, True)
-        # self.procedural_generate(background_type, background_connect, background_intersection, steps, False)
-        # self.connect()
-
         self.select_result_particle()
-        return self.result_particle.procedural_objects
-        # return self.particle_list[0].procedural_objects
+
+        return self.finish()
+
 
     def procedural_generate(self, start_type, connect_direction, intersection_pos, steps, isFront):
         parsedProb = parseTree.parseProb(self.generic_object_list, self.generic_object_list[start_type])
@@ -81,7 +72,7 @@ class generate_helper:
 
         for s in range(steps):
             cur_step = steps - s -1
-            # print("cur_step", cur_step)
+            print("cur_step", cur_step)
 
             score_list = []
             for i in range(len(self.particle_list)):
@@ -91,7 +82,7 @@ class generate_helper:
 
             self.particle_list = resample.resample_particles(self.particle_list, score_list)
 
-        print("random walk phase complete")
+        print("generation complete")
 
 
 
@@ -105,7 +96,7 @@ class generate_helper:
                 success_connect_list.append(self.particle_list[i])
 
         self.particle_list = success_connect_list
-    
+
     def select_result_particle(self):
         highest_hit = 0
         for particle in self.particle_list:
@@ -113,8 +104,6 @@ class generate_helper:
                 self.result_particle = particle
                 highest_hit = particle.hit_constraints
                 print("current hit", particle.hit_constraints)
-    
-        # print("hit result", self.result_particle.hit_constraints)
 
     def reproduce_particle_list(self, num_particles):
         new_particle_list = []
@@ -127,6 +116,7 @@ class generate_helper:
 
         self.particle_list = new_particle_list
 
+
     def finish(self):
         procedural_objects = assign_type.assign(self.result_particle.procedural_objects)
         decorator = decorations.decoration_operator()
@@ -137,12 +127,11 @@ class generate_helper:
         #phrase: 1->random walk, 2->connect, 3-> decorations
         #find impossible intersection positions
         startPos = np.array([400,400])
-        basic_scene = intersection.Scene(startPos)
         foreground_index = 8
         background_index = 16
 
-        foreground_intersection = basic_scene.get_possible_intersects(foreground_index)
-        background_intersection = basic_scene.get_possible_intersects(background_index)
+        camera = perspective.ortho_camera()
+        foreground_intersection, background_intersection = camera.get_intersections(startPos, foreground_index, background_index)
 
         #parse probability tree
         #start produce

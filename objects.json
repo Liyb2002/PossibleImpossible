@@ -1,9 +1,9 @@
 [
     {
       "object_id": 1,
-      "scope_x": [0.1,0.1],
-      "scope_y": [0.15,0.15],
-      "scope_z": [0.1,0.1],
+      "scope_x": [0.05,0.05],
+      "scope_y": [0.075,0.075],
+      "scope_z": [0.05,0.05],
       "canTerminate": "True",
       "cycle_connect": "True",
       "connect_id": [[3,0.2],[4,0.2],[5,0.2],[6,0.2],[7,0.1],[8,0.1]],
@@ -28,10 +28,10 @@
       },
       {
         "object_id": 3,
-        "scope_x": [0.1,0.1],
-        "scope_y": [0.1,0.3],
-        "scope_z": [0.1,0.1],
-        "canTerminate": "False",
+        "scope_x": [0.05,0.05],
+        "scope_y": [0.05,0.15],
+        "scope_z": [0.05,0.05],
+        "canTerminate": "True",
         "cycle_connect": "True",
         "connect_id": [[1,1.0]],
         "connect_rule":{
@@ -40,21 +40,22 @@
       },
       {
         "object_id": 4,
-        "scope_x": [0.2,0.6],
-        "scope_y": [0.15,0.15],
-        "scope_z": [0.1,0.1],
+        "scope_x": [0.1,0.3],
+        "scope_y": [0.075,0.075],
+        "scope_z": [0.05,0.05],
         "canTerminate": "False",
         "cycle_connect": "True",
-        "connect_id": [[1, 0.1]],
+        "connect_id": [[1, 1.0]],
         "connect_rule":{
           "1" : [ "-x"]
+
         }
       },
       {
         "object_id": 5,
-        "scope_x": [0.2,0.6],
-        "scope_y": [0.15,0.15],
-        "scope_z": [0.1,0.1],
+        "scope_x": [0.1,0.3],
+        "scope_y": [0.075,0.075],
+        "scope_z": [0.05,0.05],
         "canTerminate": "False",
         "cycle_connect": "True",
         "connect_id": [[1,1.0]],
@@ -64,9 +65,9 @@
       },
       {
         "object_id": 6,
-        "scope_x": [0.1,0.1],
-        "scope_y": [0.15,0.15],
-        "scope_z": [0.2,0.6],
+        "scope_x": [0.05,0.05],
+        "scope_y": [0.075,0.075],
+        "scope_z": [0.1,0.3],
         "canTerminate": "False",
         "cycle_connect": "True",
         "connect_id": [[1,1.0]],
@@ -76,9 +77,9 @@
       },
       {
         "object_id": 7,
-        "scope_x": [0.1,0.1],
-        "scope_y": [0.15,0.15],
-        "scope_z": [0.2,0.6],
+        "scope_x": [0.05,0.05],
+        "scope_y": [0.075,0.075],
+        "scope_z": [0.1,0.3],
         "canTerminate": "False",
         "cycle_connect": "True",
         "connect_id": [[1,1.0]],
@@ -88,10 +89,10 @@
       },
       {
         "object_id": 8,
-        "scope_x": [0.1,0.1],
-        "scope_y": [0.1,0.3],
-        "scope_z": [0.1,0.1],
-        "canTerminate": "False",
+        "scope_x": [0.05,0.05],
+        "scope_y": [0.05,0.15],
+        "scope_z": [0.05,0.05],
+        "canTerminate": "True",
         "cycle_connect": "True",
         "connect_id": [[1,1.0]],
         "connect_rule":{
@@ -100,9 +101,9 @@
       },
       {
         "object_id": 9,
-        "scope_x": [0.3,0.3],
-        "scope_y": [0.3,0.3],
-        "scope_z": [0.1,0.1],
+        "scope_x": [0.15,0.15],
+        "scope_y": [0.15,0.15],
+        "scope_z": [0.05,0.05],
         "canTerminate": "Dummy for RoofTop",
         "cycle_connect": "True",
         "connect_id": [],
