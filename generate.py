@@ -12,7 +12,7 @@ from copy import deepcopy
 import numpy as np
 
 class generate_helper:
-    def __init__(self, generic_object_list):
+    def __init__(self, generic_object_list, visual_bridge_info):
         #find impossible intersection positions
 
         self.generic_object_list = generic_object_list
@@ -20,7 +20,7 @@ class generate_helper:
         self.score_list = []
         self.result_particle = None
         self.sampled_points = constraints_loader.load_constraints()
-
+        self.visual_bridge_info = visual_bridge_info
     
     def smc_process(self):
         num_particles = 3000
@@ -36,18 +36,18 @@ class generate_helper:
         foreground_intersection, background_intersection = camera.get_intersections(startPos, foreground_index, background_index)
 
 
-        foreground_type = 1
-        foreground_connect = "-y"
-        background_type = 1
-        background_connect = "+y"
+        foreground_type = self.visual_bridge_info['foreground_type']
+        foreground_connect = self.visual_bridge_info['foreground_connect']
+        background_type = self.visual_bridge_info['background_type']
+        background_connect = self.visual_bridge_info['background_connect']
 
-        background_intersection = foreground_intersection + np.array([2.5, 0.0, 1.5])
         steps = 2
 
         self.small_cubes = constraints_loader.guide_visualizer(self.sampled_points, foreground_index)
 
         self.procedural_generate(foreground_type, foreground_connect, foreground_intersection, steps, True)
-        self.procedural_generate(background_type, background_connect, background_intersection, steps, False)
+        if background_type != 0:
+            self.procedural_generate(background_type, background_connect, background_intersection, steps, False)
         self.connect()
 
 

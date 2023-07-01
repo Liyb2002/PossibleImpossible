@@ -1,4 +1,10 @@
-[
+[{
+  "object_id": -1,
+  "foreground_type": 1,
+  "foreground_connect": "-y",
+  "background_type": 0,
+  "background_connect": "+y"
+  },
     {
       "object_id": 1,
       "scope_x": [0.1,0.1],

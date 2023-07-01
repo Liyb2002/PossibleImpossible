@@ -36,6 +36,7 @@ class Particle:
 
         if step == 0 and isFront:
             self.start_connect = self.procedural_objects[-1]
+            self.end_connect = self.procedural_objects[0]
 
         if step == 0 and not isFront:
             self.end_connect = self.procedural_objects[-1]
@@ -183,6 +184,8 @@ class Particle:
             current_Prob[obj.type] += 1 / len(self.procedural_objects)
         
         for key in current_Prob:
+            if not self.targetProb[key]:
+                continue
             term = self.targetProb[key]
 
             if current_Prob[key] != 0:

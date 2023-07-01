@@ -9,17 +9,20 @@ import numpy as np
 
 #read the inputs
 generic_object_list = []
-with open('temple.json', 'r') as object_file:
+visual_bridge_info = None
+with open('objects.json', 'r') as object_file:
     objects_data = json.load(object_file)
 
     generic_object_list.append(generic_objects.Generic_object(objects_data[1]))
     for object_data in objects_data:
+        if object_data['object_id'] == -1:
+            visual_bridge_info = object_data
         if object_data['object_id'] > 0:
             new_object = generic_objects.Generic_object(object_data)
             generic_object_list.append(new_object)
 
 
-class_generate = generate.generate_helper(generic_object_list)
+class_generate = generate.generate_helper(generic_object_list, visual_bridge_info)
 result_list = class_generate.smc_process()
 
 
