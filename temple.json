@@ -1,0 +1,89 @@
+[
+    {
+      "object_id": 1,
+      "scope_x": [0.1,0.1],
+      "scope_y": [1.2,1.2],
+      "scope_z": [0.1,0.1],
+      "canTerminate": "True",
+      "cycle_connect": "True",
+      "rotation": [[0],[0],[0]],
+      "connect_id": [[2,0.4],[3,0.4],[4,0.1],[5,0.1]],
+      "connect_rule":{
+        "2" : ["+x"],
+        "3" : ["-x"],
+        "4" : ["+z"],
+        "5" : ["-z"]
+      },
+      "offsets":{
+        "2" : [0.0,0.0,0.0],
+        "3" : [0.0,0.0,0.0],
+        "4" : [0.0,0.0,0.0],
+        "5" : [0.0,0.0,0.0]
+
+      }
+    },
+      {
+        "object_id": 2,
+        "scope_x": [0.5,1.0],
+        "scope_y": [0.1,0.1],
+        "scope_z": [0.1,0.1],
+        "canTerminate": "False",
+        "cycle_connect": "True",
+        "rotation": [[0],[0],[0]],
+        "connect_id": [[1,1.0]],
+        "connect_rule":{
+          "1" : [ "+x"]
+
+        },
+        "offsets":{
+          "1" : [0.0,0.0,0.0]
+        }
+      }, {
+        "object_id": 3,
+        "scope_x": [0.5,1.0],
+        "scope_y": [0.1,0.1],
+        "scope_z": [0.1,0.1],
+        "canTerminate": "False",
+        "cycle_connect": "True",
+        "rotation": [[0],[0],[0]],
+        "connect_id": [[1,1.0]],
+        "connect_rule":{
+          "1" : [ "-x"]
+
+        },
+        "offsets":{
+          "1" : [0.0,0.0,0.0]
+        }
+      }, {
+        "object_id": 4,
+        "scope_x": [0.1,0.1],
+        "scope_y": [0.1,0.1],
+        "scope_z": [0.2,0.8],
+        "canTerminate": "False",
+        "cycle_connect": "True",
+        "rotation": [[0],[0],[0]],
+        "connect_id": [[1,1.0]],
+        "connect_rule":{
+          "1" : [ "+z"]
+        },
+        "offsets":{
+          "1" : [0.0,0.0,0.0]
+        }
+      }, {
+        "object_id": 5,
+        "scope_x": [0.1,0.1],
+        "scope_y": [0.1,0.1],
+        "scope_z": [0.2,0.8],
+        "canTerminate": "False",
+        "cycle_connect": "True",
+        "rotation": [[0],[0],[0]],
+        "connect_id": [[1,1.0]],
+        "connect_rule":{
+          "1" : [ "-z"]
+        },
+        "offsets":{
+          "1" : [0.0,0.0,0.0]
+        }
+      }
+      
+  ]

@@ -38,23 +38,25 @@ class generate_helper:
 
         foreground_type = 1
         foreground_connect = "-y"
-        background_type = 3
+        background_type = 1
         background_connect = "+y"
+
+        background_intersection = foreground_intersection + np.array([2.5, 0.0, 1.5])
         steps = 2
 
         self.small_cubes = constraints_loader.guide_visualizer(self.sampled_points, foreground_index)
 
-        self.procedural_generate(foreground_type, foreground_connect, foreground_intersection+np.array([0.05,0.075,0.05]), steps, True)
-        self.procedural_generate(background_type, background_connect, background_intersection-np.array([0.05,0.15,0.05]), steps, False)
+        self.procedural_generate(foreground_type, foreground_connect, foreground_intersection, steps, True)
+        self.procedural_generate(background_type, background_connect, background_intersection, steps, False)
         self.connect()
-        self.reproduce_particle_list(num_particles)
 
 
-        startPos = np.array([100,800])
-        foreground_intersection, background_intersection = camera.get_intersections(startPos, foreground_index, background_index)
-        self.procedural_generate(foreground_type, foreground_connect, foreground_intersection+np.array([0.05,0.075,0.05]), steps, True)
-        self.procedural_generate(background_type, background_connect, background_intersection-np.array([0.05,0.15,0.05]), steps, False)
-        self.connect()
+        # self.reproduce_particle_list(num_particles)
+        # startPos = np.array([100,800])
+        # foreground_intersection, background_intersection = camera.get_intersections(startPos, foreground_index, background_index)
+        # self.procedural_generate(foreground_type, foreground_connect, foreground_intersection+np.array([0.05,0.075,0.05]), steps, True)
+        # self.procedural_generate(background_type, background_connect, background_intersection-np.array([0.05,0.15,0.05]), steps, False)
+        # self.connect()
 
         self.select_result_particle()
 
@@ -118,7 +120,7 @@ class generate_helper:
 
 
     def finish(self):
-        procedural_objects = assign_type.assign(self.result_particle.procedural_objects)
+        # procedural_objects = assign_type.assign(self.result_particle.procedural_objects)
         decorator = decorations.decoration_operator()
         decoration_list = decorator.decorate(self.result_particle.procedural_objects)
         return decoration_list
