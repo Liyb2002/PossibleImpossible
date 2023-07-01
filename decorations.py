@@ -12,7 +12,7 @@ class decoration_operator:
         self.read_decorations()
 
     def read_decorations(self):
-        with open('temple/temple_decorate.json', 'r') as object_file:
+        with open('decorate.json', 'r') as object_file:
             objects_data = json.load(object_file)
 
             new_object = generic_footprint_object(objects_data[0])

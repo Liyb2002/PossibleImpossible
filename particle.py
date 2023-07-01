@@ -223,7 +223,7 @@ def start_obj(start_pos, generic_object_list, start_type, connected_dir):
     start_scope = generic_object_list[cur_type].scope
     gen_hash = generic_object_list[cur_type].generate_hash()
     next_rotation = generic_object_list[cur_type].rotation
-    cur_obj = procedural_objects.Procedural_object(cur_type, start_pos, start_scope, gen_hash,next_rotation)
+    cur_obj = procedural_objects.Procedural_object(cur_type, start_pos, start_scope, gen_hash,next_rotation, np.array([0,0,0]))
     cur_obj_x = cur_obj.length[0]
     cur_obj_y = cur_obj.length[1]
     cur_obj_z = cur_obj.length[2]

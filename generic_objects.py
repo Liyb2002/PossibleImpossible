@@ -12,6 +12,7 @@ class Generic_object:
         self.cycle_connect = info['cycle_connect']
 
         self.rotation = info['rotation']
+        self.offsets = info['offsets']
 
         self.set_connect_ids(info['connect_id'])
 
@@ -19,6 +20,9 @@ class Generic_object:
         for id_tuple in id_tuples:
             self.connect_id.append(id_tuple[0])
             self.probabilities.append(id_tuple)
+
+    def get_offset(self, id):
+        return self.offsets[str(id)]
 
     def get_nextType(self, unavailable_dirs):
         if self.connect_id == []:

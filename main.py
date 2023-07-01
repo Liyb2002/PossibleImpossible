@@ -12,7 +12,7 @@ generic_object_list = []
 global__object_list = []
 visual_bridge_info = None
 
-with open('temple/temple.json', 'r') as object_file:
+with open('objects.json', 'r') as object_file:
     objects_data = json.load(object_file)
 
     generic_object_list.append(generic_objects.Generic_object(objects_data[1]))

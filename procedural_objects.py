@@ -2,7 +2,7 @@ import numpy as np
 import random
 
 class Procedural_object:
-    def __init__(self, type, position, scope, gen_hash, next_rotation):
+    def __init__(self, type, position, scope, gen_hash, next_rotation, next_offset):
         self.type = type
         self.position = position
         self.scope = scope
@@ -10,6 +10,7 @@ class Procedural_object:
         self.hash = gen_hash
         self.connected = []
         self.rotation = np.array([random.choice(next_rotation[0]), random.choice(next_rotation[1]), random.choice(next_rotation[2])])
+        self.offset = next_offset
 
     def set_type(self, type):
         self.type = type
@@ -30,6 +31,7 @@ class Procedural_object:
         prev_y = prev_obj.length[1]
         prev_z = prev_obj.length[2]
 
+        self.position =  np.array([self.offset[0],self.offset[1],self.offset[2]])
         if(rule == '-x'):
             self.position = prev_pos - np.array([prev_x, 0, 0]) - np.array([self.length[0],0,0])
 
