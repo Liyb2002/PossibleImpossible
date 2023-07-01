@@ -145,6 +145,9 @@
 			var scale_x = jsonData[i]["obj"]["scale_x"];
 			var scale_y = jsonData[i]["obj"]["scale_y"];
 			var scale_z = jsonData[i]["obj"]["scale_z"];
+			var rotation_x = jsonData[i]["obj"]["rotation_x"];
+			var rotation_y = jsonData[i]["obj"]["rotation_y"];
+			var rotation_z = jsonData[i]["obj"]["rotation_z"];
 
 			var center_x = start_x;
 			var center_y = start_y ;
@@ -192,6 +195,10 @@
 			var cube = new THREE.Mesh( geometry, material );
 			cube.position.set(center_x, center_y, center_z );
 			cube.scale.set(scale_x*2, scale_y*2, scale_z*2);
+			cube.rotation.x = rotation_x;
+			cube.rotation.y = rotation_y;
+			cube.rotation.z = rotation_z;
+
 			scene.add( cube );
 			load_mesh = false;
 		}
@@ -199,6 +206,10 @@
 		if (load_mesh){
 			a.position.set(start_x,start_y,start_z);
 			a.scale.set(scale_x,scale_y,scale_z);
+			a.rotation.x = rotation_x;
+			a.rotation.y = rotation_y;
+			a.rotation.z = rotation_z;
+
 			scene.add(a);
 		}
 
