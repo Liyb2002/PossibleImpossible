@@ -7,16 +7,17 @@ import assign_type
 import decorations
 import perspective
 import constraints_loader
+import global_execution
+
 from copy import deepcopy
-
-
 import numpy as np
 
 class generate_helper:
-    def __init__(self, generic_object_list, visual_bridge_info):
+    def __init__(self, generic_object_list, global__object_list, visual_bridge_info):
         #find impossible intersection positions
 
         self.generic_object_list = generic_object_list
+        self.global__object_list = global__object_list
         self.particle_list = []
         self.score_list = []
         self.result_particle = None
@@ -121,9 +122,11 @@ class generate_helper:
 
     def finish(self):
         # procedural_objects = assign_type.assign(self.result_particle.procedural_objects)
+
         self.result_particle.procedural_objects[0].type = self.visual_bridge_info['foreground_type'][1]
+        procedural_objects = global_execution.global_assign(self.result_particle.procedural_objects, self.global__object_list)
         decorator = decorations.decoration_operator()
-        decoration_list = decorator.decorate(self.result_particle.procedural_objects)
+        decoration_list = decorator.decorate(procedural_objects)
         return decoration_list
 
     def recursive_process(self):

@@ -1,5 +1,6 @@
 [{
   "object_id": -1,
+  "type": "local_object",
   "foreground_type": [1,8],
   "foreground_connect": "-y",
   "background_type": 0,
@@ -30,6 +31,7 @@
     },
       {
         "object_id": 2,
+        "type": "local_object",
         "scope_x": [0.5,1.0],
         "scope_y": [0.1,0.1],
         "scope_z": [0.1,0.1],
@@ -46,6 +48,7 @@
         }
       }, {
         "object_id": 3,
+        "type": "local_object",
         "scope_x": [0.5,1.0],
         "scope_y": [0.1,0.1],
         "scope_z": [0.1,0.1],
@@ -62,6 +65,7 @@
         }
       }, {
         "object_id": 4,
+        "type": "local_object",
         "scope_x": [0.1,0.1],
         "scope_y": [0.1,0.1],
         "scope_z": [0.2,0.8],
@@ -77,6 +81,23 @@
         }
       }, {
         "object_id": 5,
+        "type": "local_object",
+        "scope_x": [0.1,0.1],
+        "scope_y": [0.1,0.1],
+        "scope_z": [0.2,0.8],
+        "canTerminate": "False",
+        "cycle_connect": "True",
+        "rotation": [[0],[0],[0]],
+        "connect_id": [[1,1.0]],
+        "connect_rule":{
+          "1" : [ "-z"]
+        },
+        "offsets":{
+          "1" : [0.0,0.0,0.0]
+        }
+      }, {
+        "object_id": 6,
+        "type": "global_object",
         "scope_x": [0.1,0.1],
         "scope_y": [0.1,0.1],
         "scope_z": [0.2,0.8],
