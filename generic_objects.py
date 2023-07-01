@@ -11,6 +11,8 @@ class Generic_object:
         self.probabilities = []
         self.cycle_connect = info['cycle_connect']
 
+        self.rotation = info['rotation']
+
         self.set_connect_ids(info['connect_id'])
 
     def set_connect_ids(self, id_tuples):

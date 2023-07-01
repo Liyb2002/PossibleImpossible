@@ -2,14 +2,15 @@ import numpy as np
 import random
 
 class Procedural_object:
-    def __init__(self, type, position, scope, gen_hash):
+    def __init__(self, type, position, scope, gen_hash, next_rotation):
         self.type = type
         self.position = position
         self.scope = scope
         self.set_scope()
         self.hash = gen_hash
         self.connected = []
-    
+        self.rotation = np.array([random.choice(next_rotation[0]), random.choice(next_rotation[1]), random.choice(next_rotation[2])])
+
     def set_type(self, type):
         self.type = type
     
