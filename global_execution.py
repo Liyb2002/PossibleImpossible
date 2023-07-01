@@ -56,7 +56,8 @@ def action_add(procedural_objects_list, global_object):
         if min_z > obj.position[2] - obj.length[2]:
             min_z = obj.position[2] - obj.length[2]
         if max_z < obj.position[2] + obj.length[2]:
-            max_z = obj.position[2] - obj.length[2]
+            max_z = obj.position[2] +
+             obj.length[2]
 
 
     dummy_scope = [0.1, 0.1]
@@ -72,6 +73,9 @@ def action_add(procedural_objects_list, global_object):
     
     if global_object['pos'][1][0] == "top":
         obj_ypos = max_y + global_object['pos'][1][1]
+
+    if global_object['pos'][1][0] == "bot":
+        obj_ypos = min_y - global_object['pos'][1][1]
 
     if global_object['pos'][2][0] == "middle":
         obj_zpos =  (min_z+max_z) / 2.0
