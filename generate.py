@@ -9,6 +9,7 @@ import perspective
 import constraints_loader
 from copy import deepcopy
 
+
 import numpy as np
 
 class generate_helper:
@@ -36,7 +37,7 @@ class generate_helper:
         foreground_intersection, background_intersection = camera.get_intersections(startPos, foreground_index, background_index)
 
 
-        foreground_type = self.visual_bridge_info['foreground_type']
+        foreground_type = self.visual_bridge_info['foreground_type'][0]
         foreground_connect = self.visual_bridge_info['foreground_connect']
         background_type = self.visual_bridge_info['background_type']
         background_connect = self.visual_bridge_info['background_connect']
@@ -59,7 +60,6 @@ class generate_helper:
         # self.connect()
 
         self.select_result_particle()
-
         return self.finish()
 
 
@@ -121,6 +121,7 @@ class generate_helper:
 
     def finish(self):
         # procedural_objects = assign_type.assign(self.result_particle.procedural_objects)
+        self.result_particle.procedural_objects[0].type = self.visual_bridge_info['foreground_type'][1]
         decorator = decorations.decoration_operator()
         decoration_list = decorator.decorate(self.result_particle.procedural_objects)
         return decoration_list

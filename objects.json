@@ -1,6 +1,6 @@
 [{
 "object_id": -1,
-"foreground_type": 1,
+"foreground_type": [1,1],
 "foreground_connect": "-y",
 "background_type": 3,
 "background_connect": "+y"
