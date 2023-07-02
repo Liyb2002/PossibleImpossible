@@ -43,7 +43,7 @@ class generate_helper:
         background_type = self.visual_bridge_info['background_type']
         background_connect = self.visual_bridge_info['background_connect']
 
-        steps = 2
+        steps = 4
 
         self.small_cubes = constraints_loader.guide_visualizer(self.sampled_points, foreground_index)
 
@@ -62,6 +62,7 @@ class generate_helper:
 
         self.select_result_particle()
         return self.finish()
+        # return self.particle_list[0].procedural_objects
 
 
     def procedural_generate(self, start_type, connect_direction, intersection_pos, steps, isFront):

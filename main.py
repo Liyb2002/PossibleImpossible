@@ -12,7 +12,7 @@ generic_object_list = []
 global__object_list = []
 visual_bridge_info = None
 
-with open('objects.json', 'r') as object_file:
+with open('tree/tree.json', 'r') as object_file:
     objects_data = json.load(object_file)
 
     generic_object_list.append(generic_objects.Generic_object(objects_data[1]))
@@ -41,4 +41,6 @@ print("success!")
 output_writer = write2JSON.output()
 
 output_writer.write_proceudral_objects(class_generate.small_cubes, './three/guides.json')
+# output_writer.write_proceudral_objects(result_list, './three/result.json')
+
 output_writer.write_result(result_list, './three/result.json')

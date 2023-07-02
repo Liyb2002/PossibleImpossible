@@ -1,0 +1,8 @@
+1 -> random growing branch
+2 -> nest
+3 -> branch, -x direction
+4 -> branch, +x direction
+5 -> branch, -y direction
+6 -> branch, +y direction
+7 -> branch, -z direction
+8 -> branch, +z direction
