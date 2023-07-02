@@ -31,25 +31,44 @@ class Procedural_object:
         prev_y = prev_obj.length[1]
         prev_z = prev_obj.length[2]
 
-        self.position =  np.array([self.offset[0],self.offset[1],self.offset[2]])
+        offset =  np.array([self.offset[0],self.offset[1],self.offset[2]])
         if(rule == '-x'):
-            self.position = prev_pos - np.array([prev_x, 0, 0]) - np.array([self.length[0],0,0])
+            prev_obj_closest_point = prev_pos - np.array([prev_x, 0, 0])
+            prev_obj_rotated_point = rotate_line(prev_pos, prev_obj_closest_point, prev_obj.rotation[0],prev_obj.rotation[1],prev_obj.rotation[2])
+            prev_obj_delta_rotate = prev_obj_rotated_point - prev_obj_closest_point
+            self.position = prev_obj_closest_point - np.array([self.length[0],0,0]) + prev_obj_delta_rotate + offset
 
         if(rule == '+x'):
-            self.position = prev_pos + np.array([prev_x, 0, 0]) + np.array([self.length[0],0,0])
+            prev_obj_closest_point = prev_pos + np.array([prev_x, 0, 0])
+            prev_obj_rotated_point = rotate_line(prev_pos, prev_obj_closest_point, prev_obj.rotation[0],prev_obj.rotation[1],prev_obj.rotation[2])
+            prev_obj_delta_rotate = prev_obj_rotated_point - prev_obj_closest_point
+            self.position = prev_obj_closest_point + np.array([self.length[0],0,0]) + prev_obj_delta_rotate + offset
         
         if(rule == '-y'):
-            self.position = prev_pos - np.array([0, prev_y, 0]) - np.array([0,self.length[1],0])
+            prev_obj_closest_point = prev_pos - np.array([0, prev_y, 0])
+            prev_obj_rotated_point = rotate_line(prev_pos, prev_obj_closest_point, prev_obj.rotation[0],prev_obj.rotation[1],prev_obj.rotation[2])
+            prev_obj_delta_rotate = prev_obj_rotated_point - prev_obj_closest_point
+            self.position = prev_obj_closest_point - np.array([0,self.length[1],0]) + prev_obj_delta_rotate + offset
         
         if(rule == '+y'):
-            self.position = prev_pos + np.array([0, prev_y, 0]) + np.array([0,self.length[1],0])
+            prev_obj_closest_point = prev_pos + np.array([0, prev_y, 0])
+            prev_obj_rotated_point = rotate_line(prev_pos, prev_obj_closest_point, prev_obj.rotation[0],prev_obj.rotation[1],prev_obj.rotation[2])
+            prev_obj_delta_rotate = prev_obj_rotated_point - prev_obj_closest_point
+            self.position = prev_obj_closest_point + np.array([0,self.length[1],0]) + prev_obj_delta_rotate + offset
        
         if(rule == '-z'):
-            self.position = prev_pos - np.array([0, 0, prev_z]) - np.array([0,0,self.length[2]])
+            prev_obj_closest_point = prev_pos - np.array([0, 0, prev_z])
+            prev_obj_rotated_point = rotate_line(prev_pos, prev_obj_closest_point, prev_obj.rotation[0],prev_obj.rotation[1],prev_obj.rotation[2])
+            prev_obj_delta_rotate = prev_obj_rotated_point - prev_obj_closest_point
+            self.position = prev_obj_closest_point - np.array([0,0,self.length[2]]) + prev_obj_delta_rotate + offset
 
         if(rule == '+z'):
-            self.position = prev_pos + np.array([0, 0, prev_z]) + np.array([0,0,self.length[2]])
+            prev_obj_closest_point = prev_pos + np.array([0, 0, prev_z])
+            prev_obj_rotated_point = rotate_line(prev_pos, prev_obj_closest_point, prev_obj.rotation[0],prev_obj.rotation[1],prev_obj.rotation[2])
+            prev_obj_delta_rotate = prev_obj_rotated_point - prev_obj_closest_point
+            self.position = prev_obj_closest_point + np.array([0,0,self.length[2]]) + prev_obj_delta_rotate + offset
 
+        # print("prev_obj_delta_rotate", prev_obj_delta_rotate)
         if(rule == '-x2'):
             self.position = prev_pos - np.array([prev_x, -prev_y, 0]) - np.array([self.length[0],0 ,0])
             self.arriving_rule = '-x'
@@ -109,3 +128,35 @@ def getOverlap3D(objectA_position, objectA_size, objectB_position, objectB_size)
 
 def getOverlap(a, b):
     return max(0, min(a[1], b[1]) - max(a[0], b[0]))
+
+def rotate_line(line_center, line_endpoints, alpha_x, alpha_y, alpha_z):
+    # Convert angles to radians
+    alpha_x_rad = np.radians(alpha_x)
+    alpha_y_rad = np.radians(alpha_y)
+    alpha_z_rad = np.radians(alpha_z)
+
+    # Translation to origin
+    line_endpoints = line_endpoints - line_center
+
+    # Rotation matrices
+    rotation_x = np.array([[1, 0, 0],
+                           [0, np.cos(alpha_x_rad), -np.sin(alpha_x_rad)],
+                           [0, np.sin(alpha_x_rad), np.cos(alpha_x_rad)]])
+
+    rotation_y = np.array([[np.cos(alpha_y_rad), 0, np.sin(alpha_y_rad)],
+                           [0, 1, 0],
+                           [-np.sin(alpha_y_rad), 0, np.cos(alpha_y_rad)]])
+
+    rotation_z = np.array([[np.cos(alpha_z_rad), -np.sin(alpha_z_rad), 0],
+                           [np.sin(alpha_z_rad), np.cos(alpha_z_rad), 0],
+                           [0, 0, 1]])
+
+    # Apply rotations to endpoints only
+    line_endpoints = np.dot(rotation_x, line_endpoints.T).T
+    line_endpoints = np.dot(rotation_y, line_endpoints.T).T
+    line_endpoints = np.dot(rotation_z, line_endpoints.T).T
+
+    # Translation back to original position
+    line_endpoints = line_endpoints + line_center
+
+    return line_endpoints

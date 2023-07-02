@@ -86,7 +86,7 @@ def action_add(procedural_objects_list, global_object):
         obj_sizeY = global_object['size'][1][1]
 
     if global_object['size'][2][0] == "mult":
-        obj_sizeZ = (max_x - min_x) * global_object['size'][2][1]
+        obj_sizeZ = (max_z - min_z) * global_object['size'][2][1]
 
     tempt_obj = procedural_objects.Procedural_object(global_object['object_id'], np.array([obj_xpos,obj_ypos,obj_zpos]), np.array([dummy_scope,dummy_scope,dummy_scope]), "00000", np.array([[0],[0],[0]]), np.array([0,0,0]))
     tempt_obj.arbitrary_set_length(np.array([float(obj_sizeX),float(obj_sizeY),float(obj_sizeZ)]))
