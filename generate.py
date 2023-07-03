@@ -43,13 +43,20 @@ class generate_helper:
         background_type = self.visual_bridge_info['background_type']
         background_connect = self.visual_bridge_info['background_connect']
 
-        steps = 4
+        steps = 2
 
         self.small_cubes = constraints_loader.guide_visualizer(self.sampled_points, foreground_index)
 
         self.procedural_generate(foreground_type, foreground_connect, foreground_intersection, steps, True)
         if background_type != 0:
             self.procedural_generate(background_type, background_connect, background_intersection, steps, False)
+        
+        tempt_list = []
+        for temple_particle in self.particle_list:
+            if temple_particle.success:
+                tempt_list.append(temple_particle)
+        self.particle_list = tempt_list
+        print("len(tempt_list)", len(tempt_list))
         self.connect()
 
 
@@ -101,14 +108,15 @@ class generate_helper:
                 success_connect_list.append(self.particle_list[i])
 
         self.particle_list = success_connect_list
+        print("successful connected particle list", len(self.particle_list))
 
     def select_result_particle(self):
         highest_hit = 0
+        self.result_particle = self.particle_list[0]
         for particle in self.particle_list:
             if particle.hit_constraints > highest_hit:
                 self.result_particle = particle
                 highest_hit = particle.hit_constraints
-                print("current hit", particle.hit_constraints)
 
     def reproduce_particle_list(self, num_particles):
         new_particle_list = []
