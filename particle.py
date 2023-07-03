@@ -56,18 +56,18 @@ class Particle:
         directions = cycle_connect.get_dirs(delta)
         # directions = cycle_connect.update_order(self.start_connect, directions)
         orders = cycle_connect.random_order()
-        print("------------------------")
-        print("orders:", directions[orders[0]],directions[orders[1]],directions[orders[2]])
+        # print("------------------------")
+        # print("orders:", directions[orders[0]],directions[orders[1]],directions[orders[2]])
         for i in range(0,3):
             index = orders[i]
             if abs_delta[index] != 0:
                 if i < 2:
                     target_dir_index = orders[i+1]
                     available_endings = cycle_connect.Available_Ending_With_Direction(self.generic_object_list, directions[target_dir_index])
-                    print("i:", i, "available_endings", available_endings)
+                    # print("i:", i, "available_endings", available_endings)
                 if i == 2:
                     available_endings = cycle_connect.Available_Ending_With_Object(self.generic_object_list, self.end_connect)
-                    print("i:", i, "available_endings", available_endings)
+                    # print("i:", i, "available_endings", available_endings)
 
                 connect_particle = produce.connect_execution(production_list[-1], self.generic_object_list,abs_delta,directions[index],available_endings, self.end_connect)
                 ok = 1
@@ -87,7 +87,7 @@ class Particle:
                             self.success = False
                             return 
 
-            print("rotation", i, "succes")
+            # print("rotation", i, "succes")
 
         # self.success = True
         self.procedural_objects += production_list

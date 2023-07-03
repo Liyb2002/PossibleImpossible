@@ -34,6 +34,7 @@ def action_assign(procedural_objects_list, global_object):
     return procedural_objects_list
 
 def action_add(procedural_objects_list, global_object):
+    print("action add")
     min_x = 100
     max_x = -100
     min_y = 100
@@ -79,8 +80,13 @@ def action_add(procedural_objects_list, global_object):
     if global_object['pos'][2][0] == "middle":
         obj_zpos =  (min_z+max_z) / 2.0
 
+
+
     if global_object['size'][0][0] == "mult":
         obj_sizeX = (max_x - min_x) * global_object['size'][0][1]
+
+    if global_object['size'][0][0] == "fixed":
+        obj_sizeX = global_object['size'][0][1]
 
     if global_object['size'][1][0] == "fixed":
         obj_sizeY = global_object['size'][1][1]
@@ -88,9 +94,11 @@ def action_add(procedural_objects_list, global_object):
     if global_object['size'][2][0] == "mult":
         obj_sizeZ = (max_z - min_z) * global_object['size'][2][1]
 
+    if global_object['size'][2][0] == "fixed":
+        obj_sizeZ = global_object['size'][2][1]
+
     tempt_obj = procedural_objects.Procedural_object(global_object['object_id'], np.array([obj_xpos,obj_ypos,obj_zpos]), np.array([dummy_scope,dummy_scope,dummy_scope]), "00000", np.array([[0],[0],[0]]), np.array([0,0,0]))
     tempt_obj.arbitrary_set_length(np.array([float(obj_sizeX),float(obj_sizeY),float(obj_sizeZ)]))
-
     procedural_objects_list.append(tempt_obj)
     return procedural_objects_list
 

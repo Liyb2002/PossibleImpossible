@@ -104,7 +104,6 @@ class generate_helper:
         for i in range(len(self.particle_list)):
             self.particle_list[i].run_connect()
             if self.particle_list[i].success:
-                print("append!")
                 success_connect_list.append(self.particle_list[i])
 
         self.particle_list = success_connect_list
