@@ -106,19 +106,41 @@ def action_add(procedural_objects_list, global_object):
 def action_add_multiple(procedural_objects_list, global_object):
     target_count = len(procedural_objects_list)
     count = 0
+
     for obj in procedural_objects_list:
         if count > target_count:
             break
         count += 1
 
+        signs = random_sign(3)
+        offsets = random_number(3)
         pos = obj.position
         length = obj.length
         
         new_obj_scopeX = np.array([0.05, 0.2])
         new_obj_scopeY = np.array([0.01, 0.03])
         new_obj_scopeZ = np.array([0.01, 0.03])
-        new_obj_pos = obj.position + np.array([obj.length[0], 0, 0]) + np.array([new_obj_scopeX[0],0,0])
-        tempt_obj = procedural_objects.Procedural_object(9, new_obj_pos, np.array([new_obj_scopeX,new_obj_scopeY,new_obj_scopeZ]), "00000", np.array([[0.3],[0],[0.5, 0.6, 0.7, -0.5, -0.6, -0.7]]), np.array([0,0,0]))
+        new_obj_pos = obj.position + np.array([signs[0] * obj.length[0], signs[1] * offsets[1] * obj.length[1], signs[2] * offsets[2] * obj.length[2]]) + np.array([signs[0] *new_obj_scopeX[0],signs[1] *new_obj_scopeY[0],signs[2] *new_obj_scopeZ[0]])
+        tempt_obj = procedural_objects.Procedural_object(9, new_obj_pos, np.array([new_obj_scopeX,new_obj_scopeY,new_obj_scopeZ]), "00000", np.array([[0.0],[0],[0.0]]), np.array([0,0,0]))
         procedural_objects_list.append(tempt_obj)
     
     return procedural_objects_list
+
+def random_sign(number):
+    signs = []
+    for i in range(0, number):
+        rand_num = random.random()
+        if rand_num > 0.5:
+            signs.append(1)
+        else:
+            signs.append(-1)
+
+    return signs
+
+def random_number(number):
+    rand_offsets = []
+    for i in range(0, number):
+        rand_num = random.random()
+        rand_offsets.append(rand_num*0.5)
+
+    return rand_offsets

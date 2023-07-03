@@ -6,3 +6,7 @@
 6 -> branch, +y direction
 7 -> branch, -z direction
 8 -> branch, +z direction
+
+global:
+9 -> branches
+10 -> main branch
