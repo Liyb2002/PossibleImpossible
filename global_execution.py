@@ -10,7 +10,8 @@ def global_assign(procedural_objects_list, global_objects):
             procedural_objects_list = action_assign(procedural_objects_list, global_object)
         if action[0] == 'add':
             procedural_objects_list = action_add(procedural_objects_list, global_object)
-
+    
+    procedural_objects_list = action_add_multiple(procedural_objects_list, global_object)
     return procedural_objects_list
 
 def action_assign(procedural_objects_list, global_object):
@@ -34,7 +35,6 @@ def action_assign(procedural_objects_list, global_object):
     return procedural_objects_list
 
 def action_add(procedural_objects_list, global_object):
-    print("action add")
     min_x = 100
     max_x = -100
     min_y = 100
@@ -103,3 +103,22 @@ def action_add(procedural_objects_list, global_object):
     return procedural_objects_list
 
 
+def action_add_multiple(procedural_objects_list, global_object):
+    target_count = len(procedural_objects_list)
+    count = 0
+    for obj in procedural_objects_list:
+        if count > target_count:
+            break
+        count += 1
+
+        pos = obj.position
+        length = obj.length
+        
+        new_obj_scopeX = np.array([0.05, 0.2])
+        new_obj_scopeY = np.array([0.01, 0.03])
+        new_obj_scopeZ = np.array([0.01, 0.03])
+        new_obj_pos = obj.position + np.array([obj.length[0], 0, 0]) + np.array([new_obj_scopeX[0],0,0])
+        tempt_obj = procedural_objects.Procedural_object(9, new_obj_pos, np.array([new_obj_scopeX,new_obj_scopeY,new_obj_scopeZ]), "00000", np.array([[0.3],[0],[0.5, 0.6, 0.7, -0.5, -0.6, -0.7]]), np.array([0,0,0]))
+        procedural_objects_list.append(tempt_obj)
+    
+    return procedural_objects_list
