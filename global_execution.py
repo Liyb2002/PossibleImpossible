@@ -107,11 +107,14 @@ def action_add_multiple(procedural_objects_list, global_object):
     target_count = len(procedural_objects_list)
     count = 0
 
+    adding_types = [1,2,5,6]
     for obj in procedural_objects_list:
+        if obj.type not in adding_types:
+            continue
+
         if count > target_count:
             break
         count += 1
-
         signs = random_sign(3)
         offsets = random_number(3)
         pos = obj.position
@@ -121,7 +124,7 @@ def action_add_multiple(procedural_objects_list, global_object):
         new_obj_scopeY = np.array([0.01, 0.03])
         new_obj_scopeZ = np.array([0.01, 0.03])
         new_obj_pos = obj.position + np.array([signs[0] * obj.length[0], signs[1] * offsets[1] * obj.length[1], signs[2] * offsets[2] * obj.length[2]]) + np.array([signs[0] *new_obj_scopeX[0],signs[1] *new_obj_scopeY[0],signs[2] *new_obj_scopeZ[0]])
-        tempt_obj = procedural_objects.Procedural_object(9, new_obj_pos, np.array([new_obj_scopeX,new_obj_scopeY,new_obj_scopeZ]), "00000", np.array([[0.0],[0],[0.0]]), np.array([0,0,0]))
+        tempt_obj = procedural_objects.Procedural_object(9, new_obj_pos, np.array([new_obj_scopeX,new_obj_scopeY,new_obj_scopeZ]), "00000", np.array([[0.0],[0.0],[0.5]]), np.array([0,0,0]))
         procedural_objects_list.append(tempt_obj)
     
     return procedural_objects_list
