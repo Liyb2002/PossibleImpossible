@@ -10,8 +10,8 @@ def global_assign(procedural_objects_list, global_objects):
             procedural_objects_list = action_assign(procedural_objects_list, global_object)
         if action[0] == 'add':
             procedural_objects_list = action_add(procedural_objects_list, global_object)
-    
-    procedural_objects_list = action_add_multiple(procedural_objects_list, global_object)
+        if action[0] == 'add_multiple':
+            procedural_objects_list = action_add_multiple(procedural_objects_list, global_object)
     return procedural_objects_list
 
 def action_assign(procedural_objects_list, global_object):
@@ -107,7 +107,7 @@ def action_add_multiple(procedural_objects_list, global_object):
     target_count = len(procedural_objects_list)
     count = 0
 
-    adding_types = [1,2,5,6]
+    adding_types = global_object['adding_types']
     for obj in procedural_objects_list:
         if obj.type not in adding_types:
             continue
@@ -120,11 +120,16 @@ def action_add_multiple(procedural_objects_list, global_object):
         pos = obj.position
         length = obj.length
         
-        new_obj_scopeX = np.array([0.05, 0.2])
-        new_obj_scopeY = np.array([0.01, 0.03])
-        new_obj_scopeZ = np.array([0.01, 0.03])
+        new_obj_scopeX = np.array([global_object['scope_x'][0], global_object['scope_x'][1]])
+        new_obj_scopeY = np.array([global_object['scope_y'][0], global_object['scope_y'][1]])
+        new_obj_scopeZ = np.array([global_object['scope_z'][0], global_object['scope_z'][1]])
+        new_obj_rotationX = random.choice(global_object['rotation'][0])
+        new_obj_rotationY = random.choice(global_object['rotation'][1])
+        new_obj_rotationZ = random.choice(global_object['rotation'][2])
+        print("new_obj_rotationX", new_obj_rotationX, "new_obj_rotationY", new_obj_rotationY, "new_obj_rotationZ", new_obj_rotationZ)
+
         new_obj_pos = obj.position + np.array([signs[0] * obj.length[0], signs[1] * offsets[1] * obj.length[1], signs[2] * offsets[2] * obj.length[2]]) + np.array([signs[0] *new_obj_scopeX[0],signs[1] *new_obj_scopeY[0],signs[2] *new_obj_scopeZ[0]])
-        tempt_obj = procedural_objects.Procedural_object(9, new_obj_pos, np.array([new_obj_scopeX,new_obj_scopeY,new_obj_scopeZ]), "00000", np.array([[0.0],[0.0],[0.5]]), np.array([0,0,0]))
+        tempt_obj = procedural_objects.Procedural_object(9, new_obj_pos, np.array([new_obj_scopeX,new_obj_scopeY,new_obj_scopeZ]), "00000", np.array([[new_obj_rotationX],[new_obj_rotationY],[new_obj_rotationZ]]), np.array([0,0,0]))
         procedural_objects_list.append(tempt_obj)
     
     return procedural_objects_list
