@@ -126,7 +126,6 @@ def action_add_multiple(procedural_objects_list, global_object):
         new_obj_rotationX = random.choice(global_object['rotation'][0])
         new_obj_rotationY = random.choice(global_object['rotation'][1])
         new_obj_rotationZ = random.choice(global_object['rotation'][2])
-        print("new_obj_rotationX", new_obj_rotationX, "new_obj_rotationY", new_obj_rotationY, "new_obj_rotationZ", new_obj_rotationZ)
 
         new_obj_pos = obj.position + np.array([signs[0] * obj.length[0], signs[1] * offsets[1] * obj.length[1], signs[2] * offsets[2] * obj.length[2]]) + np.array([signs[0] *new_obj_scopeX[0],signs[1] *new_obj_scopeY[0],signs[2] *new_obj_scopeZ[0]])
         tempt_obj = procedural_objects.Procedural_object(9, new_obj_pos, np.array([new_obj_scopeX,new_obj_scopeY,new_obj_scopeZ]), "00000", np.array([[new_obj_rotationX],[new_obj_rotationY],[new_obj_rotationZ]]), np.array([0,0,0]))
