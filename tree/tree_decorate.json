@@ -11,7 +11,7 @@
 "category":  "footprint",
 "structural_id": 2,
 "subdiv":[
-[1.0, "y direction", ["terminal", "0", 1.0]] 
+[1.0, "y direction", ["terminal", "1", 1.0]] 
 ]
 },
 {
@@ -77,7 +77,7 @@
 "category":  "terminal",
 "terminal_id": 0,
 "rule": "normal",
-"multiplier": [1,1,1]
+"multiplier": [1.2,1.2,1.2]
 } ,
 {
 "object_name": "terminal_void",
@@ -85,5 +85,12 @@
 "terminal_id": 1,
 "rule": "normal",
 "multiplier": [0.01,0.01,0.01]
+},
+{
+"object_name": "terminal_treeAnkle",
+"category":  "terminal",
+"terminal_id": 2,
+"rule": "normal",
+"multiplier": [1,1,1]
 } 
 ]
