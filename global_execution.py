@@ -2,6 +2,7 @@ import copy
 import random
 import numpy as np
 import procedural_objects
+import LSystem
 
 def global_assign(procedural_objects_list, global_objects):
     for global_object in global_objects:
@@ -12,6 +13,8 @@ def global_assign(procedural_objects_list, global_objects):
             procedural_objects_list = action_add(procedural_objects_list, global_object)
         if action[0] == 'add_multiple':
             procedural_objects_list = action_add_multiple(procedural_objects_list, global_object)
+        if action[0] == 'LSystem':
+            procedural_objects_list += action_LSystem(procedural_objects_list, global_object)
     return procedural_objects_list
 
 def action_assign(procedural_objects_list, global_object):
@@ -87,14 +90,23 @@ def action_add(procedural_objects_list, global_object):
     if global_object['pos'][0][0] == "middle":
         obj_xpos = (min_x+max_x) / 2.0
     
+    if global_object['pos'][0][0] == "positive":
+        obj_xpos = max_x + global_object['pos'][0][1]
+
     if global_object['pos'][1][0] == "top":
         obj_ypos = max_y + global_object['pos'][1][1] + float(obj_sizeY)
 
     if global_object['pos'][1][0] == "bot":
         obj_ypos = min_y - global_object['pos'][1][1] - float(obj_sizeY)
+    
+    if global_object['pos'][1][0] == "positive":
+        obj_ypos = max_y + global_object['pos'][1][1]
 
     if global_object['pos'][2][0] == "middle":
         obj_zpos =  (min_z+max_z) / 2.0
+
+    if global_object['pos'][2][0] == "negative":
+        obj_zpos = min_z - global_object['pos'][2][1]
 
     tempt_obj = procedural_objects.Procedural_object(global_object['object_id'], np.array([obj_xpos,obj_ypos,obj_zpos]), np.array([dummy_scope,dummy_scope,dummy_scope]), "00000", np.array([[0],[0],[0]]), np.array([0,0,0]))
     tempt_obj.arbitrary_set_length(np.array([float(obj_sizeX),float(obj_sizeY),float(obj_sizeZ)]))
@@ -131,6 +143,12 @@ def action_add_multiple(procedural_objects_list, global_object):
         procedural_objects_list.append(tempt_obj)
     
     return procedural_objects_list
+
+def action_LSystem(procedural_objects_list, global_object):
+    system = LSystem.LSys()
+    result = system.finish_system()
+    print("len reulst", len(result))
+    return result
 
 def random_sign(number):
     signs = []

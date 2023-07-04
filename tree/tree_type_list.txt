@@ -8,5 +8,5 @@
 8 -> branch, +z direction
 
 global:
-9 -> branches
-10 -> main branch
+9 -> main branch
+10 -> light
