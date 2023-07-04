@@ -1,6 +1,7 @@
 import LModule
 import procedural_objects
 
+import json
 import numpy as np
 
 class LSys:
@@ -16,7 +17,7 @@ class LSys:
         self.light_pos = np.array([0.0,0.0,0.0])
         self.startpos = np.array([0.0,0.0,0.0])
 
-        self.add_rule()
+        self.add_rules()
         self.init_state()
         self.run_system()
 
@@ -39,19 +40,22 @@ class LSys:
             self.new_objects += obj.execute(self.light_pos, self.rules)
             self.procedural_objects.append(obj.toProcedual())
     
-    def add_rule(self):
-        new_rule = rule(11)
-        self.rules.append(new_rule)
+    def add_rules(self):
+        with open('tree/LSystem.json', 'r') as object_file:
+            rules_json = json.load(object_file)
+            for rule_json in rules_json:
+                new_rule = rule(rule_json)
+                self.rules.append(new_rule)
 
     def finish_system(self):
         return self.procedural_objects
 
 
 class rule:
-    def __init__(self, left_hand_type):
-        self.lhs_type = left_hand_type
-        self.rhs_types = [11, 11]
-        self.rhs_size_multiplier = [[0.8,0.8,0.8], [0.8,0.8,0.8]]
-        self.rhs_rotations = [[0.0, 0.0, 0.2], [0.0, 0.0, -0.2]]
-        self.rhs_offsets = [[0.15, 0.15, 0.0], [0.15, -0.15, 0.0]]
-        self.rhs_directions = ["top", "bot"]
+    def __init__(self, rule_json):
+        self.lhs_type = rule_json['lhs_type']
+        self.rhs_types = rule_json['rhs_types']
+        self.rhs_size_multiplier = rule_json['rhs_size_multiplier']
+        self.rhs_rotations = rule_json['rhs_rotations']
+        self.rhs_offsets = rule_json['rhs_offsets']
+        self.rhs_directions = rule_json['rhs_directions']

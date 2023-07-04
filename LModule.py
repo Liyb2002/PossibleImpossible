@@ -34,7 +34,6 @@ class Module:
             new_offsets = execute_rule.rhs_offsets[i]
 
             new_position = self.get_new_position(new_direction, new_size, new_offsets)
-            print("new_position", new_position)
             new_module = Module(new_position, new_size, new_rotation)
             new_modules.append(new_module)
 
