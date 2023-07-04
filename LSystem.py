@@ -22,7 +22,7 @@ class LSys:
         self.run_system()
 
     def init_state(self):
-        start_module = LModule.Module(self.startpos, np.array([0.2,0.03,0.03]), np.array([0,0,0]))
+        start_module = LModule.Module(self.startpos, np.array([0.2,0.03,0.03]), np.array([0,0,0]), 1)
         self.new_objects.append(start_module)
     
     def run_system(self):
@@ -30,7 +30,6 @@ class LSys:
             self.run_step()
 
     def run_step(self):
-
         level_count = len(self.new_objects)
         count = 1
         for obj in self.new_objects:
@@ -59,3 +58,4 @@ class rule:
         self.rhs_rotations = rule_json['rhs_rotations']
         self.rhs_offsets = rule_json['rhs_offsets']
         self.rhs_directions = rule_json['rhs_directions']
+        self.condition = rule_json['condition']

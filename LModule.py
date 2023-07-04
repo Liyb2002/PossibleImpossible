@@ -2,11 +2,11 @@ import procedural_objects
 import numpy as np
 
 class Module:
-    def __init__(self, position, size, rotation):
+    def __init__(self, position, size, rotation, age):
         self.type = 11
         self.position = position
         self.size = size
-        self.age = 0
+        self.age = age + 1
         self.rotation = rotation
 
     def toProcedual(self):
@@ -22,10 +22,13 @@ class Module:
         new_modules = []
         
         for rule in rules:
-            if rule.lhs_type == self.type:
+            if rule.lhs_type == self.type and self.satify_condition(rule):
                 execute_rule = rule
                 break
         
+        if not execute_rule:
+            return []
+            
         for i in range(len(execute_rule.rhs_types)):
             new_type = execute_rule.rhs_types[i]
             new_size = np.array([self.size[0] * execute_rule.rhs_size_multiplier[i][0], self.size[1] * execute_rule.rhs_size_multiplier[i][1], self.size[2] * execute_rule.rhs_size_multiplier[i][2]])
@@ -34,7 +37,7 @@ class Module:
             new_offsets = execute_rule.rhs_offsets[i]
 
             new_position = self.get_new_position(new_direction, new_size, new_offsets)
-            new_module = Module(new_position, new_size, new_rotation)
+            new_module = Module(new_position, new_size, new_rotation, self.age)
             new_modules.append(new_module)
 
         return new_modules
@@ -49,3 +52,12 @@ class Module:
             new_position += self.position - np.array([0, self.size[1], 0]) - np.array([0, new_size[1], 0])
 
         return new_position
+    
+
+    def satify_condition(self, rule):
+        for condition in rule.condition:
+            if condition[0] == 'age':
+                if condition[1] == 'less_than' and self.age >= condition[2]:
+                    return False
+                        
+        return True

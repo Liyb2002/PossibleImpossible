@@ -1,6 +1,7 @@
 [{
 "lhs_type": 11,
 "rhs_types": [11, 11],
+"condition": [["age", "less_than", 3]],
 "rhs_size_multiplier": [[0.8,0.8,0.8], [0.8,0.8,0.8]],
 "rhs_rotations": [[0.0, 0.0, 0.3], [0.0, 0.0, -0.3]],
 "rhs_offsets": [[0.15, 0.0, 0.0], [0.15, 0.0, 0.0]],
