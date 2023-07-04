@@ -1,10 +1,10 @@
 [{
 "object_id": -1,
 "type": "local_object",
-"foreground_type": [2,2],
-"foreground_connect": "+x",
+"foreground_type": [5,5],
+"foreground_connect": "+y",
 "background_type": 3,
-"background_connect": "+y"
+"background_connect": "-y"
 },
 {
 "object_id": 1,
