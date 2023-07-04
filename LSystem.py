@@ -21,7 +21,7 @@ class LSys:
         self.run_system()
 
     def init_state(self):
-        start_module = LModule.Module(self.startpos, np.array([0.1,0.05,0.05]), np.array([0,0,0]))
+        start_module = LModule.Module(self.startpos, np.array([0.2,0.03,0.03]), np.array([0,0,0]))
         self.new_objects.append(start_module)
     
     def run_system(self):
@@ -53,5 +53,5 @@ class rule:
         self.rhs_types = [11, 11]
         self.rhs_size_multiplier = [[0.8,0.8,0.8], [0.8,0.8,0.8]]
         self.rhs_rotations = [[0.0, 0.0, 0.2], [0.0, 0.0, -0.2]]
-        self.rhs_offsets = [[0.0, 0.1, 0.0], [0.0, -0.1, 0.0]]
+        self.rhs_offsets = [[0.15, 0.15, 0.0], [0.15, -0.15, 0.0]]
         self.rhs_directions = ["top", "bot"]

@@ -22,7 +22,6 @@ class Module:
         new_modules = []
         
         for rule in rules:
-            print("rule.lhs_type", rule.lhs_type, "self.type", self.type)
             if rule.lhs_type == self.type:
                 execute_rule = rule
                 break
@@ -32,20 +31,22 @@ class Module:
             new_size = np.array([self.size[0] * execute_rule.rhs_size_multiplier[i][0], self.size[1] * execute_rule.rhs_size_multiplier[i][1], self.size[2] * execute_rule.rhs_size_multiplier[i][2]])
             new_rotation = self.rotation + execute_rule.rhs_rotations[i]
             new_direction = execute_rule.rhs_directions[i]
+            new_offsets = execute_rule.rhs_offsets[i]
 
-            new_position = self.get_new_position(new_direction, new_size)
+            new_position = self.get_new_position(new_direction, new_size, new_offsets)
+            print("new_position", new_position)
             new_module = Module(new_position, new_size, new_rotation)
             new_modules.append(new_module)
 
         return new_modules
 
 
-    def get_new_position(self, new_direction, new_size):
-        new_position = np.array([0,0,0])
+    def get_new_position(self, new_direction, new_size, new_offsets):
+        new_position = new_offsets
         if new_direction == "top":
-            new_position = self.position + np.array([0, self.size[1], 0]) + np.array([0, new_size[1], 0])
+            new_position += self.position + np.array([0, self.size[1], 0]) + np.array([0, new_size[1], 0])
         
         if new_direction == "bot":
-            new_position = self.position + np.array([0, self.size[1], 0]) + np.array([0, new_size[1], 0])
+            new_position += self.position - np.array([0, self.size[1], 0]) - np.array([0, new_size[1], 0])
 
         return new_position
