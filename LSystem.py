@@ -10,7 +10,7 @@ class LSys:
         self.min_light = 0.1
         self.max_age = 5
         self.bounding_box = np.array([[0.0,0.0], [0.0,0.0], [0.0,0.0]])
-        self.steps = 6
+        self.steps = 5
         self.procedural_objects = []
         self.new_objects = []
         self.rules = []
@@ -22,7 +22,7 @@ class LSys:
         self.run_system()
 
     def init_state(self):
-        start_module = LModule.Module(self.startpos, np.array([0.2,0.025,0.025]), np.array([0,0,0]), 1)
+        start_module = LModule.Module(position = self.startpos, size = np.array([0.2,0.025,0.025]), rotation = np.array([0,0,0]), age = 1, type=11)
         self.new_objects.append(start_module)
     
     def run_system(self):
@@ -47,6 +47,8 @@ class LSys:
                 self.rules.append(new_rule)
 
     def finish_system(self):
+        for obj in self.new_objects:
+             self.procedural_objects.append(obj.toProcedual())
         return self.procedural_objects
 
 

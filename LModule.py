@@ -3,8 +3,8 @@ import numpy as np
 import random
 
 class Module:
-    def __init__(self, position, size, rotation, age):
-        self.type = 11
+    def __init__(self, position, size, rotation, age, type):
+        self.type = type
         self.position = position
         self.size = size
         self.age = age + 1
@@ -39,7 +39,7 @@ class Module:
             new_offsets = execute_rule.rhs_offsets[i]
 
             new_position = self.get_new_position(new_direction, new_size, new_offsets)
-            new_module = Module(new_position, new_size, new_rotation, self.age)
+            new_module = Module(new_position, new_size, new_rotation, self.age, execute_rule.rhs_types[i])
             new_modules.append(new_module)
 
         return new_modules
@@ -113,8 +113,7 @@ class Module:
                 if condition[1] == 'less_than' and self.age >= condition[2]:
                     return False
                 
-                if condition[1] == 'larger_than' and self.age <=
-                 condition[2]:
+                if condition[1] == 'larger_than' and self.age <= condition[2]:
                     return False
             
             if condition[0] == 'Prob' and random.random() > condition[1]:
