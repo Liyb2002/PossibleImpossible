@@ -141,12 +141,7 @@ def getOverlap3D(objectA_position, objectA_size, objectB_position, objectB_size)
 def getOverlap(a, b):
     return max(0, min(a[1], b[1]) - max(a[0], b[0]))
 
-def rotate_line(line_center, line_endpoints, alpha_x, alpha_y, alpha_z):
-    # Convert angles to radians
-    alpha_x_rad = np.radians(alpha_x)
-    alpha_y_rad = np.radians(alpha_y)
-    alpha_z_rad = np.radians(alpha_z)
-
+def rotate_line(line_center, line_endpoints, alpha_x_rad, alpha_y_rad, alpha_z_rad):
     # Translation to origin
     line_endpoints = line_endpoints - line_center
 

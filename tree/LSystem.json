@@ -1,20 +1,11 @@
 [{
 "lhs_type": 11,
 "rhs_types": [11, 11],
-"condition": [["age", "less_than", 3]],
-"rhs_size_multiplier": [[0.8,0.8,0.8], [0.8,0.8,0.8]],
-"rhs_rotations": [[0.0, 0.0, 0.3], [0.0, 0.0, -0.3]],
-"rhs_offsets": [[0.15, 0.0, 0.0], [0.15, 0.0, 0.0]],
-"rhs_directions": ["top", "bot"]
-},
-{
-"lhs_type": 11,
-"rhs_types": [12],
-"condition": [],
-"rhs_size_multiplier": [[0.2,1.0,0.1]],
-"rhs_rotations": [[0.0, 0.0, 0.0]],
-"rhs_offsets": [[0.5, 0.0, 0.0]],
-"rhs_directions": ["top"]
+"condition": [["age", "less_than", 4]],
+"rhs_size_multiplier": [[0.9,0.9,0.9], [0.9,0.9,0.9]],
+"rhs_rotations": [[0.0, 0.0, 0.5], [0.0, 0.0, -0.5]],
+"rhs_offsets": [[0.0, 0.0, 0.0], [0.0, 0.0, 0.0]],
+"rhs_directions": [[["+y",1.0] ,["+x",0.8]], [["-y",1.0] ,["+x",0.8]]]
 }
 
 ]

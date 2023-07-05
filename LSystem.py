@@ -22,7 +22,7 @@ class LSys:
         self.run_system()
 
     def init_state(self):
-        start_module = LModule.Module(self.startpos, np.array([0.2,0.03,0.03]), np.array([0,0,0]), 1)
+        start_module = LModule.Module(self.startpos, np.array([0.2,0.025,0.025]), np.array([0,0,0]), 1)
         self.new_objects.append(start_module)
     
     def run_system(self):

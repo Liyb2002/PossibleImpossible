@@ -43,13 +43,42 @@ class Module:
         return new_modules
 
 
-    def get_new_position(self, new_direction, new_size, new_offsets):
-        new_position = new_offsets
-        if new_direction == "top":
-            new_position += self.position + np.array([0, self.size[1], 0]) + np.array([0, new_size[1], 0])
-        
-        if new_direction == "bot":
-            new_position += self.position - np.array([0, self.size[1], 0]) - np.array([0, new_size[1], 0])
+    def get_new_position(self, new_directions, new_size, new_offsets):
+        new_position = self.position + new_offsets
+
+        for new_direction in new_directions:
+            if new_direction[0] == "+x":
+                prev_obj_closest_point = self.position + np.array([self.size[0], 0, 0])
+                prev_obj_rotated_point = procedural_objects.rotate_line(self.position, prev_obj_closest_point, self.rotation[0],self.rotation[1],self.rotation[2])
+                prev_obj_delta_rotate = prev_obj_rotated_point - prev_obj_closest_point
+
+                new_obj_closest_point = np.array([new_size[0], 0, 0])
+                new_obj_rotated_point = procedural_objects.rotate_line(np.array([0,0,0]), new_obj_closest_point, self.rotation[0],self.rotation[1],self.rotation[2])
+                new_obj_delta_rotate = new_obj_rotated_point - new_obj_closest_point
+
+                new_position += (np.array([self.size[0], 0, 0]) + np.array([new_size[0],0 , 0]) + prev_obj_delta_rotate + new_obj_delta_rotate) * new_direction[1]
+            
+            if new_direction[0] == "+y":
+                prev_obj_closest_point = self.position + np.array([0, self.size[1], 0])
+                prev_obj_rotated_point = procedural_objects.rotate_line(self.position, prev_obj_closest_point, self.rotation[0],self.rotation[1],self.rotation[2])
+                prev_obj_delta_rotate = prev_obj_rotated_point - prev_obj_closest_point
+
+                new_obj_closest_point = np.array([0, new_size[1], 0])
+                new_obj_rotated_point = procedural_objects.rotate_line(np.array([0,0,0]), new_obj_closest_point, self.rotation[0],self.rotation[1],self.rotation[2])
+                new_obj_delta_rotate = new_obj_rotated_point - new_obj_closest_point
+
+                new_position +=  (np.array([0, self.size[1], 0]) + np.array([0, new_size[1], 0]) + prev_obj_delta_rotate + new_obj_delta_rotate)  * new_direction[1]
+
+            if new_direction[0] == "-y":
+                prev_obj_closest_point = self.position - np.array([0, self.size[1], 0])
+                prev_obj_rotated_point = procedural_objects.rotate_line(self.position, prev_obj_closest_point, self.rotation[0],self.rotation[1],self.rotation[2])
+                prev_obj_delta_rotate = prev_obj_rotated_point - prev_obj_closest_point
+
+                new_obj_closest_point = np.array([0, -new_size[1], 0])
+                new_obj_rotated_point = procedural_objects.rotate_line(np.array([0,0,0]), new_obj_closest_point, self.rotation[0],self.rotation[1],self.rotation[2])
+                new_obj_delta_rotate = new_obj_rotated_point - new_obj_closest_point
+
+                new_position += (0 - np.array([0, self.size[1], 0]) - np.array([0, new_size[1], 0]) + prev_obj_delta_rotate + new_obj_delta_rotate)  * new_direction[1]
 
         return new_position
     
