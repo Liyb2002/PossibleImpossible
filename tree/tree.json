@@ -166,7 +166,8 @@
 {
 "object_id": 11,
 "type": "global_object",
-"action" : ["LSystem"]
+"action" : ["LSystem"],
+"adding_types":[2]
 }
 
 ]

@@ -19,7 +19,7 @@ class output:
                 'rotation_x' : float(obj.rotation[0]),
                 'rotation_y' : float(obj.rotation[1]),
                 'rotation_z' : float(obj.rotation[2]),
-                'mode': '1'}
+                'group': float(obj.group)}
                     }
             self.result.append(data)
 
@@ -41,7 +41,7 @@ class output:
                 'rotation_x' : float(obj.rotation[0]),
                 'rotation_y' : float(obj.rotation[1]),
                 'rotation_z' : float(obj.rotation[2]),
-                'mode': '1'}
+                'group': float(obj.group)}
                     }
             self.result.append(data)
 

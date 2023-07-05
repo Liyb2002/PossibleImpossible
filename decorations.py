@@ -40,6 +40,7 @@ class decoration_operator:
             min_pos = obj.position - obj.length
             max_pos = obj.position + obj.length
             rotation = obj.rotation
+            group = obj.group
 
             #if we have decoration for this main object
             for footprint_object in self.generic_footprint_list:
@@ -49,7 +50,7 @@ class decoration_operator:
                     subdiv_rule = footprint_object.execute_subdiv()
 
                     #execute the subdivision rule
-                    total_nonterminal_list, total_terminal_list = self.parse_rule(subdiv_rule, min_pos, max_pos, rotation)
+                    total_nonterminal_list, total_terminal_list = self.parse_rule(subdiv_rule, min_pos, max_pos, rotation, group)
 
                     while len(total_nonterminal_list) > 0:
                         nonterminal_obj = total_nonterminal_list[-1]
@@ -66,7 +67,7 @@ class decoration_operator:
         return instance_list
 
 
-    def parse_rule(self, subdiv_rule, min_pos, max_pos, rotation):
+    def parse_rule(self, subdiv_rule, min_pos, max_pos, rotation, group):
         split_dir = subdiv_rule[1]
         scope = max_pos - min_pos
         culmulative_percentage = 0
@@ -93,32 +94,32 @@ class decoration_operator:
                         rule = generic_terminal_object.rule
                         object_size = (tempt_max_pos-tempt_min_pos)*0.5 * multiplier
 
-                        terminal_list += self.produce_terminal_instance(rule, object_size, tempt_max_pos, tempt_min_pos, new_obj_info[1], rotation)
+                        terminal_list += self.produce_terminal_instance(rule, object_size, tempt_max_pos, tempt_min_pos, new_obj_info[1], rotation, group)
 
         return (nonterminal_list, terminal_list)
 
-    def produce_terminal_instance(self, rule, object_size, tempt_max_pos, tempt_min_pos, terminal_type, rotation):
+    def produce_terminal_instance(self, rule, object_size, tempt_max_pos, tempt_min_pos, terminal_type, rotation, group):
         instance_list = []
         if rule == "normal":
-            new_instance_terminal_object = instance_terminal_object(terminal_type, tempt_min_pos, tempt_max_pos, rotation)
+            new_instance_terminal_object = instance_terminal_object(terminal_type, tempt_min_pos, tempt_max_pos, rotation, group)
             new_instance_terminal_object.set_position((tempt_min_pos+tempt_max_pos)*0.5)
             instance_list.append(new_instance_terminal_object)
 
-        if rule == "four_corners":
-            new_instance_terminal_object_0 = instance_terminal_object(terminal_type, tempt_min_pos, tempt_max_pos, rotation)
-            new_instance_terminal_object_1 = instance_terminal_object(terminal_type, tempt_min_pos, tempt_max_pos, rotation)
-            new_instance_terminal_object_2 = instance_terminal_object(terminal_type, tempt_min_pos, tempt_max_pos, rotation)
-            new_instance_terminal_object_3 = instance_terminal_object(terminal_type, tempt_min_pos, tempt_max_pos, rotation)
+        # if rule == "four_corners":
+        #     new_instance_terminal_object_0 = instance_terminal_object(terminal_type, tempt_min_pos, tempt_max_pos, rotation)
+        #     new_instance_terminal_object_1 = instance_terminal_object(terminal_type, tempt_min_pos, tempt_max_pos, rotation)
+        #     new_instance_terminal_object_2 = instance_terminal_object(terminal_type, tempt_min_pos, tempt_max_pos, rotation)
+        #     new_instance_terminal_object_3 = instance_terminal_object(terminal_type, tempt_min_pos, tempt_max_pos, rotation)
 
-            new_instance_terminal_object_0.set_position(tempt_min_pos + object_size)
-            new_instance_terminal_object_1.set_position(np.array([tempt_max_pos[0],tempt_min_pos[1],tempt_min_pos[2]]) + np.array([-object_size[0], object_size[1], object_size[2]]))
-            new_instance_terminal_object_2.set_position(np.array([tempt_min_pos[0],tempt_min_pos[1],tempt_max_pos[2]]) + np.array([object_size[0], object_size[1], -object_size[2]]))
-            new_instance_terminal_object_3.set_position(np.array([tempt_max_pos[0],tempt_min_pos[1],tempt_max_pos[2]]) + np.array([-object_size[0], object_size[1], -object_size[2]]))
+        #     new_instance_terminal_object_0.set_position(tempt_min_pos + object_size)
+        #     new_instance_terminal_object_1.set_position(np.array([tempt_max_pos[0],tempt_min_pos[1],tempt_min_pos[2]]) + np.array([-object_size[0], object_size[1], object_size[2]]))
+        #     new_instance_terminal_object_2.set_position(np.array([tempt_min_pos[0],tempt_min_pos[1],tempt_max_pos[2]]) + np.array([object_size[0], object_size[1], -object_size[2]]))
+        #     new_instance_terminal_object_3.set_position(np.array([tempt_max_pos[0],tempt_min_pos[1],tempt_max_pos[2]]) + np.array([-object_size[0], object_size[1], -object_size[2]]))
 
-            instance_list.append(new_instance_terminal_object_0)
-            instance_list.append(new_instance_terminal_object_1)
-            instance_list.append(new_instance_terminal_object_2)
-            instance_list.append(new_instance_terminal_object_3)
+        #     instance_list.append(new_instance_terminal_object_0)
+        #     instance_list.append(new_instance_terminal_object_1)
+        #     instance_list.append(new_instance_terminal_object_2)
+        #     instance_list.append(new_instance_terminal_object_3)
 
         for obj in instance_list:
             obj.set_size(object_size)
@@ -173,11 +174,12 @@ class instance_nonterminal_object:
 
 
 class instance_terminal_object:
-    def __init__(self, type, min_pos, max_pos, rotation):
+    def __init__(self, type, min_pos, max_pos, rotation, group):
         self.type = type
         self.min_pos = min_pos
         self.max_pos = max_pos
         self.rotation = rotation
+        self.group = group
 
     def set_position(self, position):
         self.position = position

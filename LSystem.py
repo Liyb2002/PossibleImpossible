@@ -5,7 +5,7 @@ import json
 import numpy as np
 
 class LSys:
-    def __init__(self):
+    def __init__(self, startpos, group):
         self.alpha = 0.4
         self.min_light = 0.1
         self.max_age = 5
@@ -15,7 +15,8 @@ class LSys:
         self.new_objects = []
         self.rules = []
         self.light_pos = np.array([0.0,0.0,0.0])
-        self.startpos = np.array([0.0,0.0,0.0])
+        self.startpos = startpos
+        self.group = group
 
         self.add_rules()
         self.init_state()
@@ -49,6 +50,10 @@ class LSys:
     def finish_system(self):
         for obj in self.new_objects:
              self.procedural_objects.append(obj.toProcedual())
+        
+        for obj in self.procedural_objects:
+            obj.set_group(self.group)
+            
         return self.procedural_objects
 
 

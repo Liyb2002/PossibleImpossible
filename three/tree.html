@@ -61,7 +61,10 @@
 	scene.add( light );
 
 	var pivot = new THREE.Group();
+	var pivot2 = new THREE.Group();
+
 	scene.add( pivot );
+	scene.add( pivot2 );
 
 	new RGBELoader()
 	.setPath( 'textures/equirectangular/' )
@@ -201,8 +204,10 @@
 			cube.rotation.y = rotation_y;
 			cube.rotation.z = rotation_z;
 
-			if(jsonData[i]["obj"]["type"] == 2){
+			if(jsonData[i]["obj"]["type"] == 2 && jsonData[i]["obj"]["group"] == 1){
 				pivot.add(cube);
+			}else if(jsonData[i]["obj"]["type"] == 2){
+				pivot2.add(cube);
 			}else{
 				scene.add( cube );
 			}

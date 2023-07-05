@@ -145,9 +145,16 @@ def action_add_multiple(procedural_objects_list, global_object):
     return procedural_objects_list
 
 def action_LSystem(procedural_objects_list, global_object):
-    system = LSystem.LSys()
-    result = system.finish_system()
-    print("len reulst", len(result))
+
+    group_count = 1
+    result = []
+    for obj in procedural_objects_list:
+        if obj.type in global_object['adding_types'] and random.random() <0.2:
+            print("add system")
+            system = LSystem.LSys(obj.position, group_count)
+            result += system.finish_system()
+            group_count += 1
+
     return result
 
 def random_sign(number):
