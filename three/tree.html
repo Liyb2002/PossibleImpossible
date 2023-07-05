@@ -2,7 +2,7 @@
 	<html>
 	<head>
 		<meta charset="utf-8">
-		<title>Result</title>
+		<title>Tree</title>
 		<style>
 			body { margin: 0; }
 		</style>
@@ -60,6 +60,8 @@
 	light.position.set( - 1.25, 1, 1.25 );
 	scene.add( light );
 
+	var pivot = new THREE.Group();
+	scene.add( pivot );
 
 	new RGBELoader()
 	.setPath( 'textures/equirectangular/' )
@@ -199,7 +201,11 @@
 			cube.rotation.y = rotation_y;
 			cube.rotation.z = rotation_z;
 
-			scene.add( cube );
+			if(jsonData[i]["obj"]["type"] == 2){
+				pivot.add(cube);
+			}else{
+				scene.add( cube );
+			}
 			load_mesh = false;
 		}
 
@@ -215,6 +221,8 @@
 
 
 		}
+
+		pivot.rotation.z = 1.4;
 	},
 	// onProgress callback
 	function ( xhr ) {

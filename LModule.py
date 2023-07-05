@@ -12,8 +12,7 @@ class Module:
 
     def toProcedual(self):
         dummy_scope = [0.1, 0.1]
-
-        tempt_obj = procedural_objects.Procedural_object(11, self.position,np.array([dummy_scope,dummy_scope,dummy_scope]), "00000", np.array([[self.rotation[0]],[self.rotation[1]],[self.rotation[2]]]), np.array([0,0,0]))
+        tempt_obj = procedural_objects.Procedural_object(self.type, self.position,np.array([dummy_scope,dummy_scope,dummy_scope]), "00000", np.array([[self.rotation[0]],[self.rotation[1]],[self.rotation[2]]]), np.array([0,0,0]))
         tempt_obj.arbitrary_set_length(np.array([float(self.size[0]),float(self.size[1]),float(self.size[2])]))
         return tempt_obj
     

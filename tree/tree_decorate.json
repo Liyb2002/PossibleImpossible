@@ -76,14 +76,21 @@
 "category":  "footprint",
 "structural_id": 11,
 "subdiv":[
-[1.0, "y direction", ["terminal","0", 1.0]]
+[1.0, "y direction", ["terminal","2", 1.0]]
 ]
 },{
 "object_name": "footprint_12",
 "category":  "footprint",
 "structural_id": 12,
 "subdiv":[
-[1.0, "y direction", ["terminal","0", 1.0]]
+[1.0, "y direction", ["terminal","2", 1.0]]
+]
+},{
+"object_name": "footprint_13",
+"category":  "footprint",
+"structural_id": 13,
+"subdiv":[
+[1.0, "y direction", ["terminal","2", 1.0]]
 ]
 },
 {
@@ -101,7 +108,7 @@
 "multiplier": [0.01,0.01,0.01]
 },
 {
-"object_name": "terminal_treeAnkle",
+"object_name": "terminal_tree",
 "category":  "terminal",
 "terminal_id": 2,
 "rule": "normal",

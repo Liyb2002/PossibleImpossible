@@ -10,7 +10,7 @@ class LSys:
         self.min_light = 0.1
         self.max_age = 5
         self.bounding_box = np.array([[0.0,0.0], [0.0,0.0], [0.0,0.0]])
-        self.steps = 5
+        self.steps = 6
         self.procedural_objects = []
         self.new_objects = []
         self.rules = []
