@@ -12,7 +12,7 @@ class decoration_operator:
         self.read_decorations()
 
     def read_decorations(self):
-        with open('tree/tree_decorate.json', 'r') as object_file:
+        with open('decorate.json', 'r') as object_file:
             objects_data = json.load(object_file)
 
             new_object = generic_footprint_object(objects_data[0])
@@ -58,7 +58,7 @@ class decoration_operator:
 
                         generic_nonterminal_object = self.generic_nonterminal_list[int(nonterminal_obj.type)]
                         subdiv_rule = generic_nonterminal_object.execute_subdiv()
-                        tempt_nonterminal_list, tempt_terminal_list = self.parse_rule(subdiv_rule, nonterminal_obj.min_pos, nonterminal_obj.max_pos, rotation)
+                        tempt_nonterminal_list, tempt_terminal_list = self.parse_rule(subdiv_rule, nonterminal_obj.min_pos, nonterminal_obj.max_pos, rotation, group)
                         
                         total_terminal_list += tempt_terminal_list
                         total_nonterminal_list += tempt_nonterminal_list
