@@ -5,7 +5,7 @@ import json
 import numpy as np
 
 class LSys:
-    def __init__(self, startpos, group):
+    def __init__(self):
         self.alpha = 0.4
         self.min_light = 0.1
         self.max_age = 5
@@ -15,15 +15,18 @@ class LSys:
         self.new_objects = []
         self.rules = []
         self.light_pos = np.array([0.0,0.0,0.0])
-        self.startpos = startpos
-        self.group = group
 
         self.add_rules()
         self.init_state()
         self.run_system()
 
+    def system_setup(self, origin , system_rotation, group_id):
+        self.origin = origin
+        self.system_rotation = system_rotation
+        self.group = group_id
+
     def init_state(self):
-        start_module = LModule.Module(position = self.startpos, size = np.array([0.2,0.025,0.025]), rotation = np.array([0,0,0]), age = 1, type=11)
+        start_module = LModule.Module(position = np.array([0,0,0]), size = np.array([0.2,0.025,0.025]), rotation = np.array([0,0,0]), age = 1, type=11)
         self.new_objects.append(start_module)
     
     def run_system(self):

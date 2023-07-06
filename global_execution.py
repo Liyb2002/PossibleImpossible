@@ -38,30 +38,8 @@ def action_assign(procedural_objects_list, global_object):
     return procedural_objects_list
 
 def action_add(procedural_objects_list, global_object):
-    min_x = 100
-    max_x = -100
-    min_y = 100
-    max_y = -100
-    min_z = 100
-    max_z = -100
 
-    for obj in procedural_objects_list:
-
-        if min_x > obj.position[0] - obj.length[0]:
-            min_x = obj.position[0] - obj.length[0]
-        if max_x < obj.position[0] + obj.length[0]:
-            max_x = obj.position[0] + obj.length[0]
-
-        if min_y > obj.position[1] - obj.length[1]:
-            min_y = obj.position[1] - obj.length[1]
-        if max_y < obj.position[1] + obj.length[1]:
-            max_y = obj.position[1] + obj.length[1]
-
-        if min_z > obj.position[2] - obj.length[2]:
-            min_z = obj.position[2] - obj.length[2]
-        if max_z < obj.position[2] + obj.length[2]:
-            max_z = obj.position[2] + obj.length[2]
-
+    min_x,max_x,min_y,max_y,min_z,max_z = bounding_box(procedural_objects_list)
 
     dummy_scope = [0.1, 0.1]
     obj_xpos = 0.0
@@ -146,12 +124,15 @@ def action_add_multiple(procedural_objects_list, global_object):
 
 def action_LSystem(procedural_objects_list, global_object):
 
+    min_x,max_x,min_y,max_y,min_z,max_z = bounding_box(procedural_objects_list)
+    center = np.array([(min_x+max_x)/2 , (min_y+max_y)/2, (min_z+max_z)/2])
     group_count = 1
     result = []
     for obj in procedural_objects_list:
         if obj.type in global_object['adding_types'] and random.random() <0.2:
             print("add system")
-            system = LSystem.LSys(obj.position, group_count)
+            system = LSystem.LSys()
+            system.system_setup(obj.position, np.array([0,0,0]), group_count)
             result += system.finish_system()
             group_count += 1
 
@@ -175,3 +156,30 @@ def random_number(number):
         rand_offsets.append(rand_num*0.5)
 
     return rand_offsets
+
+def bounding_box(procedural_objects_list):
+    min_x = 100
+    max_x = -100
+    min_y = 100
+    max_y = -100
+    min_z = 100
+    max_z = -100
+
+    for obj in procedural_objects_list:
+
+        if min_x > obj.position[0] - obj.length[0]:
+            min_x = obj.position[0] - obj.length[0]
+        if max_x < obj.position[0] + obj.length[0]:
+            max_x = obj.position[0] + obj.length[0]
+
+        if min_y > obj.position[1] - obj.length[1]:
+            min_y = obj.position[1] - obj.length[1]
+        if max_y < obj.position[1] + obj.length[1]:
+            max_y = obj.position[1] + obj.length[1]
+
+        if min_z > obj.position[2] - obj.length[2]:
+            min_z = obj.position[2] - obj.length[2]
+        if max_z < obj.position[2] + obj.length[2]:
+            max_z = obj.position[2] + obj.length[2]
+
+    return (min_x,max_x,min_y,max_y,min_z,max_z)
