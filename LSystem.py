@@ -56,7 +56,7 @@ class LSys:
         
         for obj in self.procedural_objects:
             obj.set_group(self.group)
-            
+
         return self.procedural_objects
 
 

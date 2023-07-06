@@ -4,6 +4,8 @@ import numpy as np
 import procedural_objects
 import LSystem
 
+import json
+
 def global_assign(procedural_objects_list, global_objects):
     for global_object in global_objects:
         action = global_object['action']
@@ -128,13 +130,31 @@ def action_LSystem(procedural_objects_list, global_object):
     center = np.array([(min_x+max_x)/2 , (min_y+max_y)/2, (min_z+max_z)/2])
     group_count = 1
     result = []
+    system_data = []
     for obj in procedural_objects_list:
         if obj.type in global_object['adding_types'] and random.random() <0.2:
-            print("add system")
+            line1 = obj.position - np.array([0,0,0])
+            rotation_x, rotation_y, rotation_z = calculate_rotation_angles(line1)
             system = LSystem.LSys()
-            system.system_setup(obj.position, np.array([0,0,0]), group_count)
+            system.system_setup(obj.position, np.array([rotation_x,rotation_y,rotation_z]), group_count)
             result += system.finish_system()
+
+            data = {'System':
+            {'group': group_count,
+            'origin_x': float(obj.position[0]),
+            'origin_y': float(obj.position[1]),
+            'origin_z': float(obj.position[2]),
+            'system_rotation_x': float(rotation_x),
+            'system_rotation_y': float(rotation_y),
+            'system_rotation_z' : float(rotation_z)
+                }
+            }
+            system_data.append(data)
+
             group_count += 1
+
+    with open("three/system", 'w') as f:
+        json.dump(system_data, f, indent=2)
 
     return result
 
@@ -183,3 +203,29 @@ def bounding_box(procedural_objects_list):
             max_z = obj.position[2] + obj.length[2]
 
     return (min_x,max_x,min_y,max_y,min_z,max_z)
+
+
+def calculate_rotation_angles(line1):
+    line1 = line1 / np.linalg.norm(line1)
+    line2 = np.array([1.0,0,0])
+
+    # Calculate the cross product of the two lines
+    cross_product = np.cross(line1, line2)
+
+    # Calculate the dot product of the two lines
+    dot_product = np.dot(line1, line2)
+
+    # Create the skew-symmetric matrix of the cross product
+    cross_product_matrix = np.array([[0, -cross_product[2], cross_product[1]],
+                                     [cross_product[2], 0, -cross_product[0]],
+                                     [-cross_product[1], cross_product[0], 0]])
+
+    # Create the rotation matrix
+    rotation_matrix = np.identity(3) + cross_product_matrix + cross_product_matrix.dot(cross_product_matrix) * (1 / (1 + dot_product))
+
+    # Calculate the rotation angles
+    rotation_x = np.arctan2(rotation_matrix[2, 1], rotation_matrix[2, 2])
+    rotation_y = np.arctan2(-rotation_matrix[2, 0], np.sqrt(rotation_matrix[2, 1]**2 + rotation_matrix[2, 2]**2))
+    rotation_z = np.arctan2(rotation_matrix[1, 0], rotation_matrix[0, 0])
+
+    return rotation_x, rotation_y, rotation_z
