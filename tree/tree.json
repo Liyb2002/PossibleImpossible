@@ -167,6 +167,15 @@
 "type": "global_object",
 "action" : ["LSystem"],
 "adding_types":[2]
+},
+{
+"object_id": 12,
+"type": "global_object",
+"action" : ["edit_size"],
+"prev_type": [3,4,5,6,7,8],
+"condition":["smaller", 0.4],
+"target": 0.4
 }
+
 
 ]

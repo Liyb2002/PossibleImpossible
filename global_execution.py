@@ -18,7 +18,9 @@ def global_assign(result_particle, global_objects):
             procedural_objects_list = action_add_multiple(procedural_objects_list, global_object)
         if action[0] == 'LSystem':
             procedural_objects_list += action_LSystem(procedural_objects_list, global_object)
-    
+        if action[0] == 'edit_size':
+            procedural_objects_list += action_edit_size(procedural_objects_list, global_object)
+
     return procedural_objects_list
 
 def action_assign(procedural_objects_list, global_object):
@@ -171,6 +173,21 @@ def action_addCorner(result_particle, procedural_objects_list):
     
     return procedural_objects_list
 
+def action_edit_size(procedural_objects_list, global_object):
+    for obj in procedural_objects_list:
+
+        if obj.type in global_object['prev_type']:
+            len_x = obj.length[0]
+            len_y = obj.length[1]
+            len_z = obj.length[2]
+
+            if global_object['condition'][0] == "smaller" and len_x < global_object['condition'][1] and len_y < global_object['condition'][1] and len_z < global_object['condition'][1]:
+                edit_index = max_of_three(obj.length[0], obj.length[1], obj.length[2])
+                obj.length[edit_index] = global_object['target']
+
+    return procedural_objects_list
+
+
 
 def random_sign(number):
     signs = []
@@ -243,3 +260,12 @@ def calculate_rotation_angles(line2):
     rotation_z = np.arctan2(rotation_matrix[1, 0], rotation_matrix[0, 0])
 
     return rotation_x, rotation_y, rotation_z
+
+def max_of_three(a,b,c):
+    if a>b and a>c:
+        return 0
+    
+    if b>a and b>c:
+        return 1
+    
+    return 2
