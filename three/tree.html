@@ -60,11 +60,6 @@
 	light.position.set( - 1.25, 1, 1.25 );
 	scene.add( light );
 
-	var pivot = new THREE.Group();
-	var pivot2 = new THREE.Group();
-
-	scene.add( pivot );
-	scene.add( pivot2 );
 
 	new RGBELoader()
 	.setPath( 'textures/equirectangular/' )
@@ -103,8 +98,38 @@
 	}
 	geometry.setAttribute( 'color', new THREE.Float32BufferAttribute( colors, 3 ) );
 
-
 	const loader = new THREE.FileLoader();
+	var pivots = [];
+	var rotations = [];
+	var origins = [];
+
+	loader.load(
+	// resource URL
+	'./system.json',
+	// onLoad callback
+	function ( data ) {
+		var jsonData = JSON.parse(data); 
+		var objects_num = Object.keys(jsonData).length;
+		for (var i = 0; i < objects_num; i++) {
+			console.log("i", i);
+			var new_pivot = new THREE.Group();
+			pivots.push(new_pivot);
+			scene.add(pivots[i]);
+			origins.push([jsonData[i]["System"]["origin_x"], jsonData[i]["System"]["origin_y"], jsonData[i]["System"]["origin_z"]])
+			rotations.push([jsonData[i]["System"]["system_rotation_x"], jsonData[i]["System"]["system_rotation_y"], jsonData[i]["System"]["system_rotation_z"]])
+		}
+	},
+	// onProgress callback
+	function ( xhr ) {
+		console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+	},
+
+	// onError callback
+	function ( err ) {
+		console.error( 'An error happened' );
+	}
+	);
+
 	loader.load(
 	// resource URL
 	'./result.json',
@@ -143,18 +168,23 @@
 			cube.rotation.y = rotation_y;
 			cube.rotation.z = rotation_z;
 
-			if(jsonData[i]["obj"]["type"] == 2 && jsonData[i]["obj"]["group"] == 1){
-				pivot.add(cube);
-			}else if(jsonData[i]["obj"]["type"] == 2){
-				pivot2.add(cube);
-			}else{
+			if(jsonData[i]["obj"]["group"] == 0){
 				scene.add( cube );
-			}		
+			}else if(jsonData[i]["obj"]["type"] == 2){
+				var group = jsonData[i]["obj"]["group"];
+				pivots[group-1].add(cube);
+			}
 
 		}
+		
+		for(var i = 0; i < origins.length; i++){
+			console.log("i", i)
+			pivots[i].rotation.x = rotations[i][2];
+			pivots[i].rotation.y = rotations[i][2];
+			pivots[i].rotation.z = rotations[i][2];
+			pivots[i].position.set(origins[i][0], origins[i][1], origins[i][2]);
 
-		pivot.rotation.z = 1.4;
-		pivot.position.set(0, 0, 0 );
+		}
 
 	},
 	// onProgress callback

@@ -153,7 +153,7 @@ def action_LSystem(procedural_objects_list, global_object):
 
             group_count += 1
 
-    with open("three/system", 'w') as f:
+    with open("three/system.json", 'w') as f:
         json.dump(system_data, f, indent=2)
 
     return result
