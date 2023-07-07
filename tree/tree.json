@@ -28,9 +28,9 @@
 {
 "object_id": 2,
 "type": "local_object",
-"scope_x": [0.02,0.02],
-"scope_y": [0.02,0.02],
-"scope_z": [0.02,0.02],
+"scope_x": [0.01,0.01],
+"scope_y": [0.01,0.01],
+"scope_z": [0.01,0.01],
 "canTerminate": "True",
 "cycle_connect": "True",
 "rotation": [[0.001],[0.001],[0.001]],

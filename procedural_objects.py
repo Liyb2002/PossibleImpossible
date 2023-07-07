@@ -37,41 +37,73 @@ class Procedural_object:
         prev_z = prev_obj.length[2]
 
         offset =  np.array([self.offset[0],self.offset[1],self.offset[2]])
+        self.position = prev_pos + offset
+
         if(rule == '-x'):
-            prev_obj_closest_point = prev_pos - np.array([prev_x, 0, 0])
-            prev_obj_rotated_point = rotate_line(prev_pos, prev_obj_closest_point, prev_obj.rotation[0],prev_obj.rotation[1],prev_obj.rotation[2])
+            prev_obj_closest_point = prev_obj.position - np.array([prev_obj.length[0], 0, 0])
+            prev_obj_rotated_point = rotate_line(self.position, prev_obj_closest_point, self.rotation[0],self.rotation[1],self.rotation[2])
             prev_obj_delta_rotate = prev_obj_rotated_point - prev_obj_closest_point
-            self.position = prev_obj_closest_point - np.array([self.length[0],0,0])  + offset + prev_obj_delta_rotate
+
+            new_obj_closest_point = np.array([self.length[0], 0, 0])
+            new_obj_rotated_point = rotate_line(np.array([0,0,0]), new_obj_closest_point, self.rotation[0],self.rotation[1],self.rotation[2])
+            new_obj_delta_rotate = new_obj_rotated_point - new_obj_closest_point
+
+            self.position += -np.array([prev_obj.length[0], 0, 0]) - np.array([self.length[0],0 , 0]) + prev_obj_delta_rotate + new_obj_delta_rotate
 
         if(rule == '+x'):
-            prev_obj_closest_point = prev_pos + np.array([prev_x, 0, 0])
-            prev_obj_rotated_point = rotate_line(prev_pos, prev_obj_closest_point, prev_obj.rotation[0],prev_obj.rotation[1],prev_obj.rotation[2])
+            prev_obj_closest_point = prev_obj.position + np.array([prev_obj.length[0], 0, 0])
+            prev_obj_rotated_point = rotate_line(self.position, prev_obj_closest_point, self.rotation[0],self.rotation[1],self.rotation[2])
             prev_obj_delta_rotate = prev_obj_rotated_point - prev_obj_closest_point
-            self.position = prev_obj_closest_point + np.array([self.length[0],0,0])  + offset + prev_obj_delta_rotate
+
+            new_obj_closest_point = np.array([-self.length[0], 0, 0])
+            new_obj_rotated_point = rotate_line(np.array([0,0,0]), new_obj_closest_point, self.rotation[0],self.rotation[1],self.rotation[2])
+            new_obj_delta_rotate = new_obj_rotated_point - new_obj_closest_point
+
+            self.position += np.array([prev_obj.length[0], 0, 0]) + np.array([self.length[0],0 , 0]) + prev_obj_delta_rotate + new_obj_delta_rotate
         
         if(rule == '-y'):
-            prev_obj_closest_point = prev_pos - np.array([0, prev_y, 0])
-            prev_obj_rotated_point = rotate_line(prev_pos, prev_obj_closest_point, prev_obj.rotation[0],prev_obj.rotation[1],prev_obj.rotation[2])
+            prev_obj_closest_point = prev_obj.position - np.array([0, prev_obj.length[1], 0])
+            prev_obj_rotated_point = rotate_line(self.position, prev_obj_closest_point, self.rotation[0],self.rotation[1],self.rotation[2])
             prev_obj_delta_rotate = prev_obj_rotated_point - prev_obj_closest_point
-            self.position = prev_obj_closest_point - np.array([0,self.length[1],0])  + offset + prev_obj_delta_rotate
+
+            new_obj_closest_point = np.array([0, self.length[1], 0])
+            new_obj_rotated_point = rotate_line(np.array([0,0,0]), new_obj_closest_point, self.rotation[0],self.rotation[1],self.rotation[2])
+            new_obj_delta_rotate = new_obj_rotated_point - new_obj_closest_point
+
+            self.position += -np.array([0, prev_obj.length[1], 0]) - np.array([0,self.length[1] , 0]) + prev_obj_delta_rotate + new_obj_delta_rotate
         
         if(rule == '+y'):
-            prev_obj_closest_point = prev_pos + np.array([0, prev_y, 0])
-            prev_obj_rotated_point = rotate_line(prev_pos, prev_obj_closest_point, prev_obj.rotation[0],prev_obj.rotation[1],prev_obj.rotation[2])
+            prev_obj_closest_point = prev_obj.position + np.array([0, prev_obj.length[1], 0])
+            prev_obj_rotated_point = rotate_line(self.position, prev_obj_closest_point, self.rotation[0],self.rotation[1],self.rotation[2])
             prev_obj_delta_rotate = prev_obj_rotated_point - prev_obj_closest_point
-            self.position = prev_obj_closest_point + np.array([0,self.length[1],0])  + offset + prev_obj_delta_rotate
+
+            new_obj_closest_point = np.array([0, -self.length[1], 0])
+            new_obj_rotated_point = rotate_line(np.array([0,0,0]), new_obj_closest_point, self.rotation[0],self.rotation[1],self.rotation[2])
+            new_obj_delta_rotate = new_obj_rotated_point - new_obj_closest_point
+
+            self.position += np.array([0, prev_obj.length[1], 0]) + np.array([0,self.length[1] , 0]) + prev_obj_delta_rotate + new_obj_delta_rotate
        
         if(rule == '-z'):
-            prev_obj_closest_point = prev_pos - np.array([0, 0, prev_z])
-            prev_obj_rotated_point = rotate_line(prev_pos, prev_obj_closest_point, prev_obj.rotation[0],prev_obj.rotation[1],prev_obj.rotation[2])
+            prev_obj_closest_point = prev_obj.position - np.array([0, 0, prev_obj.length[2]])
+            prev_obj_rotated_point = rotate_line(self.position, prev_obj_closest_point, self.rotation[0],self.rotation[1],self.rotation[2])
             prev_obj_delta_rotate = prev_obj_rotated_point - prev_obj_closest_point
-            self.position = prev_obj_closest_point - np.array([0,0,self.length[2]])  + offset + prev_obj_delta_rotate
 
+            new_obj_closest_point = np.array([0,0, self.length[2]])
+            new_obj_rotated_point = rotate_line(np.array([0,0,0]), new_obj_closest_point, self.rotation[0],self.rotation[1],self.rotation[2])
+            new_obj_delta_rotate = new_obj_rotated_point - new_obj_closest_point
+
+            self.position += -np.array([0, 0, prev_obj.length[2]]) - np.array([0,0 ,self.length[2]]) + prev_obj_delta_rotate + new_obj_delta_rotate
+        
         if(rule == '+z'):
-            prev_obj_closest_point = prev_pos + np.array([0, 0, prev_z])
-            prev_obj_rotated_point = rotate_line(prev_pos, prev_obj_closest_point, prev_obj.rotation[0],prev_obj.rotation[1],prev_obj.rotation[2])
+            prev_obj_closest_point = prev_obj.position + np.array([0, 0, prev_obj.length[2]])
+            prev_obj_rotated_point = rotate_line(self.position, prev_obj_closest_point, self.rotation[0],self.rotation[1],self.rotation[2])
             prev_obj_delta_rotate = prev_obj_rotated_point - prev_obj_closest_point
-            self.position = prev_obj_closest_point + np.array([0,0,self.length[2]])  + offset + prev_obj_delta_rotate
+
+            new_obj_closest_point = np.array([0,0, -self.length[2]])
+            new_obj_rotated_point = rotate_line(np.array([0,0,0]), new_obj_closest_point, self.rotation[0],self.rotation[1],self.rotation[2])
+            new_obj_delta_rotate = new_obj_rotated_point - new_obj_closest_point
+
+            self.position += np.array([0, 0, prev_obj.length[2]]) + np.array([0,0 ,self.length[2]]) + prev_obj_delta_rotate + new_obj_delta_rotate
 
         # print("prev_obj_delta_rotate", prev_obj_delta_rotate)
         if(rule == '-x2'):

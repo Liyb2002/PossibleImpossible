@@ -19,7 +19,7 @@
 "category":  "footprint",
 "structural_id": 3,
 "subdiv":[
-[1.0, "y direction", ["terminal", "0", 1.0]] 
+[1.0, "y direction", ["terminal", "3", 1.0]] 
 ]
 },
 {
@@ -27,49 +27,49 @@
 "category":  "footprint",
 "structural_id": 4,
 "subdiv":[
-[1.0, "y direction", ["terminal", "0", 1.0]]   ]
+[1.0, "y direction", ["terminal", "4", 1.0]]   ]
 },
 {
 "object_name": "footprint_5",
 "category":  "footprint",
 "structural_id": 5,
 "subdiv":[
-[1.0, "y direction", ["terminal", "0", 1.0]]   ]
+[1.0, "y direction", ["terminal", "5", 1.0]]   ]
 },
 {
 "object_name": "footprint_6",
 "category":  "footprint",
 "structural_id": 6,
 "subdiv":[
-[1.0, "y direction", ["terminal", "0", 1.0]]   ]
+[1.0, "y direction", ["terminal", "6", 1.0]]   ]
 },
 {
 "object_name": "footprint_7",
 "category":  "footprint",
 "structural_id": 7,
 "subdiv":[
-[1.0, "y direction", ["terminal", "0", 1.0]]   ]
+[1.0, "y direction", ["terminal", "7", 1.0]]   ]
 },
 {
 "object_name": "footprint_8",
 "category":  "footprint",
 "structural_id": 8,
 "subdiv":[
-[1.0, "y direction", ["terminal","0", 1.0]]
+[1.0, "y direction", ["terminal","8", 1.0]]
 ]
 },{
 "object_name": "footprint_9",
 "category":  "footprint",
 "structural_id": 9,
 "subdiv":[
-[1.0, "y direction", ["terminal","0", 1.0]]
+[1.0, "y direction", ["terminal","9", 1.0]]
 ]
 },{
 "object_name": "footprint_10",
 "category":  "footprint",
 "structural_id": 10,
 "subdiv":[
-[1.0, "y direction", ["terminal","0", 1.0]]
+[1.0, "y direction", ["terminal","10", 1.0]]
 ]
 },{
 "object_name": "footprint_11",
@@ -98,7 +98,7 @@
 "category":  "terminal",
 "terminal_id": 0,
 "rule": "normal",
-"multiplier": [1.2,1.2,1.2]
+"multiplier": [5,5,5]
 } ,
 {
 "object_name": "terminal_void",
@@ -113,5 +113,61 @@
 "terminal_id": 2,
 "rule": "normal",
 "multiplier": [1,1,1]
-} 
+},
+{
+"object_name": "terminal_branch, -x direction",
+"category":  "terminal",
+"terminal_id": 3,
+"rule": "normal",
+"multiplier": [1.3,1,1]
+},
+{
+"object_name": "terminal_branch, +x direction",
+"category":  "terminal",
+"terminal_id": 4,
+"rule": "normal",
+"multiplier": [1.3,1,1]
+},
+{
+"object_name": "terminal_branch, -y direction",
+"category":  "terminal",
+"terminal_id": 5,
+"rule": "normal",
+"multiplier": [1,1.3,1]
+}  ,
+{
+"object_name": "terminal_branch, +y direction",
+"category":  "terminal",
+"terminal_id": 6,
+"rule": "normal",
+"multiplier": [1,1.3,1]
+} ,
+{
+"object_name": "terminal_branch, -z direction",
+"category":  "terminal",
+"terminal_id": 7,
+"rule": "normal",
+"multiplier": [1,1,1.3]
+},
+{
+"object_name": "terminal_branch, +z direction",
+"category":  "terminal",
+"terminal_id": 8,
+"rule": "normal",
+"multiplier": [1,1,1.3]
+},
+{
+"object_name": "terminal_main branch",
+"category":  "terminal",
+"terminal_id": 9,
+"rule": "normal",
+"multiplier": [1,1,1]
+},
+{
+"object_name": "terminal_light",
+"category":  "terminal",
+"terminal_id": 10,
+"rule": "normal",
+"multiplier": [1,1,1]
+}                     
 ]

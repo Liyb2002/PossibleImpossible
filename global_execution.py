@@ -15,8 +15,8 @@ def global_assign(procedural_objects_list, global_objects):
             procedural_objects_list = action_add(procedural_objects_list, global_object)
         if action[0] == 'add_multiple':
             procedural_objects_list = action_add_multiple(procedural_objects_list, global_object)
-        if action[0] == 'LSystem':
-            procedural_objects_list += action_LSystem(procedural_objects_list, global_object)
+        # if action[0] == 'LSystem':
+        #     procedural_objects_list += action_LSystem(procedural_objects_list, global_object)
     return procedural_objects_list
 
 def action_assign(procedural_objects_list, global_object):
