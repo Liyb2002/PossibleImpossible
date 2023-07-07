@@ -132,9 +132,9 @@ def action_LSystem(procedural_objects_list, global_object):
     result = []
     system_data = []
     for obj in procedural_objects_list:
-        if obj.type in global_object['adding_types'] and random.random() <0.2:
-            line1 = obj.position - np.array([0,0,0])
-            rotation_x, rotation_y, rotation_z = calculate_rotation_angles(line1)
+        if obj.type in global_object['adding_types'] and random.random() <0.6:
+            line2 = obj.position - center
+            rotation_x, rotation_y, rotation_z = calculate_rotation_angles(line2)
             system = LSystem.LSys()
             system.system_setup(obj.position, np.array([rotation_x,rotation_y,rotation_z]), group_count)
             result += system.finish_system()
@@ -205,9 +205,9 @@ def bounding_box(procedural_objects_list):
     return (min_x,max_x,min_y,max_y,min_z,max_z)
 
 
-def calculate_rotation_angles(line1):
-    line1 = line1 / np.linalg.norm(line1)
-    line2 = np.array([1.0,0,0])
+def calculate_rotation_angles(line2):
+    line1 = np.array([1.0,0,0])
+    line2 = line2 / np.linalg.norm(line2)
 
     # Calculate the cross product of the two lines
     cross_product = np.cross(line1, line2)

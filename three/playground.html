@@ -2,7 +2,7 @@
 	<html>
 	<head>
 		<meta charset="utf-8">
-		<title>Tree</title>
+		<title>Process</title>
 		<style>
 			body { margin: 0; }
 		</style>
@@ -70,8 +70,6 @@
 	} );
 
 
-	const loader2 = new GLTFLoader().setPath( 'static/models/' );
-
 	const geometry = new THREE.BoxGeometry( 1, 1, 1 ).toNonIndexed();
 	const material = new THREE.MeshBasicMaterial( { vertexColors: true } ); 
 
@@ -98,106 +96,22 @@
 	}
 	geometry.setAttribute( 'color', new THREE.Float32BufferAttribute( colors, 3 ) );
 
-	const loader = new THREE.FileLoader();
-	var pivots = [];
-	var rotations = [];
-	var origins = [];
+	var new_pivot = new THREE.Group();
+	scene.add( new_pivot );
 
-	loader.load(
-	// resource URL
-	'./system.json',
-	// onLoad callback
-	function ( data ) {
-		var jsonData = JSON.parse(data); 
-		var objects_num = Object.keys(jsonData).length;
-		for (var i = 0; i < objects_num; i++) {
-			console.log("i", i);
-			var new_pivot = new THREE.Group();
-			pivots.push(new_pivot);
-			scene.add(pivots[i]);
-			origins.push([jsonData[i]["System"]["origin_x"], jsonData[i]["System"]["origin_y"], jsonData[i]["System"]["origin_z"]])
-			rotations.push([jsonData[i]["System"]["system_rotation_x"], jsonData[i]["System"]["system_rotation_y"], jsonData[i]["System"]["system_rotation_z"]])
-		}
-	},
-	// onProgress callback
-	function ( xhr ) {
-		console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
-	},
+	var cube = new THREE.Mesh( geometry, material );
+	cube.position.set(0, 0, 0 );
+	cube.scale.set(1, 0.1, 0.1);
+	new_pivot.add(cube);
 
-	// onError callback
-	function ( err ) {
-		console.error( 'An error happened' );
-	}
-	);
+	var flower = new THREE.Mesh( geometry, material );
+	flower.position.set(0.5, 0, 0 );
+	flower.scale.set(0.1, 1.1, 1.1);
+	new_pivot.add(flower);
 
-	loader.load(
-	// resource URL
-	'./result.json',
-	// onLoad callback
-	function ( data ) {
-		// output the text to the console
-		var jsonData = JSON.parse(data); 
-		var objects_num = Object.keys(jsonData).length;
-		for (var i = 0; i < objects_num; i++) {
-
-			var start_x = jsonData[i]["obj"]["start_x"];
-			var start_y = jsonData[i]["obj"]["start_y"];
-			var start_z = jsonData[i]["obj"]["start_z"];
-
-			var scale_x = jsonData[i]["obj"]["scale_x"];
-			var scale_y = jsonData[i]["obj"]["scale_y"];
-			var scale_z = jsonData[i]["obj"]["scale_z"];
-			var rotation_x = jsonData[i]["obj"]["rotation_x"];
-			var rotation_y = jsonData[i]["obj"]["rotation_y"];
-			var rotation_z = jsonData[i]["obj"]["rotation_z"];
-
-			var center_x = start_x;
-			var center_y = start_y ;
-			var center_z = start_z;
-			
-			var debug_mode = jsonData[i]["obj"]["mode"];
-			
-			var a;
-			var rand = Math.random();
-			var load_mesh = true;
-			
-			var cube = new THREE.Mesh( geometry, material );
-			cube.position.set(center_x, center_y, center_z );
-			cube.scale.set(scale_x*2, scale_y*2, scale_z*2);
-			cube.rotation.x = rotation_x;
-			cube.rotation.y = rotation_y;
-			cube.rotation.z = rotation_z;
-
-			if(jsonData[i]["obj"]["group"] == 0){
-				scene.add( cube );
-			}else if(jsonData[i]["obj"]["type"] == 2){
-				var group = jsonData[i]["obj"]["group"];
-				pivots[group-1].add(cube);
-			}
-
-		}
-		
-		for(var i = 0; i < origins.length; i++){
-			console.log("i", i)
-			pivots[i].rotation.x = rotations[i][0];
-			pivots[i].rotation.y = rotations[i][1];
-			pivots[i].rotation.z = rotations[i][2];
-			pivots[i].position.set(origins[i][0], origins[i][1], origins[i][2]);
-
-		}
-
-	},
-	// onProgress callback
-	function ( xhr ) {
-		console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
-	},
-
-	// onError callback
-	function ( err ) {
-		console.error( 'An error happened' );
-	}
-	);
-
+	new_pivot.rotation.x =  2.3072054081687035;
+	new_pivot.rotation.y =  -0.5288091896884091;
+	new_pivot.rotation.z =  -2.9027419501799567;
 
 	window.addEventListener( 'resize', onWindowResize );
 
