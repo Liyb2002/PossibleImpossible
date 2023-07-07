@@ -75,6 +75,8 @@
 	const m3 = load_result.scene;
 	var load_result = await loader2.loadAsync('9.glb');
 	const m9 = load_result.scene;
+	var load_result = await loader2.loadAsync('10.glb');
+	const m10 = load_result.scene;
 	var load_result = await loader2.loadAsync('11.glb');
 	const m11 = load_result.scene;
 	var load_result = await loader2.loadAsync('12.glb');
@@ -175,6 +177,8 @@
 				a = m3.clone();
 			}else if(jsonData[i]["obj"]["type"] == 9 ){
 				a = m9.clone();
+			}else if(jsonData[i]["obj"]["type"] == 10 ){
+				a = m10.clone();
 			}else if(jsonData[i]["obj"]["type"] == 11 ){
 				a = m11.clone();
 			}

@@ -14,16 +14,15 @@ class LSys:
         self.procedural_objects = []
         self.new_objects = []
         self.rules = []
-        self.light_pos = np.array([0.0,0.0,0.0])
 
-        self.add_rules()
-        self.init_state()
-        self.run_system()
 
-    def system_setup(self, origin , system_rotation, group_id):
+    def system_setup(self, origin , system_rotation, group_id, light_pos):
         self.origin = origin
         self.system_rotation = system_rotation
         self.group = group_id
+        self.light_pos = light_pos
+        self.add_rules()
+        self.init_state()
 
     def init_state(self):
         start_module = LModule.Module(position = np.array([0,0,0]), size = np.array([0.2,0.025,0.025]), rotation = np.array([0,0,0]), age = 1, type=11)

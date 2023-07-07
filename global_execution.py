@@ -18,8 +18,8 @@ def global_assign(result_particle, global_objects):
             procedural_objects_list = action_add_multiple(procedural_objects_list, global_object)
         if action[0] == 'LSystem':
             procedural_objects_list += action_LSystem(procedural_objects_list, global_object)
-        if action[0] == 'edit_size':
-            procedural_objects_list += action_edit_size(procedural_objects_list, global_object)
+        # if action[0] == 'edit_size':
+        #     procedural_objects_list += action_edit_size(procedural_objects_list, global_object)
 
     return procedural_objects_list
 
@@ -131,17 +131,28 @@ def action_add_multiple(procedural_objects_list, global_object):
 def action_LSystem(procedural_objects_list, global_object):
 
     min_x,max_x,min_y,max_y,min_z,max_z = bounding_box(procedural_objects_list)
-    center = np.array([(min_x+max_x)/2 , (min_y+max_y)/2 - 0.5, (min_z+max_z)/2])
+    center = np.array([(min_x+max_x)/2 , (min_y+max_y)/2, (min_z+max_z)/2])
     group_count = 1
     result = []
     system_data = []
+    light_pos = np.array([0,0,0])
+    for obj in procedural_objects_list:
+        if obj.type == global_object['light_type']:
+            light_pos = obj.position
+            break
+    
     for obj in procedural_objects_list:
         if obj.type in global_object['adding_types'] and random.random() <0.6:
             line2 = obj.position - center
             rotation_x, rotation_y, rotation_z = calculate_rotation_angles(line2)
             system = LSystem.LSys()
-            system.system_setup(obj.position, np.array([rotation_x,rotation_y,rotation_z]), group_count)
+            system.system_setup(obj.position, np.array([rotation_x,rotation_y,rotation_z]), group_count, light_pos)
+            system.run_system()
             result += system.finish_system()
+
+            rotation_x = random.uniform(global_object['rotation'][0][0],global_object['rotation'][0][1])
+            rotation_y = random.uniform(global_object['rotation'][1][0],global_object['rotation'][1][1])
+            rotation_z = random.uniform(global_object['rotation'][2][0],global_object['rotation'][2][1])
 
             data = {'System':
             {'group': group_count,
