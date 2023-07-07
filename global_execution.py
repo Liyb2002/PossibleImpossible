@@ -6,7 +6,8 @@ import LSystem
 
 import json
 
-def global_assign(procedural_objects_list, global_objects):
+def global_assign(result_particle, global_objects):
+    procedural_objects_list = result_particle.procedural_objects
     for global_object in global_objects:
         action = global_object['action']
         if action[0] == 'assign':
@@ -15,8 +16,9 @@ def global_assign(procedural_objects_list, global_objects):
             procedural_objects_list = action_add(procedural_objects_list, global_object)
         if action[0] == 'add_multiple':
             procedural_objects_list = action_add_multiple(procedural_objects_list, global_object)
-        # if action[0] == 'LSystem':
-        #     procedural_objects_list += action_LSystem(procedural_objects_list, global_object)
+        if action[0] == 'LSystem':
+            procedural_objects_list += action_LSystem(procedural_objects_list, global_object)
+    
     return procedural_objects_list
 
 def action_assign(procedural_objects_list, global_object):
@@ -127,7 +129,7 @@ def action_add_multiple(procedural_objects_list, global_object):
 def action_LSystem(procedural_objects_list, global_object):
 
     min_x,max_x,min_y,max_y,min_z,max_z = bounding_box(procedural_objects_list)
-    center = np.array([(min_x+max_x)/2 , (min_y+max_y)/2, (min_z+max_z)/2])
+    center = np.array([(min_x+max_x)/2 , (min_y+max_y)/2 - 0.5, (min_z+max_z)/2])
     group_count = 1
     result = []
     system_data = []
@@ -157,6 +159,18 @@ def action_LSystem(procedural_objects_list, global_object):
         json.dump(system_data, f, indent=2)
 
     return result
+
+def action_addCorner(result_particle, procedural_objects_list):
+    transition_pts = result_particle.transition_pts
+    dummy_scope = [0.1, 0.1]
+
+    for pt in transition_pts:
+        tempt_obj = procedural_objects.Procedural_object(4, pt, np.array([dummy_scope,dummy_scope,dummy_scope]), "00000", np.array([[0],[0],[0]]), np.array([0,0,0]))
+        tempt_obj.arbitrary_set_length(np.array([float(0.1),float(0.1),float(0.1)])) 
+        procedural_objects_list.append(tempt_obj)
+    
+    return procedural_objects_list
+
 
 def random_sign(number):
     signs = []

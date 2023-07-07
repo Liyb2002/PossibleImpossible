@@ -76,21 +76,21 @@
 "category":  "footprint",
 "structural_id": 11,
 "subdiv":[
-[1.0, "y direction", ["terminal","2", 1.0]]
+[1.0, "y direction", ["terminal","11", 1.0]]
 ]
 },{
 "object_name": "footprint_12",
 "category":  "footprint",
 "structural_id": 12,
 "subdiv":[
-[1.0, "y direction", ["terminal","2", 1.0]]
+[1.0, "y direction", ["terminal","12", 1.0]]
 ]
 },{
 "object_name": "footprint_13",
 "category":  "footprint",
 "structural_id": 13,
 "subdiv":[
-[1.0, "y direction", ["terminal","2", 1.0]]
+[1.0, "y direction", ["terminal","13", 1.0]]
 ]
 },
 {
@@ -98,14 +98,14 @@
 "category":  "terminal",
 "terminal_id": 0,
 "rule": "normal",
-"multiplier": [5,5,5]
+"multiplier": [1,1,1]
 } ,
 {
 "object_name": "terminal_void",
 "category":  "terminal",
 "terminal_id": 1,
 "rule": "normal",
-"multiplier": [0.01,0.01,0.01]
+"multiplier": [0.0,0.0,0.0]
 },
 {
 "object_name": "terminal_tree",
@@ -169,5 +169,26 @@
 "terminal_id": 10,
 "rule": "normal",
 "multiplier": [1,1,1]
-}                     
+},
+{
+"object_name": "terminal_large_branch",
+"category":  "terminal",
+"terminal_id": 11,
+"rule": "normal",
+"multiplier": [1,1,1]
+},
+{
+"object_name": "terminal_small_branch",
+"category":  "terminal",
+"terminal_id": 12,
+"rule": "normal",
+"multiplier": [1,1,1]
+},
+{
+"object_name": "terminal_flower_branch",
+"category":  "terminal",
+"terminal_id": 13,
+"rule": "normal",
+"multiplier": [1,1,1]
+}                               
 ]

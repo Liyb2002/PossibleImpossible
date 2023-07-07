@@ -4,8 +4,7 @@
 "foreground_type": [5,5],
 "foreground_connect": "+y",
 "background_type": 3,
-"background_connect": "-y"
-},
+"background_connect": "-y"},
 {
 "object_id": 1,
 "type": "local_object",
@@ -28,9 +27,9 @@
 {
 "object_id": 2,
 "type": "local_object",
-"scope_x": [0.01,0.01],
-"scope_y": [0.01,0.01],
-"scope_z": [0.01,0.01],
+"scope_x": [0.001,0.001],
+"scope_y": [0.001,0.001],
+"scope_z": [0.001,0.001],
 "canTerminate": "True",
 "cycle_connect": "True",
 "rotation": [[0.001],[0.001],[0.001]],

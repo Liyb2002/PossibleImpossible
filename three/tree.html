@@ -70,7 +70,17 @@
 	} );
 
 
-	const loader2 = new GLTFLoader().setPath( 'static/models/' );
+	const loader2 = new GLTFLoader().setPath( 'static/tree_models/' );
+	var load_result = await loader2.loadAsync('3.glb');
+	const m3 = load_result.scene;
+	var load_result = await loader2.loadAsync('9.glb');
+	const m9 = load_result.scene;
+	var load_result = await loader2.loadAsync('11.glb');
+	const m11 = load_result.scene;
+	var load_result = await loader2.loadAsync('12.glb');
+	const m12 = load_result.scene;
+	var load_result = await loader2.loadAsync('13.glb');
+	const m13 = load_result.scene;
 
 	const geometry = new THREE.BoxGeometry( 1, 1, 1 ).toNonIndexed();
 	const material = new THREE.MeshBasicMaterial( { vertexColors: true } ); 
@@ -160,25 +170,39 @@
 			var a;
 			var rand = Math.random();
 			var load_mesh = true;
-			
-			var cube = new THREE.Mesh( geometry, material );
-			cube.position.set(center_x, center_y, center_z );
-			cube.scale.set(scale_x*2, scale_y*2, scale_z*2);
-			cube.rotation.x = rotation_x;
-			cube.rotation.y = rotation_y;
-			cube.rotation.z = rotation_z;
 
-			if(jsonData[i]["obj"]["group"] == 0){
-				scene.add( cube );
-			}else if(jsonData[i]["obj"]["type"] == 2){
+			if(jsonData[i]["obj"]["type"] == 3 || jsonData[i]["obj"]["type"] == 4 || jsonData[i]["obj"]["type"] == 5 || jsonData[i]["obj"]["type"] == 6 || jsonData[i]["obj"]["type"] == 7 || jsonData[i]["obj"]["type"] == 8){
+				a = m3.clone();
+			}else if(jsonData[i]["obj"]["type"] == 9 ){
+				a = m9.clone();
+			}else if(jsonData[i]["obj"]["type"] == 11 ){
+				a = m11.clone();
+			}
+			else if(jsonData[i]["obj"]["type"] == 12 ){
+				a = m12.clone();
+			}else if(jsonData[i]["obj"]["type"] == 13 ){
+				a = m13.clone();
+			}else{
+				load_mesh = false;
+			}
+			
+			if(load_mesh){
+			a.position.set(start_x,start_y,start_z);
+			a.scale.set(scale_x,scale_y,scale_z);
+			a.rotation.x = rotation_x;
+			a.rotation.y = rotation_y;
+			a.rotation.z = rotation_z;
+			scene.add(a);
+			}
+
+			if(jsonData[i]["obj"]["group"] != 0){
 				var group = jsonData[i]["obj"]["group"];
-				pivots[group-1].add(cube);
+				pivots[group-1].add(a);
 			}
 
 		}
 		
 		for(var i = 0; i < origins.length; i++){
-			console.log("i", i)
 			pivots[i].rotation.x = rotations[i][0];
 			pivots[i].rotation.y = rotations[i][1];
 			pivots[i].rotation.z = rotations[i][2];

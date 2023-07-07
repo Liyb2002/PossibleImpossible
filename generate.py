@@ -133,7 +133,7 @@ class generate_helper:
         # procedural_objects = assign_type.assign(self.result_particle.procedural_objects)
 
         self.result_particle.procedural_objects[0].type = self.visual_bridge_info['foreground_type'][1]
-        procedural_objects = global_execution.global_assign(self.result_particle.procedural_objects, self.global__object_list)
+        procedural_objects = global_execution.global_assign(self.result_particle, self.global__object_list)
         decorator = decorations.decoration_operator()
         decoration_list = decorator.decorate(procedural_objects)
         return decoration_list

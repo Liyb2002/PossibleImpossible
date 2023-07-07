@@ -159,6 +159,12 @@ class Procedural_object:
         len_z = length[2]
         self.length = np.array([len_x, len_y, len_z])
 
+    def set_relative_length(self, multipiler):
+        len_x = self.length[0] * multipiler[0]
+        len_y = self.length[1] * multipiler[1]
+        len_z = self.length[2] * multipiler[2]
+        self.length = np.array([len_x, len_y, len_z])
+
 
 def getOverlap3D(objectA_position, objectA_size, objectB_position, objectB_size):
     A_x = [objectA_position[0] - objectA_size[0], objectA_position[0] + objectA_size[0]]
