@@ -39,7 +39,7 @@ class LSys:
             if count > level_count:
                 break
             count += 1
-            self.new_objects += obj.execute(self.light_pos, self.rules)
+            self.new_objects += obj.execute(self.origin, self.system_rotation, self.light_pos, self.rules)
             self.procedural_objects.append(obj.toProcedual())
     
     def add_rules(self):

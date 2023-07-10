@@ -10,13 +10,18 @@ class Module:
         self.age = age + 1
         self.rotation = rotation
 
+        # print("position", self.position)
+
     def toProcedual(self):
         dummy_scope = [0.1, 0.1]
         tempt_obj = procedural_objects.Procedural_object(self.type, self.position,np.array([dummy_scope,dummy_scope,dummy_scope]), "00000", np.array([[self.rotation[0]],[self.rotation[1]],[self.rotation[2]]]), np.array([0,0,0]))
         tempt_obj.arbitrary_set_length(np.array([float(self.size[0]),float(self.size[1]),float(self.size[2])]))
         return tempt_obj
     
-    def execute(self, enviroment, rules):
+    def execute(self, origin, rotation, light_pos, rules):     
+        #to world position
+        world_pos = compute_world_position(self.position, origin, rotation)
+
         #chose a rule to execute
         execute_rule =  None
         new_modules = []
@@ -119,3 +124,34 @@ class Module:
                 return False
 
         return True
+
+
+def compute_world_position(position, translation, rotation):
+    """Compute the world position after translation and rotations."""
+    translation_vector = np.array(translation)
+    position_vector = np.array(position)
+    
+    # Apply translation
+    translated_position = position_vector + translation_vector
+    
+    # Apply rotations
+    rotated_position = rotate_vector(translated_position, rotation)
+    
+    return rotated_position
+
+def rotate_vector(vector, rotation):
+    """Rotate a vector by the specified Euler angles."""
+    rx, ry, rz = rotation
+    # Create rotation matrices
+    Rx = np.array([[1, 0, 0],
+                   [0, np.cos(rx), -np.sin(rx)],
+                   [0, np.sin(rx), np.cos(rx)]])
+    Ry = np.array([[np.cos(ry), 0, np.sin(ry)],
+                   [0, 1, 0],
+                   [-np.sin(ry), 0, np.cos(ry)]])
+    Rz = np.array([[np.cos(rz), -np.sin(rz), 0],
+                   [np.sin(rz), np.cos(rz), 0],
+                   [0, 0, 1]])
+    # Apply rotations in the order: Rz * Ry * Rx
+    rotated_vector = np.dot(Rz, np.dot(Ry, np.dot(Rx, vector)))
+    return rotated_vector
