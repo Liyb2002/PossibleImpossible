@@ -4,6 +4,7 @@ import numpy as np
 import procedural_objects
 import LSystem
 
+import math
 import json
 
 def global_assign(result_particle, global_objects):
@@ -142,17 +143,17 @@ def action_LSystem(procedural_objects_list, global_object):
             break
     
     for obj in procedural_objects_list:
-        if obj.type in global_object['adding_types'] and random.random() <0.6:
-            line2 = obj.position - center
-            rotation_x, rotation_y, rotation_z = calculate_rotation_angles(line2)
+        dist_to_light = math.sqrt((obj.position[0] - light_pos[0])**2 + (obj.position[1] - light_pos[1])**2 + (obj.position[2] - light_pos[2])**2)
+        base_prob = 0.8
+        prob = max(base_prob - (0.1*dist_to_light*2), 0)
+
+        if obj.type in global_object['adding_types'] and random.random() < 0.6:
+            line2 = light_pos - obj.position
+            rotation_x, rotation_y, rotation_z = rotation_matrix(line2)
             system = LSystem.LSys()
             system.system_setup(obj.position, np.array([rotation_x,rotation_y,rotation_z]), group_count, light_pos)
             system.run_system()
             result += system.finish_system()
-
-            rotation_x = random.uniform(global_object['rotation'][0][0],global_object['rotation'][0][1])
-            rotation_y = random.uniform(global_object['rotation'][1][0],global_object['rotation'][1][1])
-            rotation_z = random.uniform(global_object['rotation'][2][0],global_object['rotation'][2][1])
 
             data = {'System':
             {'group': group_count,
@@ -246,32 +247,6 @@ def bounding_box(procedural_objects_list):
 
     return (min_x,max_x,min_y,max_y,min_z,max_z)
 
-
-def calculate_rotation_angles(line2):
-    line1 = np.array([1.0,0,0])
-    line2 = line2 / np.linalg.norm(line2)
-
-    # Calculate the cross product of the two lines
-    cross_product = np.cross(line1, line2)
-
-    # Calculate the dot product of the two lines
-    dot_product = np.dot(line1, line2)
-
-    # Create the skew-symmetric matrix of the cross product
-    cross_product_matrix = np.array([[0, -cross_product[2], cross_product[1]],
-                                     [cross_product[2], 0, -cross_product[0]],
-                                     [-cross_product[1], cross_product[0], 0]])
-
-    # Create the rotation matrix
-    rotation_matrix = np.identity(3) + cross_product_matrix + cross_product_matrix.dot(cross_product_matrix) * (1 / (1 + dot_product))
-
-    # Calculate the rotation angles
-    rotation_x = np.arctan2(rotation_matrix[2, 1], rotation_matrix[2, 2])
-    rotation_y = np.arctan2(-rotation_matrix[2, 0], np.sqrt(rotation_matrix[2, 1]**2 + rotation_matrix[2, 2]**2))
-    rotation_z = np.arctan2(rotation_matrix[1, 0], rotation_matrix[0, 0])
-
-    return rotation_x, rotation_y, rotation_z
-
 def max_of_three(a,b,c):
     if a>b and a>c:
         return 0
@@ -280,3 +255,38 @@ def max_of_three(a,b,c):
         return 1
     
     return 2
+
+
+def rotation_matrix(target_vector):
+    source = np.array([1,0,0])
+    target = np.asarray(target_vector)
+    
+    source = source / np.linalg.norm(source)  # Normalize source vector
+    target = target / np.linalg.norm(target)  # Normalize target vector
+    
+    v = np.cross(source, target)  # Cross product of source and target
+    c = np.dot(source, target)    # Dot product of source and target
+    
+    skew_symmetric = np.array([[0, -v[2], v[1]],
+                               [v[2], 0, -v[0]],
+                               [-v[1], v[0], 0]])
+    
+    rotation = np.eye(3) + skew_symmetric + np.dot(skew_symmetric, skew_symmetric) * (1 / (1 + c))
+    x,y,z = rotation_matrix_to_euler_angles(rotation)
+    return x,y,z
+
+
+def rotation_matrix_to_euler_angles(rotation_matrix):
+    sy = np.sqrt(rotation_matrix[0, 0] * rotation_matrix[0, 0] + rotation_matrix[1, 0] * rotation_matrix[1, 0])
+    singular = sy < 1e-6
+
+    if not singular:
+        x = np.arctan2(rotation_matrix[2, 1], rotation_matrix[2, 2])
+        y = np.arctan2(-rotation_matrix[2, 0], sy)
+        z = np.arctan2(rotation_matrix[1, 0], rotation_matrix[0, 0])
+    else:
+        x = np.arctan2(-rotation_matrix[1, 2], rotation_matrix[1, 1])
+        y = np.arctan2(-rotation_matrix[2, 0], sy)
+        z = 0
+
+    return x, y, z

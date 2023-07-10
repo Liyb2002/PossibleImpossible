@@ -1,6 +1,7 @@
 import procedural_objects
 import numpy as np
 import random
+import math
 
 class Module:
     def __init__(self, position, size, rotation, age, type):
@@ -22,6 +23,9 @@ class Module:
         #to world position
         world_pos = compute_world_position(self.position, origin, rotation)
 
+        origin_dist = math.sqrt((origin[0] - light_pos[0])**2 + (origin[1] - light_pos[1])**2 + (origin[2] - light_pos[2])**2)
+        pt_dist = math.sqrt((world_pos[0] - light_pos[0])**2 + (world_pos[1] - light_pos[1])**2 + (world_pos[2] - light_pos[2])**2)
+            
         #chose a rule to execute
         execute_rule =  None
         new_modules = []
@@ -137,7 +141,7 @@ def compute_world_position(position, translation, rotation):
     # Apply rotations
     rotated_position = rotate_vector(translated_position, rotation)
     
-    return rotated_position
+    return translated_position
 
 def rotate_vector(vector, rotation):
     """Rotate a vector by the specified Euler angles."""

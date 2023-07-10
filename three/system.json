@@ -2,100 +2,78 @@
   {
     "System": {
       "group": 1,
-      "origin_x": 3.0681859162613496,
-      "origin_y": 2.1662703698109653,
-      "origin_z": 3.19674412630528,
-      "system_rotation_x": -0.44724355492846046,
-      "system_rotation_y": -0.003961608805783112,
-      "system_rotation_z": 1.6886465143296987
+      "origin_x": 3.218410630223574,
+      "origin_y": 2.3411496538690693,
+      "origin_z": 3.217487292739056,
+      "system_rotation_x": 0.7854747780133438,
+      "system_rotation_y": 1.0859434223600546,
+      "system_rotation_z": 1.203152753383661
     }
   },
   {
     "System": {
       "group": 2,
-      "origin_x": 1.3882984571622217,
-      "origin_y": 1.4858260849104457,
-      "origin_z": 1.4859706848501955,
-      "system_rotation_x": -0.3281893390065871,
-      "system_rotation_y": 0.4031576229448329,
-      "system_rotation_z": 1.7632401735047232
+      "origin_x": 1.1964175826432764,
+      "origin_y": 1.469392775437241,
+      "origin_z": 0.9017501642548313,
+      "system_rotation_x": 0.06445309926537564,
+      "system_rotation_y": 0.1684808091206442,
+      "system_rotation_z": 0.7294053651214322
     }
   },
   {
     "System": {
       "group": 3,
-      "origin_x": 1.4148558475874753,
-      "origin_y": 1.491374316580262,
-      "origin_z": 1.205037949772184,
-      "system_rotation_x": 0.02921390071517338,
-      "system_rotation_y": -0.15915209203455072,
-      "system_rotation_z": 1.6723866755805603
+      "origin_x": 2.5288496005175447,
+      "origin_y": 2.2437243876569846,
+      "origin_z": 3.568734399462712,
+      "system_rotation_x": 0.5246971292543199,
+      "system_rotation_y": 1.027635595164695,
+      "system_rotation_z": 0.8882162635025678
     }
   },
   {
     "System": {
       "group": 4,
-      "origin_x": 3.0681859162613496,
-      "origin_y": 2.1662703698109653,
-      "origin_z": 3.19674412630528,
-      "system_rotation_x": 0.009876490215551037,
-      "system_rotation_y": 0.16796424766917417,
-      "system_rotation_z": 2.3862524515952988
+      "origin_x": 1.6167342588361944,
+      "origin_y": 2.3680130812325064,
+      "origin_z": 3.555127717620375,
+      "system_rotation_x": 0.28504400471087293,
+      "system_rotation_y": 0.9008561527513888,
+      "system_rotation_z": 0.5769130549392819
     }
   },
   {
     "System": {
       "group": 5,
-      "origin_x": 2.454384833864681,
-      "origin_y": 2.107753327835155,
-      "origin_z": 3.137640996347723,
-      "system_rotation_x": -0.21321693519087315,
-      "system_rotation_y": -0.06476766318586957,
-      "system_rotation_z": 2.300899925998489
+      "origin_x": 1.2069668400904192,
+      "origin_y": 1.5442859280709198,
+      "origin_z": 3.625123744616978,
+      "system_rotation_x": 0.3018379236204625,
+      "system_rotation_y": 0.7732205935836983,
+      "system_rotation_z": 0.7150142902598394
     }
   },
   {
     "System": {
       "group": 6,
-      "origin_x": 1.833336848576257,
-      "origin_y": 2.05070530580186,
-      "origin_z": 3.226300538089631,
-      "system_rotation_x": -0.20746912141206908,
-      "system_rotation_y": 0.18748587234042868,
-      "system_rotation_z": 2.304986046842687
+      "origin_x": 1.3773815063708714,
+      "origin_y": 1.5885501849502086,
+      "origin_z": 2.39441556311389,
+      "system_rotation_x": 0.2265725530664746,
+      "system_rotation_y": 0.5712828275774634,
+      "system_rotation_z": 0.7392230835471199
     }
   },
   {
     "System": {
       "group": 7,
-      "origin_x": 1.43580010950176,
-      "origin_y": 1.3256393492360488,
-      "origin_z": 3.1603857383203673,
-      "system_rotation_x": 0.47042390127913536,
-      "system_rotation_y": 0.22116358058189722,
-      "system_rotation_z": 2.3041575789483124
-    }
-  },
-  {
-    "System": {
-      "group": 8,
-      "origin_x": 1.5385722166068194,
-      "origin_y": 1.3285945365618308,
-      "origin_z": 2.215507371472552,
-      "system_rotation_x": -0.22890328514447245,
-      "system_rotation_y": -0.49253006880576,
-      "system_rotation_z": 1.5690341430106338
-    }
-  },
-  {
-    "System": {
-      "group": 9,
-      "origin_x": 1.6155133016627647,
-      "origin_y": 1.352753117540827,
-      "origin_z": 1.6522921747483135,
-      "system_rotation_x": -0.2790905129906768,
-      "system_rotation_y": 0.19761355044118656,
-      "system_rotation_z": 1.7441010891790532
+      "origin_x": 1.4573110249534014,
+      "origin_y": 1.6136470983337952,
+      "origin_z": 1.809480144465941,
+      "system_rotation_x": 0.17645337775890785,
+      "system_rotation_y": 0.44184864414900504,
+      "system_rotation_z": 0.7503983151721416
     }
   }
 ]

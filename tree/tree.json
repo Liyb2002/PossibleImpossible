@@ -159,7 +159,7 @@
 "object_id": 10,
 "type": "global_object",
 "action" : ["add"],
-"pos": [["positive", 2.0],["positive", 2.0],["negative",1.0]],
+"pos": [["positive", 0.5],["positive", 0.5],["negative",0.5]],
 "size":[["fixed", 0.2], ["fixed", 0.2], ["fixed", 0.2]]
 },
 {
@@ -168,7 +168,7 @@
 "action" : ["LSystem"],
 "adding_types":[2],
 "rotation":[[-0.5,0.5],[-0.5,0.5],[1.5,2.5]],
-"light_type":9
+"light_type":10
 },
 {
 "object_id": 12,
