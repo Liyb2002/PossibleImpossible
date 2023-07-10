@@ -145,11 +145,15 @@ def action_LSystem(procedural_objects_list, global_object):
     for obj in procedural_objects_list:
         dist_to_light = math.sqrt((obj.position[0] - light_pos[0])**2 + (obj.position[1] - light_pos[1])**2 + (obj.position[2] - light_pos[2])**2)
         base_prob = 0.8
-        prob = max(base_prob - (0.1*dist_to_light*2), 0)
+        prob = max(base_prob - (0.1*dist_to_light), 0.1)
 
-        if obj.type in global_object['adding_types'] and random.random() < 0.6:
+        if obj.type in global_object['adding_types'] and random.random() < prob:
             line2 = light_pos - obj.position
             rotation_x, rotation_y, rotation_z = rotation_matrix(line2)
+            rotation_x += round(random.uniform(-0.2, 0.2),4)
+            rotation_y += round(random.uniform(-0.2, 0.2),4)
+            rotation_z += round(random.uniform(-0.2, 0.2),4)
+
             system = LSystem.LSys()
             system.system_setup(obj.position, np.array([rotation_x,rotation_y,rotation_z]), group_count, light_pos)
             system.run_system()
