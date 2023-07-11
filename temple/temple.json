@@ -2,7 +2,7 @@
 "object_id": -1,
 "type": "local_object",
 "foreground_type": [1,8],
-"foreground_connect": "-y",
+"foreground_connect": "+z",
 "background_type": 0,
 "background_connect": "+y"
 },

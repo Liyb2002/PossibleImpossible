@@ -154,6 +154,7 @@
 "action" : ["assign"],
 "prev_type": 1,
 "prev_condition":["+y"],
+"extra_condition": []
 "offsets": [[0.0,0.0],[0.1,0.2],[0.0,0.0]]
 }
 
