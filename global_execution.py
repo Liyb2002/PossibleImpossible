@@ -7,8 +7,7 @@ import LSystem
 import math
 import json
 
-def global_assign(result_particle, global_objects):
-    procedural_objects_list = result_particle.procedural_objects
+def global_assign(procedural_objects_list, global_objects):
     for global_object in global_objects:
         action = global_object['action']
         if action[0] == 'assign':
@@ -177,17 +176,6 @@ def action_LSystem(procedural_objects_list, global_object):
         json.dump(system_data, f, indent=2)
 
     return result
-
-def action_addCorner(result_particle, procedural_objects_list):
-    transition_pts = result_particle.transition_pts
-    dummy_scope = [0.1, 0.1]
-
-    for pt in transition_pts:
-        tempt_obj = procedural_objects.Procedural_object(4, pt, np.array([dummy_scope,dummy_scope,dummy_scope]), "00000", np.array([[0],[0],[0]]), np.array([0,0,0]))
-        tempt_obj.arbitrary_set_length(np.array([float(0.1),float(0.1),float(0.1)])) 
-        procedural_objects_list.append(tempt_obj)
-    
-    return procedural_objects_list
 
 def action_edit_size(procedural_objects_list, global_object):
     for obj in procedural_objects_list:

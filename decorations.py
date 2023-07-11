@@ -8,7 +8,6 @@ class decoration_operator:
         self.generic_footprint_list = []
         self.generic_nonterminal_list = []
         self.generic_terminal_list = []
-
         self.decorate_path = decorate_path
 
         self.read_decorations()

@@ -53,7 +53,6 @@ class Particle:
         abs_delta = np.array([abs(delta[0]), abs(delta[1]), abs(delta[2])])
         abs_delta -= np.array([0, 0, self.end_connect.length[2]])
 
-        self.transition_pts = []
         directions = cycle_connect.get_dirs(delta)
         # directions = cycle_connect.update_order(self.start_connect, directions)
         orders = cycle_connect.random_order()
@@ -88,9 +87,6 @@ class Particle:
                             self.success = False
                             return 
 
-                if i != 2:
-                    corner = get_corner_pt(tempt_result[-1], directions[index])
-                    self.transition_pts.append(corner)
             # print("rotation", i, "succes")
 
         # self.success = True
@@ -318,27 +314,3 @@ def ray_intersecting_Obj(front_obj, ro, rd):
     
     return True
 
-
-def get_corner_pt(obj, direction):
-    pt = obj.position
-    obj_size = obj.length
-
-    if direction == "-x":
-        pt -= np.array([obj_size[0], 0, 0])
-    
-    if direction == "+x":
-        pt += np.array([obj_size[0], 0, 0])
-    
-    if direction == "-y":
-        pt -= np.array([0, obj_size[1], 0])
-    
-    if direction == "+y":
-        pt += np.array([0, obj_size[1], 0])
-
-    if direction == "+z":
-        pt -= np.array([0, 0, obj_size[2]])
-    
-    if direction == "-z":
-        pt += np.array([0, 0, obj_size[2]])
-    
-    return pt
