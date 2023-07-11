@@ -118,7 +118,6 @@ class Module:
     
 
     def satify_condition(self, rule, dist_factor):
-        print("dist_factor", dist_factor)
         for condition in rule.condition:
             if condition[0] == 'age':
                 if condition[1] == 'less_than' and self.age >= condition[2]:

@@ -4,15 +4,17 @@ import procedural_objects
 import random
 
 class decoration_operator:
-    def __init__(self):
+    def __init__(self, decorate_path):
         self.generic_footprint_list = []
         self.generic_nonterminal_list = []
         self.generic_terminal_list = []
 
+        self.decorate_path = decorate_path
+
         self.read_decorations()
 
     def read_decorations(self):
-        with open('tree/tree_decorate.json', 'r') as object_file:
+        with open(self.decorate_path, 'r') as object_file:
             objects_data = json.load(object_file)
 
             new_object = generic_footprint_object(objects_data[0])

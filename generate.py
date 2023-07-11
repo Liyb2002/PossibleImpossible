@@ -13,7 +13,7 @@ from copy import deepcopy
 import numpy as np
 
 class generate_helper:
-    def __init__(self, generic_object_list, global__object_list, visual_bridge_info):
+    def __init__(self, generic_object_list, global__object_list, visual_bridge_info, decorate_path):
         #find impossible intersection positions
 
         self.generic_object_list = generic_object_list
@@ -23,6 +23,7 @@ class generate_helper:
         self.result_particle = None
         self.sampled_points = constraints_loader.load_constraints()
         self.visual_bridge_info = visual_bridge_info
+        self.decorate_path = decorate_path
     
     def smc_process(self):
         num_particles = 3000
@@ -134,7 +135,7 @@ class generate_helper:
 
         self.result_particle.procedural_objects[0].type = self.visual_bridge_info['foreground_type'][1]
         procedural_objects = global_execution.global_assign(self.result_particle, self.global__object_list)
-        decorator = decorations.decoration_operator()
+        decorator = decorations.decoration_operator(self.decorate_path)
         decoration_list = decorator.decorate(procedural_objects)
         return decoration_list
 
