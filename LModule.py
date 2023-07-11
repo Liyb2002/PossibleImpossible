@@ -25,13 +25,13 @@ class Module:
 
         origin_dist = math.sqrt((origin[0] - light_pos[0])**2 + (origin[1] - light_pos[1])**2 + (origin[2] - light_pos[2])**2)
         pt_dist = math.sqrt((world_pos[0] - light_pos[0])**2 + (world_pos[1] - light_pos[1])**2 + (world_pos[2] - light_pos[2])**2)
-            
+        dist_factor = 1-(origin_dist*0.1)
         #chose a rule to execute
         execute_rule =  None
         new_modules = []
         
         for rule in rules:
-            if rule.lhs_type == self.type and self.satify_condition(rule):
+            if rule.lhs_type == self.type and self.satify_condition(rule, dist_factor):
                 execute_rule = rule
                 break
         
@@ -39,16 +39,18 @@ class Module:
             return []
             
         for i in range(len(execute_rule.rhs_types)):
+            
+            prob = max(execute_rule.prob_each[i] * dist_factor, 0.1)
+            if random.random() < prob:
+                new_type = execute_rule.rhs_types[i]
+                new_size = np.array([self.size[0] * execute_rule.rhs_size_multiplier[i][0], self.size[1] * execute_rule.rhs_size_multiplier[i][1], self.size[2] * execute_rule.rhs_size_multiplier[i][2]])
+                new_rotation = self.rotation + execute_rule.rhs_rotations[i]
+                new_direction = execute_rule.rhs_directions[i]
+                new_offsets = execute_rule.rhs_offsets[i]
 
-            new_type = execute_rule.rhs_types[i]
-            new_size = np.array([self.size[0] * execute_rule.rhs_size_multiplier[i][0], self.size[1] * execute_rule.rhs_size_multiplier[i][1], self.size[2] * execute_rule.rhs_size_multiplier[i][2]])
-            new_rotation = self.rotation + execute_rule.rhs_rotations[i]
-            new_direction = execute_rule.rhs_directions[i]
-            new_offsets = execute_rule.rhs_offsets[i]
-
-            new_position = self.get_new_position(new_direction, new_size, new_offsets)
-            new_module = Module(new_position, new_size, new_rotation, self.age, execute_rule.rhs_types[i])
-            new_modules.append(new_module)
+                new_position = self.get_new_position(new_direction, new_size, new_offsets)
+                new_module = Module(new_position, new_size, new_rotation, self.age, execute_rule.rhs_types[i])
+                new_modules.append(new_module)
 
         return new_modules
 
@@ -115,7 +117,8 @@ class Module:
         return new_position
     
 
-    def satify_condition(self, rule):
+    def satify_condition(self, rule, dist_factor):
+        print("dist_factor", dist_factor)
         for condition in rule.condition:
             if condition[0] == 'age':
                 if condition[1] == 'less_than' and self.age >= condition[2]:
@@ -124,7 +127,7 @@ class Module:
                 if condition[1] == 'larger_than' and self.age <= condition[2]:
                     return False
             
-            if condition[0] == 'Prob' and random.random() > condition[1]:
+            if condition[0] == 'Prob' and random.random() < (condition[1] * dist_factor):
                 return False
 
         return True

@@ -10,7 +10,7 @@ class LSys:
         self.min_light = 0.1
         self.max_age = 5
         self.bounding_box = np.array([[0.0,0.0], [0.0,0.0], [0.0,0.0]])
-        self.steps = 6
+        self.steps = 7
         self.procedural_objects = []
         self.new_objects = []
         self.rules = []
@@ -68,3 +68,4 @@ class rule:
         self.rhs_offsets = rule_json['rhs_offsets']
         self.rhs_directions = rule_json['rhs_directions']
         self.condition = rule_json['condition']
+        self.prob_each = rule_json['prob_each']
