@@ -81,8 +81,8 @@ class connect_execution:
 
         ok, next_type, rule_chosen = current_generic_obj.get_nextType_with_direction(self.direction)
         if ok != True:
-            print("current type", current_generic_obj.id, "target direction", self.direction)
-            print("can't find next object available")
+            # print("current type", current_generic_obj.id, "target direction", self.direction)
+            # print("can't find next object available")
             return 0
         next_type = int(next_type)
 
@@ -98,22 +98,33 @@ class connect_execution:
         next_obj.add_connected(opposite_direction(rule_chosen))
         self.production_list.append(next_obj)
         self.rules_list.append(rule_chosen)
-
-        self.lower_bound += next_scope[self.direction_idx][0] + self.prev_lower_bound
-        self.current_bound += next_obj.length[self.direction_idx] + self.prev_current_bound
-        self.upper_bound += next_scope[self.direction_idx][1] + self.prev_upper_bound
-        self.prev_lower_bound = next_scope[self.direction_idx][0]
-        self.prev_current_bound = next_obj.length[self.direction_idx]
-        self.prev_upper_bound = next_scope[self.direction_idx][1]
+        
+        if self.direction_idx != 2:
+            self.lower_bound += next_scope[self.direction_idx][0] + self.prev_lower_bound
+            self.current_bound += next_obj.length[self.direction_idx] + self.prev_current_bound
+            self.upper_bound += next_scope[self.direction_idx][1] + self.prev_upper_bound
+            self.prev_lower_bound = next_scope[self.direction_idx][0]
+            self.prev_current_bound = next_obj.length[self.direction_idx]
+            self.prev_upper_bound = next_scope[self.direction_idx][1]
+        elif self.objEnd.type == 3 or self.objEnd.type == 8:
+            self.lower_bound += next_scope[self.direction_idx][0] + self.prev_lower_bound
+            self.current_bound += next_obj.length[self.direction_idx] + self.prev_current_bound
+            self.upper_bound += next_scope[self.direction_idx][1] + self.prev_upper_bound
+            self.prev_lower_bound = next_scope[self.direction_idx][0]
+            self.prev_current_bound = next_obj.length[self.direction_idx]
+            self.prev_upper_bound = next_scope[self.direction_idx][1]
+        else:
+            self.lower_bound += next_scope[self.direction_idx][0] *2
+            self.current_bound += next_obj.length[self.direction_idx] *2
+            self.upper_bound += next_scope[self.direction_idx][1] *2
 
         self.current_type = next_type
-
 
         if self.upper_bound>self.delta[self.direction_idx] and self.lower_bound<self.delta[self.direction_idx] and valid_ending(self.available_endings, self.current_type):
             return 2
         
         if self.lower_bound > self.delta[self.direction_idx]:
-            print("lower bound larger than delta")
+            # print("lower bound larger than delta")
             return 0
 
         return 1

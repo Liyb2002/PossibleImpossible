@@ -38,8 +38,6 @@ class generate_helper:
         camera = perspective.ortho_camera()
         foreground_intersection, background_intersection = camera.get_intersections(startPos, foreground_index, background_index)
 
-        startPos2 = np.array([600,800])
-        foreground_intersection2, background_intersection2 = camera.get_intersections(startPos2, foreground_index+8, background_index+8)
 
         foreground_type = self.visual_bridge_info['foreground_type'][0]
         foreground_connect = self.visual_bridge_info['foreground_connect']
@@ -47,17 +45,25 @@ class generate_helper:
         background_connect = self.visual_bridge_info['background_connect']
 
         steps = 2
-        start_type_list = [foreground_type,foreground_type]
-        connect_direction_list = [foreground_connect,foreground_connect]
-        intersection_pos_list = [foreground_intersection, foreground_intersection2]
 
         self.small_cubes = constraints_loader.guide_visualizer(self.sampled_points, foreground_index)
-
-        self.multiple_intersections(start_type_list, connect_direction_list, intersection_pos_list)
-        self.procedural_generate(background_type, background_connect, background_intersection, steps, True)
-        if background_type != 0:
-            self.procedural_generate(background_type, background_connect, background_intersection2, steps, False)
         
+        if self.visual_bridge_info['num_visual_bridge'] == 1:
+            self.procedural_generate(foreground_type, foreground_connect, foreground_intersection, steps, True)
+            if background_type != 0:
+                self.procedural_generate(background_type, background_connect, background_intersection, steps, False)
+        
+        if self.visual_bridge_info['num_visual_bridge'] >1:
+            startPos2 = np.array([600,800])
+            foreground_intersection2, background_intersection2 = camera.get_intersections(startPos2, foreground_index+8, background_index+8)
+
+            start_type_list = [foreground_type,foreground_type]
+            connect_direction_list = [foreground_connect,foreground_connect]
+            intersection_pos_list = [foreground_intersection, foreground_intersection2]
+            self.multiple_intersections(start_type_list, connect_direction_list, intersection_pos_list)
+            self.procedural_generate(background_type, background_connect, background_intersection, steps, True)
+            if background_type != 0:
+                self.procedural_generate(background_type, background_connect, background_intersection2, steps, False)
 
         tempt_list = []
         for temple_particle in self.particle_list:
@@ -114,7 +120,6 @@ class generate_helper:
             tempt_particle.arbitrary_connect(0,1)
             tempt_particle.run_connect()
             if self.particle_list[i].success:
-                print("sucess")
                 success_connect_list.append(tempt_particle)
 
         self.particle_list = success_connect_list
@@ -162,7 +167,7 @@ class generate_helper:
         #find impossible intersection positions
         startPos = np.array([400,400])
         foreground_index = 8
-        background_index = 24
+        background_index = 16
 
         camera = perspective.ortho_camera()
         foreground_intersection, background_intersection = camera.get_intersections(startPos, foreground_index, background_index)

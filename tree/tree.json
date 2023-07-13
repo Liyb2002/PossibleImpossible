@@ -4,7 +4,9 @@
 "foreground_type": [5,5],
 "foreground_connect": "+y",
 "background_type": 3,
-"background_connect": "-y"},
+"background_connect": "-y",
+"num_visual_bridge" : 1
+},
 {
 "object_id": 1,
 "type": "local_object",

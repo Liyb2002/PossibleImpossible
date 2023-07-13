@@ -49,15 +49,12 @@ class Particle:
         self.start_connect = self.procedural_objects[id1]
         self.end_connect = self.procedural_objects[id2]
 
-    def run_connect(self):
 
+    def run_connect(self):
         startPos = self.start_connect.position
         endPos = self.end_connect.position
 
         delta = endPos - startPos
-
-        # print("delta", delta)
-
         production_list = []
         production_list.append(self.start_connect)
         abs_delta = np.array([abs(delta[0]), abs(delta[1]), abs(delta[2])])
@@ -94,7 +91,6 @@ class Particle:
                     production_list += tempt_result
                     for obj in tempt_result:
                         if not self.overlapping_check_obj(obj):
-                            print("failed overlapping chekc")
                             self.success = False
                             return 
 
@@ -135,7 +131,6 @@ class Particle:
             if obj_A.hash != obj_B.hash:
                 overlapping = obj_A.collision_check(obj_B)
                 if overlapping:
-                    print("obj_A.position", obj_A.position, "obj_B.position",obj_B.position )
                     # print("step by step overlapping check failed")
                     self.success = False
                     return False
