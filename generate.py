@@ -57,7 +57,7 @@ class generate_helper:
             if temple_particle.success:
                 tempt_list.append(temple_particle)
         self.particle_list = tempt_list
-        print("len(tempt_list)", len(tempt_list))
+
         self.connect()
 
 
@@ -99,8 +99,6 @@ class generate_helper:
 
 
     def connect(self):
-        print("to connect, len(particle_list)", len(self.particle_list))
-
         success_connect_list = []
         for i in range(len(self.particle_list)):
             self.particle_list[i].run_connect()
