@@ -29,6 +29,7 @@ class ortho_camera:
         ndc_x = (2 * x / self.screen_width) - 1
         ndc_y = (2 * y / self.screen_height) - 1
 
+
         # Calculate the world coordinates of the current pixel
         world_x = self.camera_position[0] + (ndc_x * self.world_width * 0.5 * self.right[0])
         world_y = self.camera_position[1] + (ndc_y * self.world_height * 0.5 * self.up[1])
@@ -37,9 +38,12 @@ class ortho_camera:
         # Create the ray from the camera to the current pixel
         ray_origin = np.array([world_x, world_y, world_z])
 
+        # print("ray_origin", ray_origin)
+
         return ray_origin
 
     def get_intersections(self, startPos, k1, k2):
+
         ro = self.get_ray(startPos[0], startPos[1])
         pos_1 = ro + (k1 *0.25) * self.direction
         pos_2 = ro + (k2 *0.25) * self.direction

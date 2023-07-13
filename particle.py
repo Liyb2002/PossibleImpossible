@@ -41,13 +41,23 @@ class Particle:
         if step == 0 and not isFront:
             self.end_connect = self.procedural_objects[-1]
         
+    def arbitrary_add_object(self, intersection, start_type, connected_dir):
+        obj = start_obj(intersection, self.generic_object_list, start_type, connected_dir)
+        self.procedural_objects.append(obj)
 
+    def arbitrary_connect(self, id1, id2):
+        self.start_connect = self.procedural_objects[id1]
+        self.end_connect = self.procedural_objects[id2]
 
     def run_connect(self):
+
         startPos = self.start_connect.position
         endPos = self.end_connect.position
 
         delta = endPos - startPos
+
+        # print("delta", delta)
+
         production_list = []
         production_list.append(self.start_connect)
         abs_delta = np.array([abs(delta[0]), abs(delta[1]), abs(delta[2])])
@@ -82,10 +92,11 @@ class Particle:
                 if ok == 2:
                     tempt_result = connect_particle.set_scope()
                     production_list += tempt_result
-                    for obj in tempt_result:
-                        if not self.overlapping_check_obj(obj):
-                            self.success = False
-                            return 
+                    # for obj in tempt_result:
+                    #     if not self.overlapping_check_obj(obj):
+                    #         print("failed overlapping chekc")
+                    #         self.success = False
+                    #         return 
 
             # print("rotation", i, "succes")
 
