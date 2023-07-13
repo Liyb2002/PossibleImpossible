@@ -92,11 +92,11 @@ class Particle:
                 if ok == 2:
                     tempt_result = connect_particle.set_scope()
                     production_list += tempt_result
-                    # for obj in tempt_result:
-                    #     if not self.overlapping_check_obj(obj):
-                    #         print("failed overlapping chekc")
-                    #         self.success = False
-                    #         return 
+                    for obj in tempt_result:
+                        if not self.overlapping_check_obj(obj):
+                            print("failed overlapping chekc")
+                            self.success = False
+                            return 
 
             # print("rotation", i, "succes")
 
@@ -135,6 +135,7 @@ class Particle:
             if obj_A.hash != obj_B.hash:
                 overlapping = obj_A.collision_check(obj_B)
                 if overlapping:
+                    print("obj_A.position", obj_A.position, "obj_B.position",obj_B.position )
                     # print("step by step overlapping check failed")
                     self.success = False
                     return False

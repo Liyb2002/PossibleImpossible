@@ -140,7 +140,7 @@ class Procedural_object:
         B_z = [objB.position[2] - objB.length[2], objB.position[2] + objB.length[2]]
         overlap_z = getOverlap(A_z, B_z)
 
-        if overlap_x>0.02 and overlap_y>0.02 and overlap_z>0.02:
+        if overlap_x>0.1 and overlap_y>0.1 and overlap_z>0.1:
             # print("cur obj", self.position, self.length)
             # print("objB", objB.position, objB.length)
             return True

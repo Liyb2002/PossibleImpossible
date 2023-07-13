@@ -46,17 +46,17 @@ class generate_helper:
         background_type = self.visual_bridge_info['background_type']
         background_connect = self.visual_bridge_info['background_connect']
 
-        steps = 0
-        start_type_list = [foreground_type,background_type,foreground_type,background_type]
-        connect_direction_list = [foreground_connect,background_connect,foreground_connect,background_connect]
-        intersection_pos_list = [foreground_intersection, background_intersection, foreground_intersection2, background_intersection2]
+        steps = 2
+        start_type_list = [foreground_type,foreground_type]
+        connect_direction_list = [foreground_connect,foreground_connect]
+        intersection_pos_list = [foreground_intersection, foreground_intersection2]
 
         self.small_cubes = constraints_loader.guide_visualizer(self.sampled_points, foreground_index)
 
         self.multiple_intersections(start_type_list, connect_direction_list, intersection_pos_list)
-        # self.procedural_generate(foreground_type, foreground_connect, foreground_intersection, steps, True)
-        # if background_type != 0:
-        #     self.procedural_generate(background_type, background_connect, background_intersection, steps, False)
+        self.procedural_generate(background_type, background_connect, background_intersection, steps, True)
+        if background_type != 0:
+            self.procedural_generate(background_type, background_connect, background_intersection2, steps, False)
         
 
         tempt_list = []
@@ -65,7 +65,7 @@ class generate_helper:
                 tempt_list.append(temple_particle)
         self.particle_list = tempt_list
 
-        # self.connect()
+        self.connect()
 
 
         # self.reproduce_particle_list(num_particles)
@@ -111,14 +111,12 @@ class generate_helper:
             for j in range(len(start_types)):
                 tempt_particle.arbitrary_add_object(intersection_pos[j],start_types[j],connect_directions[j])
             
-            tempt_particle.arbitrary_connect(0,2)
+            tempt_particle.arbitrary_connect(0,1)
             tempt_particle.run_connect()
             if self.particle_list[i].success:
                 print("sucess")
                 success_connect_list.append(tempt_particle)
 
-            tempt_particle.arbitrary_connect(0,2)
-        
         self.particle_list = success_connect_list
 
 
