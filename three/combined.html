@@ -200,8 +200,6 @@
 			}
 			else if(jsonData[i]["obj"]["type"] == 16){
 				console.log("pivot size", pivot.scale)
-				pivot.position.set(start_x-0.5,start_y,start_z);
-				pivot.scale.set(0.1,0.1,0.1);
 				load_mesh = false;
 			}
 			else{
@@ -289,6 +287,8 @@
 			pivot.add(a);
 		}
 
+		pivot.position.set(0,2,0);
+		pivot.scale.set(0.1,0.1,0.1);
 
 		}
 
