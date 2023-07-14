@@ -13,12 +13,13 @@ generic_object_list = []
 global__object_list = []
 visual_bridge_info = None
 
-if len(sys.argv) < 3:
-    print("Usage: python main.py <file_path> <decorate_path>")
+if len(sys.argv) < 4:
+    print("Usage: python main.py <file_path> <decorate_path> <export_path>")
     sys.exit(1)
 
 file_path = sys.argv[1]
 decorate_path = sys.argv[2]
+export_path = sys.argv[3]
 
 with open( file_path, 'r') as object_file:
     objects_data = json.load(object_file)
@@ -48,7 +49,7 @@ print("success!")
 
 output_writer = write2JSON.output()
 
-output_writer.write_proceudral_objects(class_generate.small_cubes, './three/guides.json')
+# output_writer.write_proceudral_objects(class_generate.small_cubes, './three/guides.json')
 # output_writer.write_proceudral_objects(result_list, './three/result.json')
 
-output_writer.write_result(result_list, './three/result.json')
+output_writer.write_result(result_list, export_path)
