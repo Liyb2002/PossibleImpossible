@@ -164,11 +164,9 @@
 			var center_z = start_z;
 			
 			var debug_mode = jsonData[i]["obj"]["mode"];
-			console.log("jsonData[i]", jsonData[i]["obj"]["mode"] == 0);
 			
 			var a;
 			var rand = Math.random();
-			console.log("rand", rand);
 			var load_mesh = true;
 			if(jsonData[i]["obj"]["type"] == 1){
 				a = m1.clone();
@@ -199,9 +197,14 @@
 				a = m14.clone();
 			}else if(jsonData[i]["obj"]["type"] == 15){
 				a = m15.clone();
-			}else if(jsonData[i]["obj"]["type"] == 16){
-				a = m16.clone();
-			}else{
+			}
+			else if(jsonData[i]["obj"]["type"] == 16){
+				console.log("pivot size", pivot.scale)
+				pivot.position.set(start_x-0.5,start_y,start_z);
+				pivot.scale.set(0.1,0.1,0.1);
+				load_mesh = false;
+			}
+			else{
 			var cube = new THREE.Mesh( geometry, material );
 			cube.position.set(center_x, center_y, center_z );
 			cube.scale.set(scale_x*2, scale_y*2, scale_z*2);
@@ -265,7 +268,6 @@
 			
 			var a;
 			var rand = Math.random();
-			console.log("rand", rand);
 			var load_mesh = true;
 			if(jsonData[i]["obj"]["type"] == 0 ){
 				a = m0_temple.clone();
@@ -290,8 +292,6 @@
 
 		}
 
-		pivot.scale.set(0.1,0.1,0.1);
-		pivot.position.set(0,2,0);
 	},
 	// onProgress callback
 	function ( xhr ) {
