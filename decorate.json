@@ -71,7 +71,7 @@
   "category":  "footprint",
   "structural_id": 9,
   "subdiv":[
-  [1.0, "y direction", ["terminal", "5", 0.5], ["terminal", "16", 0.5]]
+  [1.0, "y direction", ["terminal", "5", 0.3], ["terminal", "16", 0.7]]
 
   ]
   },
