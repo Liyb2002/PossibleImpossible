@@ -38,6 +38,9 @@ with open( file_path, 'r') as object_file:
                 global__object_list.append(object_data)
             if object_data['type'] == "extra_system":
                 extra_system_list.append(object_data)
+                new_object = generic_objects.Generic_object(object_data)
+                generic_object_list.append(new_object)
+
 
 
 class_generate = generate.generate_helper(generic_object_list, global__object_list, extra_system_list, visual_bridge_info, decorate_path)

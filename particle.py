@@ -11,6 +11,8 @@ class Particle:
         self.generic_object_list = generic_object_list
         self.success = True
         self.procedural_objects = []
+        self.extra_system = []
+
         self.targetProb = {}
         self.eye=np.array([5.0, 5.0, 5.0])
         self.score = 1
@@ -50,15 +52,23 @@ class Particle:
         self.end_connect = self.procedural_objects[id2]
 
     def arbitrary_add_extra_system(self, extra_system):
-        print("add arbitrary_add_extra_system")
         scope_x = extra_system['scope_x']
         scope_y = extra_system['scope_y']
         scope_z = extra_system['scope_z']
         scope = np.array([scope_x,scope_y,scope_z])
         gen_hash = extra_system['object_id'] + random.uniform(0, 1)
+        position = np.array([extra_system['position'][0], extra_system['position'][1], extra_system['position'][2]])
 
-        obj = procedural_objects.Procedural_object(extra_system['object_id'], extra_system['position'], scope, gen_hash,np.array([[0],[0],[0]]), np.array([0,0,0]))
+        obj = procedural_objects.Procedural_object(extra_system['object_id'], position, scope, gen_hash,np.array([[0],[0],[0]]), np.array([0,0,0]))
         self.procedural_objects.append(obj)
+        self.extra_system.append(obj)
+
+    def connect_extra_system(self):
+        for e_sys in self.extra_system:
+            prev_start = self.start_connect
+            self.start_connect = e_sys
+            self.run_connect()
+            self.start_connect = prev_start
 
     def run_connect(self):
         startPos = self.start_connect.position

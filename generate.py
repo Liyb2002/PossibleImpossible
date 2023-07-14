@@ -119,6 +119,14 @@ class generate_helper:
 
             self.particle_list = resample.resample_particles(self.particle_list, score_list)
 
+        if not isFront:
+            success_connect_list = []
+            for i in range(len(self.particle_list)):
+                self.particle_list[i].connect_extra_system()
+                if self.particle_list[i].success:
+                    success_connect_list.append(self.particle_list[i])
+    
+            self.particle_list = success_connect_list
         print("generation complete")
 
     def multiple_intersections(self, start_types, connect_directions, intersection_pos):
@@ -145,7 +153,10 @@ class generate_helper:
                 success_connect_list.append(self.particle_list[i])
 
         self.particle_list = success_connect_list
+        success_connect_list = []
+
         print("successful connected particle list", len(self.particle_list))
+
 
     def select_result_particle(self):
         highest_hit = 0
