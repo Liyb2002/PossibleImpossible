@@ -13,11 +13,13 @@ from copy import deepcopy
 import numpy as np
 
 class generate_helper:
-    def __init__(self, generic_object_list, global__object_list, visual_bridge_info, decorate_path):
+    def __init__(self, generic_object_list, global__object_list, extra_system_list, visual_bridge_info, decorate_path):
         #find impossible intersection positions
 
         self.generic_object_list = generic_object_list
         self.global__object_list = global__object_list
+        self.extra_system_list = extra_system_list
+
         self.particle_list = []
         self.score_list = []
         self.result_particle = None
@@ -25,12 +27,21 @@ class generate_helper:
         self.visual_bridge_info = visual_bridge_info
         self.decorate_path = decorate_path
     
+    def extra_system_init(self):
+        for i in range(len(self.particle_list)):
+            tempt_particle = self.particle_list[i]
+            for extra_system in self.extra_system_list:
+                tempt_particle.arbitrary_add_extra_system(extra_system)
+
+
     def smc_process(self):
         num_particles = 3000
         for i in range(num_particles):
             tempt_particle = particle.Particle(self.generic_object_list, self.sampled_points)
             self.particle_list.append(tempt_particle)
 
+        self.extra_system_init()
+        
         startPos = np.array([400,400])
         foreground_index = 12
         background_index = 24

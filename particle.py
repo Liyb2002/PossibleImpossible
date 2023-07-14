@@ -49,6 +49,16 @@ class Particle:
         self.start_connect = self.procedural_objects[id1]
         self.end_connect = self.procedural_objects[id2]
 
+    def arbitrary_add_extra_system(self, extra_system):
+        print("add arbitrary_add_extra_system")
+        scope_x = extra_system['scope_x']
+        scope_y = extra_system['scope_y']
+        scope_z = extra_system['scope_z']
+        scope = np.array([scope_x,scope_y,scope_z])
+        gen_hash = extra_system['object_id'] + random.uniform(0, 1)
+
+        obj = procedural_objects.Procedural_object(extra_system['object_id'], extra_system['position'], scope, gen_hash,np.array([[0],[0],[0]]), np.array([0,0,0]))
+        self.procedural_objects.append(obj)
 
     def run_connect(self):
         startPos = self.start_connect.position

@@ -151,12 +151,13 @@
 },
 {
 "object_id": 9,
-"type": "local_object",
+"type": "extra_system",
 "scope_x": [0.5,0.5],
-"scope_y": [0.5,0.15],
+"scope_y": [0.5,0.5],
 "scope_z": [0.5,0.5],
+"position": [0,2,0],
 "canTerminate": "True",
-"cycle_connect": "False",
+"cycle_connect": "True",
 "rotation": [[0],[0],[0]],
 "connect_id": [[4,0.5],[5,0.5]],
 "connect_rule":{
