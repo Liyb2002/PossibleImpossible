@@ -4,7 +4,7 @@
 4 -> beam, +z direction
 5 -> beam, -z direction
 
-6 -> ceiling
-7 -> floor
-8 -> pillar broken into pieces
-9-> roof
+
+6 -> pillar broken into pieces
+7 -> ceiling
+8 -> floor

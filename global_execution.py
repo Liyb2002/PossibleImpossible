@@ -29,9 +29,11 @@ def action_assign(procedural_objects_list, global_object):
         if obj.type == global_object['prev_type']:
             assign_available = True
             for dir in obj.connected:
-                if dir == global_object['prev_condition'][0]:
-                    assign_available = False
-            
+                for i in range(len(global_object['prev_condition'])):
+                    prev_condition_dir = global_object['prev_condition'][i]
+                    if dir == prev_condition_dir:
+                        assign_available = False
+          
             if assign_available:
                 offset_x = random.uniform(global_object['offsets'][0][0],global_object['offsets'][0][1])
                 offset_y = random.uniform(global_object['offsets'][1][0],global_object['offsets'][1][1])

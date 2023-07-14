@@ -41,21 +41,22 @@
   "category":  "footprint",
   "structural_id": 6,
   "subdiv":[
-    [1.0, "y direction", ["terminal", "0", 1.0]]   ]
+    [1.0, "y direction", ["terminal","2", 0.7],["terminal","1", 0.02], ["terminal","0", 0.28]]
+     ]
   },
   {
   "object_name": "footprint_7",
   "category":  "footprint",
   "structural_id": 7,
   "subdiv":[
-    [1.0, "y direction", ["terminal", "3", 1.0]]   ]
+    [1.0, "y direction", ["terminal", "0", 1.0]]   ]
   },
   {
   "object_name": "footprint_8",
   "category":  "footprint",
   "structural_id": 8,
   "subdiv":[
-  [1.0, "y direction", ["terminal","2", 0.7],["terminal","1", 0.02], ["terminal","0", 0.28]]
+    [1.0, "y direction", ["terminal", "3", 1.0]] 
   ]
   },
   {

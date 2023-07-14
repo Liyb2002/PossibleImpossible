@@ -2,7 +2,7 @@
 "object_id": -1,
 "type": "local_object",
 "foreground_type": [1,8],
-"foreground_connect": "+z",
+"foreground_connect": "+y",
 "background_type": 0,
 "background_connect": "+y",
 "num_visual_bridge" : 1
@@ -101,12 +101,20 @@
 {
 "object_id": 6,
 "type": "global_object",
+"action" : ["assign"],
+"prev_type": 1,
+"prev_condition":["+x", "+z"],
+"offsets": [[0.0,0.0],[0.0,0.0],[0.0,0.0]]
+},
+{
+"object_id": 7,
+"type": "global_object",
 "action" : ["add"],
 "pos": [["middle", 0.0],["top", 0.0],["middle",0.0]],
 "size":[["mult", 0.5], ["fixed", "0.15"], ["mult", 0.5]]
 },
 {
-"object_id": 7,
+"object_id": 8,
 "type": "global_object",
 "action" : ["add"],
 "pos": [["middle", 0.0],["bot", 0.0],["middle",0.0]],
