@@ -1,10 +1,10 @@
 [{
 "object_id": -1,
-"foreground_type": [1,1],
+"foreground_type": [9,9],
 "foreground_connect": "-y",
 "background_type": 3,
 "background_connect": "+y",
-"num_visual_bridge" : 2
+"num_visual_bridge" : 1
 },
 {
 "object_id": 1,
@@ -151,6 +151,25 @@
 },
 {
 "object_id": 9,
+"type": "local_object",
+"scope_x": [0.5,0.5],
+"scope_y": [0.5,0.15],
+"scope_z": [0.5,0.5],
+"canTerminate": "True",
+"cycle_connect": "False",
+"rotation": [[0],[0],[0]],
+"connect_id": [[4,0.5],[5,0.5]],
+"connect_rule":{
+"4" : [ "-x"],
+"5" : [ "+x"]
+},
+"offsets":{
+"4" : [0.0,0.0,0.0],
+"5" : [0.0,0.0,0.0]
+}
+},
+{
+"object_id": 10,
 "type": "global_object",
 "action" : ["assign"],
 "prev_type": 1,

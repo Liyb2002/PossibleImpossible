@@ -9,4 +9,5 @@
 
 
 Assign type:
-9 -> when (1) has nothing above it, it become 9. 
+9 -> temple
+10 -> when (1) has nothing above it, it become 10. 

@@ -71,7 +71,7 @@
   "category":  "footprint",
   "structural_id": 9,
   "subdiv":[
-  [1.0, "y direction", ["nonterminal", "2", 1.0]]
+  [1.0, "y direction", ["terminal", "5", 0.5], ["terminal", "16", 0.5]]
 
   ]
   },
@@ -80,7 +80,7 @@
   "category":  "footprint",
   "structural_id": 10,
   "subdiv":[
-  [1.0, "y direction", ["terminal", "16", 1.0]]
+  [1.0, "y direction", ["nonterminal", "2", 1.0]]
 
   ]
   },
@@ -227,7 +227,7 @@
   "multiplier": [1,1,1]
   },
   {
-  "object_name": "stairs",
+  "object_name": "temple",
   "category":  "terminal",
   "terminal_id": 16,
   "rule": "normal",

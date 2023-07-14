@@ -87,6 +87,7 @@ class generate_helper:
 
 
     def procedural_generate(self, start_type, connect_direction, intersection_pos, steps, isFront):
+        print("start_type", start_type, "lenself.generic_object_list)", len(self.generic_object_list))
         parsedProb = parseTree.parseProb(self.generic_object_list, self.generic_object_list[start_type])
 
         score_list = []
