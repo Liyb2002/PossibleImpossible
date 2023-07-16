@@ -45,7 +45,6 @@
 	scene = new THREE.Scene();
 	scene.background = new THREE.Color( 0x81ebc6 );
 	var pivot = new THREE.Group();
-	scene.add(pivot);
 
 	const left = -3.2, right = 3.2, top2 = 2.4, bottom = -2.4, near = 0.01, far = 100;
 	camera = new THREE.OrthographicCamera(left, right, top2, bottom, near, far);
@@ -199,6 +198,7 @@
 				a = m15.clone();
 			}
 			else if(jsonData[i]["obj"]["type"] == 16){
+				scene.add(pivot);
 				pivot.position.set(start_x,start_y,start_z);
 				load_mesh = false;
 			}

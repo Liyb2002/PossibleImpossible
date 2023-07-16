@@ -4,7 +4,7 @@
   "category":  "footprint",
   "structural_id": 1,
   "subdiv":[
-  [1.0, "y direction", ["terminal", "14", 0.4]]  ]
+  [1.0, "y direction", ["terminal", "14", 1.0]]  ]
   },
   {
   "object_name": "footprint_2",
@@ -47,7 +47,7 @@
   "category":  "footprint",
   "structural_id": 6,
   "subdiv":[
-  [1.0, "y direction", ["terminal","12", 0.2], ["terminal","5", 0.8]]
+  [1.0, "y direction", ["terminal","12", 0.2]]
   ]
   },
   {
@@ -55,7 +55,7 @@
   "category":  "footprint",
   "structural_id": 7,
   "subdiv":[
-  [1.0, "y direction", ["terminal","12", 0.2], ["terminal","5", 0.8]]
+  [1.0, "y direction", ["terminal","12", 0.2]]
   ]
   },
   {
@@ -71,7 +71,7 @@
   "category":  "footprint",
   "structural_id": 9,
   "subdiv":[
-  [1.0, "y direction", ["terminal", "5", 0.3], ["terminal", "16", 0.7]]
+  [1.0, "y direction", ["terminal", "16", 1.0]]
 
   ]
   },
@@ -105,9 +105,7 @@
     "category":  "nonterminal",
     "nonterminal_id": 2,
     "subdiv":[
-    [0.6, "y direction", ["terminal", "13", 0.08], ["terminal", "9", 0.62], ["terminal", "10", 0.15], ["terminal", "11", 0.15]],
-    [0.4, "y direction", ["terminal", "13", 0.08], ["terminal", "9", 0.62], ["terminal", "10", 0.15], ["terminal", "11", 0.15]]
-  
+    [0.6, "y direction", ["terminal", "13", 0.08], ["terminal", "9", 0.62], ["terminal", "10", 0.15], ["terminal", "11", 0.15]]  
   ]
     },
   {
@@ -136,7 +134,7 @@
   "category":  "terminal",
   "terminal_id": 3,
   "rule": "normal",
-  "multiplier": [0.8,1,0.8]
+  "multiplier": [1.0,1,1.0]
   },
   {
   "object_name": "terminal_bridge_XDir",
@@ -157,7 +155,7 @@
   "category":  "terminal",
   "terminal_id": 6,
   "rule": "four_corners",
-  "multiplier": [0.15,1,0.15]
+  "multiplier": [1.0,1.0,1.0]
   },
   {
   "object_name": "terminal_solid",
@@ -172,7 +170,7 @@
   "category":  "terminal",
   "terminal_id": 8,
   "rule": "normal",
-  "multiplier": [0.5,0.5,0.5]
+  "multiplier": [1.0,1.0,1.0]
   }
   ,
   {
@@ -196,7 +194,7 @@
   "category":  "terminal",
   "terminal_id": 11,
   "rule": "normal",
-  "multiplier": [0.5,1,0.5]
+  "multiplier": [1.0,1,1.0]
   },
   {
   "object_name": "terminal_bridge_ZDir",
