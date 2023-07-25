@@ -8,6 +8,7 @@ import decorations
 import perspective
 import constraints_loader
 import global_execution
+import bounding_box
 
 from copy import deepcopy
 import numpy as np
@@ -26,7 +27,11 @@ class generate_helper:
         self.sampled_points = constraints_loader.load_constraints()
         self.visual_bridge_info = visual_bridge_info
         self.decorate_path = decorate_path
-    
+
+        box_pos = np.array([0,0,0])
+        box_scope = np.array([5,5,5])
+        self.bounding_box = bounding_box.box(box_pos, box_scope)
+
     def extra_system_init(self):
         for i in range(len(self.particle_list)):
             tempt_particle = self.particle_list[i]
@@ -37,7 +42,7 @@ class generate_helper:
     def smc_process(self):
         num_particles = 3000
         for i in range(num_particles):
-            tempt_particle = particle.Particle(self.generic_object_list, self.sampled_points)
+            tempt_particle = particle.Particle(self.generic_object_list, self.sampled_points, self.bounding_box)
             self.particle_list.append(tempt_particle)
 
         self.extra_system_init()
@@ -55,7 +60,7 @@ class generate_helper:
         background_type = self.visual_bridge_info['background_type']
         background_connect = self.visual_bridge_info['background_connect']
 
-        steps = 2
+        steps = 1
 
         self.small_cubes = constraints_loader.guide_visualizer(self.sampled_points, foreground_index)
         

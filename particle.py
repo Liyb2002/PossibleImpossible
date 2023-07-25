@@ -5,9 +5,10 @@ import procedural_objects
 import numpy as np
 import math
 import perspective
+import bounding_box
 
 class Particle:
-    def __init__(self, generic_object_list, guided_pts):
+    def __init__(self, generic_object_list, guided_pts, bounding_box):
         self.generic_object_list = generic_object_list
         self.success = True
         self.procedural_objects = []
@@ -20,6 +21,7 @@ class Particle:
         self.constraints_pts = guided_pts
         self.camera = perspective.ortho_camera()
         self.hit_constraints = 0
+        self.bounding_box = bounding_box
 
     def prepare_particle(self,intersection, start_type, connected_dir, targetProb):
         self.cur_obj = start_obj(intersection, self.generic_object_list, start_type, connected_dir)
@@ -34,7 +36,7 @@ class Particle:
             return False
         self.cur_obj = results[-1]
         self.procedural_objects += results
-        # self.calculate_score(self.intersection_obj, results)
+        self.calculate_score(self.intersection_obj, results)
 
         if step == 0 and isFront:
             self.start_connect = self.procedural_objects[-1]
@@ -188,12 +190,16 @@ class Particle:
         occulusion_score = self.occulusion_score(intersection_obj, results)
         overlapping_score = 1
         constraints_score = self.constraints_score(results)
+        bounding_score = 1
 
         for obj in results:
             if not self.overlapping_check_obj(obj):
-                overlapping_score = 0            
+                overlapping_score = 0
 
-        self.score = (density_score + probability_score + occulusion_score + constraints_score) *  overlapping_score
+            if not self.bounding_box.check_within(obj):
+                bounding_score = 0
+
+        self.score = (density_score + probability_score + occulusion_score + constraints_score) *  overlapping_score * bounding_score
 
         if len(results) == 0:
             self.score = 0
