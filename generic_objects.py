@@ -57,6 +57,11 @@ class Generic_object:
         scope_x = info['scope_x']
         scope_y = info['scope_y']
         scope_z = info['scope_z']
+
+        scope_x = [scope_x[0] * 0.5, scope_x[1] * 0.5]
+        scope_y = [scope_y[0] * 0.5, scope_y[1] * 0.5]
+        # scope_z = [scope_z[0] * 0.5, scope_z[1] * 0.5]
+
         self.scope = np.array([scope_x,scope_y,scope_z])
     
     def execute_rule(self, next_id):
