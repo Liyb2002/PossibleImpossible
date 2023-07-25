@@ -2,78 +2,45 @@
   {
     "System": {
       "group": 1,
-      "origin_x": 3.2183916492362252,
-      "origin_y": 2.3791496348880754,
-      "origin_z": 3.2175062927263895,
-      "system_rotation_x": 0.46297581432602686,
-      "system_rotation_y": 0.9145588357919691,
-      "system_rotation_z": 0.912985185266516
+      "origin_x": 2.6196760418819163,
+      "origin_y": 0.9557183886289247,
+      "origin_z": 3.1576598352656027,
+      "system_rotation_x": 0.29088309996603334,
+      "system_rotation_y": 0.6957534439050126,
+      "system_rotation_z": 1.118810335665005
     }
   },
   {
     "System": {
       "group": 2,
-      "origin_x": 3.2298137504960396,
-      "origin_y": 2.375658070845316,
-      "origin_z": 3.0913003811857642,
-      "system_rotation_x": 0.6218743177118317,
-      "system_rotation_y": 1.1244912150448243,
-      "system_rotation_z": 1.2582836345605553
+      "origin_x": 1.9986280565934922,
+      "origin_y": 1.0121684110608855,
+      "origin_z": 3.2463193770075103,
+      "system_rotation_x": 0.3303812364150961,
+      "system_rotation_y": 0.8018471918913235,
+      "system_rotation_z": 1.067963558941391
     }
   },
   {
     "System": {
       "group": 3,
-      "origin_x": 1.4146984439622259,
-      "origin_y": 1.4858392849016455,
-      "origin_z": 1.4859574848523955,
-      "system_rotation_x": 0.19117895609510865,
-      "system_rotation_y": 0.3728032248728654,
-      "system_rotation_z": 0.6952008775342906
+      "origin_x": 0.8783789412190698,
+      "origin_y": 1.0118553153134742,
+      "origin_z": 2.7553126337453877,
+      "system_rotation_x": 0.2337617146778172,
+      "system_rotation_y": 0.5907552119547025,
+      "system_rotation_z": 0.6034656521970729
     }
   },
   {
     "System": {
       "group": 4,
-      "origin_x": 1.387059485651021,
-      "origin_y": 1.480350892497242,
-      "origin_z": 1.287510080068209,
-      "system_rotation_x": 0.1942012992314003,
-      "system_rotation_y": 0.13311419709189162,
-      "system_rotation_z": 0.8622165266745601
-    }
-  },
-  {
-    "System": {
-      "group": 5,
-      "origin_x": 2.230354279172617,
-      "origin_y": 1.5652528903131866,
-      "origin_z": 3.22592355862536,
-      "system_rotation_x": 0.4919471229024345,
-      "system_rotation_y": 0.8719535222244248,
-      "system_rotation_z": 0.7825830204938891
-    }
-  },
-  {
-    "System": {
-      "group": 6,
-      "origin_x": 1.6689473867766196,
-      "origin_y": 1.6162467065635966,
-      "origin_z": 3.1463736507611157,
-      "system_rotation_x": 0.40032122952097826,
-      "system_rotation_y": 0.7219366570475716,
-      "system_rotation_z": 0.7732233748605599
-    }
-  },
-  {
-    "System": {
-      "group": 7,
-      "origin_x": 1.4388126529889762,
-      "origin_y": 1.6277006370920537,
-      "origin_z": 1.9513774455042445,
-      "system_rotation_x": 0.031702951723759795,
-      "system_rotation_y": 0.4505830802527137,
-      "system_rotation_z": 0.8428532178496082
+      "origin_x": 0.9362976847431459,
+      "origin_y": 1.0003526347178213,
+      "origin_z": 2.147352839519819,
+      "system_rotation_x": -0.06721252498766392,
+      "system_rotation_y": 0.11098198894249298,
+      "system_rotation_z": 0.8015499820943346
     }
   }
 ]
