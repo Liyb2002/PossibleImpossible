@@ -54,7 +54,7 @@ class Generic_object:
         return None
     
     def set_scope(self, info):
-        multipler = 0.2
+        multipler = 1.0
         scope_x = info['scope_x']
         scope_y = info['scope_y']
         scope_z = info['scope_z']

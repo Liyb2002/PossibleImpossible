@@ -49,7 +49,7 @@ class generate_helper:
         
         startPos = np.array([400,400])
         foreground_index = 12
-        background_index = 14
+        background_index = 24
 
         camera = perspective.ortho_camera()
         foreground_intersection, background_intersection = camera.get_intersections(startPos, foreground_index, background_index)
