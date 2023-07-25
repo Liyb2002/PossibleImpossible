@@ -49,7 +49,7 @@ class generate_helper:
         
         startPos = np.array([400,400])
         foreground_index = 12
-        background_index = 24
+        background_index = 14
 
         camera = perspective.ortho_camera()
         foreground_intersection, background_intersection = camera.get_intersections(startPos, foreground_index, background_index)
@@ -83,7 +83,7 @@ class generate_helper:
 
         tempt_list = []
         for temple_particle in self.particle_list:
-            if temple_particle.success:
+            if temple_particle.success and hasattr(temple_particle, 'start_connect'):
                 tempt_list.append(temple_particle)
         self.particle_list = tempt_list
 

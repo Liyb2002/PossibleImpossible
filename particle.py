@@ -5,7 +5,6 @@ import procedural_objects
 import numpy as np
 import math
 import perspective
-import bounding_box
 
 class Particle:
     def __init__(self, generic_object_list, guided_pts, bounding_box):
@@ -190,16 +189,16 @@ class Particle:
         occulusion_score = self.occulusion_score(intersection_obj, results)
         overlapping_score = 1
         constraints_score = self.constraints_score(results)
-        bounding_score = 1
+        bounding_box_score = 1
 
         for obj in results:
             if not self.overlapping_check_obj(obj):
                 overlapping_score = 0
 
             if not self.bounding_box.check_within(obj):
-                bounding_score = 0
+                bounding_box_score = 0            
 
-        self.score = (density_score + probability_score + occulusion_score + constraints_score) *  overlapping_score * bounding_score
+        self.score = (density_score + probability_score + occulusion_score + constraints_score) *  overlapping_score * bounding_box_score
 
         if len(results) == 0:
             self.score = 0

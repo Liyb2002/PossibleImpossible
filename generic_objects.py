@@ -54,13 +54,14 @@ class Generic_object:
         return None
     
     def set_scope(self, info):
+        multipler = 0.2
         scope_x = info['scope_x']
         scope_y = info['scope_y']
         scope_z = info['scope_z']
 
-        scope_x = [scope_x[0] * 0.5, scope_x[1] * 0.5]
-        scope_y = [scope_y[0] * 0.5, scope_y[1] * 0.5]
-        # scope_z = [scope_z[0] * 0.5, scope_z[1] * 0.5]
+        scope_x = [scope_x[0] * multipler, scope_x[1] * multipler]
+        scope_y = [scope_y[0] * multipler, scope_y[1] * multipler]
+        scope_z = [scope_z[0] * multipler, scope_z[1] * multipler]
 
         self.scope = np.array([scope_x,scope_y,scope_z])
     
