@@ -47,9 +47,9 @@ class generate_helper:
 
         self.extra_system_init()
         
-        startPos = np.array([400,400])
-        foreground_index = 12
-        background_index = 24
+        foreground_index = self.visual_bridge_info['foreground_index']
+        background_index = self.visual_bridge_info['background_index']
+        startPos = np.array([self.visual_bridge_info['startPos'][0], self.visual_bridge_info['startPos'][1]])
 
         camera = perspective.ortho_camera()
         foreground_intersection, background_intersection = camera.get_intersections(startPos, foreground_index, background_index)

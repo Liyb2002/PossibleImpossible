@@ -65,6 +65,17 @@ class Generic_object:
 
         self.scope = np.array([scope_x,scope_y,scope_z])
     
+    def adjust_scope(self, multipler):
+        scope_x = self.scope[0]
+        scope_y = self.scope[1]
+        scope_z = self.scope[2]
+
+        scope_x = [scope_x[0] * multipler, scope_x[1] * multipler]
+        scope_y = [scope_y[0] * multipler, scope_y[1] * multipler]
+        scope_z = [scope_z[0] * multipler, scope_z[1] * multipler]
+
+        self.scope = np.array([scope_x,scope_y,scope_z])
+
     def execute_rule(self, next_id):
         rule = self.rules[str(next_id)]
         choice = random.choice(rule)

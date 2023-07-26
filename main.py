@@ -52,7 +52,7 @@ result_list = class_generate.smc_process()
 
 print("success!")
 
-innerLayer.produce_innerLayer()
+innerLayer.produce_innerLayer(generic_object_list, global__object_list, extra_system_list, visual_bridge_info, decorate_path)
 
 
 
