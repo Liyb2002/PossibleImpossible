@@ -13,7 +13,7 @@ import numpy as np
 def produce_innerLayer(generic_object_list, global__object_list, extra_system_list, visual_bridge_info, decorate_path):
 
     new_generic_object_list = deepcopy(generic_object_list)
-    multipler = 0.1
+    multipler = 0.08
     result_list = []
     camera = perspective.ortho_camera()
 
@@ -33,7 +33,7 @@ def produce_innerLayer(generic_object_list, global__object_list, extra_system_li
             scope_y = object_data['obj']['scale_y']
             scope_z = object_data['obj']['scale_z']
             
-            foreground_intersection = np.array([center_x,center_y,center_z])
+            foreground_intersection = np.array([center_x,center_y + 0.05,center_z])
             background_intersection = camera.get_intersections_withPos(foreground_intersection, 2)
 
             visual_bridge_info['foreground_index'] = 12

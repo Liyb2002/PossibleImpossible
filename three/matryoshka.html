@@ -69,6 +69,10 @@
 	scene.environment = texture;
 	} );
 
+	const loader2_temple = new GLTFLoader().setPath( 'static/matryoshka_models/' );
+	var load_result = await loader2_temple.loadAsync('9.glb');
+	const m9 = load_result.scene;
+
 
 	const geometry = new THREE.BoxGeometry( 1, 1, 1 ).toNonIndexed();
 	const material = new THREE.MeshBasicMaterial( { vertexColors: true } ); 
@@ -130,16 +134,28 @@
 			var rand = Math.random();
 			var load_mesh = true;
 
+			if(jsonData[i]["obj"]["type"] == 9){
+				a = m9.clone();
+			}else{
 			var cube = new THREE.Mesh( geometry, material );
 			cube.position.set(center_x, center_y, center_z );
 			cube.scale.set(scale_x*2, scale_y*2, scale_z*2);
 			cube.rotation.x = rotation_x;
 			cube.rotation.y = rotation_y;
 			cube.rotation.z = rotation_z;
-
 			scene.add( cube );
 			load_mesh = false;
-		
+			}
+
+			if (load_mesh){
+			a.position.set(start_x,start_y,start_z);
+			a.scale.set(scale_x,scale_y,scale_z);
+			a.rotation.x = rotation_x;
+			a.rotation.y = rotation_y;
+			a.rotation.z = rotation_z;
+
+			scene.add(a);
+		}
 
 
 		}

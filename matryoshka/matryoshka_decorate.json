@@ -59,11 +59,11 @@
 ]
 },
 {
-"object_name": "footprint_8",
+"object_name": "footprint_9",
 "category":  "footprint",
 "structural_id": 9,
 "subdiv":[
-[1.0, "y direction", ["terminal","2", 1.0]]
+[1.0, "y direction", ["terminal","9", 1.0]]
 ]
 },
 {
@@ -128,5 +128,12 @@
 "terminal_id": 8,
 "rule": "normal",
 "multiplier": [1,1,1.3]
-}                  
+},
+{
+"object_name": "terminal_transparentCube",
+"category":  "terminal",
+"terminal_id": 9,
+"rule": "normal",
+"multiplier": [1,1,1]
+}                     
 ]
