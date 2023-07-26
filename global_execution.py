@@ -203,6 +203,7 @@ def action_matryoshka(procedural_objects_list, global_object):
     for obj in procedural_objects_list:
         if obj.type == global_object['prev_type'] and random.random() < global_object['prob']:
             inner_matryoshka.append(obj)
+            obj.type = global_object['object_id']
     
     output_writer.write_proceudral_objects(inner_matryoshka, './inner_layer.json')
 

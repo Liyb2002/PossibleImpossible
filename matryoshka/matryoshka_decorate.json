@@ -59,6 +59,14 @@
 ]
 },
 {
+"object_name": "footprint_8",
+"category":  "footprint",
+"structural_id": 9,
+"subdiv":[
+[1.0, "y direction", ["terminal","2", 1.0]]
+]
+},
+{
 "object_name": "terminal_spaceHolder",
 "category":  "terminal",
 "terminal_id": 0,
