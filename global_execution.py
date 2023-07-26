@@ -3,6 +3,7 @@ import random
 import numpy as np
 import procedural_objects
 import LSystem
+import write2JSON
 
 import math
 import json
@@ -196,10 +197,15 @@ def action_edit_size(procedural_objects_list, global_object):
     return procedural_objects_list
 
 def action_matryoshka(procedural_objects_list, global_object):
+    output_writer = write2JSON.output()
+    inner_matryoshka = []
+
     for obj in procedural_objects_list:
         if obj.type == global_object['prev_type']:
-            print("matryoshka!")
+            inner_matryoshka.append(obj)
     
+    output_writer.write_proceudral_objects(inner_matryoshka, './inner_layer.json')
+
     return []
 
 def random_sign(number):
