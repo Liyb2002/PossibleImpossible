@@ -39,7 +39,7 @@ class generate_helper:
                 tempt_particle.arbitrary_add_extra_system(extra_system)
 
 
-    def smc_process(self):
+    def smc_process(self, foreground_intersection = np.array([-100,0,0]), background_intersection = np.array([-100,0,0])):
         num_particles = 3000
         for i in range(num_particles):
             tempt_particle = particle.Particle(self.generic_object_list, self.sampled_points, self.bounding_box)
@@ -52,7 +52,9 @@ class generate_helper:
         startPos = np.array([self.visual_bridge_info['startPos'][0], self.visual_bridge_info['startPos'][1]])
 
         camera = perspective.ortho_camera()
-        foreground_intersection, background_intersection = camera.get_intersections(startPos, foreground_index, background_index)
+
+        if foreground_intersection[0] == -100 and background_intersection[0] == -100:
+            foreground_intersection, background_intersection = camera.get_intersections(startPos, foreground_index, background_index)
 
 
         foreground_type = self.visual_bridge_info['foreground_type'][0]

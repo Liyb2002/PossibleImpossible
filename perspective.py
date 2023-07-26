@@ -46,6 +46,11 @@ class ortho_camera:
 
         return (pos_1, pos_2)
 
+    def get_intersections_withPos(self, pos_1, k):
+        pos_2 = pos_1 + (k *0.25) * self.direction
+
+        return pos_2
+
     def get_position(self, startPos, k):
         ro = self.get_ray(startPos[0], startPos[1])
         pos = ro + (k *0.25) * self.direction
