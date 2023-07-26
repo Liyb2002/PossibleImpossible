@@ -13,6 +13,7 @@ def produce_innerLayer(generic_object_list, global__object_list, extra_system_li
 
     new_generic_object_list = deepcopy(generic_object_list)
     multipler = 0.1
+    result_list = []
 
     for new_generic_object in new_generic_object_list:
         new_generic_object.adjust_scope(multipler)
@@ -30,7 +31,14 @@ def produce_innerLayer(generic_object_list, global__object_list, extra_system_li
             scope_y = object_data['obj']['scale_y']
             scope_z = object_data['obj']['scale_z']
             
-            
-            
-            class_generate = generate.generate_helper(generic_object_list, global__object_list, extra_system_list, visual_bridge_info, decorate_path)
+            visual_bridge_info['foreground_index'] = 12
+            visual_bridge_info['background_index'] = 14
+            visual_bridge_info['startPos'] = [600,600]
+
+            class_generate = generate.generate_helper(new_generic_object_list, global__object_list, extra_system_list, visual_bridge_info, decorate_path)
             result_list = class_generate.smc_process()
+            break
+
+    
+    print("len(result_list)", len(result_list))
+    return result_list
