@@ -4,6 +4,7 @@ import produce
 import generic_objects
 import cycle_connect
 import generate
+import innerLayer
 
 import sys
 import numpy as np
@@ -51,6 +52,7 @@ result_list = class_generate.smc_process()
 
 print("success!")
 
+innerLayer.produce_innerLayer()
 
 
 
