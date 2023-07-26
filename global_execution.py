@@ -18,6 +18,8 @@ def global_assign(procedural_objects_list, global_objects):
             procedural_objects_list = action_add_multiple(procedural_objects_list, global_object)
         if action[0] == 'LSystem':
             procedural_objects_list += action_LSystem(procedural_objects_list, global_object)
+        if action[0] == 'matryoshka':
+            procedural_objects_list += action_matryoshka(procedural_objects_list, global_object)
         # if action[0] == 'edit_size':
         #     procedural_objects_list += action_edit_size(procedural_objects_list, global_object)
 
@@ -193,7 +195,12 @@ def action_edit_size(procedural_objects_list, global_object):
 
     return procedural_objects_list
 
-
+def action_matryoshka(procedural_objects_list, global_object):
+    for obj in procedural_objects_list:
+        if obj.type == global_object['prev_type']:
+            print("matryoshka!")
+    
+    return []
 
 def random_sign(number):
     signs = []
