@@ -5,14 +5,16 @@ import generic_objects
 import cycle_connect
 import generate
 import perspective
+import read_file
 
 from copy import deepcopy
 import sys
 import numpy as np
 
-def produce_innerLayer(generic_object_list, global__object_list, extra_system_list, visual_bridge_info, decorate_path):
+def produce_innerLayer(matryoshka_path, decorate_path):
 
-    new_generic_object_list = deepcopy(generic_object_list)
+    visual_bridge_info,new_generic_object_list,global__object_list,extra_system_list = read_file.read_object_file(matryoshka_path)
+
     multipler = 0.08
     result_list = []
     camera = perspective.ortho_camera()

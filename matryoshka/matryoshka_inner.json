@@ -148,12 +148,6 @@
 "offsets":{
 "1" : [0.0,0.0,0.0]
 }
-},
-{
-"object_id": 9,
-"type": "global_object",
-"action" : ["matryoshka"],
-"prev_type": 1
 }
 
 ]
