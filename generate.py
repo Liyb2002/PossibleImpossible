@@ -47,10 +47,13 @@ class generate_helper:
 
         self.extra_system_init()
         
-        foreground_index = self.visual_bridge_info['foreground_index']
-        background_index = self.visual_bridge_info['background_index']
-        startPos = np.array([self.visual_bridge_info['startPos'][0], self.visual_bridge_info['startPos'][1]])
+        # foreground_index = self.visual_bridge_info['foreground_index']
+        # background_index = self.visual_bridge_info['background_index']
+        # startPos = np.array([self.visual_bridge_info['startPos'][0], self.visual_bridge_info['startPos'][1]])
 
+        foreground_index = 12
+        background_index = 24
+        startPos = np.array([400,400])
         camera = perspective.ortho_camera()
 
         if foreground_intersection[0] == -100 and background_intersection[0] == -100:
@@ -62,7 +65,7 @@ class generate_helper:
         background_type = self.visual_bridge_info['background_type']
         background_connect = self.visual_bridge_info['background_connect']
 
-        steps = 1
+        steps = 2
 
         self.small_cubes = constraints_loader.guide_visualizer(self.sampled_points, foreground_index)
         

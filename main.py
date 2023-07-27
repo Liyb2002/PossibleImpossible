@@ -17,11 +17,6 @@ if len(sys.argv) < 4:
 file_path = sys.argv[1]
 decorate_path = sys.argv[2]
 export_path = sys.argv[3]
-matryoshka_path = file_path
-
-if len(sys.argv) == 5:
-    matryoshka_path = sys.argv[4]
-
 
 #read the inputs
 generic_object_list = []
@@ -38,7 +33,9 @@ result_list = class_generate.smc_process()
 
 print("success!")
 
-result_list += innerLayer.produce_innerLayer(matryoshka_path, decorate_path)
+if len(sys.argv) == 5:
+    matryoshka_path = sys.argv[4]
+    result_list += innerLayer.produce_innerLayer(matryoshka_path, decorate_path)
 
 
 

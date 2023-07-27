@@ -156,7 +156,7 @@
 "object_id": 9,
 "type": "global_object",
 "action" : ["matryoshka"],
-"prob" : 0.2, 
+"prob" : 0.5, 
 "prev_type": 1
 }
 
