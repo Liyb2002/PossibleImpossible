@@ -32,6 +32,8 @@ class generate_helper:
         box_scope = np.array([5,5,5])
         self.bounding_box = bounding_box.box(box_pos, box_scope)
 
+        self.depth_interposition = False
+
     def extra_system_init(self):
         for i in range(len(self.particle_list)):
             tempt_particle = self.particle_list[i]
@@ -59,9 +61,9 @@ class generate_helper:
         if foreground_intersection[0] == -100 and background_intersection[0] == -100:
             foreground_intersection, background_intersection = camera.get_intersections(startPos, foreground_index, background_index)
 
-        background_intersection = foreground_intersection + np.array([0.0,0.0,2.0])
-
-        print("foreground_intersection", foreground_intersection, "background_intersection", background_intersection)
+        if self.visual_bridge_info['visual_bridge_type'] == "depth_interposition":
+            background_intersection = foreground_intersection + np.array([0.0,0.0,2.0])
+            self.depth_interposition = True
 
         foreground_type = self.visual_bridge_info['foreground_type'][0]
         foreground_connect = self.visual_bridge_info['foreground_connect']
@@ -116,7 +118,7 @@ class generate_helper:
 
         for i in range(len(self.particle_list)):
             tempt_particle = self.particle_list[i]
-            tempt_particle.prepare_particle(intersection_pos, start_type, connect_direction, parsedProb, depthInterposition = True)
+            tempt_particle.prepare_particle(intersection_pos, start_type, connect_direction, parsedProb, depthInterposition = self.depth_interposition)
 
         for s in range(steps):
             cur_step = steps - s -1
@@ -190,8 +192,8 @@ class generate_helper:
 
 
     def finish(self):
-        for obj in self.result_particle.procedural_objects:
-            print("type:", obj.type, "pos:", obj.position)
+        # for obj in self.result_particle.procedural_objects:
+        #     print("type:", obj.type, "pos:", obj.position)
 
         procedural_objects = global_execution.global_assign(self.result_particle.procedural_objects, self.global__object_list)
         decorator = decorations.decoration_operator(self.decorate_path)

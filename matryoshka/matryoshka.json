@@ -7,7 +7,8 @@
 "background_type": 3,
 "background_connect": "+y",
 "background_index" : 24,
-"num_visual_bridge" : 1
+"num_visual_bridge" : 1,
+"visual_bridge_type" : "depth_contradiction"
 },
 {
 "object_id": 1,
