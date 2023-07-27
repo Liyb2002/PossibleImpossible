@@ -59,6 +59,9 @@ class generate_helper:
         if foreground_intersection[0] == -100 and background_intersection[0] == -100:
             foreground_intersection, background_intersection = camera.get_intersections(startPos, foreground_index, background_index)
 
+        background_intersection = foreground_intersection + np.array([0.0,0.0,2.0])
+
+        print("foreground_intersection", foreground_intersection, "background_intersection", background_intersection)
 
         foreground_type = self.visual_bridge_info['foreground_type'][0]
         foreground_connect = self.visual_bridge_info['foreground_connect']
@@ -104,18 +107,16 @@ class generate_helper:
 
         self.select_result_particle()
         return self.finish()
-        # return self.particle_list[0].procedural_objects
 
 
     def procedural_generate(self, start_type, connect_direction, intersection_pos, steps, isFront):
-        print("start_type", start_type, "lenself.generic_object_list)", len(self.generic_object_list))
         parsedProb = parseTree.parseProb(self.generic_object_list, self.generic_object_list[start_type])
 
         score_list = []
 
         for i in range(len(self.particle_list)):
             tempt_particle = self.particle_list[i]
-            tempt_particle.prepare_particle(intersection_pos, start_type, connect_direction, parsedProb)
+            tempt_particle.prepare_particle(intersection_pos, start_type, connect_direction, parsedProb, depthInterposition = True)
 
         for s in range(steps):
             cur_step = steps - s -1
@@ -189,7 +190,9 @@ class generate_helper:
 
 
     def finish(self):
-        # self.result_particle.procedural_objects[0].type = self.visual_bridge_info['foreground_type'][1]
+        for obj in self.result_particle.procedural_objects:
+            print("type:", obj.type, "pos:", obj.position)
+
         procedural_objects = global_execution.global_assign(self.result_particle.procedural_objects, self.global__object_list)
         decorator = decorations.decoration_operator(self.decorate_path)
         decoration_list = decorator.decorate(procedural_objects)
