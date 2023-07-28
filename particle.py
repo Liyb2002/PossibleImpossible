@@ -22,12 +22,8 @@ class Particle:
         self.hit_constraints = 0
         self.bounding_box = bounding_box
 
-    def prepare_particle(self,intersection, start_type, connected_dir, targetProb, depthInterposition):
+    def prepare_particle(self,intersection, start_type, connected_dir, targetProb):
         self.cur_obj = start_obj(intersection, self.generic_object_list, start_type, connected_dir)
-
-        if depthInterposition:
-            self.cur_obj = arbitrary_start_obj(intersection, self.generic_object_list, start_type, connected_dir)
-
         self.intersection_obj = self.cur_obj
         self.procedural_objects.append(self.cur_obj)
         self.targetProb = targetProb
@@ -80,9 +76,6 @@ class Particle:
         endPos = self.end_connect.position
 
         delta = endPos - startPos
-
-        # print("startPos", startPos, "endPos", endPos, "delta", delta)
-
         production_list = []
         production_list.append(self.start_connect)
         abs_delta = np.array([abs(delta[0]), abs(delta[1]), abs(delta[2])])
@@ -270,6 +263,7 @@ class Particle:
 
 
 def start_obj(start_pos, generic_object_list, start_type, connected_dir):
+
     cur_type = start_type
     start_scope = generic_object_list[cur_type].scope
     gen_hash = generic_object_list[cur_type].generate_hash()
@@ -280,16 +274,6 @@ def start_obj(start_pos, generic_object_list, start_type, connected_dir):
     cur_obj_z = cur_obj.length[2]
     update_pos = np.array([cur_obj_x, cur_obj_y, cur_obj_z])
     cur_obj.arbitrary_set_position(start_pos - update_pos)
-    cur_obj.add_connected(connected_dir)
-
-    return cur_obj
-
-def arbitrary_start_obj(start_pos, generic_object_list, start_type, connected_dir):
-    cur_type = start_type
-    start_scope = generic_object_list[cur_type].scope
-    gen_hash = generic_object_list[cur_type].generate_hash()
-    next_rotation = generic_object_list[cur_type].rotation
-    cur_obj = procedural_objects.Procedural_object(cur_type, start_pos, start_scope, gen_hash,next_rotation, np.array([0,0,0]))
     cur_obj.add_connected(connected_dir)
 
     return cur_obj
