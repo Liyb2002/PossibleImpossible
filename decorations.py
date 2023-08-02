@@ -76,26 +76,31 @@ class decoration_operator:
         nonterminal_list = []
         terminal_list = []
 
-        if split_dir == "y direction":
-            for i in range(2, len(subdiv_rule)):
-                
-                new_obj_info = subdiv_rule[i]
+        for i in range(2, len(subdiv_rule)):
+            new_obj_info = subdiv_rule[i]
+
+            if split_dir == "y direction":
                 tempt_min_pos = min_pos + np.array([0, culmulative_percentage * scope[1], 0])
                 culmulative_percentage += new_obj_info[2]
                 tempt_max_pos = np.array([max_pos[0], min_pos[1] + culmulative_percentage * scope[1], max_pos[2]])
-                
-                if new_obj_info[0] == "nonterminal":
-                    new_instance_nonterminal_object = instance_nonterminal_object(new_obj_info[1], tempt_min_pos, tempt_max_pos)
-                    nonterminal_list.append(new_instance_nonterminal_object)
+            
+            if split_dir == "x direction":
+                tempt_min_pos = min_pos + np.array([culmulative_percentage * scope[0], 0, 0])
+                culmulative_percentage += new_obj_info[2]
+                tempt_max_pos = np.array([min_pos[0] + culmulative_percentage * scope[0], max_pos[1], max_pos[2]])
 
-                if new_obj_info[0] == "terminal":
-                    generic_terminal_object = self.generic_terminal_list[int(new_obj_info[1])]
-                    multiplier = generic_terminal_object.multiplier
-                    if multiplier[0] != 0.001 and multiplier[1] != 0.001 and multiplier[2] != 0.001:
-                        rule = generic_terminal_object.rule
-                        object_size = (tempt_max_pos-tempt_min_pos)*0.5 * multiplier
+            if new_obj_info[0] == "nonterminal":
+                new_instance_nonterminal_object = instance_nonterminal_object(new_obj_info[1], tempt_min_pos, tempt_max_pos)
+                nonterminal_list.append(new_instance_nonterminal_object)
 
-                        terminal_list += self.produce_terminal_instance(rule, object_size, tempt_max_pos, tempt_min_pos, new_obj_info[1], rotation, group)
+            if new_obj_info[0] == "terminal":
+                generic_terminal_object = self.generic_terminal_list[int(new_obj_info[1])]
+                multiplier = generic_terminal_object.multiplier
+                if multiplier[0] != 0.001 and multiplier[1] != 0.001 and multiplier[2] != 0.001:
+                    rule = generic_terminal_object.rule
+                    object_size = (tempt_max_pos-tempt_min_pos)*0.5 * multiplier
+
+                    terminal_list += self.produce_terminal_instance(rule, object_size, tempt_max_pos, tempt_min_pos, new_obj_info[1], rotation, group)
 
         return (nonterminal_list, terminal_list)
 

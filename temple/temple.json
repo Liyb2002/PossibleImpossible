@@ -113,8 +113,8 @@
 "object_id": 7,
 "type": "global_object",
 "action" : ["add"],
-"pos": [["middle", 0.0],["top", 0.0],["middle",0.0]],
-"size":[["mult", 0.5], ["fixed", "0.15"], ["mult", 0.5]]
+"pos": [["middle", 0.0],["top", -0.1],["middle",0.0]],
+"size":[["mult", 0.9], ["fixed", "0.5"], ["mult", 0.7]]
 },
 {
 "object_id": 8,

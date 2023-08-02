@@ -49,7 +49,7 @@
   "category":  "footprint",
   "structural_id": 7,
   "subdiv":[
-    [1.0, "y direction", ["terminal", "0", 1.0]]   ]
+    [1.0, "x direction", ["terminal", "4", 0.35],["terminal", "5", 0.3],["terminal", "6", 0.35]]   ]
   },
   {
   "object_name": "footprint_8",
@@ -93,5 +93,26 @@
   "terminal_id": 3,
   "rule": "normal",
   "multiplier": [1,1,1]
+  },
+  {
+  "object_name": "terminal_leftRoofTop",
+  "category":  "terminal",
+  "terminal_id": 4,
+  "rule": "normal",
+  "multiplier": [0.8,0.8,0.8]
+  },
+  {
+  "object_name": "terminal_midRoofTop",
+  "category":  "terminal",
+  "terminal_id": 5,
+  "rule": "normal",
+  "multiplier": [1,1,1]
+  },
+  {
+  "object_name": "terminal_rightRoofTop",
+  "category":  "terminal",
+  "terminal_id": 6,
+  "rule": "normal",
+  "multiplier": [0.8,0.8,0.8]
   }
   ]
