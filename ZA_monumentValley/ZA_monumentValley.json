@@ -12,9 +12,9 @@
 {
 "object_id": 1,
 "type": "local_object",
-"scope_x": [0.2,0.2],
-"scope_y": [0.2,0.2],
-"scope_z": [0.2,0.2],
+"scope_x": [0.1,0.1],
+"scope_y": [0.1,0.1],
+"scope_z": [0.1,0.1],
 "canTerminate": "True",
 "cycle_connect": "True",
 "rotation": [[0],[0],[0]],
@@ -53,9 +53,9 @@
 {
 "object_id": 3,
 "type": "local_object",
-"scope_x": [0.05,0.05],
+"scope_x": [0.1,0.1],
 "scope_y": [0.1,0.4],
-"scope_z": [0.05,0.05],
+"scope_z": [0.1,0.1],
 "canTerminate": "True",
 "cycle_connect": "True",
 "rotation": [[0],[0],[0]],
@@ -71,8 +71,8 @@
 "object_id": 4,
 "type": "local_object",
 "scope_x": [0.1,0.4],
-"scope_y": [0.05,0.05],
-"scope_z": [0.05,0.05],
+"scope_y": [0.15,0.15],
+"scope_z": [0.1,0.1],
 "canTerminate": "False",
 "cycle_connect": "True",
 "rotation": [[0],[0],[0]],
@@ -88,8 +88,8 @@
 "object_id": 5,
 "type": "local_object",
 "scope_x": [0.1,0.4],
-"scope_y": [0.05,0.05],
-"scope_z": [0.05,0.05],
+"scope_y": [0.15,0.15],
+"scope_z": [0.1,0.1],
 "canTerminate": "False",
 "cycle_connect": "True",
 "rotation": [[0],[0],[0]],
@@ -104,8 +104,8 @@
 {
 "object_id": 6,
 "type": "local_object",
-"scope_x": [0.05,0.05],
-"scope_y": [0.05,0.05],
+"scope_x": [0.1,0.1],
+"scope_y": [0.15,0.15],
 "scope_z": [0.1,0.4],
 "canTerminate": "False",
 "cycle_connect": "True",
@@ -121,8 +121,8 @@
 {
 "object_id": 7,
 "type": "local_object",
-"scope_x": [0.05,0.05],
-"scope_y": [0.05,0.05],
+"scope_x": [0.1,0.1],
+"scope_y": [0.15,0.15],
 "scope_z": [0.1,0.4],
 "canTerminate": "False",
 "cycle_connect": "True",
@@ -138,9 +138,9 @@
 {
 "object_id": 8,
 "type": "local_object",
-"scope_x": [0.05,0.05],
+"scope_x": [0.1,0.1],
 "scope_y": [0.1,0.4],
-"scope_z": [0.05,0.05],
+"scope_z": [0.1,0.1],
 "canTerminate": "True",
 "cycle_connect": "True",
 "rotation": [[0],[0],[0]],
@@ -151,5 +151,13 @@
 "offsets":{
 "1" : [0.0,0.0,0.0]
 }
+},
+{
+"object_id": 9,
+"type": "global_object",
+"action" : ["assign"],
+"prev_type": 1,
+"prev_condition":["+y"],
+"offsets": [[0.0,0.0],[0.2,0.2],[0.0,0.0]]
 }
 ]    
