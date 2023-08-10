@@ -43,7 +43,7 @@
 	document.body.appendChild( renderer.domElement );
 
 	scene = new THREE.Scene();
-	scene.background = new THREE.Color( 0x81ebc6 );
+	scene.background = new THREE.Color( 0xffffff );
 
 	const left = -3.2, right = 3.2, top2 = 2.4, bottom = -2.4, near = 0.01, far = 100;
 	camera = new THREE.OrthographicCamera(left, right, top2, bottom, near, far);
@@ -61,62 +61,86 @@
 	scene.add( light );
 
 
-	new RGBELoader()
-	.setPath( 'textures/equirectangular/' )
-	.load( 'royal_esplanade_1k.hdr', function ( texture ) {
-	texture.mapping = THREE.EquirectangularReflectionMapping;
-	// scene.background = texture;
-	scene.environment = texture;
-	} );
-
 
 	const geometry = new THREE.BoxGeometry( 1, 1, 1 ).toNonIndexed();
 	const material = new THREE.MeshBasicMaterial( { vertexColors: true } ); 
 
-	const positionAttribute = geometry.getAttribute( 'position' );
+
+	const geometry_f = new THREE.BoxGeometry( 1, 1, 1 ).toNonIndexed();
+	const material_f = new THREE.MeshBasicMaterial( { vertexColors: true } ); 
+
+	const positionAttribute_f = geometry_f.getAttribute( 'position' );
 	const colors = [];
 	const color = new THREE.Color();
 
-	var count = 0;
-	for ( let i = 0; i < positionAttribute.count; i += 12 ) {
-	if (count == 0){
-	color.set( 0x435bc4 );
-	}
-	if (count == 1){
-	color.set( 0xb33946 );
-	}
-	if (count == 2){
-	color.set( 0x4287f5);
-	}
-	for(let j=0;j<12;j++){
-	colors.push( color.r, color.g, color.b );
-	}
-	count += 1
+		var count = 0;
+		for ( let i = 0; i < positionAttribute_f.count; i += 12 ) {
+			if (count == 0){
+				color.set( 0x435bc4 );
+			}
+			if (count == 1){
+				color.set( 0x3763ab );
+			}
+			if (count == 2){
+				color.set( 0x4287f5);
+			}
+			for(let j=0;j<12;j++){
+				colors.push( color.r, color.g, color.b );
+			}
+			count += 1
 
-	}
-	geometry.setAttribute( 'color', new THREE.Float32BufferAttribute( colors, 3 ) );
+		}
+		
+		// define the new attribute
+		
+		geometry_f.setAttribute( 'color', new THREE.Float32BufferAttribute( colors, 3 ) );
+
+
+
+		const geometry_b = new THREE.BoxGeometry( 1, 1, 1 ).toNonIndexed();
+		const material_b = new THREE.MeshBasicMaterial( { vertexColors: true } ); 
+
+		const positionAttribute_b = geometry_f.getAttribute( 'position' );
+		const colors_b = [];
+		const color_b = new THREE.Color();
+
+		var count = 0;
+		for ( let i = 0; i < positionAttribute_b.count; i += 12 ) {
+			if (count == 0){
+				color_b.set( 0x78262f );
+			}
+			if (count == 1){
+				color_b.set( 0x992632 );
+			}
+			if (count == 2){
+				color_b.set( 0xb33946);
+			}
+			for(let j=0;j<12;j++){
+				colors_b.push( color_b.r, color_b.g, color_b.b );
+			}
+			count += 1
+
+		}
+		
+		// define the new attribute
+		
+		geometry_b.setAttribute( 'color', new THREE.Float32BufferAttribute( colors_b, 3 ) );
 
 	var new_pivot = new THREE.Group();
 	scene.add( new_pivot );
 
-	var cube = new THREE.Mesh( geometry, material );
-	cube.position.set(0, 0, 0 );
-	cube.scale.set(1, 0.1, 0.1);
-	new_pivot.add(cube);
-
-	var flower = new THREE.Mesh( geometry, material );
-	flower.position.set(0.5, 0, 0 );
-	flower.scale.set(0.1, 1.1, 1.1);
-	new_pivot.add(flower);
-
-	var sun = new THREE.Mesh( geometry, material );
-	sun.position.set(3.5, 3, 0 );
-	sun.scale.set(1.1, 1.1, 1.1);
-	scene.add(sun);
-
-	new_pivot.rotation.x =  0.14189705460416394;
-	new_pivot.rotation.y =  0.3398369094541219;
-	new_pivot.rotation.z =   0.7853981633974483;
+		//front
+		const cube1 = new THREE.Mesh( geometry_f, material_f );
+        cube1.position.set(0 ,0,0 );
+        cube1.scale.set(0.2, 2, 0.2);
+        scene.add( cube1 );
+		
+		//back
+		const cube2 = new THREE.Mesh( geometry_b, material_b );
+        cube2.position.set(-1.55, -1.5 ,-1.0 );
+        cube2.scale.set(2.0, 0.2, 0.2);
+		cube2.rotation.set(0,0,1.0);
+        scene.add( cube2 );
 
 	window.addEventListener( 'resize', onWindowResize );
 
