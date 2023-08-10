@@ -129,18 +129,28 @@
 	var new_pivot = new THREE.Group();
 	scene.add( new_pivot );
 
-		//front
-		const cube1 = new THREE.Mesh( geometry_f, material_f );
-        cube1.position.set(0 ,0,0 );
-        cube1.scale.set(0.2, 2, 0.2);
-        scene.add( cube1 );
+
+	const loader2 = new GLTFLoader().setPath( 'static/playground_models/' );
+	var load_result = await loader2.loadAsync('a.glb');
+	const ma = load_result.scene;
+	var load_result = await loader2.loadAsync('b.glb');
+	const mb = load_result.scene;
+
+		//blue
+		var a;
+		a = new THREE.Mesh( geometry_f, material_f );
+		a = mb.clone();
+        a.position.set(0 ,0,-1.0 );
+        a.scale.set(0.1, 0.1, 1.0);
+        scene.add( a );
 		
-		//back
-		const cube2 = new THREE.Mesh( geometry_b, material_b );
-        cube2.position.set(-1.55, -1.5 ,-1.0 );
-        cube2.scale.set(2.0, 0.2, 0.2);
-		cube2.rotation.set(0,0,1.0);
-        scene.add( cube2 );
+		//red
+		var b
+		b = new THREE.Mesh( geometry_b, material_b );
+        b.position.set(0.0,-1.0 ,-1.5 );
+        b.scale.set(2.0, 0.2, 0.2);
+		b.rotation.set(-0.0,-0,0.0);
+        scene.add( b );
 
 	window.addEventListener( 'resize', onWindowResize );
 

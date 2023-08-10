@@ -43,7 +43,14 @@
 	document.body.appendChild( renderer.domElement );
 
 	scene = new THREE.Scene();
-	scene.background = new THREE.Color( 0x81ebc6 );
+	// scene.background = new THREE.Color( 0x81ebc6 );
+
+	//Load background texture
+	const bg_loader = new THREE.TextureLoader();
+	bg_loader.load('static/ZA_monument_models/bk.png'  , function(texture)
+            {
+             scene.background = texture;  
+            });
 
 	const left = -3.2, right = 3.2, top2 = 2.4, bottom = -2.4, near = 0.01, far = 100;
 	camera = new THREE.OrthographicCamera(left, right, top2, bottom, near, far);
