@@ -12,9 +12,9 @@
 {
 "object_id": 1,
 "type": "local_object",
-"scope_x": [0.08,0.08],
-"scope_y": [0.2,0.2],
-"scope_z": [0.08,0.08],
+"scope_x": [0.05,0.05],
+"scope_y": [0.15,0.15],
+"scope_z": [0.05,0.05],
 "canTerminate": "True",
 "cycle_connect": "True",
 "rotation": [[0],[0],[0]],
@@ -53,9 +53,9 @@
 {
 "object_id": 3,
 "type": "local_object",
-"scope_x": [0.08,0.08],
-"scope_y": [0.1,0.4],
-"scope_z": [0.08,0.08],
+"scope_x": [0.05,0.05],
+"scope_y": [0.05,0.3],
+"scope_z": [0.05,0.05],
 "canTerminate": "True",
 "cycle_connect": "True",
 "rotation": [[0],[0],[0]],
@@ -70,9 +70,9 @@
 {
 "object_id": 4,
 "type": "local_object",
-"scope_x": [0.1,0.4],
-"scope_y": [0.2,0.2],
-"scope_z": [0.08,0.08],
+"scope_x": [0.05,0.3],
+"scope_y": [0.15,0.15],
+"scope_z": [0.05,0.05],
 "canTerminate": "False",
 "cycle_connect": "True",
 "rotation": [[0],[0],[0]],
@@ -87,9 +87,9 @@
 {
 "object_id": 5,
 "type": "local_object",
-"scope_x": [0.1,0.4],
-"scope_y": [0.2,0.2],
-"scope_z": [0.08,0.08],
+"scope_x": [0.05,0.3],
+"scope_y": [0.15,0.15],
+"scope_z": [0.05,0.05],
 "canTerminate": "False",
 "cycle_connect": "True",
 "rotation": [[0],[0],[0]],
@@ -104,9 +104,9 @@
 {
 "object_id": 6,
 "type": "local_object",
-"scope_x": [0.08,0.08],
-"scope_y": [0.2,0.2],
-"scope_z": [0.1,0.4],
+"scope_x": [0.05,0.05],
+"scope_y": [0.15,0.15],
+"scope_z": [0.05,0.3],
 "canTerminate": "False",
 "cycle_connect": "True",
 "rotation": [[0],[0],[0]],
@@ -121,9 +121,9 @@
 {
 "object_id": 7,
 "type": "local_object",
-"scope_x": [0.08,0.08],
-"scope_y": [0.2,0.2],
-"scope_z": [0.1,0.4],
+"scope_x": [0.05,0.05],
+"scope_y": [0.15,0.15],
+"scope_z": [0.05,0.3],
 "canTerminate": "False",
 "cycle_connect": "True",
 "rotation": [[0],[0],[0]],
@@ -138,9 +138,9 @@
 {
 "object_id": 8,
 "type": "local_object",
-"scope_x": [0.08,0.08],
-"scope_y": [0.1,0.4],
-"scope_z": [0.08,0.08],
+"scope_x": [0.05,0.05],
+"scope_y": [0.05,0.3],
+"scope_z": [0.05,0.05],
 "canTerminate": "True",
 "cycle_connect": "True",
 "rotation": [[0],[0],[0]],
@@ -158,6 +158,6 @@
 "action" : ["assign"],
 "prev_type": 1,
 "prev_condition":["+y"],
-"offsets": [[0.0,0.0],[0.05,0.2],[0.0,0.0]]
+"offsets": [[0.0,0.0],[0.05,0.15],[0.0,0.0]]
 }
 ]    

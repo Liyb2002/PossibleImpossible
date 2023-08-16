@@ -4,7 +4,8 @@
 "category":  "footprint",
 "structural_id": 1,
 "subdiv":[
-[1.0, "y direction", ["terminal", "1", 1.0]]  ]
+[1.0, "y direction", ["terminal", "1", 1.0]]
+]
 },
 {
 "object_name": "footprint_2",
@@ -19,8 +20,7 @@
 "category":  "footprint",
 "structural_id": 3,
 "subdiv":[
-[1.0, "y direction", ["terminal", "4", 0.5], ["terminal", "4", 0.5]] 
-]
+[1.0, "y direction", ["terminal", "4", 0.5], ["terminal", "4", 0.5]]]
 },
 {
 "object_name": "footprint_4",
@@ -164,6 +164,13 @@
 "object_name": "terminal_arch z direction",
 "category":  "terminal",
 "terminal_id": 8,
+"rule": "normal",
+"multiplier": [1,1,1]
+},
+{
+"object_name": "terminal_fountain",
+"category":  "terminal",
+"terminal_id": 9,
 "rule": "normal",
 "multiplier": [1,1,1]
 }

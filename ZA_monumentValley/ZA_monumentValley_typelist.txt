@@ -18,9 +18,11 @@ nonterminal:
 
 
 terminal:
+1 -> bot for tower
 3 -> terminal_branch, y direction
 4 -> terminal_branch, x direction
 5 -> terminal_pyramid
 6 -> terminal_tree
 7 -> terminal_arch x direction
 8 -> terminal_arch z direction
+9 -> fountain
