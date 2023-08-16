@@ -78,8 +78,22 @@
 	const m4_1 = load_result.scene;
 	var load_result = await loader2_temple.loadAsync('5_0.glb');
 	const m5_0 = load_result.scene;
+	var load_result = await loader2_temple.loadAsync('5_1.glb');
+	const m5_1 = load_result.scene;
+	var load_result = await loader2_temple.loadAsync('5_2.glb');
+	const m5_2 = load_result.scene;
+	var load_result = await loader2_temple.loadAsync('5_3.glb');
+	const m5_3 = load_result.scene;
 	var load_result = await loader2_temple.loadAsync('6.glb');
 	const m6 = load_result.scene;
+	var load_result = await loader2_temple.loadAsync('6_1.glb');
+	const m6_1 = load_result.scene;
+	var load_result = await loader2_temple.loadAsync('6_2.glb');
+	const m6_2 = load_result.scene;
+	var load_result = await loader2_temple.loadAsync('6_3.glb');
+	const m6_3 = load_result.scene;
+	var load_result = await loader2_temple.loadAsync('6_4.glb');
+	const m6_4 = load_result.scene;
 	var load_result = await loader2_temple.loadAsync('7.glb');
 	const m7 = load_result.scene;
 	var load_result = await loader2_temple.loadAsync('8.glb');
@@ -152,10 +166,24 @@
 				a = m4_0.clone();}
 			else if(jsonData[i]["obj"]["type"] == 4){
 				a = m4_1.clone();}
-			else if(jsonData[i]["obj"]["type"] == 5 ){
+			else if(jsonData[i]["obj"]["type"] == 5  && rand < 0.33){
 				a = m5_0.clone();}
-			else if(jsonData[i]["obj"]["type"] == 6 ){
+			else if(jsonData[i]["obj"]["type"] == 5 && rand < 0.66){
+				a = m5_1.clone();}
+			else if(jsonData[i]["obj"]["type"] == 5 && rand < 0.9){
+				a = m5_2.clone();}
+			else if(jsonData[i]["obj"]["type"] == 5 ){
+				a = m5_3.clone();}
+			else if(jsonData[i]["obj"]["type"] == 6  && rand < 0.3){
 				a = m6.clone();}
+			else if(jsonData[i]["obj"]["type"] == 6  && rand < 0.6){
+				a = m6_1.clone();}
+			else if(jsonData[i]["obj"]["type"] == 6  && rand < 0.7){
+				a = m6_2.clone();}
+			else if(jsonData[i]["obj"]["type"] == 6  && rand < 0.8){
+				a = m6_3.clone();}
+			else if(jsonData[i]["obj"]["type"] == 6 ){
+				a = m6_4.clone();}
 			else if(jsonData[i]["obj"]["type"] == 7 ){
 				a = m7.clone();}
 			else if(jsonData[i]["obj"]["type"] == 8 ){
