@@ -27,28 +27,28 @@
 "category":  "footprint",
 "structural_id": 4,
 "subdiv":[
-[1.0, "y direction", ["terminal", "4", 0.8], ["nonterminal", "0", 0.2]]   ]
+[1.0, "y direction", ["terminal", "4", 0.5], ["nonterminal", "0", 0.5]]   ]
 },
 {
 "object_name": "footprint_5",
 "category":  "footprint",
 "structural_id": 5,
 "subdiv":[
-[1.0, "y direction", ["terminal", "4", 0.8], ["nonterminal", "0", 0.2]]   ]
+[1.0, "y direction", ["terminal", "4", 0.5], ["nonterminal", "0", 0.5]]   ]
 },
 {
 "object_name": "footprint_6",
 "category":  "footprint",
 "structural_id": 6,
 "subdiv":[
-[1.0, "y direction", ["terminal", "4", 0.8], ["nonterminal", "1", 0.2]]   ]
+[1.0, "y direction", ["terminal", "4", 0.5], ["nonterminal", "1", 0.5]]   ]
 },
 {
 "object_name": "footprint_7",
 "category":  "footprint",
 "structural_id": 7,
 "subdiv":[
-[1.0, "y direction", ["terminal", "4", 0.8], ["nonterminal", "1", 0.2]]   ]
+[1.0, "y direction", ["terminal", "4", 0.5], ["nonterminal", "1", 0.5]]   ]
 },
 {
 "object_name": "footprint_8",
@@ -138,13 +138,13 @@
 "category":  "terminal",
 "terminal_id": 7,
 "rule": "normal",
-"multiplier": [1,5,1]
+"multiplier": [1,1,1]
 },
 {
 "object_name": "terminal_arch z direction",
 "category":  "terminal",
 "terminal_id": 8,
 "rule": "normal",
-"multiplier": [1,5,1]
+"multiplier": [1,1,1]
 }
 ]
