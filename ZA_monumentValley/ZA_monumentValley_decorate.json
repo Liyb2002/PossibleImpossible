@@ -4,7 +4,7 @@
 "category":  "footprint",
 "structural_id": 1,
 "subdiv":[
-[1.0, "y direction", ["terminal", "4", 1.0]]  ]
+[1.0, "y direction", ["terminal", "1", 1.0]]  ]
 },
 {
 "object_name": "footprint_2",
@@ -19,7 +19,7 @@
 "category":  "footprint",
 "structural_id": 3,
 "subdiv":[
-[1.0, "y direction", ["terminal", "4", 1.0]] 
+[1.0, "y direction", ["terminal", "4", 0.5], ["terminal", "4", 0.5]] 
 ]
 },
 {
@@ -27,35 +27,35 @@
 "category":  "footprint",
 "structural_id": 4,
 "subdiv":[
-[1.0, "y direction", ["terminal", "4", 0.5], ["nonterminal", "0", 0.5]]   ]
+[1.0, "y direction", ["nonterminal", "2", 0.5], ["nonterminal", "0", 0.5]]   ]
 },
 {
 "object_name": "footprint_5",
 "category":  "footprint",
 "structural_id": 5,
 "subdiv":[
-[1.0, "y direction", ["terminal", "4", 0.5], ["nonterminal", "0", 0.5]]   ]
+[1.0, "y direction", ["nonterminal", "2", 0.5], ["nonterminal", "0", 0.5]]   ]
 },
 {
 "object_name": "footprint_6",
 "category":  "footprint",
 "structural_id": 6,
 "subdiv":[
-[1.0, "y direction", ["terminal", "4", 0.5], ["nonterminal", "1", 0.5]]   ]
+[1.0, "y direction", ["nonterminal", "3", 0.5], ["nonterminal", "1", 0.5]]   ]
 },
 {
 "object_name": "footprint_7",
 "category":  "footprint",
 "structural_id": 7,
 "subdiv":[
-[1.0, "y direction", ["terminal", "4", 0.5], ["nonterminal", "1", 0.5]]   ]
+[1.0, "y direction", ["nonterminal", "3", 0.5], ["nonterminal", "1", 0.5]]   ]
 },
 {
 "object_name": "footprint_8",
 "category":  "footprint",
 "structural_id": 8,
 "subdiv":[
-[1.0, "y direction", ["terminal","4", 1.0]]
+[1.0, "y direction", ["terminal", "4", 0.5], ["terminal", "4", 0.5]] 
 ]
 },
 {
@@ -63,7 +63,7 @@
 "category":  "footprint",
 "structural_id": 9,
 "subdiv":[
-[1.0, "y direction", ["terminal","4", 0.43], ["terminal","5", 0.57]]
+[1.0, "y direction", ["terminal","1", 0.35], ["terminal","5", 0.5]]
 ]
 },
 {
@@ -82,6 +82,22 @@
 "subdiv":[
 [0.5, "z direction", ["terminal", "2", 0.3],["terminal", "6", 0.2]],
 [0.5, "z direction", ["terminal", "2", 0.6], ["terminal", "8", 0.2]]
+]
+},
+{
+"object_name": "nonterminal_horizontalBranch_x direction lower_decorations",
+"category":  "nonterminal",
+"nonterminal_id": 2,
+"subdiv":[
+[1.0, "x direction", ["terminal", "4", 0.33],["terminal", "4", 0.34], ["terminal", "4", 0.33]]
+]
+},
+{
+"object_name": "nonterminal_horizontalBranch_z direction lower_decorations",
+"category":  "nonterminal",
+"nonterminal_id": 3,
+"subdiv":[
+[1.0, "z direction", ["terminal", "4", 0.5],["terminal", "4", 0.5]]
 ]
 },
 {

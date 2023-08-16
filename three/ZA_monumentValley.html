@@ -70,8 +70,12 @@
 
 
 	const loader2_temple = new GLTFLoader().setPath( 'static/ZA_monument_models/' );
+	var load_result = await loader2_temple.loadAsync('1.glb');
+	const m1 = load_result.scene;
 	var load_result = await loader2_temple.loadAsync('4_0.glb');
 	const m4_0 = load_result.scene;
+	var load_result = await loader2_temple.loadAsync('4_1.glb');
+	const m4_1 = load_result.scene;
 	var load_result = await loader2_temple.loadAsync('5_0.glb');
 	const m5_0 = load_result.scene;
 	var load_result = await loader2_temple.loadAsync('6.glb');
@@ -142,8 +146,12 @@
 			var rand = Math.random();
 			var load_mesh = true;
 
-			 if(jsonData[i]["obj"]["type"] == 4 ){
+			if(jsonData[i]["obj"]["type"] == 1 ){
+				a = m1.clone();}
+			else if(jsonData[i]["obj"]["type"] == 4 && rand < 0.5){
 				a = m4_0.clone();}
+			else if(jsonData[i]["obj"]["type"] == 4){
+				a = m4_1.clone();}
 			else if(jsonData[i]["obj"]["type"] == 5 ){
 				a = m5_0.clone();}
 			else if(jsonData[i]["obj"]["type"] == 6 ){

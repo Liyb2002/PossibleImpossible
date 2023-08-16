@@ -8,10 +8,14 @@
 8 -> pillar, +y direction
 9 -> tower
 
+
 Decorations:
 nonterminal:
 0 -> nonterminal_horizontalBranch_x direction upper_decorations
 1 -> nonterminal_horizontalBranch_z direction upper_decorations
+2 -> nonterminal_horizontalBranch_x direction lower_decorations
+3 -> nonterminal_horizontalBranch_z direction lower_decorations
+
 
 terminal:
 3 -> terminal_branch, y direction
