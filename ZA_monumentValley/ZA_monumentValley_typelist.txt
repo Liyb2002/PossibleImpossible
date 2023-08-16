@@ -6,3 +6,18 @@
 6 -> bridge, -z direction
 7 -> bridge, +z direction
 8 -> pillar, +y direction
+9 -> tower
+
+Decorations:
+nonterminal:
+0 -> nonterminal_horizontalBranch_x direction upper_decorations
+1 -> nonterminal_horizontalBranch_z direction upper_decorations
+
+terminal:
+3 -> terminal_branch, y direction
+4 -> terminal_branch, x direction
+9 -> terminal_branch, z direction
+5 -> terminal_pyramid
+6 -> terminal_tree
+7 -> terminal_arch x direction
+8 -> terminal_arch z direction

@@ -106,14 +106,14 @@
 "multiplier": [0.0,0.0,0.0]
 },
 {
-"object_name": "terminal_branch, vertical direction",
+"object_name": "terminal_branch, y_direction",
 "category":  "terminal",
 "terminal_id": 3,
 "rule": "normal",
 "multiplier": [1,1,1]
 },
 {
-"object_name": "terminal_branch, horizontal_direction",
+"object_name": "terminal_branch, x_direction",
 "category":  "terminal",
 "terminal_id": 4,
 "rule": "normal",
@@ -146,5 +146,12 @@
 "terminal_id": 8,
 "rule": "normal",
 "multiplier": [1,5,1]
-}   
+},
+{
+"object_name": "terminal_branch, z_direction",
+"category":  "terminal",
+"terminal_id": 9,
+"rule": "normal",
+"multiplier": [1,1,1]
+}
 ]
