@@ -127,10 +127,10 @@
 	geometry.setAttribute( 'color', new THREE.Float32BufferAttribute( colors, 3 ) );
 
 
-	var cc = new THREE.Mesh( geometry, material );
-	cc.position.set(1, 1, 1 );
-	scene.add(cc);
+	var count = 0;
 
+async function load_info(){
+	return new Promise(function(resolve){
 	const loader = new THREE.FileLoader();
 	loader.load(
 	// resource URL
@@ -156,112 +156,105 @@
 			var center_x = start_x;
 			var center_y = start_y ;
 			var center_z = start_z;
-			
-			var debug_mode = jsonData[i]["obj"]["mode"];
-			console.log("jsonData[i]", jsonData[i]["obj"]["mode"] == 0);
-			
-			var a;
-			var rand = Math.random();
-			var load_mesh = true;
 
-			if(jsonData[i]["obj"]["type"] == 1
-			
-			){
-				a = m1.clone();}
-			else if(jsonData[i]["obj"]["type"] == 4 && rand < 0.5){
-				a = m4_0.clone();}
-			else if(jsonData[i]["obj"]["type"] == 4){
-				a = m4_1.clone();}
-			else if(jsonData[i]["obj"]["type"] == 5  && rand < 0.45){
-				a = m5_0.clone();}
-			else if(jsonData[i]["obj"]["type"] == 5 && rand < 0.6){
-				a = m5_1.clone();}
-			else if(jsonData[i]["obj"]["type"] == 5 && rand < 0.9){
-				a = m5_2.clone();}
-			else if(jsonData[i]["obj"]["type"] == 5 ){
-				a = m5_3.clone();}
-			else if(jsonData[i]["obj"]["type"] == 6  && rand < 0.3){
-				a = m6.clone();}
-			else if(jsonData[i]["obj"]["type"] == 6  && rand < 0.6){
-				a = m6_1.clone();}
-			else if(jsonData[i]["obj"]["type"] == 6  && rand < 0.7){
-				a = m6_2.clone();}
-			else if(jsonData[i]["obj"]["type"] == 6  && rand < 0.8){
-				a = m6_3.clone();}
-			else if(jsonData[i]["obj"]["type"] == 6 ){
-				a = m6_4.clone();}
-			else if(jsonData[i]["obj"]["type"] == 7 ){
-				a = m7.clone();}
-			else if(jsonData[i]["obj"]["type"] == 8 ){
-				a = m8.clone();}
-			else{
-			var cube = new THREE.Mesh( geometry, material );
-			cube.position.set(center_x, center_y, center_z );
-			cube.scale.set(scale_x*2, scale_y*2, scale_z*2);
-			cube.rotation.x = rotation_x;
-			cube.rotation.y = rotation_y;
-			cube.rotation.z = rotation_z;
-			scene.add( cube );
-			load_mesh = false;
-			}
-
-			if (load_mesh){
-			a.position.set(start_x,start_y,start_z);
-			a.scale.set(scale_x,scale_y,scale_z);
-			a.rotation.x = rotation_x;
-			a.rotation.y = rotation_y;
-			a.rotation.z = rotation_z;
-
-			scene.add(a);
-		}
-
-
-		}
+			count += 1;
 		
-	},
-	// onProgress callback
-	function ( xhr ) {
-		console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
-	},
+			// 	var a;
+		// 	var rand = Math.random();
+		// 	var load_mesh = true;
 
-	// onError callback
-	function ( err ) {
-		console.error( 'An error happened' );
-	}
-	);
+		// 	if(jsonData[i]["obj"]["type"] == 1){
+		// 		a = m1.clone();}
+		// 	else if(jsonData[i]["obj"]["type"] == 4 && rand < 0.5){
+		// 		a = m4_0.clone();}
+		// 	else if(jsonData[i]["obj"]["type"] == 4){
+		// 		a = m4_1.clone();}
+		// 	else if(jsonData[i]["obj"]["type"] == 5  && rand < 0.45){
+		// 		a = m5_0.clone();}
+		// 	else if(jsonData[i]["obj"]["type"] == 5 && rand < 0.6){
+		// 		a = m5_1.clone();}
+		// 	else if(jsonData[i]["obj"]["type"] == 5 && rand < 0.9){
+		// 		a = m5_2.clone();}
+		// 	else if(jsonData[i]["obj"]["type"] == 5 ){
+		// 		a = m5_3.clone();}
+		// 	else if(jsonData[i]["obj"]["type"] == 6  && rand < 0.3){
+		// 		a = m6.clone();}
+		// 	else if(jsonData[i]["obj"]["type"] == 6  && rand < 0.6){
+		// 		a = m6_1.clone();}
+		// 	else if(jsonData[i]["obj"]["type"] == 6  && rand < 0.7){
+		// 		a = m6_2.clone();}
+		// 	else if(jsonData[i]["obj"]["type"] == 6  && rand < 0.8){
+		// 		a = m6_3.clone();}
+		// 	else if(jsonData[i]["obj"]["type"] == 6 ){
+		// 		a = m6_4.clone();}
+		// 	else if(jsonData[i]["obj"]["type"] == 7 ){
+		// 		a = m7.clone();}
+		// 	else if(jsonData[i]["obj"]["type"] == 8 ){
+		// 		a = m8.clone();}
+		// 	else{
+		// 	var cube = new THREE.Mesh( geometry, material );
+		// 	cube.position.set(center_x, center_y, center_z );
+		// 	cube.scale.set(scale_x*2, scale_y*2, scale_z*2);
+		// 	cube.rotation.x = rotation_x;
+		// 	cube.rotation.y = rotation_y;
+		// 	cube.rotation.z = rotation_z;
+		// 	scene.add( cube );
+		// 	load_mesh = false;
+		// 	}
+
+		// 	if (load_mesh){
+		// 	a.position.set(start_x,start_y,start_z);
+		// 	a.scale.set(scale_x,scale_y,scale_z);
+		// 	a.rotation.x = rotation_x;
+		// 	a.rotation.y = rotation_y;
+		// 	a.rotation.z = rotation_z;
+
+		// 	scene.add(a);
+		// }
+		}		
+
+		resolve();
+	},);
+})
+}
 
 
-	run_download(cc);
+
+function displaypos() {
+    console.log("info_array.length", count);
+	//Just add everything here!
+	scene.add(m4_0);
+	run_download(scene);
 
 
-	function run_download(input) {
+}
+
+(async function(){
+    await load_info();
+    displaypos(); 
+})();
+
+
+
+function run_download(input) {
 const exporter = new GLTFExporter();
 exporter.parse(input, function (result) {
 var output = JSON.stringify( result, null, 2 );
-		console.log( output );
-		saveString( output, 'scene.gltf' );
-},
-);
-}
+console.log( output );
+// saveString( output, 'scene.gltf' );
+ },);}
 
 var link = document.createElement( 'a' );
-			link.style.display = 'none';
-			document.body.appendChild( link ); // Firefox workaround, see #6594
+link.style.display = 'none';
+document.body.appendChild( link ); // Firefox workaround, see #6594
 
 function save( blob, filename ) {
-
 link.href = URL.createObjectURL( blob );
 link.download = filename;
-link.click();
-
-// URL.revokeObjectURL( url ); breaks Firefox...
-
-}
+link.click();}
 
 function saveString( text, filename ) {
-
 save( new Blob( [ text ], { type: 'text/plain' } ), filename );
-
 }
 
 
