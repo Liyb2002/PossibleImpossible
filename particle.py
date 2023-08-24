@@ -187,8 +187,8 @@ class Particle:
         density_score = self.density_score()
         probability_score = self.probability_score()
         occulusion_score = self.occulusion_score(intersection_obj, results)
-        overlapping_score = 1
         constraints_score = self.constraints_score(results)
+        constraints_score = 0
         bounding_box_score = 1
 
         for obj in results:
