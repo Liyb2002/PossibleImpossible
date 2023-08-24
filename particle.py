@@ -103,7 +103,7 @@ class Particle:
                 while ok == 1:
                     ok = connect_particle.execute_model_withDirection()
                 
-                if ok == 0:
+                if ok == 0 or self.score < 0:
                     self.success = False
                     return 
                 

@@ -156,7 +156,7 @@ class generate_helper:
         success_connect_list = []
         for i in range(len(self.particle_list)):
             self.particle_list[i].run_connect()
-            if self.particle_list[i].success:
+            if self.particle_list[i].success and self.particle_list[i].score > 0:
                 success_connect_list.append(self.particle_list[i])
 
         self.particle_list = success_connect_list
@@ -166,12 +166,12 @@ class generate_helper:
 
 
     def select_result_particle(self):
-        highest_hit = 0
+        highest_score = self.particle_list[0].score
         self.result_particle = self.particle_list[0]
         for particle in self.particle_list:
-            if particle.hit_constraints > highest_hit:
+            if particle.score > highest_score:
                 self.result_particle = particle
-                highest_hit = particle.hit_constraints
+                highest_score = particle.score
 
     def reproduce_particle_list(self, num_particles):
         new_particle_list = []

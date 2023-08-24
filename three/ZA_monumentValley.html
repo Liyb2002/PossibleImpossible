@@ -223,9 +223,9 @@ function displaypos() {
 			else if(cur_type == 8 ){
 				a = m8.clone();}
 			
-				scale_x = scale_x * 1.0;
-				scale_y = scale_y * 1.0;
-				scale_z = scale_z * 1.0;
+			scale_x = scale_x * 1.0;
+			scale_y = scale_y * 1.0;
+			scale_z = scale_z * 1.0;
 			a.position.set(center_x,center_y,center_z);
 			a.scale.set(scale_x,scale_y,scale_z);
 			// a.rotation.x = rotation_x;
@@ -252,7 +252,7 @@ const exporter = new GLTFExporter();
 exporter.parse(input, function (result) {
 var output = JSON.stringify( result, null, 2 );
 console.log( output );
-saveArrayBuffer( output, 'scene.glb' );
+// saveArrayBuffer( output, 'scene.glb' );
  },);}
 
 var link = document.createElement( 'a' );
