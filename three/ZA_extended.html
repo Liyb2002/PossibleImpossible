@@ -103,6 +103,7 @@
 
 	const geometry = new THREE.BoxGeometry( 1, 1, 1 ).toNonIndexed();
 	const material = new THREE.MeshBasicMaterial( { vertexColors: true } ); 
+	var cube = new THREE.Mesh( geometry, material );
 
 	const positionAttribute = geometry.getAttribute( 'position' );
 	const colors = [];
@@ -222,6 +223,8 @@ function displaypos() {
 				a = m7.clone();}
 			else if(cur_type == 8 ){
 				a = m8.clone();}
+			else{
+				a = cube.clone();}
 			
 			scale_x = scale_x * 1.0;
 			scale_y = scale_y * 1.0;

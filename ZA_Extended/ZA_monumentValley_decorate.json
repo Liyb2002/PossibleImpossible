@@ -63,9 +63,16 @@
 "category":  "footprint",
 "structural_id": 9,
 "subdiv":[
+[1.0, "y direction", ["terminal","0", 1.0]]
+]
+},
+{
+"object_name": "footprint_10",
+"category":  "footprint",
+"structural_id": 10,
+"subdiv":[
 [0.6, "y direction", ["terminal","1", 0.35], ["terminal","5", 0.5]],
 [0.4, "y direction", ["terminal","1", 0.35]]
-
 ]
 },
 {

@@ -105,7 +105,6 @@ class Procedural_object:
 
             self.position += np.array([0, 0, prev_obj.length[2]]) + np.array([0,0 ,self.length[2]]) + prev_obj_delta_rotate + new_obj_delta_rotate
 
-        # print("prev_obj_delta_rotate", prev_obj_delta_rotate)
         if(rule == '-x2'):
             self.position = prev_pos - np.array([prev_x, -prev_y, 0]) - np.array([self.length[0],0 ,0])
             self.arriving_rule = '-x'

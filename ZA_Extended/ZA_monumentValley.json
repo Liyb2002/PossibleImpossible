@@ -1,10 +1,10 @@
 [{
 "object_id": -1,
 "startPos" : [400, 400],
-"foreground_type": [1,1],
+"foreground_type": [5,1],
 "foreground_connect": "-y",
 "foreground_index" : 12,
-"background_type": 4,
+"background_type": 1,
 "background_connect": "+y",
 "background_index" : 24,
 "num_visual_bridge" : 1
@@ -76,12 +76,14 @@
 "canTerminate": "False",
 "cycle_connect": "True",
 "rotation": [[0],[0],[0]],
-"connect_id": [[1, 1.0]],
+"connect_id": [[1, 0.5], [9,0.5]],
 "connect_rule":{
-"1" : [ "-x"]
+"1" : [ "-x"],
+"9" : [ "-x"]
 },
 "offsets":{
-"1" : [0.0,0.0,0.0]
+"1" : [0.0,0.0,0.0],
+"9" : [0.0,0.0,0.0]
 }
 },
 {
@@ -154,10 +156,28 @@
 },
 {
 "object_id": 9,
+"type": "local_object",
+"scope_x": [0.15,0.15],
+"scope_y": [0.4,0.4],
+"scope_z": [0.05,0.05],
+"canTerminate": "False",
+"cycle_connect": "True",
+"rotation": [[0],[0],[0]],
+"connect_id": [[4,1.0]],
+"connect_rule":{
+"4" : [ "-x2"]
+},
+"offsets":{
+"4" : [0.0,0.0,0.0]
+}
+},
+{
+"object_id": 10,
 "type": "global_object",
 "action" : ["assign"],
 "prev_type": 1,
 "prev_condition":["+y"],
 "offsets": [[0.0,0.0],[0.05,0.15],[0.0,0.0]]
 }
+
 ]    
