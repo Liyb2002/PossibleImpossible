@@ -70,7 +70,7 @@
 	scene.add( light );
 
 
-	const loader2_temple = new GLTFLoader().setPath( 'static/ZA_monument_models/' );
+	const loader2_temple = new GLTFLoader().setPath( 'static/ZA_extended/' );
 	var load_result = await loader2_temple.loadAsync('1.glb');
 	const m1 = load_result.scene;
 	var load_result = await loader2_temple.loadAsync('4_0.glb');
@@ -99,6 +99,10 @@
 	const m7 = load_result.scene;
 	var load_result = await loader2_temple.loadAsync('8.glb');
 	const m8 = load_result.scene;
+	var load_result = await loader2_temple.loadAsync('9.glb');
+	const m9 = load_result.scene;
+
+
 
 
 	const geometry = new THREE.BoxGeometry( 1, 1, 1 ).toNonIndexed();
@@ -223,7 +227,10 @@ function displaypos() {
 				a = m7.clone();}
 			else if(cur_type == 8 ){
 				a = m8.clone();}
+			else if(cur_type == 9 ){
+				a = m9.clone();}
 			else{
+				console.log("tyoe", cur_type);
 				a = cube.clone();}
 			
 			scale_x = scale_x * 1.0;

@@ -6,7 +6,8 @@
 6 -> bridge, -z direction
 7 -> bridge, +z direction
 8 -> pillar, +y direction
-9 -> tower
+9 -> stairs
+10 -> tower
 
 
 Decorations:
@@ -15,7 +16,7 @@ nonterminal:
 1 -> nonterminal_horizontalBranch_z direction upper_decorations
 2 -> nonterminal_horizontalBranch_x direction lower_decorations
 3 -> nonterminal_horizontalBranch_z direction lower_decorations
-
+10 -> tower
 
 terminal:
 1 -> bot for tower
@@ -25,4 +26,4 @@ terminal:
 6 -> terminal_tree
 7 -> terminal_arch x direction
 8 -> terminal_arch z direction
-9 -> fountain
+9 -> stairs
