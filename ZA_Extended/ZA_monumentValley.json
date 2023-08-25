@@ -129,11 +129,13 @@
 "canTerminate": "False",
 "cycle_connect": "True",
 "rotation": [[0],[0],[0]],
-"connect_id": [[1,1.0]],
+"connect_id": [[10,1.0],[1,1.0]],
 "connect_rule":{
+"10" : [ "+z"],
 "1" : [ "+z"]
 },
 "offsets":{
+"10" : [0.0,0.0,0.0],
 "1" : [0.0,0.0,0.0]
 }
 },
@@ -161,7 +163,7 @@
 "scope_y": [0.4,0.4],
 "scope_z": [0.05,0.05],
 "canTerminate": "False",
-"cycle_connect": "True",
+"cycle_connect": "False",
 "rotation": [[0],[0],[0]],
 "connect_id": [[1,1.0]],
 "connect_rule":{
@@ -173,6 +175,23 @@
 },
 {
 "object_id": 10,
+"type": "local_object",
+"scope_x": [0.2,0.2],
+"scope_y": [0.3,0.3],
+"scope_z": [0.2,0.2],
+"canTerminate": "False",
+"cycle_connect": "False",
+"rotation": [[0],[0],[0]],
+"connect_id": [[5,1.0]],
+"connect_rule":{
+"5" : [ "+x"]
+},
+"offsets":{
+"5" : [0.0,0.0,0.0]
+}
+},
+{
+"object_id": 11,
 "type": "global_object",
 "action" : ["assign"],
 "prev_type": 1,

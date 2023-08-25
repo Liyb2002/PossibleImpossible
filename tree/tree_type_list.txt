@@ -14,3 +14,6 @@ global:
 11 -> larger branch
 12 -> smaller branch
 13 -> leaf
+
+Notes:
+to create the effect of very strong branches (overlapping), comment the rotation checkings

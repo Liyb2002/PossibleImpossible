@@ -154,6 +154,7 @@ class generate_helper:
 
     def connect(self):
         success_connect_list = []
+        print("len(self.particle_list)", len(self.particle_list))
         for i in range(len(self.particle_list)):
             self.particle_list[i].run_connect()
             if self.particle_list[i].success and self.particle_list[i].score > 0:

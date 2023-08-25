@@ -71,6 +71,13 @@
 "category":  "footprint",
 "structural_id": 10,
 "subdiv":[
+[1.0, "y direction", ["terminal","10", 1.0]]]
+},
+{
+"object_name": "footprint_11",
+"category":  "footprint",
+"structural_id": 11,
+"subdiv":[
 [0.6, "y direction", ["terminal","1", 0.35], ["terminal","5", 0.5]],
 [0.4, "y direction", ["terminal","1", 0.35]]
 ]
@@ -178,6 +185,13 @@
 "object_name": "terminal_stairs",
 "category":  "terminal",
 "terminal_id": 9,
+"rule": "normal",
+"multiplier": [1,1,1]
+},
+{
+"object_name": "terminal_largeSphere",
+"category":  "terminal",
+"terminal_id": 10,
 "rule": "normal",
 "multiplier": [1,1,1]
 }

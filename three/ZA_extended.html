@@ -101,6 +101,8 @@
 	const m8 = load_result.scene;
 	var load_result = await loader2_temple.loadAsync('9.glb');
 	const m9 = load_result.scene;
+	var load_result = await loader2_temple.loadAsync('10.glb');
+	const m10 = load_result.scene;
 
 
 
@@ -229,6 +231,8 @@ function displaypos() {
 				a = m8.clone();}
 			else if(cur_type == 9 ){
 				a = m9.clone();}
+			else if(cur_type == 10 ){
+				a = m10.clone();}
 			else{
 				console.log("tyoe", cur_type);
 				a = cube.clone();}
