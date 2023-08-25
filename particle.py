@@ -191,6 +191,7 @@ class Particle:
         constraints_score = 0
         bounding_box_score = 1
 
+        overlapping_score = 1
         for obj in results:
             if not self.overlapping_check_obj(obj):
                 overlapping_score = 0
