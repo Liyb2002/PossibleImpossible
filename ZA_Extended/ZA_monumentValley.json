@@ -163,12 +163,12 @@
 "canTerminate": "False",
 "cycle_connect": "True",
 "rotation": [[0],[0],[0]],
-"connect_id": [[4,1.0]],
+"connect_id": [[1,1.0]],
 "connect_rule":{
-"4" : [ "-x2"]
+"1" : [ "-x2"]
 },
 "offsets":{
-"4" : [0.0,0.0,0.0]
+"1" : [0.0,0.0,0.0]
 }
 },
 {
