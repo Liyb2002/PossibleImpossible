@@ -16,4 +16,5 @@ global:
 13 -> leaf
 
 Notes:
-to create the effect of very strong branches (overlapping), comment the rotation checkings
+to create the effect of very strong branches (overlapping), comment the rotation checkings + 
+procedural_objects's transition rules (add the rotation conditions)

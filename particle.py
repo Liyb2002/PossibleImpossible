@@ -138,6 +138,7 @@ class Particle:
             for obj_B in self.procedural_objects:
                 if obj_B.rotation[0] != 0 or obj_B.rotation[1] != 0 or obj_B.rotation[2] != 0:
                     continue
+
                 if obj_A.hash != obj_B.hash:
                     overlapping = obj_A.collision_check(obj_B)
                     if overlapping:
