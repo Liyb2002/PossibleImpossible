@@ -49,7 +49,7 @@ class Procedural_object:
             new_obj_delta_rotate = new_obj_rotated_point - new_obj_closest_point
 
             # self.position += -np.array([prev_obj.length[0], 0, 0]) - np.array([self.length[0],0 , 0]) + prev_obj_delta_rotate + new_obj_delta_rotate
-            self.position += -np.array([prev_obj.length[0], 0, 0]) - np.array([self.length[0],0 , 0])
+            self.position = self.position -np.array([prev_obj.length[0], 0, 0]) - np.array([self.length[0],0 , 0])
 
         if(rule == '+x'):
             prev_obj_closest_point = prev_obj.position + np.array([prev_obj.length[0], 0, 0])
@@ -73,7 +73,7 @@ class Procedural_object:
             new_obj_delta_rotate = new_obj_rotated_point - new_obj_closest_point
 
             # self.position += -np.array([0, prev_obj.length[1], 0]) - np.array([0,self.length[1] , 0]) + prev_obj_delta_rotate + new_obj_delta_rotate
-            self.position += -np.array([0, prev_obj.length[1], 0]) - np.array([0,self.length[1] , 0])
+            self.position = self.position - np.array([0, prev_obj.length[1], 0]) - np.array([0,self.length[1] , 0])
 
         if(rule == '+y'):
             prev_obj_closest_point = prev_obj.position + np.array([0, prev_obj.length[1], 0])
@@ -97,7 +97,7 @@ class Procedural_object:
             new_obj_delta_rotate = new_obj_rotated_point - new_obj_closest_point
 
             # self.position += -np.array([0, 0, prev_obj.length[2]]) - np.array([0,0 ,self.length[2]]) + prev_obj_delta_rotate + new_obj_delta_rotate
-            self.position += -np.array([0, 0, prev_obj.length[2]]) - np.array([0,0 ,self.length[2]])
+            self.position =self.position -np.array([0, 0, prev_obj.length[2]]) - np.array([0,0 ,self.length[2]])
 
         if(rule == '+z'):
             prev_obj_closest_point = prev_obj.position + np.array([0, 0, prev_obj.length[2]])

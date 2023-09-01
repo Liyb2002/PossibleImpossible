@@ -15,7 +15,7 @@ def produce_innerLayer(matryoshka_path, decorate_path):
 
     visual_bridge_info,new_generic_object_list,global__object_list,extra_system_list = read_file.read_object_file(matryoshka_path)
 
-    multipler = 0.08
+    multipler = 0.05
     result_list = []
     camera = perspective.ortho_camera()
 
@@ -35,11 +35,12 @@ def produce_innerLayer(matryoshka_path, decorate_path):
             scope_y = object_data['obj']['scale_y']
             scope_z = object_data['obj']['scale_z']
             
-            foreground_intersection = np.array([center_x,center_y + 0.05,center_z])
-            background_intersection = camera.get_intersections_withPos(foreground_intersection, 2)
+            foreground_intersection = np.array([center_x+0.1, center_y + 0.05,center_z + 0.1])
+            background_intersection = camera.get_intersections_withPos(foreground_intersection, 1)
 
-            visual_bridge_info['foreground_index'] = 12
-            visual_bridge_info['background_index'] = 14
+            visual_bridge_info['foreground_index'] = 8
+            visual_bridge_info['background_index'] = 9
+            visual_bridge_info['steps'] = 1
             visual_bridge_info['startPos'] = [600,600]
 
             class_generate = generate.generate_helper(new_generic_object_list, global__object_list, extra_system_list, visual_bridge_info, decorate_path)

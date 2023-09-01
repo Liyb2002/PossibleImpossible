@@ -62,7 +62,7 @@ class generate_helper:
         background_type = self.visual_bridge_info['background_type']
         background_connect = self.visual_bridge_info['background_connect']
 
-        steps = 2
+        steps = self.visual_bridge_info['steps']
     
 
         self.small_cubes = constraints_loader.guide_visualizer(self.sampled_points, foreground_index)

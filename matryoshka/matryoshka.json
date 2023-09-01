@@ -3,17 +3,18 @@
 "startPos" : [400, 400],
 "foreground_type": [1,1],
 "foreground_connect": "-y",
-"foreground_index" : 12,
+"foreground_index" : 5,
 "background_type": 3,
 "background_connect": "+y",
 "background_index" : 24,
-"num_visual_bridge" : 1
+"num_visual_bridge" : 1,
+"steps" : 8
 },
 {
 "object_id": 1,
 "type": "local_object",
 "scope_x": [0.2,0.2],
-"scope_y": [0.2,0.2],
+"scope_y": [0.25,0.25],
 "scope_z": [0.2,0.2],
 "canTerminate": "True",
 "cycle_connect": "True",
@@ -70,7 +71,7 @@
 {
 "object_id": 4,
 "type": "local_object",
-"scope_x": [0.1,0.4],
+"scope_x": [0.3,0.6],
 "scope_y": [0.05,0.05],
 "scope_z": [0.05,0.05],
 "canTerminate": "False",
@@ -87,7 +88,7 @@
 {
 "object_id": 5,
 "type": "local_object",
-"scope_x": [0.1,0.4],
+"scope_x": [0.3,0.6],
 "scope_y": [0.05,0.05],
 "scope_z": [0.05,0.05],
 "canTerminate": "False",
@@ -106,7 +107,7 @@
 "type": "local_object",
 "scope_x": [0.05,0.05],
 "scope_y": [0.05,0.05],
-"scope_z": [0.1,0.4],
+"scope_z": [0.2,0.4],
 "canTerminate": "False",
 "cycle_connect": "True",
 "rotation": [[0],[0],[0]],
@@ -123,7 +124,7 @@
 "type": "local_object",
 "scope_x": [0.05,0.05],
 "scope_y": [0.05,0.05],
-"scope_z": [0.1,0.4],
+"scope_z": [0.3,0.5],
 "canTerminate": "False",
 "cycle_connect": "True",
 "rotation": [[0],[0],[0]],
@@ -156,7 +157,7 @@
 "object_id": 9,
 "type": "global_object",
 "action" : ["matryoshka"],
-"prob" : 0.5, 
+"prob" : 0.3, 
 "prev_type": 1
 }
 

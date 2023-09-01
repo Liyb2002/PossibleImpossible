@@ -31,6 +31,7 @@
 	import { OrbitControls } from '/node_modules/three/examples/jsm/controls/OrbitControls.js';
 	import { GLTFLoader } from '/node_modules/three/examples/jsm/loaders/GLTFLoader.js';
 	import { RGBELoader } from '/node_modules/three/examples/jsm/loaders/RGBELoader.js';
+	import { GLTFExporter } from '/node_modules/three/examples/jsm/exporters/GLTFExporter.js';
 
 	let camera, scene, renderer;
 
@@ -70,6 +71,14 @@
 	} );
 
 	const loader2_temple = new GLTFLoader().setPath( 'static/matryoshka_models/' );
+	var load_result = await loader2_temple.loadAsync('1_0.glb');
+	const m1_0 = load_result.scene;
+	var load_result = await loader2_temple.loadAsync('3.glb');
+	const m3 = load_result.scene;
+	var load_result = await loader2_temple.loadAsync('4.glb');
+	const m4 = load_result.scene;
+	var load_result = await loader2_temple.loadAsync('6.glb');
+	const m6 = load_result.scene;
 	var load_result = await loader2_temple.loadAsync('9.glb');
 	const m9 = load_result.scene;
 
@@ -101,6 +110,11 @@
 	geometry.setAttribute( 'color', new THREE.Float32BufferAttribute( colors, 3 ) );
 
 
+	var loaded_info = [];
+
+	async function load_info(){
+	return new Promise(function(resolve){
+
 	const loader = new THREE.FileLoader();
 	loader.load(
 	// resource URL
@@ -130,46 +144,103 @@
 			var debug_mode = jsonData[i]["obj"]["mode"];
 			console.log("jsonData[i]", jsonData[i]["obj"]["mode"] == 0);
 			
-			var a;
-			var rand = Math.random();
-			var load_mesh = true;
+			loaded_info.push({type:jsonData[i]["obj"]["type"],
+				center_x:start_x, center_y:start_y, center_z:start_z, 
+				scale_x:scale_x, scale_y:scale_y, scale_z:scale_z,
+				rotation_x:rotation_x, rotation_y:rotation_y, rotation_z:rotation_z});
 
-			if(jsonData[i]["obj"]["type"] == 9){
-				a = m9.clone();
-			}else{
-			var cube = new THREE.Mesh( geometry, material );
-			cube.position.set(center_x, center_y, center_z );
-			cube.scale.set(scale_x*2, scale_y*2, scale_z*2);
-			cube.rotation.x = rotation_x;
-			cube.rotation.y = rotation_y;
-			cube.rotation.z = rotation_z;
-			scene.add( cube );
-			load_mesh = false;
-			}
 
-			if (load_mesh){
-			a.position.set(start_x,start_y,start_z);
+		}
+		resolve();
+	},);
+})
+}
+
+var cube = new THREE.Mesh( geometry, material );
+
+
+function displaypos() {
+    console.log("info_array.length", loaded_info.length);
+
+	var x = new THREE.Scene();
+
+	for(var i =0; i<loaded_info.length; i++){
+
+		var cur_type = loaded_info[i].type;
+		var center_x = loaded_info[i].center_x;
+		var center_y = loaded_info[i].center_y;
+		var center_z = loaded_info[i].center_z;
+
+		var scale_x = loaded_info[i].scale_x;
+		var scale_y= loaded_info[i].scale_y;
+		var scale_z = loaded_info[i].scale_z;
+
+		var rotation_x = loaded_info[i].rotation_x;
+		var rotation_y = loaded_info[i].rotation_y;
+		var rotation_z = loaded_info[i].rotation_z;
+
+		var a = cube.clone();
+		var rand = Math.random();
+		var load_mesh = true;
+
+			if(cur_type == 1){
+				a = m1_0.clone();}
+			else if(cur_type == 3 ||cur_type == 8 ){
+				a = m3.clone();}
+			else if(cur_type == 4 ||cur_type == 5 ){
+				a = m4.clone();}
+			else if(cur_type == 6 ||cur_type == 7 ){
+				a = m6.clone();}
+			else if(cur_type == 9){
+				a = m9.clone();}
+
+			scale_x = scale_x * 1.0;
+			scale_y = scale_y * 1.0;
+			scale_z = scale_z * 1.0;
+			a.position.set(center_x,center_y,center_z);
 			a.scale.set(scale_x,scale_y,scale_z);
-			a.rotation.x = rotation_x;
-			a.rotation.y = rotation_y;
-			a.rotation.z = rotation_z;
+			// a.rotation.x = rotation_x;
+			// a.rotation.y = rotation_y;
+			// a.rotation.z = rotation_z;
+			scene.add(a.clone());
+			x.add(a.clone());
 
-			scene.add(a);
-		}
-
-
-		}
-	},
-	// onProgress callback
-	function ( xhr ) {
-		console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
-	},
-
-	// onError callback
-	function ( err ) {
-		console.error( 'An error happened' );
 	}
-	);
+	run_download(x);}
+
+
+
+(async function(){
+    await load_info();
+    displaypos(); 
+})();
+
+
+
+function run_download(input) {
+const exporter = new GLTFExporter();
+exporter.parse(input, function (result) {
+var output = JSON.stringify( result, null, 2 );
+console.log( output );
+saveArrayBuffer( output, 'scene.glb' );
+ },);}
+
+var link = document.createElement( 'a' );
+link.style.display = 'none';
+document.body.appendChild( link ); // Firefox workaround, see #6594
+
+function save( blob, filename ) {
+link.href = URL.createObjectURL( blob );
+link.download = filename;
+link.click();}
+
+function saveString( text, filename ) {
+save( new Blob( [ text ], { type: 'text/plain' } ), filename );}
+
+function saveArrayBuffer( buffer, filename ) {
+save( new Blob( [ buffer ], { type: 'application/octet-stream' } ), filename );}
+
+
 
 
 	window.addEventListener( 'resize', onWindowResize );
