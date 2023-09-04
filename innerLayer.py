@@ -6,6 +6,7 @@ import cycle_connect
 import generate
 import perspective
 import read_file
+import random
 
 from copy import deepcopy
 import sys
@@ -38,8 +39,8 @@ def produce_innerLayer(matryoshka_path, decorate_path):
             foreground_intersection = np.array([center_x+0.1, center_y + 0.05,center_z + 0.1])
             background_intersection = camera.get_intersections_withPos(foreground_intersection, 1)
 
-            visual_bridge_info['foreground_index'] = 8
-            visual_bridge_info['background_index'] = 9
+            visual_bridge_info['foreground_index'] = 10 * random.uniform(0, 1)
+            visual_bridge_info['background_index'] = visual_bridge_info['foreground_index'] + random.uniform(0, 1)*10
             visual_bridge_info['steps'] = 1
             visual_bridge_info['startPos'] = [600,600]
 

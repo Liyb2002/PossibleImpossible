@@ -6,9 +6,10 @@
 "foreground_index" : 5,
 "background_type": 3,
 "background_connect": "+y",
-"background_index" : 24,
+"background_index" : 36,
 "num_visual_bridge" : 1,
-"steps" : 8
+"steps" : 3
+
 },
 {
 "object_id": 1,
@@ -157,7 +158,7 @@
 "object_id": 9,
 "type": "global_object",
 "action" : ["matryoshka"],
-"prob" : 0.3, 
+"prob" : 0.2, 
 "prev_type": 1
 }
 

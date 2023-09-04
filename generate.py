@@ -72,13 +72,46 @@ class generate_helper:
             if background_type != 0:
                 self.procedural_generate(background_type, background_connect, background_intersection, steps, False)
         
-        if self.visual_bridge_info['num_visual_bridge'] >1:
+        if self.visual_bridge_info['num_visual_bridge'] == 2:
             startPos2 = np.array([600,800])
-            foreground_intersection2, background_intersection2 = camera.get_intersections(startPos2, foreground_index+8, background_index+8)
+            foreground_intersection2, background_intersection2 = camera.get_intersections(startPos2, foreground_index-2, background_index+8)
 
             start_type_list = [foreground_type,foreground_type]
             connect_direction_list = [foreground_connect,foreground_connect]
             intersection_pos_list = [foreground_intersection, foreground_intersection2]
+            self.multiple_intersections(start_type_list, connect_direction_list, intersection_pos_list)
+            self.procedural_generate(background_type, background_connect, background_intersection, steps, True)
+            if background_type != 0:
+                self.procedural_generate(background_type, background_connect, background_intersection2, steps, False)
+
+        if self.visual_bridge_info['num_visual_bridge'] == 3:
+            startPos2 = np.array([600,800])
+            foreground_intersection2, background_intersection2 = camera.get_intersections(startPos2, foreground_index-2, background_index+8)
+
+            startPos3 = np.array([400,600])
+            foreground_intersection3, background_intersection3 = camera.get_intersections(startPos3, foreground_index-4, background_index+2)
+
+            start_type_list = [foreground_type,foreground_type, foreground_type, background_type]
+            connect_direction_list = [foreground_connect,foreground_connect, foreground_connect, background_connect]
+            intersection_pos_list = [foreground_intersection, foreground_intersection2, foreground_intersection3, background_intersection3]
+            self.multiple_intersections(start_type_list, connect_direction_list, intersection_pos_list)
+            self.procedural_generate(background_type, background_connect, background_intersection, steps, True)
+            if background_type != 0:
+                self.procedural_generate(background_type, background_connect, background_intersection2, steps, False)
+
+        if self.visual_bridge_info['num_visual_bridge'] == 4:
+            startPos2 = np.array([600,800])
+            foreground_intersection2, background_intersection2 = camera.get_intersections(startPos2, foreground_index-2, background_index+9)
+
+            startPos3 = np.array([400,600])
+            foreground_intersection3, background_intersection3 = camera.get_intersections(startPos3, foreground_index-4, background_index+2)
+
+            startPos4 = np.array([300,500])
+            foreground_intersection4, background_intersection4 = camera.get_intersections(startPos4, foreground_index+3, background_index+5)
+
+            start_type_list = [foreground_type,foreground_type, foreground_type, foreground_type, background_type, background_type]
+            connect_direction_list = [foreground_connect,foreground_connect, foreground_connect, foreground_connect, background_connect, background_connect]
+            intersection_pos_list = [foreground_intersection, foreground_intersection2, foreground_intersection3, foreground_intersection4, background_intersection3, background_intersection4]
             self.multiple_intersections(start_type_list, connect_direction_list, intersection_pos_list)
             self.procedural_generate(background_type, background_connect, background_intersection, steps, True)
             if background_type != 0:
@@ -147,6 +180,24 @@ class generate_helper:
             
             tempt_particle.arbitrary_connect(0,1)
             tempt_particle.run_connect()
+
+            if (len(connect_directions) == 4):
+                tempt_particle.arbitrary_connect(0,3)
+                tempt_particle.run_connect()
+                tempt_particle.arbitrary_connect(1,2)
+                tempt_particle.run_connect()
+
+            if (len(connect_directions) == 6):
+                tempt_particle.arbitrary_connect(2,3)
+                tempt_particle.run_connect()
+                tempt_particle.arbitrary_connect(3,4)
+                tempt_particle.run_connect()
+                # tempt_particle.arbitrary_connect(5,6)
+                # tempt_particle.run_connect()
+                # tempt_particle.arbitrary_connect(3,4)
+                # tempt_particle.run_connect()
+
+
             if self.particle_list[i].success:
                 success_connect_list.append(tempt_particle)
 

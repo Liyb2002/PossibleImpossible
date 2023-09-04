@@ -75,7 +75,6 @@ def action_add(procedural_objects_list, global_object):
     if global_object['size'][2][0] == "fixed":
         obj_sizeZ = global_object['size'][2][1]
 
-
     if global_object['pos'][0][0] == "middle":
         obj_xpos = (min_x+max_x) / 2.0
     
@@ -90,6 +89,9 @@ def action_add(procedural_objects_list, global_object):
     
     if global_object['pos'][1][0] == "positive":
         obj_ypos = max_y + global_object['pos'][1][1]
+
+    if global_object['pos'][1][0] == "middle":
+        obj_ypos = (min_y+max_y) / 2.0
 
     if global_object['pos'][2][0] == "middle":
         obj_zpos =  (min_z+max_z) / 2.0
