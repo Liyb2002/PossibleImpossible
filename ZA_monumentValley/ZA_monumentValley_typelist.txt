@@ -25,4 +25,3 @@ terminal:
 6 -> terminal_tree
 7 -> terminal_arch x direction
 8 -> terminal_arch z direction
-9 -> fountain

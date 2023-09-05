@@ -9,6 +9,7 @@ import perspective
 import constraints_loader
 import global_execution
 import bounding_box
+import write2JSON
 
 from copy import deepcopy
 import numpy as np
@@ -239,6 +240,12 @@ class generate_helper:
 
 
     def finish(self):
+        
+        #write the process
+        output_writer = write2JSON.output()
+        output_writer.write_proceudral_objects(self.result_particle.procedural_objects, "three/process_demo.json")
+
+
         # self.result_particle.procedural_objects[0].type = self.visual_bridge_info['foreground_type'][1]
         procedural_objects = global_execution.global_assign(self.result_particle.procedural_objects, self.global__object_list)
         decorator = decorations.decoration_operator(self.decorate_path)
