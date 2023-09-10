@@ -107,3 +107,27 @@ def find_intersection(plane_eq, point, direction_vector):
     intersection_z = pz + t * dz
 
     return intersection_x, intersection_y, intersection_z
+
+def get_m_view():
+    lookAt = np.array([0.0, 0.0, 0.0])  
+    camera_pos = np.array([5.0, 5.0, 5.0])
+    up = np.array([0.0, 1.0, 0.0]) 
+    look_vec = lookAt - camera_pos
+    w = -look_vec / np.linalg.norm(look_vec)
+    v = up - np.dot(up, w)*w
+    v = v / np.linalg.norm(v)
+    u = np.cross(v, w)
+
+    m_rotate = np.array([[u[0], u[1], u[2], 0], 
+                    [v[0], v[1], v[2], 0],
+                    [w[0], w[1], w[2], 0],
+                    [0, 0, 0, 1]])
+
+    m_view = np.array([
+        [m_rotate[0][0], m_rotate[0][1], m_rotate[0][2],  camera_pos[0]],
+        [m_rotate[1][0], m_rotate[1][1], m_rotate[1][2], camera_pos[1]],
+        [m_rotate[2][0], m_rotate[2][1], m_rotate[2][2], camera_pos[2]],
+        [0, 0, 0, 1]
+    ])
+
+    return np.around(m_view,2)

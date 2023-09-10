@@ -5,6 +5,7 @@ import procedural_objects
 import numpy as np
 import math
 import perspective
+import rasterizer
 
 class Particle:
     def __init__(self, generic_object_list, guided_pts, bounding_box):
@@ -211,15 +212,19 @@ class Particle:
     def density_score(self):
         added_object = self.procedural_objects[-1]
         k = 1.0
+        alpha,beta,alpha_dash, beta_dash = 0.5,0.5,0.5,0.5
+        D = 0.0
+        S_de = 0.0
+
         expanded_cube_length = added_object.length + np.array([k,k,k])
         expanded_cube_size = expanded_cube_length[0] * expanded_cube_length[1] * expanded_cube_length[2] * 8
-        sum_overlapping_size = added_object.length[0] * added_object.length[1] * added_object.length[2] * 8
+        # sum_overlapping_size = added_object.length[0] * added_object.length[1] * added_object.length[2] * 8
 
         for obj in self.procedural_objects[:-1]:
-            sum_overlapping_size += procedural_objects.getOverlap3D(added_object.position, expanded_cube_length, obj.position, obj.length)
-        
-        proportion_score = sum_overlapping_size / expanded_cube_size * 100
-        return proportion_score
+            D = alpha * distance(added_object, obj) + beta * procedural_objects.getOverlap3D(added_object.position, expanded_cube_length, obj.position, obj.length)
+            S_de += math.exp(-alpha_dash * D - beta_dash)
+
+        return S_de
 
     def probability_score(self):
         current_Prob = {}
@@ -239,10 +244,13 @@ class Particle:
                 term = self.targetProb[key] * math.log(self.targetProb[key] / current_Prob[key])
             KL += term
 
-        return (1-KL) * (1-KL)
+        return  (1-KL)
 
     def occulusion_score(self, intersection_obj, new_Obj_list):
         occulusion_score = 0
+        # vb = []
+        # vb.append(new_Obj_list[0])
+        # rasterized_vb = rasterizer.get_graph(vb)
         for obj in new_Obj_list:
             occulusion_score += 5
             occulusion_score += check_occlusion(obj, intersection_obj, self.eye)
@@ -284,28 +292,11 @@ def check_occlusion(front_obj, back_obj, eye):
     score = 0
 
     pt0 = back_obj.position
-    ray0 = pt0 - eye
-    ray0 = ray0 / np.linalg.norm(ray0)
-    is_occluded =  ray_intersecting_Obj(front_obj, ray0, eye)
-    if is_occluded:
-        score -= 5
-
-    pt1 = back_obj.position + back_obj.length
-    ray1 = pt1 - eye
-    ray1 = ray1 / np.linalg.norm(ray1)
-    is_occluded =  ray_intersecting_Obj(front_obj, ray1, eye)
-    if is_occluded:
-        score -= 3
-
-
-    pt2 = back_obj.position - back_obj.length
-    ray2 = pt2 - eye
-    ray2 = ray2 / np.linalg.norm(ray2)
-    is_occluded =  ray_intersecting_Obj(front_obj, ray2, eye)
-    if is_occluded:
-        score -= 3
+    pt1 = front_obj.position
+    alpha = 0.5
+    val = math.exp(-alpha * ((pt0[0]-pt1[0])**2 + (pt0[1]-pt1[1])))
     
-    return score
+    return val
 
 
 
@@ -348,3 +339,5 @@ def ray_intersecting_Obj(front_obj, ro, rd):
     
     return True
 
+def distance(obj1, obj2):
+    return math.sqrt((obj1.length[0]-obj2.length[0])**2 + (obj1.length[1]-obj2.length[1])**2 + (obj1.length[2]-obj2.length[2])**2)
