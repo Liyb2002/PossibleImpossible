@@ -16,11 +16,13 @@ class LSys:
         self.rules = []
 
 
-    def system_setup(self, origin , system_rotation, group_id, light_pos):
+    def system_setup(self, origin , system_rotation, group_id, light_pos, sys_path = 'tree/LSystem.json'):
         self.origin = origin
         self.system_rotation = system_rotation
         self.group = group_id
         self.light_pos = light_pos
+        self.sys_path = sys_path
+
         self.add_rules()
         self.init_state()
 
@@ -43,7 +45,7 @@ class LSys:
             self.procedural_objects.append(obj.toProcedual())
     
     def add_rules(self):
-        with open('tree/LSystem.json', 'r') as object_file:
+        with open(self.sys_path, 'r') as object_file:
             rules_json = json.load(object_file)
             for rule_json in rules_json:
                 new_rule = rule(rule_json)

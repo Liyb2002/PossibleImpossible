@@ -6,6 +6,7 @@ import cycle_connect
 import generate
 import innerLayer
 import read_file
+import initLSystem
 
 import sys
 import numpy as np
@@ -22,23 +23,24 @@ export_path = sys.argv[3]
 generic_object_list = []
 global__object_list = []
 extra_system_list = []
+result_list = []
 
 visual_bridge_info,generic_object_list,global__object_list,extra_system_list = read_file.read_object_file(file_path)
 
-class_generate = generate.generate_helper(generic_object_list, global__object_list, extra_system_list, visual_bridge_info, decorate_path)
-result_list = class_generate.smc_process()
+if "background_type" in visual_bridge_info:
+    result_list = initLSystem.initSystem(decorate_path)
 
+else:
+    class_generate = generate.generate_helper(generic_object_list, global__object_list, extra_system_list, visual_bridge_info, decorate_path)
+    result_list = class_generate.smc_process()
 
-# phase1, phase2, phase3 = class_generate.recursive_process()
+    print("impossible structure success!")
+    if len(sys.argv) == 5:
+        matryoshka_path = sys.argv[4]
+        result_list += innerLayer.produce_innerLayer(matryoshka_path, decorate_path)
+
 
 print("success!")
-
-if len(sys.argv) == 5:
-    matryoshka_path = sys.argv[4]
-    result_list += innerLayer.produce_innerLayer(matryoshka_path, decorate_path)
-
-
-
 output_writer = write2JSON.output()
 
 # output_writer.write_proceudral_objects(class_generate.small_cubes, './three/guides.json')

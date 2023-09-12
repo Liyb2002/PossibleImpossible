@@ -147,8 +147,8 @@ class Particle:
                         self.success = False
     
     def overlapping_check_obj(self, obj_A):
-        # if obj_A.rotation[0] != 0 or obj_A.rotation[1] != 0 or obj_A.rotation[2] != 0:
-        #     return True
+        if obj_A.rotation[0] != 0 or obj_A.rotation[1] != 0 or obj_A.rotation[2] != 0:
+            return True
 
         for obj_B in self.procedural_objects:
             if obj_A.hash != obj_B.hash:

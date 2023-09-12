@@ -109,6 +109,7 @@
 
 	}
 	geometry.setAttribute( 'color', new THREE.Float32BufferAttribute( colors, 3 ) );
+	var cube = new THREE.Mesh( geometry, material );
 
 	const loader = new THREE.FileLoader();
 	var pivots = [];
@@ -169,7 +170,7 @@
 			
 			var debug_mode = jsonData[i]["obj"]["mode"];
 			
-			var a;
+			var a = m3.clone();
 			var rand = Math.random();
 			var load_mesh = true;
 
@@ -187,17 +188,16 @@
 			}else if(jsonData[i]["obj"]["type"] == 13 ){
 				a = m13.clone();
 			}else{
-				load_mesh = false;
+				a = cube.clone()
 			}
 			
-			if(load_mesh){
 			a.position.set(start_x,start_y,start_z);
 			a.scale.set(scale_x,scale_y,scale_z);
 			a.rotation.x = rotation_x;
 			a.rotation.y = rotation_y;
 			a.rotation.z = rotation_z;
 			scene.add(a);
-			}
+			
 
 			if(jsonData[i]["obj"]["group"] != 0){
 				var group = jsonData[i]["obj"]["group"];

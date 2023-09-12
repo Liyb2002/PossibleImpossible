@@ -4,11 +4,11 @@
 "foreground_type": [1,1],
 "foreground_connect": "-y",
 "foreground_index" : 12,
-"background_type": 5,
+"background_type": 1,
 "background_connect": "+y",
 "background_index" : 24,
 "num_visual_bridge" : 1,
-"steps": 1
+"steps": 5
 },
 
 {
