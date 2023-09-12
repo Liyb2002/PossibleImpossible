@@ -19,6 +19,7 @@ file_path = sys.argv[1]
 decorate_path = sys.argv[2]
 export_path = sys.argv[3]
 
+
 #read the inputs
 generic_object_list = []
 global__object_list = []
@@ -26,10 +27,8 @@ extra_system_list = []
 result_list = []
 
 visual_bridge_info,generic_object_list,global__object_list,extra_system_list = read_file.read_object_file(file_path)
-
-if "background_type" in visual_bridge_info:
+if visual_bridge_info is None:
     result_list = initLSystem.initSystem(decorate_path)
-
 else:
     class_generate = generate.generate_helper(generic_object_list, global__object_list, extra_system_list, visual_bridge_info, decorate_path)
     result_list = class_generate.smc_process()
@@ -38,6 +37,7 @@ else:
     if len(sys.argv) == 5:
         matryoshka_path = sys.argv[4]
         result_list += innerLayer.produce_innerLayer(matryoshka_path, decorate_path)
+
 
 
 print("success!")

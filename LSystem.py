@@ -16,7 +16,7 @@ class LSys:
         self.rules = []
 
 
-    def system_setup(self, origin , system_rotation, group_id, light_pos, sys_path = 'tree/LSystem.json'):
+    def system_setup(self, origin , system_rotation, group_id, light_pos, sys_path = 'tree/LSystem.json', init_size = np.array([0.2,0.025,0.025])):
         self.origin = origin
         self.system_rotation = system_rotation
         self.group = group_id
@@ -24,10 +24,10 @@ class LSys:
         self.sys_path = sys_path
 
         self.add_rules()
-        self.init_state()
+        self.init_state(init_size)
 
-    def init_state(self):
-        start_module = LModule.Module(position = np.array([0,0,0]), size = np.array([1.0,0.1,0.1]), rotation = np.array([0,0,0]), age = 1, type=11)
+    def init_state(self, init_size = np.array([0.2,0.025,0.025])):
+        start_module = LModule.Module(position = np.array([0,0,0]), size = init_size, rotation = np.array([0,0,0]), age = 1, type=11)
         self.new_objects.append(start_module)
     
     def run_system(self):

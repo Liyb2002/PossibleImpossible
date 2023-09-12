@@ -12,6 +12,9 @@ def read_object_file(file_path):
     with open( file_path, 'r') as object_file:
         objects_data = json.load(object_file)
 
+        if objects_data[0]['object_id'] == -2:
+            return (visual_bridge_info,generic_object_list,global__object_list,extra_system_list)
+
         generic_object_list.append(generic_objects.Generic_object(objects_data[1]))
         for object_data in objects_data:
             if object_data['object_id'] == -1:

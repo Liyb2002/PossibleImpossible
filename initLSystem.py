@@ -12,13 +12,15 @@ def initSystem(decorate_path):
     light_pos = np.array([5,5,5])
 
     system = LSystem.LSys()
-    system.system_setup(start_pos, rotation, group_count, light_pos)
+    system.system_setup(start_pos, rotation, group_count, light_pos, init_size = np.array([1.0,0.1,0.1]))
     system.run_system()
     L_backbone = system.finish_system()
 
     decorator = decorations.decoration_operator(decorate_path)
     decoration_list = decorator.decorate(L_backbone)
     write_group(start_pos, rotation)
+
+    print("len decorate list", len(decoration_list))
     return decoration_list
 
 def write_group(start_pos, rotation):
