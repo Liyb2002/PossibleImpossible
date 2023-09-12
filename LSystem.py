@@ -27,7 +27,7 @@ class LSys:
         self.init_state()
 
     def init_state(self):
-        start_module = LModule.Module(position = np.array([0,0,0]), size = np.array([0.2,0.025,0.025]), rotation = np.array([0,0,0]), age = 1, type=11)
+        start_module = LModule.Module(position = np.array([0,0,0]), size = np.array([1.0,0.1,0.1]), rotation = np.array([0,0,0]), age = 1, type=11)
         self.new_objects.append(start_module)
     
     def run_system(self):

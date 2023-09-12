@@ -2,12 +2,12 @@
   {
     "System": {
       "group": 1,
-      "origin_x": 3.346949192431123,
-      "origin_y": 4.4599491924311225,
-      "origin_z": 2.537349192431124,
-      "system_rotation_x": -1.0052013996403,
-      "system_rotation_y": 0.5127354090340237,
-      "system_rotation_z": -2.2050825506707734
+      "origin_x": 0.0,
+      "origin_y": -2.0,
+      "origin_z": 0.0,
+      "system_rotation_x": 0.0,
+      "system_rotation_y": 0.0,
+      "system_rotation_z": 1.6
     }
   }
 ]
