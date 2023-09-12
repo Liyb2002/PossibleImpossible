@@ -40,8 +40,11 @@ class Module:
             
         for i in range(len(execute_rule.rhs_types)):
             
-            prob = max(execute_rule.prob_each[i] * dist_factor, 0.1)
-            if random.random() < prob:
+            # prob = max(execute_rule.prob_each[i] * dist_factor, 0.1)
+            rand = random.random()
+            p = execute_rule.prob_each[i]
+            print("p", p)
+            if rand < p:
                 new_type = execute_rule.rhs_types[i]
                 new_size = np.array([self.size[0] * execute_rule.rhs_size_multiplier[i][0], self.size[1] * execute_rule.rhs_size_multiplier[i][1], self.size[2] * execute_rule.rhs_size_multiplier[i][2]])
                 new_rotation = self.rotation + execute_rule.rhs_rotations[i]
@@ -126,7 +129,7 @@ class Module:
                 if condition[1] == 'larger_than' and self.age <= condition[2]:
                     return False
             
-            if condition[0] == 'Prob' and random.random() < (condition[1] * dist_factor):
+            if condition[0] == 'Prob' and random.random() < condition[1]:
                 return False
 
         return True
