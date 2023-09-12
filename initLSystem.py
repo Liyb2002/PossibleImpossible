@@ -2,6 +2,7 @@ import LSystem
 import numpy as np
 import decorations
 import json
+import write2JSON
 
 def initSystem(decorate_path):
     print("hello")
@@ -16,9 +17,16 @@ def initSystem(decorate_path):
     system.run_system()
     L_backbone = system.finish_system()
 
-    for backbone in L_backbone:
-        print("type", backbone.type)
-        
+
+    output_writer = write2JSON.output()
+    inner_matryoshka = []
+
+    for obj in L_backbone:
+        if obj.type == 13:
+            inner_matryoshka.append(obj)
+    
+    output_writer.write_proceudral_objects(inner_matryoshka, './inner_layer.json')
+
     decorator = decorations.decoration_operator(decorate_path)
     decoration_list = decorator.decorate(L_backbone)
     write_group(start_pos, rotation)

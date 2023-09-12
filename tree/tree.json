@@ -1,7 +1,7 @@
 [{
 "object_id": -1,
 "startPos" : [400, 400],
-"foreground_type": [1,1],
+"foreground_type": [2,2],
 "foreground_connect": "-y",
 "foreground_index" : 12,
 "background_type": 5,
@@ -168,7 +168,7 @@
 },
 {
 "object_id": 11,
-"type": "global_object",
+"type": "global_objectt",
 "action" : ["LSystem"],
 "adding_types":[2],
 "rotation":[[-0.5,0.5],[-0.5,0.5],[1.5,2.5]],
@@ -176,7 +176,7 @@
 },
 {
 "object_id": 12,
-"type": "global_object",
+"type": "global_objectt",
 "action" : ["edit_size"],
 "prev_type": [3,4,5,6,7,8],
 "condition":["smaller", 0.4],

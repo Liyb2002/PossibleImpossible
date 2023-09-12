@@ -28,15 +28,16 @@ result_list = []
 
 visual_bridge_info,generic_object_list,global__object_list,extra_system_list = read_file.read_object_file(file_path)
 if visual_bridge_info is None:
+    print("L-System backbone")
     result_list = initLSystem.initSystem(decorate_path)
 else:
     class_generate = generate.generate_helper(generic_object_list, global__object_list, extra_system_list, visual_bridge_info, decorate_path)
     result_list = class_generate.smc_process()
 
     print("impossible structure success!")
-    if len(sys.argv) == 5:
-        matryoshka_path = sys.argv[4]
-        result_list += innerLayer.produce_innerLayer(matryoshka_path, decorate_path)
+if len(sys.argv) == 5:
+    matryoshka_path = sys.argv[4]
+    result_list += innerLayer.produce_innerLayer(matryoshka_path, decorate_path)
 
 
 
