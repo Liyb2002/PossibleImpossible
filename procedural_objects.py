@@ -12,7 +12,7 @@ class Procedural_object:
         self.rotation = np.array([random.choice(next_rotation[0]), random.choice(next_rotation[1]), random.choice(next_rotation[2])])
         self.offset = next_offset
 
-        self.group = 0
+        self.group = 1
 
     def set_type(self, type):
         self.type = type

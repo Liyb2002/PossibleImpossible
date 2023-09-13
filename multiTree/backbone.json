@@ -24,7 +24,7 @@
 "rhs_types": [13],
 "condition": [["age", "larger_than", 3]],
 "prob_each" : [0.3],
-"rhs_size_multiplier": [[2, 5.0, 5.0]],
+"rhs_size_multiplier": [[0.2, 1.0, 1.0]],
 "rhs_rotations": [ [0.0, 0.0, 0.0]],
 "rhs_offsets": [[0.0, 0.0, 0.0]],
 "rhs_directions": [[["+x",1.0]]]

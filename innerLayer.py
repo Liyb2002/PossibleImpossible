@@ -16,7 +16,7 @@ def produce_innerLayer(matryoshka_path, decorate_path):
 
     visual_bridge_info,new_generic_object_list,global__object_list,extra_system_list = read_file.read_object_file(matryoshka_path)
 
-    multipler = 0.5
+    multipler = 0.15
     result_list = []
     camera = perspective.ortho_camera()
 
@@ -45,6 +45,6 @@ def produce_innerLayer(matryoshka_path, decorate_path):
             visual_bridge_info['startPos'] = [400,400]
 
             class_generate = generate.generate_helper(new_generic_object_list, global__object_list, extra_system_list, visual_bridge_info, decorate_path)
-            result_list += class_generate.smc_process()
+            result_list += class_generate.smc_process(foreground_intersection, background_intersection)
 
     return result_list

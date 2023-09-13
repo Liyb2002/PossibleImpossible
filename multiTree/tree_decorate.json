@@ -189,6 +189,6 @@
 "category":  "terminal",
 "terminal_id": 13,
 "rule": "normal",
-"multiplier": [0,0,0]
+"multiplier": [1,1,1]
 }                               
 ]
