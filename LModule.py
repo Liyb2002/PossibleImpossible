@@ -43,7 +43,6 @@ class Module:
             # prob = max(execute_rule.prob_each[i] * dist_factor, 0.1)
             rand = random.random()
             p = execute_rule.prob_each[i]
-            print("p", p)
             if rand < p:
                 new_type = execute_rule.rhs_types[i]
                 new_size = np.array([self.size[0] * execute_rule.rhs_size_multiplier[i][0], self.size[1] * execute_rule.rhs_size_multiplier[i][1], self.size[2] * execute_rule.rhs_size_multiplier[i][2]])

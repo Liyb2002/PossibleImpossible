@@ -3,6 +3,7 @@ import numpy as np
 import decorations
 import json
 import write2JSON
+import reduceDuplicate
 
 def initSystem(decorate_path):
     print("hello")
@@ -25,6 +26,7 @@ def initSystem(decorate_path):
         if obj.type == 13:
             inner_matryoshka.append(obj)
     
+    inner_matryoshka = reduceDuplicate.reduce(inner_matryoshka)
     output_writer.write_proceudral_objects(inner_matryoshka, './inner_layer.json')
 
     decorator = decorations.decoration_operator(decorate_path)
