@@ -8,13 +8,13 @@ import reduceDuplicate
 def initSystem(decorate_path):
     print("hello")
 
-    start_pos = np.array([0,-2,0])
-    rotation = np.array([0,0,1.6])
+    start_pos = np.array([0,0,0])
+    rotation = np.array([0,0,0])
     group_count = 1
     light_pos = np.array([5,5,5])
 
     system = LSystem.LSys()
-    system.system_setup(start_pos, rotation, group_count, light_pos, sys_path = 'multiTree/backbone.json', init_size = np.array([2.0,0.2,0.2]))
+    system.system_setup(start_pos, rotation, group_count, light_pos, sys_path = 'multiTree/backbone.json', init_size = np.array([0.2,2.0,0.2]))
     system.run_system()
     L_backbone = system.finish_system()
 
@@ -35,7 +35,7 @@ def initSystem(decorate_path):
 
     return decoration_list
 
-
+        
 def write_group(start_pos, rotation):
     system_data = []
     data = {'System':
