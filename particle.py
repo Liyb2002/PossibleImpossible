@@ -44,7 +44,23 @@ class Particle:
 
         if step == 0 and not isFront:
             self.end_connect = self.procedural_objects[-1]
-        
+
+    def branching_run_step(self, step):
+        results = produce.execute_model(self.generic_object_list, self.cur_obj, 1)
+        if len(results) == 0:
+            self.score = 0
+            return False
+        self.cur_obj = results[-1]
+        self.procedural_objects += results
+        self.calculate_score(self.intersection_obj, results)
+
+        if step == 0:
+            self.branching_start = self.procedural_objects[-1]
+
+    def branching_connect(self):
+        self.run_connect(targetStart = self.branching_start, targetEnd=self.end_connect)
+
+
     def arbitrary_add_object(self, intersection, start_type, connected_dir):
         obj = start_obj(intersection, self.generic_object_list, start_type, connected_dir)
         self.procedural_objects.append(obj)
@@ -72,18 +88,70 @@ class Particle:
             self.run_connect()
             self.start_connect = prev_start
 
-    def run_connect(self):
-        startPos = self.start_connect.position
+    def run_connect(self, targetStart = None, targetEnd=None):
+        if targetStart == None:
+            targetStart = self.start_connect
+        if targetEnd == None:
+            targetEnd = self.end_connect
+        startPos = targetStart.position
+        endPos = targetEnd.position
+
+        delta = endPos - startPos
+        production_list = []
+        production_list.append(targetStart)
+        abs_delta = np.array([abs(delta[0]), abs(delta[1]), abs(delta[2])])
+        abs_delta -= np.array([0, 0, targetEnd.length[2]])
+
+        directions = cycle_connect.get_dirs(delta)
+        # directions = cycle_connect.update_order(self.start_connect, directions)
+        orders = cycle_connect.random_order()
+        # print("------------------------")
+        # print("orders:", directions[orders[0]],directions[orders[1]],directions[orders[2]])
+        for i in range(0,3):
+            index = orders[i]
+            if abs_delta[index] != 0:
+                if i < 2:
+                    target_dir_index = orders[i+1]
+                    available_endings = cycle_connect.Available_Ending_With_Direction(self.generic_object_list, directions[target_dir_index])
+                    # print("i:", i, "available_endings", available_endings)
+                if i == 2:
+                    available_endings = cycle_connect.Available_Ending_With_Object(self.generic_object_list, targetEnd)
+                    # print("i:", i, "available_endings", available_endings)
+
+                connect_particle = produce.connect_execution(production_list[-1], self.generic_object_list,abs_delta,directions[index],available_endings, self.end_connect)
+                ok = 1
+
+                while ok == 1:
+                    ok = connect_particle.execute_model_withDirection()
+                
+                if ok == 0 or self.score < 0:
+                    self.success = False
+                    return 
+                
+                if ok == 2:
+                    tempt_result = connect_particle.set_scope()
+                    production_list += tempt_result
+                    for obj in tempt_result:
+                        if not self.overlapping_check_obj(obj):
+                            self.success = False
+                            return 
+
+            # print("rotation", i, "succes")
+
+        # self.success = True
+        self.procedural_objects += production_list
+    
+    def run_connect2(self):
+        startPos = self.branching_start.position
         endPos = self.end_connect.position
 
         delta = endPos - startPos
         production_list = []
-        production_list.append(self.start_connect)
+        production_list.append(self.branching_start)
         abs_delta = np.array([abs(delta[0]), abs(delta[1]), abs(delta[2])])
         abs_delta -= np.array([0, 0, self.end_connect.length[2]])
 
         directions = cycle_connect.get_dirs(delta)
-        # directions = cycle_connect.update_order(self.start_connect, directions)
         orders = cycle_connect.random_order()
         # print("------------------------")
         # print("orders:", directions[orders[0]],directions[orders[1]],directions[orders[2]])
@@ -120,6 +188,7 @@ class Particle:
 
         # self.success = True
         self.procedural_objects += production_list
+
     
     def run_particle2(self, steps):
         rd1, rd2 = self.random_object()

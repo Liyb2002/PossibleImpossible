@@ -73,6 +73,11 @@ class generate_helper:
             if background_type != 0:
                 self.procedural_generate(background_type, background_connect, background_intersection, steps, False)
         
+        branching = True
+        if branching:
+            self.branching(foreground_type, foreground_connect, foreground_intersection, steps)
+
+
         if self.visual_bridge_info['num_visual_bridge'] == 2:
             startPos2 = np.array([600,800])
             foreground_intersection2, background_intersection2 = camera.get_intersections(startPos2, foreground_index-2, background_index+8)
@@ -124,15 +129,12 @@ class generate_helper:
                 tempt_list.append(temple_particle)
         self.particle_list = tempt_list
 
-        self.connect()
-
-
         # self.reproduce_particle_list(num_particles)
         # startPos = np.array([100,800])
         # foreground_intersection, background_intersection = camera.get_intersections(startPos, foreground_index, background_index)
         # self.procedural_generate(foreground_type, foreground_connect, foreground_intersection+np.array([0.05,0.075,0.05]), steps, True)
         # self.procedural_generate(background_type, background_connect, background_intersection-np.array([0.05,0.15,0.05]), steps, False)
-        # self.connect()
+        self.connect()
 
         self.select_result_particle()
         return self.finish()
@@ -316,3 +318,26 @@ class generate_helper:
 
         phase3 = decoration_list
         return (phase1, phase2, phase3)
+
+    def branching(self, foreground_type, foreground_connect, foreground_intersection, steps):
+        for s in range(steps):
+            cur_step = steps - s -1
+            print("cur_step", cur_step)
+
+            score_list = []
+            for i in range(len(self.particle_list)):
+                tempt_particle = self.particle_list[i]
+                tempt_particle.branching_run_step(cur_step)
+                score_list.append(tempt_particle.get_score())
+            self.particle_list = resample.resample_particles(self.particle_list, score_list)
+
+
+        success_connect_list = []
+        for i in range(len(self.particle_list)):
+            self.particle_list[i].branching_connect()
+            if self.particle_list[i].success and self.particle_list[i].score > 0:
+                success_connect_list.append(self.particle_list[i])
+        self.particle_list = success_connect_list
+        success_connect_list = []
+
+
