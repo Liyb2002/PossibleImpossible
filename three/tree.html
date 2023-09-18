@@ -31,6 +31,7 @@
 	import { OrbitControls } from '/node_modules/three/examples/jsm/controls/OrbitControls.js';
 	import { GLTFLoader } from '/node_modules/three/examples/jsm/loaders/GLTFLoader.js';
 	import { RGBELoader } from '/node_modules/three/examples/jsm/loaders/RGBELoader.js';
+	import { GLTFExporter } from '/node_modules/three/examples/jsm/exporters/GLTFExporter.js';
 
 	let camera, scene, renderer;
 
@@ -143,6 +144,11 @@
 	}
 	);
 
+	var loaded_info = [];
+
+	async function load_info(){
+	return new Promise(function(resolve){
+
 	loader.load(
 	// resource URL
 	'./tree_result.json',
@@ -163,68 +169,124 @@
 			var rotation_x = jsonData[i]["obj"]["rotation_x"];
 			var rotation_y = jsonData[i]["obj"]["rotation_y"];
 			var rotation_z = jsonData[i]["obj"]["rotation_z"];
+			var group = jsonData[i]["obj"]["group"];
 
 			var center_x = start_x;
 			var center_y = start_y ;
 			var center_z = start_z;
 			
-			var debug_mode = jsonData[i]["obj"]["mode"];
-			
-			var a = m3.clone();
-			var rand = Math.random();
-			var load_mesh = true;
+			loaded_info.push({type:jsonData[i]["obj"]["type"],
+				center_x:start_x, center_y:start_y, center_z:start_z, 
+				scale_x:scale_x, scale_y:scale_y, scale_z:scale_z,
+				rotation_x:rotation_x, rotation_y:rotation_y, rotation_z:rotation_z,
+			group: group});
 
-			if(jsonData[i]["obj"]["type"] == 3 || jsonData[i]["obj"]["type"] == 4 || jsonData[i]["obj"]["type"] == 5 || jsonData[i]["obj"]["type"] == 6 || jsonData[i]["obj"]["type"] == 7 || jsonData[i]["obj"]["type"] == 8){
-				a = m3.clone();
-			}else if(jsonData[i]["obj"]["type"] == 9 ){
-				a = m9.clone();
-			}else if(jsonData[i]["obj"]["type"] == 10 ){
-				a = m10.clone();
-			}else if(jsonData[i]["obj"]["type"] == 11 ){
-				a = m11.clone();
-			}
-			else if(jsonData[i]["obj"]["type"] == 12 ){
-				a = m12.clone();
-			}else if(jsonData[i]["obj"]["type"] == 13 ){
-				a = m13.clone();
-			}else{
-				a = cube.clone()
-			}
 			
-			a.position.set(start_x,start_y,start_z);
+
+			// if(jsonData[i]["obj"]["group"] != 0){
+			// 	var group = jsonData[i]["obj"]["group"];
+			// 	pivots[group-1].add(a);
+			// }
+
+		}
+		
+		// for(var i = 0; i < origins.length; i++){
+		// 	pivots[i].rotation.x = rotations[i][0];
+		// 	pivots[i].rotation.y = rotations[i][1];
+		// 	pivots[i].rotation.z = rotations[i][2];
+		// 	pivots[i].position.set(origins[i][0], origins[i][1], origins[i][2]);
+
+		// }
+
+		resolve();
+
+	},	);
+})
+}
+
+
+function displaypos() {
+    console.log("info_array.length", loaded_info.length);
+
+	var x = new THREE.Scene();
+
+	for(var i =0; i<loaded_info.length; i++){
+
+		var cur_type = loaded_info[i].type;
+		var center_x = loaded_info[i].center_x;
+		var center_y = loaded_info[i].center_y;
+		var center_z = loaded_info[i].center_z;
+
+		var scale_x = loaded_info[i].scale_x;
+		var scale_y= loaded_info[i].scale_y;
+		var scale_z = loaded_info[i].scale_z;
+
+		var rotation_x = loaded_info[i].rotation_x;
+		var rotation_y = loaded_info[i].rotation_y;
+		var rotation_z = loaded_info[i].rotation_z;
+
+		var a = cube.clone();
+		var rand = Math.random();
+		var load_mesh = true;
+
+			if(cur_type == 3 || cur_type == 4 || cur_type == 5 || cur_type == 6 || cur_type == 7 || cur_type == 8){
+				a = m3.clone();}
+			else if(cur_type == 9){
+				a = m9.clone();}
+			else if(cur_type == 10 ){
+				a = m10.clone();}
+			else if(cur_type == 11 ){
+				a = m11.clone();}
+			else if(cur_type == 12){
+				a = m12.clone();}
+			else if(cur_type == 13){
+				a = m13.clone();}
+
+			scale_x = scale_x * 1.0;
+			scale_y = scale_y * 1.0;
+			scale_z = scale_z * 1.0;
+			a.position.set(center_x,center_y,center_z);
 			a.scale.set(scale_x,scale_y,scale_z);
 			a.rotation.x = rotation_x;
 			a.rotation.y = rotation_y;
 			a.rotation.z = rotation_z;
-			scene.add(a);
-			
+			scene.add(a.clone());
+			x.add(a.clone());
 
-			if(jsonData[i]["obj"]["group"] != 0){
-				var group = jsonData[i]["obj"]["group"];
-				pivots[group-1].add(a);
-			}
-
-		}
-		
-		for(var i = 0; i < origins.length; i++){
-			pivots[i].rotation.x = rotations[i][0];
-			pivots[i].rotation.y = rotations[i][1];
-			pivots[i].rotation.z = rotations[i][2];
-			pivots[i].position.set(origins[i][0], origins[i][1], origins[i][2]);
-
-		}
-
-	},
-	// onProgress callback
-	function ( xhr ) {
-		console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
-	},
-
-	// onError callback
-	function ( err ) {
-		console.error( 'An error happened' );
 	}
-	);
+	run_download(x);}
+
+
+
+(async function(){
+    await load_info();
+    displaypos(); 
+})();
+
+
+
+function run_download(input) {
+const exporter = new GLTFExporter();
+exporter.parse(input, function (result) {
+var output = JSON.stringify( result, null, 2 );
+console.log( output );
+saveArrayBuffer( output, 'tree.glb' );
+ },);}
+
+var link = document.createElement( 'a' );
+link.style.display = 'none';
+document.body.appendChild( link ); // Firefox workaround, see #6594
+
+function save( blob, filename ) {
+link.href = URL.createObjectURL( blob );
+link.download = filename;
+link.click();}
+
+function saveString( text, filename ) {
+save( new Blob( [ text ], { type: 'text/plain' } ), filename );}
+
+function saveArrayBuffer( buffer, filename ) {
+save( new Blob( [ buffer ], { type: 'application/octet-stream' } ), filename );}
 
 
 	window.addEventListener( 'resize', onWindowResize );

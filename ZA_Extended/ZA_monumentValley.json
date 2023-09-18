@@ -3,12 +3,12 @@
 "startPos" : [400, 400],
 "foreground_type": [8,8],
 "foreground_connect": "-y",
-"foreground_index" : 8,
+"foreground_index" : 12,
 "background_type": 3,
 "background_connect": "+y",
-"background_index" : 36,
+"background_index" : 24,
 "num_visual_bridge" : 1,
-"steps" : 8
+"steps" : 10
 },
 {
 "object_id": 1,

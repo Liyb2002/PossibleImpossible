@@ -4,6 +4,8 @@ import decorations
 import json
 import write2JSON
 import reduceDuplicate
+import procedural_objects
+import copy 
 
 def initSystem(decorate_path):
     print("hello")
@@ -20,13 +22,15 @@ def initSystem(decorate_path):
 
 
     output_writer = write2JSON.output()
-    inner_matryoshka = []
-
-    for obj in L_backbone:
-        if obj.type == 13:
-            inner_matryoshka.append(obj)
     
-    inner_matryoshka = reduceDuplicate.reduce(inner_matryoshka)
+    # inner_matryoshka = []
+    # for obj in L_backbone:
+    #     if obj.type == 13:
+    #         inner_matryoshka.append(obj)
+    
+    # inner_matryoshka = reduceDuplicate.reduce(inner_matryoshka)[:2]
+
+    inner_matryoshka = find_mid_point(L_backbone)
     output_writer.write_proceudral_objects(inner_matryoshka, './inner_layer.json')
 
     decorator = decorations.decoration_operator(decorate_path)
@@ -55,3 +59,26 @@ def write_group(start_pos, rotation):
         json.dump(system_data, f, indent=2)
 
 
+def find_mid_point(L_backbone):
+    x_mid,y_mid,z_mid,count= 0,0,0,0
+    for obj in L_backbone:
+        count += 1.0
+        x_mid += obj.position[0]
+        y_mid += obj.position[1]
+        z_mid += obj.position[2]
+
+    x_mid = x_mid / count  + 5.0
+    y_mid = y_mid / count  + 2.0
+    z_mid = z_mid / count  
+
+    obj = copy.deepcopy(L_backbone[0])
+    obj.position = np.array([x_mid, y_mid, z_mid])
+
+    inner_matryoshka = []
+    inner_matryoshka.append(obj)
+
+    # obj2 = copy.deepcopy(L_backbone[0])
+    # obj2.position = np.array([x_mid-7.0, y_mid-5.0, z_mid-3.0])
+    # inner_matryoshka.append(obj2)
+
+    return inner_matryoshka

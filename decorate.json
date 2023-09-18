@@ -47,7 +47,7 @@
   "category":  "footprint",
   "structural_id": 6,
   "subdiv":[
-  [1.0, "y direction", ["terminal","12", 0.2]]
+  [1.0, "y direction", ["terminal","12", 0.2], ["terminal","5", 0.8]]
   ]
   },
   {
@@ -55,7 +55,7 @@
   "category":  "footprint",
   "structural_id": 7,
   "subdiv":[
-  [1.0, "y direction", ["terminal","12", 0.2]]
+  [1.0, "y direction", ["terminal","12", 0.2], ["terminal","5", 0.8]]
   ]
   },
   {
@@ -71,7 +71,7 @@
   "category":  "footprint",
   "structural_id": 9,
   "subdiv":[
-  [1.0, "y direction", ["terminal", "16", 1.0]]
+  [1.0, "y direction", ["nonterminal", "2", 1.0]]
 
   ]
   },
@@ -80,7 +80,7 @@
   "category":  "footprint",
   "structural_id": 10,
   "subdiv":[
-  [1.0, "y direction", ["terminal", "17", 1.0]]
+  [1.0, "y direction", ["terminal", "16", 1.0]]
 
   ]
   },
@@ -105,7 +105,9 @@
     "category":  "nonterminal",
     "nonterminal_id": 2,
     "subdiv":[
-    [0.6, "y direction", ["terminal", "13", 0.08], ["terminal", "9", 0.62], ["terminal", "10", 0.15], ["terminal", "11", 0.15]]  
+    [0.6, "y direction", ["terminal", "13", 0.08], ["terminal", "9", 0.62], ["terminal", "10", 0.15], ["terminal", "11", 0.15]],
+    [0.4, "y direction", ["terminal", "13", 0.08], ["terminal", "9", 0.62], ["terminal", "10", 0.15], ["terminal", "11", 0.15]]
+  
   ]
     },
   {
@@ -134,7 +136,7 @@
   "category":  "terminal",
   "terminal_id": 3,
   "rule": "normal",
-  "multiplier": [1.0,1,1.0]
+  "multiplier": [0.8,1,0.8]
   },
   {
   "object_name": "terminal_bridge_XDir",
@@ -155,7 +157,7 @@
   "category":  "terminal",
   "terminal_id": 6,
   "rule": "four_corners",
-  "multiplier": [1.0,1.0,1.0]
+  "multiplier": [0.15,1,0.15]
   },
   {
   "object_name": "terminal_solid",
@@ -170,7 +172,7 @@
   "category":  "terminal",
   "terminal_id": 8,
   "rule": "normal",
-  "multiplier": [1.0,1.0,1.0]
+  "multiplier": [0.5,0.5,0.5]
   }
   ,
   {
@@ -194,7 +196,7 @@
   "category":  "terminal",
   "terminal_id": 11,
   "rule": "normal",
-  "multiplier": [1.0,1,1.0]
+  "multiplier": [0.5,1,0.5]
   },
   {
   "object_name": "terminal_bridge_ZDir",
@@ -225,16 +227,9 @@
   "multiplier": [1,1,1]
   },
   {
-  "object_name": "temple",
+  "object_name": "stairs",
   "category":  "terminal",
   "terminal_id": 16,
-  "rule": "normal",
-  "multiplier": [1,1,1]
-  },
-  {
-  "object_name": "building1",
-  "category":  "terminal",
-  "terminal_id": 17,
   "rule": "normal",
   "multiplier": [1,1,1]
   }

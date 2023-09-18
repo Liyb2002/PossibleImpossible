@@ -252,7 +252,7 @@ const exporter = new GLTFExporter();
 exporter.parse(input, function (result) {
 var output = JSON.stringify( result, null, 2 );
 console.log( output );
-// saveArrayBuffer( output, 'scene.glb' );
+saveArrayBuffer( output, 'ZA.glb' );
  },);}
 
 var link = document.createElement( 'a' );

@@ -37,11 +37,11 @@ def produce_innerLayer(matryoshka_path, decorate_path):
             scope_z = object_data['obj']['scale_z']
             
             foreground_intersection = np.array([center_x+0.1, center_y + 0.05,center_z + 0.1])
-            background_intersection = camera.get_intersections_withPos(foreground_intersection, 12)
+            background_intersection = camera.get_intersections_withPos(foreground_intersection, 30)
 
             visual_bridge_info['foreground_index'] = 12
             visual_bridge_info['background_index'] = 24
-            visual_bridge_info['steps'] = 1
+            visual_bridge_info['steps'] = 8
             visual_bridge_info['startPos'] = [400,400]
 
             class_generate = generate.generate_helper(new_generic_object_list, global__object_list, extra_system_list, visual_bridge_info, decorate_path)
