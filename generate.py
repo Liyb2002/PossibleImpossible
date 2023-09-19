@@ -73,7 +73,7 @@ class generate_helper:
             if background_type != 0:
                 self.procedural_generate(background_type, background_connect, background_intersection, steps, False)
         
-        branching = True
+        branching = False
         if branching:
             self.branching(foreground_type, foreground_connect, foreground_intersection, steps)
 

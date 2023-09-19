@@ -7,6 +7,7 @@ import generate
 import innerLayer
 import read_file
 import initLSystem
+import complexity 
 
 import sys
 import numpy as np
@@ -31,6 +32,7 @@ if visual_bridge_info is None:
     print("L-System backbone")
     result_list = initLSystem.initSystem(decorate_path)
 else:
+    visual_bridge_info = complexity.calc_complexity(visual_bridge_info)
     class_generate = generate.generate_helper(generic_object_list, global__object_list, extra_system_list, visual_bridge_info, decorate_path)
     result_list = class_generate.smc_process()
 

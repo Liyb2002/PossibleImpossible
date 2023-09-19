@@ -58,7 +58,7 @@ class Particle:
             self.branching_start = self.procedural_objects[-1]
 
     def branching_connect(self):
-        self.run_connect(targetStart = self.branching_start, targetEnd=self.end_connect)
+        self.run_connect(targetStart = self.branching_start, targetEnd=self.start_connect)
 
 
     def arbitrary_add_object(self, intersection, start_type, connected_dir):
