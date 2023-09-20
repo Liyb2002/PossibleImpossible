@@ -2,72 +2,12 @@
   {
     "obj": {
       "type": 1,
-      "start_x": 3.332480590268432,
-      "start_y": 3.2324805902684317,
-      "start_z": 3.332480590268432,
-      "scale_x": 0.05,
-      "scale_y": 0.15,
-      "scale_z": 0.05,
-      "rotation_x": 0.0,
-      "rotation_y": 0.0,
-      "rotation_z": 0.0,
-      "group": 1.0
-    }
-  },
-  {
-    "obj": {
-      "type": 6,
-      "start_x": 3.332480590268432,
-      "start_y": 3.2324805902684317,
-      "start_z": 3.064380590268432,
-      "scale_x": 0.05,
-      "scale_y": 0.15,
-      "scale_z": 0.2181,
-      "rotation_x": 0.0,
-      "rotation_y": 0.0,
-      "rotation_z": 0.0,
-      "group": 1.0
-    }
-  },
-  {
-    "obj": {
-      "type": 1,
-      "start_x": 3.332480590268432,
-      "start_y": 3.2324805902684317,
-      "start_z": 2.796280590268432,
-      "scale_x": 0.05,
-      "scale_y": 0.15,
-      "scale_z": 0.05,
-      "rotation_x": 0.0,
-      "rotation_y": 0.0,
-      "rotation_z": 0.0,
-      "group": 1.0
-    }
-  },
-  {
-    "obj": {
-      "type": 6,
-      "start_x": 3.332480590268432,
-      "start_y": 3.2324805902684317,
-      "start_z": 2.639580590268432,
-      "scale_x": 0.05,
-      "scale_y": 0.15,
-      "scale_z": 0.1067,
-      "rotation_x": 0.0,
-      "rotation_y": 0.0,
-      "rotation_z": 0.0,
-      "group": 1.0
-    }
-  },
-  {
-    "obj": {
-      "type": 1,
-      "start_x": 3.332480590268432,
-      "start_y": 3.2324805902684317,
-      "start_z": 2.482880590268432,
-      "scale_x": 0.05,
-      "scale_y": 0.15,
-      "scale_z": 0.05,
+      "start_x": 3.4566243270259354,
+      "start_y": 2.3566243270259353,
+      "start_z": 3.4566243270259354,
+      "scale_x": 0.1,
+      "scale_y": 1.2,
+      "scale_z": 0.1,
       "rotation_x": 0.0,
       "rotation_y": 0.0,
       "rotation_z": 0.0,
@@ -77,12 +17,12 @@
   {
     "obj": {
       "type": 4,
-      "start_x": 3.067980590268432,
-      "start_y": 3.2324805902684317,
-      "start_z": 2.482880590268432,
-      "scale_x": 0.2145,
-      "scale_y": 0.15,
-      "scale_z": 0.05,
+      "start_x": 3.4566243270259354,
+      "start_y": 2.3566243270259353,
+      "start_z": 4.034524327025935,
+      "scale_x": 0.1,
+      "scale_y": 0.1,
+      "scale_z": 0.4779,
       "rotation_x": 0.0,
       "rotation_y": 0.0,
       "rotation_z": 0.0,
@@ -92,12 +32,12 @@
   {
     "obj": {
       "type": 1,
-      "start_x": 2.803480590268432,
-      "start_y": 3.2324805902684317,
-      "start_z": 2.482880590268432,
-      "scale_x": 0.05,
-      "scale_y": 0.15,
-      "scale_z": 0.05,
+      "start_x": 3.4566243270259354,
+      "start_y": 2.3566243270259353,
+      "start_z": 4.612424327025935,
+      "scale_x": 0.1,
+      "scale_y": 1.2,
+      "scale_z": 0.1,
       "rotation_x": 0.0,
       "rotation_y": 0.0,
       "rotation_z": 0.0,
@@ -106,13 +46,13 @@
   },
   {
     "obj": {
-      "type": 7,
-      "start_x": 2.803480590268432,
-      "start_y": 3.2324805902684317,
-      "start_z": 2.698680590268432,
-      "scale_x": 0.05,
-      "scale_y": 0.15,
-      "scale_z": 0.1658,
+      "type": 2,
+      "start_x": 4.070924327025935,
+      "start_y": 2.3566243270259353,
+      "start_z": 4.612424327025935,
+      "scale_x": 0.5143,
+      "scale_y": 0.1,
+      "scale_z": 0.1,
       "rotation_x": 0.0,
       "rotation_y": 0.0,
       "rotation_z": 0.0,
@@ -122,12 +62,12 @@
   {
     "obj": {
       "type": 1,
-      "start_x": 2.803480590268432,
-      "start_y": 3.2324805902684317,
-      "start_z": 2.9144805902684316,
-      "scale_x": 0.05,
-      "scale_y": 0.15,
-      "scale_z": 0.05,
+      "start_x": 4.685224327025935,
+      "start_y": 2.3566243270259353,
+      "start_z": 4.612424327025935,
+      "scale_x": 0.1,
+      "scale_y": 1.2,
+      "scale_z": 0.1,
       "rotation_x": 0.0,
       "rotation_y": 0.0,
       "rotation_z": 0.0,
@@ -137,12 +77,12 @@
   {
     "obj": {
       "type": 5,
-      "start_x": 2.9136805902684317,
-      "start_y": 3.2324805902684317,
-      "start_z": 2.9144805902684316,
-      "scale_x": 0.0602,
-      "scale_y": 0.15,
-      "scale_z": 0.05,
+      "start_x": 4.685224327025935,
+      "start_y": 2.3566243270259353,
+      "start_z": 3.7214243270259355,
+      "scale_x": 0.1,
+      "scale_y": 0.1,
+      "scale_z": 0.791,
       "rotation_x": 0.0,
       "rotation_y": 0.0,
       "rotation_z": 0.0,
@@ -152,12 +92,27 @@
   {
     "obj": {
       "type": 1,
-      "start_x": 3.0238805902684316,
-      "start_y": 3.2324805902684317,
-      "start_z": 2.9144805902684316,
-      "scale_x": 0.05,
-      "scale_y": 0.15,
-      "scale_z": 0.05,
+      "start_x": 4.685224327025935,
+      "start_y": 2.3566243270259353,
+      "start_z": 2.8304243270259355,
+      "scale_x": 0.1,
+      "scale_y": 1.2,
+      "scale_z": 0.1,
+      "rotation_x": 0.0,
+      "rotation_y": 0.0,
+      "rotation_z": 0.0,
+      "group": 1.0
+    }
+  },
+  {
+    "obj": {
+      "type": 1,
+      "start_x": 4.685224327025935,
+      "start_y": 2.3566243270259353,
+      "start_z": 2.8304243270259355,
+      "scale_x": 0.1,
+      "scale_y": 1.2,
+      "scale_z": 0.1,
       "rotation_x": 0.0,
       "rotation_y": 0.0,
       "rotation_z": 0.0,
@@ -167,27 +122,12 @@
   {
     "obj": {
       "type": 3,
-      "start_x": 0.6975591270503114,
-      "start_y": 0.6899591270503115,
-      "start_z": 0.6975591270503114,
-      "scale_x": 0.05,
-      "scale_y": 0.0576,
-      "scale_z": 0.05,
-      "rotation_x": 0.0,
-      "rotation_y": 0.0,
-      "rotation_z": 0.0,
-      "group": 1.0
-    }
-  },
-  {
-    "obj": {
-      "type": 3,
-      "start_x": 0.6975591270503114,
-      "start_y": 0.5732591270503115,
-      "start_z": 0.6975591270503114,
-      "scale_x": 0.05,
-      "scale_y": 0.1743,
-      "scale_z": 0.05,
+      "start_x": 4.070924327025936,
+      "start_y": 2.3566243270259353,
+      "start_z": 2.8304243270259355,
+      "scale_x": 0.5142999999999999,
+      "scale_y": 0.1,
+      "scale_z": 0.1,
       "rotation_x": 0.0,
       "rotation_y": 0.0,
       "rotation_z": 0.0,
@@ -197,192 +137,12 @@
   {
     "obj": {
       "type": 1,
-      "start_x": 0.6975591270503114,
-      "start_y": 0.24895912705031145,
-      "start_z": 0.6975591270503114,
-      "scale_x": 0.05,
-      "scale_y": 0.15,
-      "scale_z": 0.05,
-      "rotation_x": 0.0,
-      "rotation_y": 0.0,
-      "rotation_z": 0.0,
-      "group": 1.0
-    }
-  },
-  {
-    "obj": {
-      "type": 5,
-      "start_x": 0.8572591270503114,
-      "start_y": 0.24895912705031145,
-      "start_z": 0.6975591270503114,
-      "scale_x": 0.1097,
-      "scale_y": 0.15,
-      "scale_z": 0.05,
-      "rotation_x": 0.0,
-      "rotation_y": 0.0,
-      "rotation_z": 0.0,
-      "group": 1.0
-    }
-  },
-  {
-    "obj": {
-      "type": 1,
-      "start_x": 1.0169591270503113,
-      "start_y": 0.24895912705031145,
-      "start_z": 0.6975591270503114,
-      "scale_x": 0.05,
-      "scale_y": 0.15,
-      "scale_z": 0.05,
-      "rotation_x": 0.0,
-      "rotation_y": 0.0,
-      "rotation_z": 0.0,
-      "group": 1.0
-    }
-  },
-  {
-    "obj": {
-      "type": 5,
-      "start_x": 1.1772591270503114,
-      "start_y": 0.24895912705031145,
-      "start_z": 0.6975591270503114,
-      "scale_x": 0.1103,
-      "scale_y": 0.15,
-      "scale_z": 0.05,
-      "rotation_x": 0.0,
-      "rotation_y": 0.0,
-      "rotation_z": 0.0,
-      "group": 1.0
-    }
-  },
-  {
-    "obj": {
-      "type": 1,
-      "start_x": 1.3375591270503113,
-      "start_y": 0.24895912705031145,
-      "start_z": 0.6975591270503114,
-      "scale_x": 0.05,
-      "scale_y": 0.15,
-      "scale_z": 0.05,
-      "rotation_x": 0.0,
-      "rotation_y": 0.0,
-      "rotation_z": 0.0,
-      "group": 1.0
-    }
-  },
-  {
-    "obj": {
-      "type": 7,
-      "start_x": 1.3375591270503113,
-      "start_y": 0.24895912705031145,
-      "start_z": 0.8118591270503114,
-      "scale_x": 0.05,
-      "scale_y": 0.15,
-      "scale_z": 0.0643,
-      "rotation_x": 0.0,
-      "rotation_y": 0.0,
-      "rotation_z": 0.0,
-      "group": 1.0
-    }
-  },
-  {
-    "obj": {
-      "type": 1,
-      "start_x": 1.3375591270503113,
-      "start_y": 0.24895912705031145,
-      "start_z": 0.9261591270503113,
-      "scale_x": 0.05,
-      "scale_y": 0.15,
-      "scale_z": 0.05,
-      "rotation_x": 0.0,
-      "rotation_y": 0.0,
-      "rotation_z": 0.0,
-      "group": 1.0
-    }
-  },
-  {
-    "obj": {
-      "type": 7,
-      "start_x": 1.3375591270503113,
-      "start_y": 0.24895912705031145,
-      "start_z": 1.1366591270503115,
-      "scale_x": 0.05,
-      "scale_y": 0.15,
-      "scale_z": 0.1605,
-      "rotation_x": 0.0,
-      "rotation_y": 0.0,
-      "rotation_z": 0.0,
-      "group": 1.0
-    }
-  },
-  {
-    "obj": {
-      "type": 1,
-      "start_x": 1.3375591270503113,
-      "start_y": 0.24895912705031145,
-      "start_z": 1.3471591270503116,
-      "scale_x": 0.05,
-      "scale_y": 0.15,
-      "scale_z": 0.05,
-      "rotation_x": 0.0,
-      "rotation_y": 0.0,
-      "rotation_z": 0.0,
-      "group": 1.0
-    }
-  },
-  {
-    "obj": {
-      "type": 8,
-      "start_x": 1.3375591270503113,
-      "start_y": 0.5257591270503115,
-      "start_z": 1.3471591270503116,
-      "scale_x": 0.05,
-      "scale_y": 0.1268,
-      "scale_z": 0.05,
-      "rotation_x": 0.0,
-      "rotation_y": 0.0,
-      "rotation_z": 0.0,
-      "group": 1.0
-    }
-  },
-  {
-    "obj": {
-      "type": 1,
-      "start_x": 1.3375591270503113,
-      "start_y": 0.8025591270503114,
-      "start_z": 1.3471591270503116,
-      "scale_x": 0.05,
-      "scale_y": 0.15,
-      "scale_z": 0.05,
-      "rotation_x": 0.0,
-      "rotation_y": 0.0,
-      "rotation_z": 0.0,
-      "group": 1.0
-    }
-  },
-  {
-    "obj": {
-      "type": 8,
-      "start_x": 1.3375591270503113,
-      "start_y": 1.0303591270503114,
-      "start_z": 1.3471591270503116,
-      "scale_x": 0.05,
-      "scale_y": 0.0778,
-      "scale_z": 0.05,
-      "rotation_x": 0.0,
-      "rotation_y": 0.0,
-      "rotation_z": 0.0,
-      "group": 1.0
-    }
-  },
-  {
-    "obj": {
-      "type": 1,
-      "start_x": 1.3375591270503113,
-      "start_y": 1.2581591270503114,
-      "start_z": 1.3471591270503116,
-      "scale_x": 0.05,
-      "scale_y": 0.15,
-      "scale_z": 0.05,
+      "start_x": 3.456624327025936,
+      "start_y": 2.3566243270259353,
+      "start_z": 2.8304243270259355,
+      "scale_x": 0.1,
+      "scale_y": 1.2,
+      "scale_z": 0.1,
       "rotation_x": 0.0,
       "rotation_y": 0.0,
       "rotation_z": 0.0,
@@ -392,297 +152,12 @@
   {
     "obj": {
       "type": 4,
-      "start_x": 1.1552591270503112,
-      "start_y": 1.2581591270503114,
-      "start_z": 1.3471591270503116,
-      "scale_x": 0.1323,
-      "scale_y": 0.15,
-      "scale_z": 0.05,
-      "rotation_x": 0.0,
-      "rotation_y": 0.0,
-      "rotation_z": 0.0,
-      "group": 1.0
-    }
-  },
-  {
-    "obj": {
-      "type": 1,
-      "start_x": 0.9729591270503111,
-      "start_y": 1.2581591270503114,
-      "start_z": 1.3471591270503116,
-      "scale_x": 0.05,
-      "scale_y": 0.15,
-      "scale_z": 0.05,
-      "rotation_x": 0.0,
-      "rotation_y": 0.0,
-      "rotation_z": 0.0,
-      "group": 1.0
-    }
-  },
-  {
-    "obj": {
-      "type": 1,
-      "start_x": 3.0238805902684316,
-      "start_y": 3.2324805902684317,
-      "start_z": 2.9144805902684316,
-      "scale_x": 0.05,
-      "scale_y": 0.15,
-      "scale_z": 0.05,
-      "rotation_x": 0.0,
-      "rotation_y": 0.0,
-      "rotation_z": 0.0,
-      "group": 1.0
-    }
-  },
-  {
-    "obj": {
-      "type": 3,
-      "start_x": 3.0238805902684316,
-      "start_y": 2.931819858659372,
-      "start_z": 2.9144805902684316,
-      "scale_x": 0.05,
-      "scale_y": 0.15066073160906002,
-      "scale_z": 0.05,
-      "rotation_x": 0.0,
-      "rotation_y": 0.0,
-      "rotation_z": 0.0,
-      "group": 1.0
-    }
-  },
-  {
-    "obj": {
-      "type": 1,
-      "start_x": 3.0238805902684316,
-      "start_y": 2.6311591270503123,
-      "start_z": 2.9144805902684316,
-      "scale_x": 0.05,
-      "scale_y": 0.15,
-      "scale_z": 0.05,
-      "rotation_x": 0.0,
-      "rotation_y": 0.0,
-      "rotation_z": 0.0,
-      "group": 1.0
-    }
-  },
-  {
-    "obj": {
-      "type": 3,
-      "start_x": 3.0238805902684316,
-      "start_y": 2.2445591270503122,
-      "start_z": 2.9144805902684316,
-      "scale_x": 0.05,
-      "scale_y": 0.2366,
-      "scale_z": 0.05,
-      "rotation_x": 0.0,
-      "rotation_y": 0.0,
-      "rotation_z": 0.0,
-      "group": 1.0
-    }
-  },
-  {
-    "obj": {
-      "type": 1,
-      "start_x": 3.0238805902684316,
-      "start_y": 1.8579591270503122,
-      "start_z": 2.9144805902684316,
-      "scale_x": 0.05,
-      "scale_y": 0.15,
-      "scale_z": 0.05,
-      "rotation_x": 0.0,
-      "rotation_y": 0.0,
-      "rotation_z": 0.0,
-      "group": 1.0
-    }
-  },
-  {
-    "obj": {
-      "type": 3,
-      "start_x": 3.0238805902684316,
-      "start_y": 1.5580591270503124,
-      "start_z": 2.9144805902684316,
-      "scale_x": 0.05,
-      "scale_y": 0.1499,
-      "scale_z": 0.05,
-      "rotation_x": 0.0,
-      "rotation_y": 0.0,
-      "rotation_z": 0.0,
-      "group": 1.0
-    }
-  },
-  {
-    "obj": {
-      "type": 1,
-      "start_x": 3.0238805902684316,
-      "start_y": 1.2581591270503125,
-      "start_z": 2.9144805902684316,
-      "scale_x": 0.05,
-      "scale_y": 0.15,
-      "scale_z": 0.05,
-      "rotation_x": 0.0,
-      "rotation_y": 0.0,
-      "rotation_z": 0.0,
-      "group": 1.0
-    }
-  },
-  {
-    "obj": {
-      "type": 4,
-      "start_x": 2.673880590268432,
-      "start_y": 1.2581591270503125,
-      "start_z": 2.9144805902684316,
-      "scale_x": 0.3,
-      "scale_y": 0.15,
-      "scale_z": 0.05,
-      "rotation_x": 0.0,
-      "rotation_y": 0.0,
-      "rotation_z": 0.0,
-      "group": 1.0
-    }
-  },
-  {
-    "obj": {
-      "type": 1,
-      "start_x": 2.3238805902684323,
-      "start_y": 1.2581591270503125,
-      "start_z": 2.9144805902684316,
-      "scale_x": 0.05,
-      "scale_y": 0.15,
-      "scale_z": 0.05,
-      "rotation_x": 0.0,
-      "rotation_y": 0.0,
-      "rotation_z": 0.0,
-      "group": 1.0
-    }
-  },
-  {
-    "obj": {
-      "type": 4,
-      "start_x": 1.9738805902684324,
-      "start_y": 1.2581591270503125,
-      "start_z": 2.9144805902684316,
-      "scale_x": 0.3,
-      "scale_y": 0.15,
-      "scale_z": 0.05,
-      "rotation_x": 0.0,
-      "rotation_y": 0.0,
-      "rotation_z": 0.0,
-      "group": 1.0
-    }
-  },
-  {
-    "obj": {
-      "type": 1,
-      "start_x": 1.6238805902684323,
-      "start_y": 1.2581591270503125,
-      "start_z": 2.9144805902684316,
-      "scale_x": 0.05,
-      "scale_y": 0.15,
-      "scale_z": 0.05,
-      "rotation_x": 0.0,
-      "rotation_y": 0.0,
-      "rotation_z": 0.0,
-      "group": 1.0
-    }
-  },
-  {
-    "obj": {
-      "type": 4,
-      "start_x": 1.298419858659372,
-      "start_y": 1.2581591270503125,
-      "start_z": 2.9144805902684316,
-      "scale_x": 0.2754607316090603,
-      "scale_y": 0.15,
-      "scale_z": 0.05,
-      "rotation_x": 0.0,
-      "rotation_y": 0.0,
-      "rotation_z": 0.0,
-      "group": 1.0
-    }
-  },
-  {
-    "obj": {
-      "type": 1,
-      "start_x": 0.9729591270503117,
-      "start_y": 1.2581591270503125,
-      "start_z": 2.9144805902684316,
-      "scale_x": 0.05,
-      "scale_y": 0.15,
-      "scale_z": 0.05,
-      "rotation_x": 0.0,
-      "rotation_y": 0.0,
-      "rotation_z": 0.0,
-      "group": 1.0
-    }
-  },
-  {
-    "obj": {
-      "type": 6,
-      "start_x": 0.9729591270503117,
-      "start_y": 1.2581591270503125,
-      "start_z": 2.564480590268432,
-      "scale_x": 0.05,
-      "scale_y": 0.15,
-      "scale_z": 0.3,
-      "rotation_x": 0.0,
-      "rotation_y": 0.0,
-      "rotation_z": 0.0,
-      "group": 1.0
-    }
-  },
-  {
-    "obj": {
-      "type": 1,
-      "start_x": 0.9729591270503117,
-      "start_y": 1.2581591270503125,
-      "start_z": 2.2144805902684324,
-      "scale_x": 0.05,
-      "scale_y": 0.15,
-      "scale_z": 0.05,
-      "rotation_x": 0.0,
-      "rotation_y": 0.0,
-      "rotation_z": 0.0,
-      "group": 1.0
-    }
-  },
-  {
-    "obj": {
-      "type": 6,
-      "start_x": 0.9729591270503117,
-      "start_y": 1.2581591270503125,
-      "start_z": 1.8843198586593726,
-      "scale_x": 0.05,
-      "scale_y": 0.15,
-      "scale_z": 0.28016073160905997,
-      "rotation_x": 0.0,
-      "rotation_y": 0.0,
-      "rotation_z": 0.0,
-      "group": 1.0
-    }
-  },
-  {
-    "obj": {
-      "type": 1,
-      "start_x": 0.9729591270503117,
-      "start_y": 1.2581591270503125,
-      "start_z": 1.5541591270503126,
-      "scale_x": 0.05,
-      "scale_y": 0.15,
-      "scale_z": 0.05,
-      "rotation_x": 0.0,
-      "rotation_y": 0.0,
-      "rotation_z": 0.0,
-      "group": 1.0
-    }
-  },
-  {
-    "obj": {
-      "type": 6,
-      "start_x": 0.9729591270503117,
-      "start_y": 1.2581591270503125,
-      "start_z": 1.4506591270503124,
-      "scale_x": 0.05,
-      "scale_y": 0.15,
-      "scale_z": 0.0535,
+      "start_x": 3.456624327025936,
+      "start_y": 2.3566243270259353,
+      "start_z": 3.1435243270259354,
+      "scale_x": 0.1,
+      "scale_y": 0.1,
+      "scale_z": 0.21309999999999996,
       "rotation_x": 0.0,
       "rotation_y": 0.0,
       "rotation_z": 0.0,

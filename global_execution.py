@@ -27,8 +27,14 @@ def global_assign(procedural_objects_list, global_objects):
     return procedural_objects_list
 
 def action_assign(procedural_objects_list, global_object):
+
     for obj in procedural_objects_list:
-        
+        if obj.type == 6:
+            print("aaa ppp broken")
+
+    for obj in procedural_objects_list:
+        assign_available = False
+
         if obj.type == global_object['prev_type']:
             assign_available = True
             for dir in obj.connected:
@@ -37,15 +43,24 @@ def action_assign(procedural_objects_list, global_object):
                     if dir == prev_condition_dir:
                         assign_available = False
           
-            if assign_available:
-                offset_x = random.uniform(global_object['offsets'][0][0],global_object['offsets'][0][1])
-                offset_y = random.uniform(global_object['offsets'][1][0],global_object['offsets'][1][1])
-                offset_z = random.uniform(global_object['offsets'][2][0],global_object['offsets'][2][1])
+        if assign_available:
+            print("prev dir!")
+            for dir in obj.connected:
+                print("dir", dir) 
 
-                obj.position += np.array([offset_x, offset_y, offset_z])
-                obj.length += np.array([offset_x, offset_y, offset_z])
-                obj.type = global_object['object_id']
+            offset_x = random.uniform(global_object['offsets'][0][0],global_object['offsets'][0][1])
+            offset_y = random.uniform(global_object['offsets'][1][0],global_object['offsets'][1][1])
+            offset_z = random.uniform(global_object['offsets'][2][0],global_object['offsets'][2][1])
+
+            obj.position += np.array([offset_x, offset_y, offset_z])
+            obj.length += np.array([offset_x, offset_y, offset_z])
+            obj.type = global_object['object_id']
     
+
+    for obj in procedural_objects_list:
+        if obj.type == 6:
+            print("broken")
+
     return procedural_objects_list
 
 def action_add(procedural_objects_list, global_object):

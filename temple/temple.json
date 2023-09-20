@@ -2,14 +2,15 @@
 "object_id": -1,
 "startPos" : [400, 400],
 "type": "local_object",
-"foreground_type": [1,8],
+"foreground_type": [1],
 "foreground_connect": "+y",
-"foreground_index" : 12,
+"foreground_index" : 2.5,
 "background_type": 0,
 "background_connect": "+y",
-"background_index" : 12,
+"background_index" : 5,
 "num_visual_bridge" : 1,
-"steps" : 2
+"steps" : 8,
+"complexity":0
 },
 {
 "object_id": 1,

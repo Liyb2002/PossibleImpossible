@@ -138,11 +138,9 @@ class generate_helper:
 
         self.select_result_particle()
         return self.finish()
-        # return self.particle_list[0].procedural_objects
 
 
     def procedural_generate(self, start_type, connect_direction, intersection_pos, steps, isFront):
-        print("start_type", start_type, "lenself.generic_object_list)", len(self.generic_object_list))
         parsedProb = parseTree.parseProb(self.generic_object_list, self.generic_object_list[start_type])
 
         score_list = []
@@ -246,7 +244,6 @@ class generate_helper:
         #write the process
         output_writer = write2JSON.output()
         output_writer.write_proceudral_objects(self.result_particle.procedural_objects, "three/process_demo.json")
-
 
         # self.result_particle.procedural_objects[0].type = self.visual_bridge_info['foreground_type'][1]
         procedural_objects = global_execution.global_assign(self.result_particle.procedural_objects, self.global__object_list)
