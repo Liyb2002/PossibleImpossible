@@ -69,6 +69,11 @@
 	const m2 = load_result.scene;
 	var load_result = await loader2.loadAsync('3.glb');
 	const m3 = load_result.scene;
+	var load_result = await loader2.loadAsync('top.glb');
+	const m_top = load_result.scene;
+	var load_result = await loader2.loadAsync('mid.glb');
+	const m_mid = load_result.scene;
+
 
 	const geometry = new THREE.BoxGeometry( 1, 1, 1 ).toNonIndexed();
 	const material = new THREE.MeshBasicMaterial( { vertexColors: true } ); 
@@ -167,7 +172,11 @@ function displaypos() {
 				a = m2.clone();
 			}else if(cur_type == 3 ){
 				a = m3.clone();}
-			
+			else if(cur_type == 5 ){
+				a = m_top.clone();}
+			else if(cur_type == 7 ){
+				a = m_mid.clone();}
+
 			scale_x = scale_x * 1.0;
 			scale_y = scale_y * 1.0;
 			scale_z = scale_z * 1.0;
@@ -197,7 +206,7 @@ const exporter = new GLTFExporter();
 exporter.parse(input, function (result) {
 var output = JSON.stringify( result, null, 2 );
 console.log( output );
-saveArrayBuffer( output, 'scene.glb' );
+// saveArrayBuffer( output, 'scene.glb' );
  },);}
 
 var link = document.createElement( 'a' );

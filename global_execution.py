@@ -29,10 +29,6 @@ def global_assign(procedural_objects_list, global_objects):
 def action_assign(procedural_objects_list, global_object):
 
     for obj in procedural_objects_list:
-        if obj.type == 6:
-            print("aaa ppp broken")
-
-    for obj in procedural_objects_list:
         assign_available = False
 
         if obj.type == global_object['prev_type']:
@@ -44,10 +40,6 @@ def action_assign(procedural_objects_list, global_object):
                         assign_available = False
           
         if assign_available:
-            print("prev dir!")
-            for dir in obj.connected:
-                print("dir", dir) 
-
             offset_x = random.uniform(global_object['offsets'][0][0],global_object['offsets'][0][1])
             offset_y = random.uniform(global_object['offsets'][1][0],global_object['offsets'][1][1])
             offset_z = random.uniform(global_object['offsets'][2][0],global_object['offsets'][2][1])
