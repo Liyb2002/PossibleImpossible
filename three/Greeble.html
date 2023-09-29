@@ -1,0 +1,302 @@
+	<!DOCTYPE html>
+	<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Result</title>
+		<style>
+			body { margin: 0; }
+		</style>
+	</head>
+	<body>
+		<script src="js/three.js"></script>
+		<script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
+
+		<script type="importmap">
+			{
+			"imports": {
+				"three": "https://cdn.skypack.dev/three@0.139.2/build/three.module",
+				"three/": "https://cdn.skypack.dev/three@0.139.2/",      
+				"dat.gui": "https://cdn.skypack.dev/dat.gui",
+				"three/addons/": "node_modules/three/examples/jsm/"
+			}
+			}
+			</script>
+			
+		
+			<script type="module">
+
+	import * as THREE from 'three';
+
+	import { GUI } from '/node_modules/three/examples/jsm/libs/lil-gui.module.min.js';
+	import { OrbitControls } from '/node_modules/three/examples/jsm/controls/OrbitControls.js';
+	import { GLTFLoader } from '/node_modules/three/examples/jsm/loaders/GLTFLoader.js';
+	import { RGBELoader } from '/node_modules/three/examples/jsm/loaders/RGBELoader.js';
+	import { GLTFExporter } from '/node_modules/three/examples/jsm/exporters/GLTFExporter.js';
+	import { OBJExporter } from '/node_modules/three/examples/jsm/exporters/OBJExporter.js';
+
+	let camera, scene, renderer;
+
+
+
+	renderer = new THREE.WebGLRenderer( { antialias: true } );
+	renderer.setPixelRatio( window.devicePixelRatio );
+	renderer.setSize( window.innerWidth, window.innerHeight );
+	renderer.localClippingEnabled = true;
+	document.body.appendChild( renderer.domElement );
+
+	scene = new THREE.Scene();
+	scene.background = new THREE.Color( 0x81ebc6 );
+
+	//Load background texture
+	const bg_loader = new THREE.TextureLoader();
+	bg_loader.load('static/ZA_monument_models/bk.png'  , function(texture)
+            {
+             scene.background = texture;  
+            });
+
+	const left = -3.2, right = 3.2, top2 = 2.4, bottom = -2.4, near = 0.01, far = 100;
+	camera = new THREE.OrthographicCamera(left, right, top2, bottom, near, far);
+
+	camera.position.set( 5, 5, 5 );
+
+	const controls = new OrbitControls( camera, renderer.domElement );
+	controls.addEventListener( 'change', render ); // use only if there is no animation loop
+	controls.minDistance = 1;
+	controls.maxDistance = 100;
+	controls.enablePan = false;
+
+	const light = new THREE.DirectionalLight( 0xffffff, 3.0 );
+	light.position.set( - 3.25, 3, 3.25 );
+	scene.add( light );
+
+
+	const loader2_temple = new GLTFLoader().setPath( 'static/ZA_monument_models/' );
+	var load_result = await loader2_temple.loadAsync('1.glb');
+	const m1 = load_result.scene;
+	var load_result = await loader2_temple.loadAsync('4_0.glb');
+	const m4_0 = load_result.scene;
+	var load_result = await loader2_temple.loadAsync('4_1.glb');
+	const m4_1 = load_result.scene;
+	var load_result = await loader2_temple.loadAsync('5_0.glb');
+	const m5_0 = load_result.scene;
+	var load_result = await loader2_temple.loadAsync('5_1.glb');
+	const m5_1 = load_result.scene;
+	var load_result = await loader2_temple.loadAsync('5_2.glb');
+	const m5_2 = load_result.scene;
+	var load_result = await loader2_temple.loadAsync('5_3.glb');
+	const m5_3 = load_result.scene;
+	var load_result = await loader2_temple.loadAsync('6.glb');
+	const m6 = load_result.scene;
+	var load_result = await loader2_temple.loadAsync('6_1.glb');
+	const m6_1 = load_result.scene;
+	var load_result = await loader2_temple.loadAsync('6_2.glb');
+	const m6_2 = load_result.scene;
+	var load_result = await loader2_temple.loadAsync('6_3.glb');
+	const m6_3 = load_result.scene;
+	var load_result = await loader2_temple.loadAsync('6_4.glb');
+	const m6_4 = load_result.scene;
+	var load_result = await loader2_temple.loadAsync('7.glb');
+	const m7 = load_result.scene;
+	var load_result = await loader2_temple.loadAsync('8.glb');
+	const m8 = load_result.scene;
+
+
+	const geometry = new THREE.BoxGeometry( 1, 1, 1 ).toNonIndexed();
+	const material = new THREE.MeshBasicMaterial( { vertexColors: true } ); 
+
+	const positionAttribute = geometry.getAttribute( 'position' );
+	const colors = [];
+	const color = new THREE.Color();
+
+	var count = 0;
+	for ( let i = 0; i < positionAttribute.count; i += 12 ) {
+	if (count == 0){
+	color.set( 0x435bc4 );
+	}
+	if (count == 1){
+	color.set( 0xb33946 );
+	}
+	if (count == 2){
+	color.set( 0x4287f5);
+	}
+	for(let j=0;j<12;j++){
+	colors.push( color.r, color.g, color.b );
+	}
+	count += 1
+
+	}
+	geometry.setAttribute( 'color', new THREE.Float32BufferAttribute( colors, 3 ) );
+
+
+	var loaded_info = [];
+	var counts = 0;
+
+async function load_info(){
+	return new Promise(function(resolve){
+	const loader = new THREE.FileLoader();
+	loader.load(
+	// resource URL
+	'./Greeble_result.json',
+	// onLoad callback
+	function ( data ) {
+		// output the text to the console
+		var jsonData = JSON.parse(data); 
+		var objects_num = Object.keys(jsonData).length;
+		for (var i = 0; i < objects_num; i++) {
+
+			var start_x = jsonData[i]["obj"]["start_x"];
+			var start_y = jsonData[i]["obj"]["start_y"];
+			var start_z = jsonData[i]["obj"]["start_z"];
+
+			var scale_x = jsonData[i]["obj"]["scale_x"];
+			var scale_y = jsonData[i]["obj"]["scale_y"];
+			var scale_z = jsonData[i]["obj"]["scale_z"];
+			var rotation_x = jsonData[i]["obj"]["rotation_x"];
+			var rotation_y = jsonData[i]["obj"]["rotation_y"];
+			var rotation_z = jsonData[i]["obj"]["rotation_z"];
+			
+			counts += 1;
+			loaded_info.push({type:jsonData[i]["obj"]["type"],
+				center_x:start_x, center_y:start_y, center_z:start_z, 
+				scale_x:scale_x, scale_y:scale_y, scale_z:scale_z,
+				rotation_x:rotation_x, rotation_y:rotation_y, rotation_z:rotation_z});
+		
+		}		
+
+		resolve();
+	},);
+})
+}
+
+
+
+function displaypos() {
+    console.log("info_array.length", loaded_info.length);
+
+	var x = new THREE.Scene();
+
+	for(var i =0; i<loaded_info.length; i++){
+
+		var cur_type = loaded_info[i].type;
+		var center_x = loaded_info[i].center_x;
+		var center_y = loaded_info[i].center_y;
+		var center_z = loaded_info[i].center_z;
+
+		var scale_x = loaded_info[i].scale_x;
+		var scale_y= loaded_info[i].scale_y;
+		var scale_z = loaded_info[i].scale_z;
+
+		var rotation_x = loaded_info[i].rotation_x;
+		var rotation_y = loaded_info[i].rotation_y;
+		var rotation_z = loaded_info[i].rotation_z;
+
+		var a = m1.clone();
+		var rand = Math.random();
+		var load_mesh = true;
+
+			if(cur_type == 1){
+				a = m1.clone();}
+			else if(cur_type == 4 && rand < 0.5){
+				a = m4_0.clone();}
+			else if(cur_type == 4){
+				a = m4_1.clone();}
+			else if(cur_type == 5  && rand < 0.45){
+				a = m5_0.clone();}
+			else if(cur_type == 5 && rand < 0.6){
+				a = m5_1.clone();}
+			else if(cur_type == 5 && rand < 0.9){
+				a = m5_2.clone();}
+			else if(cur_type == 5 ){
+				a = m5_3.clone();}
+			else if(cur_type == 6  && rand < 0.3){
+				a = m6.clone();}
+			else if(cur_type == 6  && rand < 0.6){
+				a = m6_1.clone();}
+			else if(cur_type == 6  && rand < 0.7){
+				a = m6_2.clone();}
+			else if(cur_type == 6  && rand < 0.8){
+				a = m6_3.clone();}
+			else if(cur_type == 6 ){
+				a = m6_4.clone();}
+			else if(cur_type == 7 ){
+				a = m7.clone();}
+			else if(cur_type == 8 ){
+				a = m8.clone();}
+			
+			scale_x = scale_x * 1.0;
+			scale_y = scale_y * 1.0;
+			scale_z = scale_z * 1.0;
+			a.position.set(center_x,center_y,center_z);
+			a.scale.set(scale_x,scale_y,scale_z);
+			// a.rotation.x = rotation_x;
+			// a.rotation.y = rotation_y;
+			// a.rotation.z = rotation_z;
+			scene.add(a.clone());
+			x.add(a.clone());
+
+	}
+	run_download(x);
+
+
+}
+
+(async function(){
+    await load_info();
+    displaypos(); 
+})();
+
+
+
+function run_download(input) {
+const exporter = new GLTFExporter();
+exporter.parse(input, function (result) {
+var output = JSON.stringify( result, null, 2 );
+console.log( output );
+saveArrayBuffer( output, 'ZA.glb' );
+ },);}
+
+var link = document.createElement( 'a' );
+link.style.display = 'none';
+document.body.appendChild( link ); // Firefox workaround, see #6594
+
+function save( blob, filename ) {
+link.href = URL.createObjectURL( blob );
+link.download = filename;
+link.click();}
+
+function saveString( text, filename ) {
+save( new Blob( [ text ], { type: 'text/plain' } ), filename );}
+
+function saveArrayBuffer( buffer, filename ) {
+save( new Blob( [ buffer ], { type: 'application/octet-stream' } ), filename );}
+
+
+
+
+	window.addEventListener( 'resize', onWindowResize );
+
+	render();
+
+	function onWindowResize() {
+
+	camera.aspect = window.innerWidth / window.innerHeight;
+	camera.updateProjectionMatrix();
+
+	renderer.setSize( window.innerWidth, window.innerHeight );
+
+	render();
+
+	}
+
+	function render() {
+
+	renderer.render( scene, camera );
+
+	}
+
+	</script>
+
+
+
+	</body>
+	</html>

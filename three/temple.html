@@ -62,7 +62,7 @@
 	scene.add( light );
 
 
-	const loader2 = new GLTFLoader().setPath( 'static/temple_models/' );
+	const loader2 = new GLTFLoader().setPath( 'static/temple_models2/' );
 	var load_result = await loader2.loadAsync('0.glb');
 	const m0 = load_result.scene;
 	var load_result = await loader2.loadAsync('2.glb');
@@ -71,8 +71,6 @@
 	const m3 = load_result.scene;
 	var load_result = await loader2.loadAsync('top.glb');
 	const m_top = load_result.scene;
-	var load_result = await loader2.loadAsync('mid.glb');
-	const m_mid = load_result.scene;
 
 
 	const geometry = new THREE.BoxGeometry( 1, 1, 1 ).toNonIndexed();
@@ -206,7 +204,7 @@ const exporter = new GLTFExporter();
 exporter.parse(input, function (result) {
 var output = JSON.stringify( result, null, 2 );
 console.log( output );
-// saveArrayBuffer( output, 'scene.glb' );
+saveArrayBuffer( output, 'scene.glb' );
  },);}
 
 var link = document.createElement( 'a' );

@@ -70,7 +70,7 @@
 	scene.environment = texture;
 	} );
 
-	const loader2_temple = new GLTFLoader().setPath( 'static/matryoshka_models/' );
+	const loader2_temple = new GLTFLoader().setPath( 'static/matryoshka2/' );
 	var load_result = await loader2_temple.loadAsync('1_0.glb');
 	const m1_0 = load_result.scene;
 	var load_result = await loader2_temple.loadAsync('3.glb');
@@ -82,6 +82,31 @@
 	var load_result = await loader2_temple.loadAsync('9.glb');
 	const m9 = load_result.scene;
 
+	var load_result = await loader2_temple.loadAsync('1_n.glb');
+	const m1_0n = load_result.scene;
+	var load_result = await loader2_temple.loadAsync('3n.glb');
+	const m3n = load_result.scene;
+	var load_result = await loader2_temple.loadAsync('4n.glb');
+	const m4n = load_result.scene;
+	var load_result = await loader2_temple.loadAsync('6n.glb');
+	const m6n = load_result.scene;
+
+	var load_result = await loader2_temple.loadAsync('x_0.glb');
+	const mx0 = load_result.scene;
+	var load_result = await loader2_temple.loadAsync('x_1.glb');
+	const mx1 = load_result.scene;
+	var load_result = await loader2_temple.loadAsync('x_2.glb');
+	const mx2 = load_result.scene;
+
+	var load_result = await loader2_temple.loadAsync('z_0.glb');
+	const mz0 = load_result.scene;
+	var load_result = await loader2_temple.loadAsync('z_1.glb');
+	const mz1 = load_result.scene;
+	var load_result = await loader2_temple.loadAsync('z_2.glb');
+	const mz2 = load_result.scene;
+
+	var load_result = await loader2_temple.loadAsync('y_0.glb');
+	const my0 = load_result.scene;
 
 	const geometry = new THREE.BoxGeometry( 1, 1, 1 ).toNonIndexed();
 	const material = new THREE.MeshBasicMaterial( { vertexColors: true } ); 
@@ -193,8 +218,46 @@ function displaypos() {
 				a = m4.clone();}
 			else if(cur_type == 6 ||cur_type == 7 ){
 				a = m6.clone();}
-			else if(cur_type == 9){
+			else if(cur_type == 9 ){
 				a = m9.clone();}
+
+			else if(cur_type == 10){
+				console.log("rand", rand)
+				if (rand <0.4){
+					a = mx0.clone();
+				}
+				else if (rand <0.7){
+					a = mx1.clone();
+				}
+				else{
+					a = mx2.clone();
+				}
+			}
+
+
+			else if(cur_type == 11){
+				if (rand <0.4){
+					a = mz0.clone();
+				}
+				else if (rand <0.7){
+					a = mz1.clone();
+				}
+				else{
+					a = mz2.clone();
+				}
+			}
+
+			else if(cur_type == 12){
+				a = my0.clone();}
+
+			else if(cur_type == 101){
+				a = m1_0n.clone();}
+			else if(cur_type == 103 ||cur_type == 108 ){
+				a = m3n.clone();}
+			else if(cur_type == 104 ||cur_type == 105 ){
+				a = m4n.clone();}
+			else if(cur_type == 106 ||cur_type == 107 ){
+				a = m6n.clone();}
 
 			scale_x = scale_x * 1.0;
 			scale_y = scale_y * 1.0;

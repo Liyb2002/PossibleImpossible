@@ -2,12 +2,122 @@
   {
     "System": {
       "group": 1,
-      "origin_x": 0.0,
-      "origin_y": 0.0,
-      "origin_z": 0.0,
-      "system_rotation_x": 0.0,
-      "system_rotation_y": 0.0,
-      "system_rotation_z": 0.0
+      "origin_x": 3.266949192431123,
+      "origin_y": 3.266949192431123,
+      "origin_z": 3.266949192431123,
+      "system_rotation_x": -1.186196938995747,
+      "system_rotation_y": 0.47747970867038747,
+      "system_rotation_z": -2.2641944901923448
+    }
+  },
+  {
+    "System": {
+      "group": 2,
+      "origin_x": 2.063248654051873,
+      "origin_y": 3.2547491924311225,
+      "origin_z": 3.266949192431123,
+      "system_rotation_x": -1.0369044704583188,
+      "system_rotation_y": 0.5804928364467411,
+      "system_rotation_z": -2.156783896475904
+    }
+  },
+  {
+    "System": {
+      "group": 3,
+      "origin_x": 2.063248654051873,
+      "origin_y": 2.2131486540518703,
+      "origin_z": 3.266949192431123,
+      "system_rotation_x": -1.5371690815803836,
+      "system_rotation_y": 0.6570132551737542,
+      "system_rotation_z": -2.2735559658932356
+    }
+  },
+  {
+    "System": {
+      "group": 4,
+      "origin_x": 2.063248654051873,
+      "origin_y": 1.5111486540518704,
+      "origin_z": 3.266949192431123,
+      "system_rotation_x": -1.8991264757271473,
+      "system_rotation_y": 0.9555153915599794,
+      "system_rotation_z": -2.4900430315884914
+    }
+  },
+  {
+    "System": {
+      "group": 5,
+      "origin_x": 2.063248654051873,
+      "origin_y": 0.44814865405187054,
+      "origin_z": 3.266949192431123,
+      "system_rotation_x": -2.80609376682832,
+      "system_rotation_y": 0.8913419657514924,
+      "system_rotation_z": -2.7368095360765285
+    }
+  },
+  {
+    "System": {
+      "group": 6,
+      "origin_x": 2.063248654051873,
+      "origin_y": 0.44814865405187054,
+      "origin_z": 2.6649491924311235,
+      "system_rotation_x": -2.557458067136414,
+      "system_rotation_y": 0.8660869238529191,
+      "system_rotation_z": -2.7652095360765285
+    }
+  },
+  {
+    "System": {
+      "group": 7,
+      "origin_x": 2.681549192431123,
+      "origin_y": 4.456749192431123,
+      "origin_z": 3.266949192431123,
+      "system_rotation_x": -1.0686825748173363,
+      "system_rotation_y": 0.37342885301350504,
+      "system_rotation_z": -1.9769522382755036
+    }
+  },
+  {
+    "System": {
+      "group": 8,
+      "origin_x": 2.063248654051872,
+      "origin_y": 3.2547491924311225,
+      "origin_z": 3.266949192431123,
+      "system_rotation_x": -1.0219044704583184,
+      "system_rotation_y": 0.6303928364467413,
+      "system_rotation_z": -2.1791838964759043
+    }
+  },
+  {
+    "System": {
+      "group": 9,
+      "origin_x": 2.063248654051872,
+      "origin_y": 2.0527491924311225,
+      "origin_z": 3.266949192431123,
+      "system_rotation_x": -1.7365145373315622,
+      "system_rotation_y": 0.9713428500626842,
+      "system_rotation_z": -2.168845375600684
+    }
+  },
+  {
+    "System": {
+      "group": 10,
+      "origin_x": 2.063248654051872,
+      "origin_y": 0.4481486540518708,
+      "origin_z": 2.6649491924311235,
+      "system_rotation_x": -2.889258067136414,
+      "system_rotation_y": 1.0128869238529197,
+      "system_rotation_z": -2.799109536076528
+    }
+  },
+  {
+    "System": {
+      "group": 11,
+      "origin_x": 2.063248654051872,
+      "origin_y": 0.4481486540518708,
+      "origin_z": 2.062949192431124,
+      "system_rotation_x": -2.5292443329891703,
+      "system_rotation_y": 0.822901856140187,
+      "system_rotation_z": -3.1003095360765287
     }
   }
 ]

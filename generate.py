@@ -249,6 +249,10 @@ class generate_helper:
         procedural_objects = global_execution.global_assign(self.result_particle.procedural_objects, self.global__object_list)
         decorator = decorations.decoration_operator(self.decorate_path)
         decoration_list = decorator.decorate(procedural_objects)
+
+        print("len procedural_objects", len(procedural_objects))
+        print("len decoration_list", len(decoration_list))
+
         return decoration_list
 
     def recursive_process(self):

@@ -11,7 +11,7 @@
 "category":  "footprint",
 "structural_id": 2,
 "subdiv":[
-[1.0, "y direction", ["terminal", "1", 1.0]] 
+[1.0, "y direction", ["terminal", "0", 1.0]] 
 ]
 },
 {
@@ -34,14 +34,14 @@
 "category":  "footprint",
 "structural_id": 5,
 "subdiv":[
-[1.0, "y direction", ["terminal", "5", 1.0]]   ]
+[1.0, "z direction", ["terminal", "5", 1.0]]   ]
 },
 {
 "object_name": "footprint_6",
 "category":  "footprint",
 "structural_id": 6,
 "subdiv":[
-[1.0, "y direction", ["terminal", "6", 1.0]]   ]
+[1.0, "z direction", ["terminal", "6", 1.0]]   ]
 },
 {
 "object_name": "footprint_7",
@@ -190,5 +190,13 @@
 "terminal_id": 13,
 "rule": "normal",
 "multiplier": [1,1,1]
+},
+{
+"object_name": "terminal_flower",
+"category":  "terminal",
+"terminal_id": 14,
+"rule": "normal",
+"multiplier": [1,1,1]
 }                               
+
 ]

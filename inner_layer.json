@@ -1,13 +1,13 @@
 [
   {
     "obj": {
-      "type": 11,
-      "start_x": 5.253912615634351,
-      "start_y": 8.85801921417404,
-      "start_z": 2.776046886646573,
-      "scale_x": 0.2,
-      "scale_y": 2.0,
-      "scale_z": 0.2,
+      "type": 9,
+      "start_x": 2.067949192431123,
+      "start_y": 2.067949192431123,
+      "start_z": 2.067949192431123,
+      "scale_x": 1.2,
+      "scale_y": 1.2,
+      "scale_z": 1.2,
       "rotation_x": 0.0,
       "rotation_y": 0.0,
       "rotation_z": 0.0,
