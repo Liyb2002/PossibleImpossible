@@ -6,9 +6,9 @@
     "foreground_index" : 2.5,
     "background_type": 3,
     "background_connect": "+y",
-    "background_index" : 8,
+    "background_index" : 4,
     "num_visual_bridge" : 1,
-    "steps" : 18,
+    "steps" : 3,
     "complexity" : 0
     },
 {

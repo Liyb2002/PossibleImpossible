@@ -38,23 +38,19 @@
 
 
 
-	renderer = new THREE.WebGLRenderer( { antialias: true } );
+	renderer = new THREE.WebGLRenderer( { antialias: true ,     preserveDrawingBuffer: true} );
 	renderer.setPixelRatio( window.devicePixelRatio );
 	renderer.setSize( window.innerWidth, window.innerHeight );
 	renderer.localClippingEnabled = true;
 	document.body.appendChild( renderer.domElement );
 
 	scene = new THREE.Scene();
-	scene.background = new THREE.Color( 0x81ebc6 );
+	scene.background = new THREE.Color( 0xFFFFFF );
 
 	//Load background texture
 	const bg_loader = new THREE.TextureLoader();
-	bg_loader.load('static/ZA_monument_models/bk.png'  , function(texture)
-            {
-             scene.background = texture;  
-            });
 
-	const left = -3.2, right = 3.2, top2 = 2.4, bottom = -2.4, near = 0.01, far = 100;
+	const left = -3.2, right = 3.2, top2 = 2.4, bottom = -2.4, near = 1, far = 20;
 	camera = new THREE.OrthographicCamera(left, right, top2, bottom, near, far);
 
 	camera.position.set( 5, 5, 5 );
@@ -168,7 +164,7 @@ async function load_info(){
 })
 }
 
-var cube = new THREE.Mesh( geometry, material );
+var cube = new THREE.Mesh( geometry, new THREE.MeshDepthMaterial() );
 
 
 function displaypos() {
@@ -207,7 +203,9 @@ function displaypos() {
 			x.add(a.clone());
 
 	}
-	run_download(x);
+	// run_download(x);
+	saveAsImage();
+
 
 
 }
@@ -223,8 +221,8 @@ function run_download(input) {
 const exporter = new GLTFExporter();
 exporter.parse(input, function (result) {
 var output = JSON.stringify( result, null, 2 );
-console.log( output );
-saveArrayBuffer( output, 'noMesh.glb' );
+// console.log( output );
+// saveArrayBuffer( output, 'noMesh.glb' );
  },);}
 
 var link = document.createElement( 'a' );
@@ -259,6 +257,40 @@ save( new Blob( [ buffer ], { type: 'application/octet-stream' } ), filename );}
 	render();
 
 	}
+
+	function saveAsImage() {
+    var imgData, imgNode;
+	console.log("save image");
+
+    try {
+        var strMime = "image/jpeg";
+        var strDownloadMime = "image/octet-stream";
+
+        imgData = renderer.domElement.toDataURL(strMime);
+
+        saveFile(imgData.replace(strMime, strDownloadMime), "test.jpg");
+
+    } catch (e) {
+        console.log(e);
+        return;
+    }
+
+}
+
+var saveFile = function (strData, filename) {
+    var link = document.createElement('a');
+    if (typeof link.download === 'string') {
+        document.body.appendChild(link); //Firefox requires the link to be in the body
+        link.download = filename;
+        link.href = strData;
+        link.click();
+        document.body.removeChild(link); //remove the link when done
+    } else {
+        location.replace(uri);
+    }
+}
+
+
 
 	function render() {
 
