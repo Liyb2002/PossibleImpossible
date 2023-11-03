@@ -126,13 +126,15 @@
 
 	var loaded_info = [];
 	var counts = 0;
+	var index = 'ZA_extended_result'
+	var file = './' + index + '.json'
 
 async function load_info(){
 	return new Promise(function(resolve){
 	const loader = new THREE.FileLoader();
 	loader.load(
 	// resource URL
-	'./ZA_extended_result.json',
+	file,
 	// onLoad callback
 	function ( data ) {
 		// output the text to the console
@@ -204,7 +206,6 @@ function displaypos() {
 
 	}
 	// run_download(x);
-	saveAsImage();
 
 
 
@@ -213,6 +214,9 @@ function displaypos() {
 (async function(){
     await load_info();
     displaypos(); 
+	render();
+	saveAsImage();
+
 })();
 
 
@@ -245,7 +249,6 @@ save( new Blob( [ buffer ], { type: 'application/octet-stream' } ), filename );}
 
 	window.addEventListener( 'resize', onWindowResize );
 
-	render();
 
 	function onWindowResize() {
 
@@ -267,8 +270,9 @@ save( new Blob( [ buffer ], { type: 'application/octet-stream' } ), filename );}
         var strDownloadMime = "image/octet-stream";
 
         imgData = renderer.domElement.toDataURL(strMime);
+		var save_name = 'depth_map_' + index + '.jpg';
 
-        saveFile(imgData.replace(strMime, strDownloadMime), "test.jpg");
+        saveFile(imgData.replace(strMime, strDownloadMime), save_name);
 
     } catch (e) {
         console.log(e);
