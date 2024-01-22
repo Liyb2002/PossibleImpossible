@@ -11,6 +11,7 @@ import global_execution
 import bounding_box
 import write2JSON
 
+import ast
 from copy import deepcopy
 import numpy as np
 
@@ -73,7 +74,7 @@ class generate_helper:
             if background_type != 0:
                 self.procedural_generate(background_type, background_connect, background_intersection, steps, False)
         
-        branching = False
+        branching = ast.literal_eval(self.visual_bridge_info['branching'])
         if branching:
             self.branching(foreground_type, foreground_connect, foreground_intersection, steps)
 
